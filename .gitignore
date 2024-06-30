@@ -1,0 +1,7 @@
+/.quarto/
+/_freeze/
+/_site/
+.jupyter_cache/
+.ipynb_checkpoints/
+media/
+*.mp4

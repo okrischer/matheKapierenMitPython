@@ -1,0 +1,17 @@
+---
+title: "Rechenregeln"
+jupyter: python3
+---
+
+## Buchstabenrechnen
+
+Buchstabenrechnen ist das Rechnen mit unbestimmten Zahlen.
+Wenn wir eine mathematische Aussage formulieren, die nicht nur für eine bestimmte Zahl, sondern für einen ganzen Zahlenbereich oder sogar für alle Zahlen gilt, dann benutzen wir statt einer Zahl einen Buchstaben.
+Der Buchstabe heißt dann *Variable*.
+
+Auch in Python können wir Variablen anlegen und ihnen gleichzeitig einen Wert zuweisen:
+```{python}
+a = 3
+b = 4
+a, b
+```
