@@ -10,6 +10,7 @@ website:
 
 format:
   html:
+    lang: de
     theme: cosmo
     toc: true
     number-sections: true

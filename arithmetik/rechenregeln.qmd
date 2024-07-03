@@ -1,7 +1,13 @@
 ---
-title: "Rechenregeln"
+title: "Grundlegende Rechenregeln"
 jupyter: python3
 ---
+
+Um mit Zahlen rechnen zu können, verknüpfen wir sie mit mathematischen *Operatoren*.
+Ein Operator in diesem Sinn ist nichts anders als ein Symbol für die beabsichtigte Berechnung.
+So werden zum Beispiel die vier Grundrechenarten Addition, Subtraktion, Multiplikation und Division durch die Operatoren $+, \ -, \ \cdot, \ \div$ ausgedrückt, während das Gleichheitszeichen ($=$) das Ergebnis der Berechnung widerspiegelt.
+
+In diesem Kapitel werden wir untersuchen, wie wir verschiedene Operatoren miteinander verknüpfen können, um sinnvolle Ergebnisse für unsere Berechnungen zu erhalten.
 
 ## Buchstabenrechnen
 
@@ -9,9 +15,413 @@ Buchstabenrechnen ist das Rechnen mit unbestimmten Zahlen.
 Wenn wir eine mathematische Aussage formulieren, die nicht nur für eine bestimmte Zahl, sondern für einen ganzen Zahlenbereich oder sogar für alle Zahlen gilt, dann benutzen wir statt einer Zahl einen Buchstaben.
 Der Buchstabe heißt dann *Variable*.
 
-Auch in Python können wir Variablen anlegen und ihnen gleichzeitig einen Wert zuweisen:
+Auch in Python können wir Variablen anlegen und ihnen gleichzeitig mit `=` einen Wert zuweisen.
+Das Gleichheitszeichen in Python darf also nicht mit dem mathematischen Gleichheitszeichen verwechselt werden.
+Wenn Variablen einmal angelegt sind, können wir mit ihnen wie mit Zahlen rechnen:
+
 ```{python}
 a = 3
 b = 4
-a, b
+c = a + b - 2
+# Dies ist ein Kommentar
+# Kommentare werden von Python ignoriert
+# Die nächste Zeile gibt den Wert von c aus
+c
 ```
+
+Wenn wir nun mehrere Berechnungen gleichzeitig durchführen wollen, dann verknüpfen wir Zahlen und Variablen mit den entsprechenden Operatoren und erhalten einen zusammengesetzten Ausdruck, den wir *Term* nennen.
+
+::: {.callout-important}
+## Term
+Ein **Term** ist ein mathematischer Ausdruck, der aus Zahlen, Variablen, mathematischen Operatoren und möglicherweise noch anderen mathematischen Symbolen besteht.
+:::
+
+Diese Definition führt uns gleich zur nächsten:
+
+::: {.callout-important}
+## Gleichung
+Will man ausdrücken, dass ein Term $T_1$ zu einem anderen Term $T_2$ gleichwertig ist, so schreibt man
+$$
+T_1 = T_2
+$$
+Eine solche Darstellung heißt **Gleichung**.
+Die *linke* Seite der Gleichung ist $T_1$, die *rechte* Seite ist $T_2$.
+:::
+
+Wir sehen hier die wahre Bedeutung des Gleichheitszeichen in der Mathematik:
+der Term auf der linken Seite von $=$ ist gleichbedeutend mit dem Term auf der rechten Seite.
+
+In Python können wir auch Terme definieren; allerdings wertet Python solche Terme sofort aus, d.h. es wird das Ergebnis berechnet, wenn alle Variablen bekannt sind:
+
+```{python}
+T_1 = a * c + b * c - c
+T_1
+```
+
+Bei der Auswertung geht die ursprüngliche Form des Terms $T_1 = a \cdot c + b \cdot c - c$ unwiederbringlich verloren, es bleibt nur das Ergebnis, in diesem Fall die Zahl $30$.
+Aus diesem Grund ist Standard-Python nicht besonders gut für das Betreiben von Mathematik geeignet; seine Stärke liegt in der schnellen Berechnung von Ausdrücken, nicht in deren mathematischer Umformung.\
+Wir werden im nächsten Kapitel ??? sehen, wie wir diese Beschränkung umgehen können, indem wir eine zusätzliche Bibliothek (engl. *library*) installieren.
+
+Im letzten Code-Beispiel haben wir ein unbekanntes Zeichen `*` gesehen.
+Das liegt daran, dass die Operatoren in Python nicht eins zu eins den mathematischen Operatoren entsprechen.
+Die folgende Tabelle zeigt die Entsprechungen einiger mathematischer Operatoren mit denen in Python:
+
+| Bedeutung            | mathematischer Operator | Python Operator |
+|:---------------------|:-----------------------:|:---------------:|
+| Addition             | $+$                     | `+`             |
+| Subtraktion          | $-$                     | `-`             |
+| Multiplikation       | $\cdot$                 | `*`             |
+| Division             | $\div$                  | `/`             |
+| ganzzahlige Division |                         | `//`            |
+| Rest der Division    | $n \mod{m}$             | `n % m`         |
+| Potenz               | $a^x$                   | `a**x`          |
+
+
+## Grundgesetze der Addition und Multiplikation
+
+Wenn wir einen Term betrachten, wie z.B. im letzten Code-Beispiel $T_1=a \cdot c + b \cdot c - c$, dann ist nicht sofort offensichtlich, wie wir das Ergebnis am besten berechnen.
+In diesem Abschnitt wollen wir erkunden, wie wir solche komplexe Ausdrücke vereinfachen können, um uns Rechenarbeit zu ersparen.
+
+Ein erstes Beispiel in Python:
+
+```{python}
+T_2 = c*(a+b-1)
+assert T_1 == T_2
+```
+
+Wir sehen hier eine neue Anweisung `assert`, deren Bedeutung so zu verstehen ist:
+
+::: {.callout-note}
+## Gleichheit mit `assert`
+Die `assert` Anweisung in Python prüft, ob der nachfolgend angegebene Ausdruck wahr ist.
+Um zwei Werte auf Gleichheit zu überprüfen, verwenden wir in Python das doppeltes Gleichheitsyeichen `==`, das einen Wahrheitswert `True` oder `False` zurückliefert.\
+Wenn der Wahrheitswert `True` ist, dann passiert beim Aufruf von `assert` gar nichts, anderenfalls wird ein Fehler ausgegeben.
+:::
+
+Offensichtlich gilt also die Gleichung $T_1=T_2$ und damit $a \cdot c + b \cdot c - c = c \cdot(a+b-1)$, zumindest für die gegebenen Werte von $a, b$ und $c$.
+Wir wollen in der Mathematik aber zeigen, dass die Gleichung für alle möglichen Werte von $a, b$ und $c$ gilt.
+Deshalb brauchen wir Rechengesetze, die eine äquivalente Umformung eines Ausdrucks in einen anderen Ausdruck ermöglichen, d.h. eine Umformung, die die Bedeutung (oder den Wert) eines Ausdrucks nicht verändert.
+
+::: {.callout-important}
+## Kommutativgesetz
+Für reelle Zahlen gilt bezüglich der Addition und Multiplikation das Kommutativgesetz:
+$$
+\begin{align}
+a + b &= b + a\\
+a \cdot b &= b \cdot a
+\end{align}
+$$ {#eq-kommutativ}
+Bei der Addition kann man also die *Summanden* vertauschen und bei der Multiplikation die *Faktoren*.
+:::
+
+```{python}
+assert a + b == b + a
+assert a * b == b * a
+```
+
+::: {.callout-important}
+## Assoziativgestz
+Für reelle Zahlen gilt bezüglich der Addition und Multiplikation das Assoziativgesetz:
+$$
+\begin{align}
+(a + b) + c &= a + (b + c)\\
+(a \cdot b) \cdot c &= a \cdot (b \cdot c)
+\end{align}
+$$ {#eq-assoziativ}
+Bei der Addition kann man also die Summanden beliebig zusammenfassen, bei der Multiplikation die Faktoren beliebig verknüpfen.
+:::
+
+```{python}
+assert (a + b) + c == a + (b + c)
+assert (a * b) * c == a * (b * c)
+```
+
+::: {.callout-important}
+## Distributivgesetze
+Für reelle Zahlen gelten die Distributivgesetze:
+$$
+\begin{align}
+(a + b) \cdot c &= a \cdot c + b \cdot c\\
+a \cdot (b + c) \cdot c &= a \cdot b + a \cdot c\\
+\end{align}
+$$ {#eq-distributiv}
+:::
+
+```{python}
+assert (a + b) * c == a*c + b*c
+assert a * (b + c) == a*b + a*c
+```
+
+::: {.callout-note}
+## Punktrechnung vor Strichrechnung
+Die Rechenzeichen $\cdot$ und $\div$ binden stärker als $+$ und $-$, das heißt, Multiplikation und Division müssen vor Addition und Subtraktion ausgeführt werden.
+$$
+\begin{align}
+a + b \cdot c &= a + (b \cdot c)\\
+a - b \div c &= a - (b \div c)
+\end{align}
+$$
+Python berücksichtigt diese Regeln automatisch, so dass wir im letzten Codebeispiel die Klammern auf der rechten Seite weglassen konnten.
+:::
+
+## Grundregeln der Klammerrechnung
+
+Aus den Grundgesetzen der Addition und Multiplikation ergeben sich die wichtigen Regeln der Klammerrechnung, die wir in diesem Abschnitt untersuchen wollen.
+Zuvor aber noch einen Hinweis für die mathematische Schreibweise von Produkten:
+
+::: {.callout-note}
+## Schreibweise von Produkten
+Beim Aufschreiben von Produkten in der Form $a \cdot b$ lassen wir oft den Operator für die Multiplikation weg.
+Das heißt, $a \cdot b$ ist gleichbedeutend mit $ab$.\
+Das gilt aber nicht für Python-Code: hier muss ein Produkt immer in der Form `a * b` angegeben werden; die Leerzeichen können aber auch weggelassen werden: `a*b`.
+:::
+
+Außerdem ist noch eine Warnung angebracht: das Distributivgestz (@eq-distributiv) gilt nicht für die reine Multiplikation:
+
+::: {.callout-warning}
+$$
+(a\cdot b)\cdot c\neq ac\cdot bc, \ \mathrm{sondern} \ (a\cdot b)\cdot c=abc
+$$
+:::
+
+```{python}
+assert (a*b)*c == a*b*c
+(a*b) * c == a*c * b*c
+```
+
+### Multiplikation mit Klammern
+
+Summen und Differenzen von Produkten können vereinfacht werden, indem man gemeinsame Faktoren *ausklammert*.
+
+::: {.callout-important}
+## Ausklammern
+Enthalten alle Glieder einer Summe oder Differenz den gleichen Faktor so kann man diesen ausklammern:
+$$
+\begin{align}
+ab + ac &= a(b+c)\\
+ac - bc &= (a-b)c
+\end{align}
+$$
+:::
+
+Produkte von Summen und Differenzen werden berechnet, indem man ihre Glieder *ausmultipliziert*.
+
+::: {.callout-important}
+## Ausmultiplizieren
+Man multipliziert zwei Summen (bzw. Differenzen) miteinander, indem man jedes Glied der einen Summe mit jedem Glied der anderen Summe multipliziert und die erhaltenen Produkte addiert (bzw. subtrahiert):
+$$
+\begin{align}
+(a+b)(c+d) &= ac+ad+bc+bd\\
+(a+b)(c-d) &= ac-ad+bc-bd\\
+(a-b)(c+d) &= ac+ad-bc-bd\\
+(a-b)(c-d) &= ac-ad-bc+bd
+\end{align}
+$$
+:::
+
+Die grundsätzlich Bedeutung von Klammern ist, dass Teilausdrücke, die innerhalb einer Klammer stehen, vor allen anderen Operationen ausgewertet werden.
+Bei verschachtelten Klammern sind die Klammern immer von innen nach außen aufzulösen:
+
+$$
+a(b+c(d+e))=a(b+cd+ce)=ab+acd+ace
+$$
+
+### Binomische Formeln {#sec-binom}
+
+Ein *Binom* ist ein zweigliedriger Ausdruck in der Form $a+b$ oder $a-b$.
+Die Multiplikation von Binomen führt zu den **Binomischen Formeln** (mit zwei Faktoren).
+Sie heißen daher auch *binomische Gleichungen 2. Grades*.
+
+Bevor wir uns diese Gleichungen anschauen, wollen wir erst den Begiff der Quadratzahl einführen:
+
+::: {.callout-note}
+## Quadratzahl
+Eine reelle Zahl $a$, multipliziert mit sich selbst, heißt **Quadratzahl** von $a$ (gesprochen *a Quadrat*):
+$$
+a \cdot a = a^2
+$$
+:::
+
+::: {.callout-important}
+## Binomische Formeln
+Die binomischen Formeln für zwei beliebige reelle Zahlen lauten:
+$$
+\begin{align}
+(a+b)^2 &= a^2+2ab+b^2\\
+(a-b)^2 &= a^2-2ab+b^2\\
+(a+b)(a-b) &= a^2-b^2
+\end{align}
+$$ {#eq-binom}
+:::
+
+```{python}
+assert (a+b)**2 == a**2 + 2*a*b + b**2
+assert (a-b)**2 == a**2 - 2*a*b + b**2
+assert (a+b)*(a-b) == a**2 - b**2
+```
+
+Diese Formeln sind keine Hexerei, sondern können mit den jetzt bekannten Rechenregeln hergeleitet werden.
+Für die erste binomische Formel könnte das so aussehen:
+$$
+(a+b)^2=(a+b)(a+b)=aa+ab+ba+bb=a^2+2ab+b^2
+$$
+
+::: {.callout-warning}
+$$
+(a+b)^2 \neq a^2+b^2, \ \mathrm{sondern} \ (a+b)^2=a^2+2ab+b^2
+$$
+:::
+
+```{python}
+(a+b)**2 == a**2 + b**2
+```
+
+## Übungen
+
+Mit der Mathematik verhält es sich nicht anders als mit dem Fußballspielen oder dem Klavierspielen.
+Wenn wir Fußballspielen lernen wollen, dann reicht es nicht, ein Fußballspiel anzuschauen; wenn wir Klavierspielen lernen wollen, dann reicht es nicht, ein Klavierkonzert anzuhören.
+Wir müssen es selbst tun, es wiederholt üben, um die notwendige Geschicklichkeit zu erlangen.
+Genauso können wir Mathematik nicht lernen, indem wir ein Tuturial (wie dieses hier) oder ein Lehrbuch über Mathematik lesen.
+
+Wir müssen auch Mathematik üben, selbst Berechnungen durchführen und dabei die gültigen Regeln anwenden, um mathematische Geschicklichkeit zu erlangen.
+Das ist weder schwer noch besonders aufwändig; wir müssen es einfach nur tun.
+
+Deshalb enthält jedes Kapitel einen abschließenden Abschnitt **Übungen**.
+Ich werde dir ein paar Aufgaben vorgeben, die du mit etwas Nachdenken sicher lösen kannst.
+Wenn du bei einer Aufgabe dennoch Schwierigkeiten hast, schau dir den entsprechenden Lösungshinweis an, und vergleiche dann deine Lösung mit meinem Lösungsvorschlag.
+Mache dir aber auf jeden Fall Gedanken, wie du die Aufgabe lösen kannst.
+Wenn du gleich zur Lösung springst, wirst du *nichts* lernen.
+Also, schnapp dir Papier und Bleistift und leg los.
+
+::: {.callout-caution}
+## Aufgabe 1
+Leite die 2. binomische Formel her.
+:::
+
+::: {.callout-tip collapse="true"}
+## Hinweis
+Gehe genauso vor wie bei der Herleitung der 1. binomischen Formel in @sec-binom.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+(a-b)^2=(a-b)(a-b)=aa-ab-ba+bb=a^2-2ab+b^2
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 2
+Leite die 3. binomische Formel her.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+(a+b)(a-b)=aa-ab+ba-bb=aa-bb=a^2-b^2
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 3
+Berechne $3(200+7)$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+3(200+7)=3\cdot 200+3\cdot 7= 600+21=621
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 4
+Vereinfache den Term: $abc-acd+ace$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Hinweis
+Klammere die gemeinsamen Faktoren aus.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+abc-acd+ace=ac(b-d+e)
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 5
+Vereinfache den Term: $-5x^2+25xy-35zx$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+-5x^2+25xy-35zx=-5x(x-5y+7z)
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 6
+Berechne $21^2$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Hinweis
+Versuche, die 1. binomische Formel anzuwenden.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+21^2=(20+1)^2=20^2+2\cdot 20\cdot 1+1^2=400+40+1=441
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 7
+Berechne $19^2$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+19^2=(20-1)^2=20^2-2\cdot 20\cdot 1+1^2=400-40+1=361
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 8
+Vereinfache den Term: $5(x-2(x-y-3y-6x-3y)+2y)$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+\begin{align}
+5(x-2(x-y-3y-6x-3y)+2y) &= 5(x-2(-5x-7y)+2y)\\
+&=5(x+10x+14y+2y)\\
+&=5(11x+16y)\\
+&=55x+80y
+\end{align}
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 9
+Berechne $21\cdot 19$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Hinweis
+Versuche, die 3. binomische Formel anzuwenden.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+21 \cdot 19=(20+1)(20-1)=20^2-1^2=400-1=399
+$$
+:::
