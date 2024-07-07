@@ -5,7 +5,7 @@ jupyter: python3
 
 Um mit Zahlen rechnen zu können, verknüpfen wir sie mit mathematischen *Operatoren*.
 Ein Operator in diesem Sinn ist nichts anders als ein Symbol für die beabsichtigte Berechnung.
-So werden zum Beispiel die vier Grundrechenarten Addition, Subtraktion, Multiplikation und Division durch die Operatoren $+, \ -, \ \cdot, \ \div$ ausgedrückt, während das Gleichheitszeichen ($=$) das Ergebnis der Berechnung widerspiegelt.
+So werden zum Beispiel die vier Grundrechenarten Addition, Subtraktion, Multiplikation und Division durch die Operatoren $+, \ -, \ \cdot, \ \div$ ausgedrückt, während das Gleichheitszeichen ($=$) das Ergebnis der Berechnung angibt.
 
 In diesem Kapitel werden wir untersuchen, wie wir verschiedene Operatoren miteinander verknüpfen können, um sinnvolle Ergebnisse für unsere Berechnungen zu erhalten.
 
@@ -20,14 +20,17 @@ Das Gleichheitszeichen in Python darf also nicht mit dem mathematischen Gleichhe
 Wenn Variablen einmal angelegt sind, können wir mit ihnen wie mit Zahlen rechnen:
 
 ```{python}
-a = 3
-b = 4
-c = a + b - 2
-# Dies ist ein Kommentar
-# Kommentare werden von Python ignoriert
-# Die nächste Zeile gibt den Wert von c aus
+a = 3                                         # <1>
+b = 4                                         # <2>
+c = a + b - 2                                 # <3>
+# Die nächste Zeile gibt den Wert von c aus   # <4>
 c
 ```
+1. Zuweisung der Zahl 3 an die Variable `a`
+2. Zuweisung der Zahl 4 an die Variable `b`
+3. Berechnung von `a + b - 2` und Zuweisung des Ergebnisses an die Variable `c`
+4. Eingaben, die nach dem `#` Zeichen erfolgen, werden als Kommentar gewertet.
+Kommentare bleiben bei der Auswertung eines Programms in Python unberücksichtigt.
 
 Wenn wir nun mehrere Berechnungen gleichzeitig durchführen wollen, dann verknüpfen wir Zahlen und Variablen mit den entsprechenden Operatoren und erhalten einen zusammengesetzten Ausdruck, den wir *Term* nennen.
 
@@ -60,7 +63,7 @@ T_1
 
 Bei der Auswertung geht die ursprüngliche Form des Terms $T_1 = a \cdot c + b \cdot c - c$ unwiederbringlich verloren, es bleibt nur das Ergebnis, in diesem Fall die Zahl $30$.
 Aus diesem Grund ist Standard-Python nicht besonders gut für das Betreiben von Mathematik geeignet; seine Stärke liegt in der schnellen Berechnung von Ausdrücken, nicht in deren mathematischer Umformung.\
-Wir werden im nächsten Kapitel ??? sehen, wie wir diese Beschränkung umgehen können, indem wir eine zusätzliche Bibliothek (engl. *library*) installieren.
+Wir werden in einer späteren Lektion (siehe ???) sehen, wie wir diese Beschränkung umgehen können, indem wir eine zusätzliche Bibliothek (engl. *library*) installieren.
 
 Im letzten Code-Beispiel haben wir ein unbekanntes Zeichen `*` gesehen.
 Das liegt daran, dass die Operatoren in Python nicht eins zu eins den mathematischen Operatoren entsprechen.
@@ -75,6 +78,40 @@ Die folgende Tabelle zeigt die Entsprechungen einiger mathematischer Operatoren 
 | ganzzahlige Division |                         | `//`            |
 | Rest der Division    | $n \mod{m}$             | `n % m`         |
 | Potenz               | $a^x$                   | `a**x`          |
+
+## Teilbarkeitsregeln
+
+Wir werden uns in der Lektion [Teiler und Vielfache](teiler.qmd) ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.
+An dieser Stelle wollen wir aber schon einige grundlegende Teilbarkeitsregeln betrachten.
+
+Die einzelnen Zeichen einer Zahl sind ihre Ziffern: $0,1,2,3,4,5,6,7,8,9$.
+Aus den Eigenschaften der Ziffern lassen sich Teilbarkeitseigenschaften der Zahlen ableiten:
+
+::: {.callout-important}
+## Teilbarkeitsregeln
+Eine ganze Zahl ist teilbar durch
+
+- 2, wenn die letzte Ziffer durch 2 teilbar ist
+- 3, wenn die *Quersumme* der Zahl (also die Summe der Ziffern) durch 3 teilbar ist
+- 4, wenn die Zahl aus den letzten beiden Ziffern durch 4 teilbar ist
+- 5, wenn die letzte Ziffer durch 5 teilbar ist (also 0 oder 5 ist)
+- 6, wenn die letzte Ziffer durch 2 und die Quersumme der Zahl durch 3 teilbar ist
+- 8, wenn die Zahl aus den letzten 3 Ziffern durch 8 teilbar ist
+- 9, wenn die Quersumme der Zahl durch 9 teilbar ist
+- 11, wenn die alternierende Quersumme der Zahl (also die Summe der Ziffern, die abwechselnd positives und negatives Vozeichen erhalten) durch 11 teilbar ist.
+:::
+
+::: {.callout-tip}
+## Beispiele für Teilbarkeit
+- 2486 ist teilbar durch 2, denn 6 ist teilbar durch 2
+- 263.451 ist teilbar durch 3, denn die Quersumme $2+6+3+4+5+1=21$ ist teilbar druch 3
+- 2.563.488 ist teilbar durch 4, denn 88 ist teilbar durch 4 ($22\cdot4=88$)
+- 823.620 ist teilbar durch 5, denn die letzte Ziffer ist 0
+- 2.598.018 ist teilbar durch 6, denn 8 ist teilbar durch 2 und die Quersumme $2+5+9+8+0+1+8=33$ ist teilbar durch 3
+- 524.299.168 ist teilbar durch 8, denn 168 ist teilbar durch 8 ($21\cdot8=168$)
+- 11.929.545 ist teilbar durch 9, denn die Quersumme $1+1+9+2+9+5+4+5=36$ ist teilbar durch 9 ($4\cdot9=36$)
+- 14.739.296 ist teilbar durch 11, denn die alternierende Quersumme $+1-4+7-3+9-2+9-6=11$ ist teilbar durch 11
+:::
 
 
 ## Grundgesetze der Addition und Multiplikation
@@ -204,7 +241,7 @@ ac - bc &= (a-b)c
 $$
 :::
 
-Produkte von Summen und Differenzen werden berechnet, indem man ihre Glieder *ausmultipliziert*.
+Produkte von Summen und Differenzen werden berechnet, indem man ihre Glieder multipliziert.
 
 ::: {.callout-important}
 ## Ausmultiplizieren
@@ -281,7 +318,7 @@ $$
 Mit der Mathematik verhält es sich nicht anders als mit dem Fußballspielen oder dem Klavierspielen.
 Wenn wir Fußballspielen lernen wollen, dann reicht es nicht, ein Fußballspiel anzuschauen; wenn wir Klavierspielen lernen wollen, dann reicht es nicht, ein Klavierkonzert anzuhören.
 Wir müssen es selbst tun, es wiederholt üben, um die notwendige Geschicklichkeit zu erlangen.
-Genauso können wir Mathematik nicht lernen, indem wir ein Tuturial (wie dieses hier) oder ein Lehrbuch über Mathematik lesen.
+Genauso können wir Mathematik nicht lernen, indem wir ein Tutorial (wie dieses hier) oder ein Lehrbuch über Mathematik lesen.
 
 Wir müssen auch Mathematik üben, selbst Berechnungen durchführen und dabei die gültigen Regeln anwenden, um mathematische Geschicklichkeit zu erlangen.
 Das ist weder schwer noch besonders aufwändig; wir müssen es einfach nur tun.
@@ -295,6 +332,23 @@ Also, schnapp dir Papier und Bleistift und leg los.
 
 ::: {.callout-caution}
 ## Aufgabe 1
+Berechne die Quersumme von $1.234.567.890$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Hinweis
+Die Quersumme einer Zahl ist die Summe ihrer Ziffern.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+1+2+3+4+5+6+7+8+9+0=45
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 2
 Leite die 2. binomische Formel her.
 :::
 
@@ -311,7 +365,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 2
+## Aufgabe 3
 Leite die 3. binomische Formel her.
 :::
 
@@ -323,7 +377,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 3
+## Aufgabe 4
 Berechne $3(200+7)$.
 :::
 
@@ -335,7 +389,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 4
+## Aufgabe 5
 Vereinfache den Term: $abc-acd+ace$.
 :::
 
@@ -352,7 +406,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 5
+## Aufgabe 6
 Vereinfache den Term: $-5x^2+25xy-35zx$.
 :::
 
@@ -364,7 +418,22 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 6
+## Aufgabe 7
+Ist 11.543.711 durch 11 teilbar?
+:::
+
+::: {.callout-tip collapse="true"}
+## Hinweis
+Verwende die alternierende Quersumme.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+11.513.511 ist nicht durch 11 teilbar, denn die alternierende Quersumme $+1-1+5-1+3-5+1-1=2$ ist nicht teilbar durch 11.
+:::
+
+::: {.callout-caution}
+## Aufgabe 8
 Berechne $21^2$.
 :::
 
@@ -381,7 +450,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 7
+## Aufgabe 9
 Berechne $19^2$.
 :::
 
@@ -393,7 +462,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 8
+## Aufgabe 10
 Vereinfache den Term: $5(x-2(x-y-3y-6x-3y)+2y)$.
 :::
 
@@ -410,7 +479,7 @@ $$
 :::
 
 ::: {.callout-caution}
-## Aufgabe 9
+## Aufgabe 11
 Berechne $21\cdot 19$.
 :::
 
