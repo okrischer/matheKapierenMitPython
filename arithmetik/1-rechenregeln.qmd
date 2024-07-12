@@ -81,7 +81,7 @@ Die folgende Tabelle zeigt die Entsprechungen einiger mathematischer Operatoren 
 
 ## Teilbarkeitsregeln
 
-Wir werden uns in der Lektion [Teiler und Vielfache](teiler.qmd) ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.
+Wir werden uns in der Lektion [Teiler und Vielfache](3-teiler.qmd) ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.
 An dieser Stelle wollen wir aber schon einige grundlegende Teilbarkeitsregeln betrachten.
 
 Die einzelnen Zeichen einer Zahl sind ihre Ziffern: $0,1,2,3,4,5,6,7,8,9$.
@@ -313,6 +313,62 @@ $$
 (a+b)**2 == a**2 + b**2
 ```
 
+## Indizes und Summenzeichen
+
+Ein Index (Plural Indizes) ist ein Zeichen, das an Symbole für Variable, Funktionen oder Operationen angebracht wird.
+Bezeichnet man z.B. Variable mit $x$, dann kennzeichent man verschiedene Variable dudurch, dass man an das $x$ verschiedene tiefgestellte Indizes anhängt: $x_1, x_2, x_3, \dots$
+
+Das Summenzeichen, (entstanden aus dem griechischen Buchstaben für S) dient zur vereinfachten Darstellung von Summen:
+
+::: {.callout-important}
+## Summenzeichen
+$$
+\sum_{k=1}^n = a_k=a_1+a_2+a_3+\cdots+a_n,
+$$ {#eq-summe}
+gespochen als: Summe über $a_k$ von $k=1$ bis $k=n$.
+:::
+
+Man erhält alle Summanden der Summe, wenn man in $a_k$ für den Index $k$ zunächst 1, dann 2 usw. und schließlich $n$ setzt.
+Dieser Buchstabe $k$ heißt Summationsindex und kann durch einen beleibigen anderen Buchstaben ersetzt werden.
+
+::: {.callout-tip}
+## Beispiel für Summen
+$\sum_{k=1}^6 k^2= 1^2+2^2+3^2+4^2+5^2+6^2=1+4+9+16+25+36=91$
+:::
+
+In Python können wir Summen auf verschiedene Weisen berechnen:
+
+```{python}
+# manuelles Addieren
+sum_1 = 1**2 + 2**2 + 3**2 + 4**2 + 5**2 + 6**2
+assert sum_1 == 91
+
+# Addieren in einer for-Schleife
+sum_2 = 0
+ks = [1,2,3,4,5,6]                  # <1>
+for s in ks:                        # <2>
+  sum_2 += s**2                     # <3>
+
+## Addieren über den Index
+sum_3 = 0
+for i in range(len(ks)):            # <4>
+  sum_3 += ks[i]**2                 # <5>
+
+assert sum_1 == sum_2 == sum_3
+```
+1. Definition der Werte für den Summationsindex $k$ als Python Liste.
+Zur Erstellung einer Liste geben wir die Werte, getrennt durch ein Komma, in eckigen Klammern an.
+Das Ergebis dieser Definition ist Objekt des Datentyps `list`.
+2. Beginn einer `for` Schleife mit `s` als Schleifenvariable und dem Objekt `ks`.
+Diese Anweisung führt dazu, dass die nächste Code-Zeile (3) für jedes Element in `ks` einmal ausgeführt wird.
+3. Der Wert von `sum_2` wird um das Quadrat des jeweiligen Elements `s` erhöht.
+4. Python erzeugt automatisch einen Index für jedes `list` Objekt.
+Wir können mit dem Ausdruck `range(len(ks))` eine neue Liste dieser Indizes erzeugen.
+Die Indizes in Python beginnen, abweichend von der mathematischen Definition, mit 0 und enden demgemäß mit $n-1$, in unserem Beispiel mit 5.
+Wir werden in der nächsten Lektion [Zahlenbereiche und Zahlensyteme](2-mengen.qmd) sehen, wie wir die Funktion `range()` korrekt anwenden.
+5. Auf das $i$-te Element einer Liste kann mit `list[i]` zugegriffen werden.
+Der Ausdruck `ks[i]` ist also synonym zum Ausdruck `s` im vorangehenden Code-Beispiel.
+
 ## Übungen
 
 Mit der Mathematik verhält es sich nicht anders als mit dem Fußballspielen oder dem Klavierspielen.
@@ -324,7 +380,7 @@ Wir müssen auch Mathematik üben, selbst Berechnungen durchführen und dabei di
 Das ist weder schwer noch besonders aufwändig; wir müssen es einfach nur tun.
 
 Deshalb enthält jedes Kapitel einen abschließenden Abschnitt **Übungen**.
-Ich werde dir ein paar Aufgaben vorgeben, die du mit etwas Nachdenken sicher lösen kannst.
+Ich werde dir hier ein paar Aufgaben vorgeben, die du mit etwas Nachdenken sicher lösen kannst.
 Wenn du bei einer Aufgabe dennoch Schwierigkeiten hast, schau dir den entsprechenden Lösungshinweis an, und vergleiche dann deine Lösung mit meinem Lösungsvorschlag.
 Mache dir aber auf jeden Fall Gedanken, wie du die Aufgabe lösen kannst.
 Wenn du gleich zur Lösung springst, wirst du *nichts* lernen.
