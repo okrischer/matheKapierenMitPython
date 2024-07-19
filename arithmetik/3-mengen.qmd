@@ -9,7 +9,7 @@ In dieser Lektion werden wir uns den Zahlenbegriff, so wie er der gesamten Mathe
 Dafür werden wir zunächst die Grundbegriffe der Mengenlehre kennenlernen und die Zahlen in Zahlenbereiche einteilen.
 Schließlich wollen wir auch noch verschiedene Zahlensysteme erkunden.
 
-## Elementare Mengenlehre
+## Elementare Mengenlehre {#sec-mengen}
 
 In der Mathematik wird jede Zusammenfassung von bestimmten, wohlunterscheidbaren Objekten zu einer *Gesamtheit* eine **Menge** genannt.
 Eine Menge ist definiert, wenn feststeht, welche Objekte zu dieser Menge gehören und welche nicht.
@@ -63,7 +63,7 @@ $$
 :::
 
 ::: {.callout-important}
-## Differenzmenge
+## Differenz
 Die Differenz $A \backslash B$ zweier Mengen $A$ und $B$ besteht aus denjenigen Elementen, die in $A$, aber nicht in $B$ enthalten sind:
 $$
 A \backslash B = \{x \mid x \in A \ \mathrm{und} \ x \notin B\}
@@ -163,47 +163,6 @@ $$
 wobei die drei Punkte anzeigen, dass die Folge der Zahlen nach dem gegeben Muster fortgeführt wird.
 :::
 
-Die Folge der natürlichen Zahlen beginnt also mit 1, und jedes nächstes Element zeichnet sich dadurch aus, dass es genau um eins größer ist als sein Vorgänger, also: $n_2 = n_1+1$.
-Wir könnten die Menge der natürlichen Zahlen also auch mit folgender *rekursiven Beziehung* beschreiben:
-
-::: {.callout-warning}
-## Rekursive Definition der natürlichen Zahlen
-$$
-\begin{align}
-\mathbb{N}_1 &= 1\\
-\mathbb{N}_m &= \mathbb{N}_{m-1}+1
-\end{align}
-$$
-:::
-
-::: {.callout-note}
-## Rekursive Beziehung
-Eine **rekursive Beziehung** ist eine *selbstbezügliche* Beschreibung der Elemente einer Menge, in der also die Elemente in Bezug zu einem oder mehreren anderen Elementen der Menge definiert sind.
-
-Diese Beziehungskette muss aber irgenwann beendet werden, damit sie sich nicht unendlich weiter fortsetzt.
-Dazu wird eine *Abbruchbedingung* definiert, d.h. der Wert für ein bestimmtes Element wird so festgelegt, dass er sich ohne Rekursion bestimmen lässt.
-Im Fall der natürlichen Zahlen ist das das erste Element $\mathbb{N}_1$ der Menge $\mathbb{N}$, dem der Wert 1 zugewiesen wird.
-:::
-
-Die obige rekursive Definition der natürlichen Zahlen wird in der Arithmetik allerdings selten verwendet; dennoch ist sie ein guter Einstiegspunkt, um das Konzept der *Rekursion* zu verstehen:
-wir könnten eine rekursive Funktion definieren, die das $n$-te Element von $\mathbb{N}$ berechnet:
-
-```{python}
-def nat(n):
-  def rek(m):                 # <1>
-    if m == n: return m       # <2>
-    else: return rek(m+1)     # <3>
-  return rek(1)               # <4>
-
-assert nat(15) == 15
-```
-1. Definition einer *inneren* Funktion `rek()`: diese Funktion ist nur innerhalb der sie umgebenden Funktion `nat()` sichtbar, kann also nicht direkt in Python aufgerufen werden.
-2. *Abbruchbedingung*: wenn `m == n`, dann wird ohne weitere Berechnung `m` als Ergebnis zurückgegeben.
-3. Wenn die Abbruchbedingung nicht erfüllt ist, dann ruft sich `rek()` selbst wieder mit dem Argument `m+1` auf.
-Das ist der *rekursive Schritt* der inneren Funktion `rek()`.
-4. Aufruf der *rekursiven Funktion* `rek()` mit dem ersten Element von $\mathbb{N}$
-
-Diese Funktion mag auf den ersten Blick nicht als besonders nützlich erscheinen; rekursive Funktionen können sich aber zum Abzählen der Elemente einer Menge als sehr wertvoll erweisen.
 
 ### Ganze Zahlen {#sec-zahlen}
 
@@ -221,10 +180,11 @@ wobei $abs(z)$ für den absoluten Wert von $z$ steht, also $z$ ohne Vorzeichen.
 :::
 
 Es hat in Europa bis zum Ende des Mittelalters gedauert, bis sich die Verwendung von 0 als Zahl und die Rechnung mit negativen Zahlen durchgesetzt hat.
-Das erscheint auf den ersten Blick verwunderlich, da wir heute ganz selbstverständlich mit negativen Zahlen rechnen, aber die folgende (erfundene) Anekdote zeigt, was für ein großer intellektueller Schritt das war:
+Das erscheint auf den ersten Blick verwunderlich, da wir heute ganz selbstverständlich mit negativen Zahlen rechnen.
+Folgender Witz illustriert, was für ein großer intellektueller Schritt das war:
 
 ::: {.callout-note}
-## Rechnen mit negativen Zahlen
+## Mathematiker Witz
 Stehen ein Theologe, ein Physiker und ein Mathematiker vor einem leeren Raum.
 Gemeinsam beobachten sie, wie drei Personen den Raum betreten und kurze Zeit fünf Personen wieder herauskommen.\
 "Ein Wunder!", ruft der Theologe.\
@@ -282,7 +242,7 @@ Um diese Verwirrung auszuschließen, können wir eine *set comprehension* auch a
 {z for z in range(-5, 17) if z % 2 != 0}
 ```
 
-Hier haben wir den Modulo Operator `%` verwendet, der den Rest einer [ganzzahligen Division](3-teiler.qmd#sec-division) ausgibt, um zu testen, ob `z` eine ungerade Zahl ist.
+Hier haben wir den Modulo Operator `%` verwendet, der den Rest einer [ganzzahligen Division](2-teiler.qmd#sec-division) ausgibt, um zu testen, ob `z` eine ungerade Zahl ist.
 
 ### Rationale Zahlen
 
@@ -369,7 +329,7 @@ Grundsätzlich unterscheidet man zwischen sogenannten Positionssystemen und Addi
 
 ::: {.callout-note}
 ## Positions- und Additionssysteme
-Bei einem *Positionssystem* ist der Wert einer Ziffer abhängig von der *Position* dieser Ziffer innerhalb der Zahl.\
+Bei einem *Positionssystem* (auch *Stellenwertsystem* genannt) ist der Wert einer Ziffer abhängig von der *Position* dieser Ziffer innerhalb der Zahl.\
 Bei *Additionssystemen* wird der Wert aller Ziffern einfach addiert, um den Wert der Zahl festzulegen.
 :::
 
@@ -504,3 +464,155 @@ Addition mit Übertrag
 Hier sehen wir auch die besondere Rolle der $0$: obwohl sie selbst keinen Wert besitzt, ist sie doch als Platzhalter in einem Positionssystem unentbehrlich.
 
 ### Dualsystem
+
+Das **Dualsystem** ist ein Positionssystem zur Basis 2, es gibt also nur zwei Ziffern $0,1$.
+Es wird deshalb auch *Binärsystem* oder *Zweiersystem* genannt.
+
+Das Dualsystem spielt eine entscheidende Rolle in der Digitaltechnik, in der Zahlen durch elektrische Zustände dargestellt werden.
+In einem elektronischen Schaltkreis gibt es nur zwei Zustände: entweder es liegt ein Signal vor (Strom an), oder eben nicht (Strom aus).
+Diese Zustände werden zu Binärzahlen kombiniert, mit denen dann ein Computer "rechnet".\
+*Informatiker* (Menschen, die Computerwissenschaften studiert haben) erzählen sich gerne folgenden Witz:
+
+::: {.callout-note}
+## Informatiker Witz
+Es gibt 10 Arten von Menschen:
+
+- diejenigen, die das Binärsystem verstanden haben
+- diejenigen, die es *nicht* verstanden haben
+:::
+
+Wenn du darüber lachen kannst, dann hast du es verstanden.
+
+Auch Python rechnet intern mit Binärzahlen, d.h. jede Eingabe von Dezimalzahlen wird in Binärzahlen umgewandelt, mit denen die notwendigen Berechnungen durchgeführt werden.
+Bei der Ausgabe des Ergebnisses werden diese Binärzahlen dann wieder zurück ins Dezimalsystem konvertiert.
+
+Dieser Vorgang ist für den Anwender *transparent*, d.h. wir als Programmierer merken nichts von der internen Umwandlung.
+Für die Berechnung des Wertes einer ganzen Binärzahl gelten die Regeln aus @sec-dezimal analog, nur dass wir jede Ziffer nun mit einer Zweierpotenz $2^i$ multiplizieren; jede Ziffer hat dann den doppelten Stellenwert der ihr rechts folgenden Ziffer:
+
+::: {.callout-tip}
+## Berechnung des Wertes einer Dualzahl
+$$
+\begin{align}
+0100\ 1101_2&=0\cdot2^7+1\cdot2^6+0\cdot2^5+0\cdot2^4+1\cdot2^3+1\cdot2^2+0\cdot2^1+1\cdot2^0\\
+&=0+64+0+0+8+4+0+1=77_{10}
+\end{align}
+$$
+:::
+
+Werden mehrere Zahlensysteme gleichzeitig benutzt, so ist es zur Vermeidung von Irrtümern üblich, die Basis als Index anzuhängen.
+Dualzahlen stellen wir zur besseren Lesbarkeit in Vierer-Blöcken dar.
+
+Die Berechnung reeller Zahlen im Dualsystem erfolgt analog zu @eq-dezimalzahl.
+Der Wert einer Ziffer im Dualsytem (engl. *bit*, als Kurzform für *binary digit*) ergibt sich dadurch, dass die $n$-te Stelle mit $2^{n-1}$ und die $m$-te Stelle nach dem Komma mit $2^{-m}$ multipliziert wird:
+
+::: {.callout-important}
+## Der Wert einer Dualzahl
+$$
+b=\sum_{i=-m}^n b_i\cdot 2^i
+$$ {#eq-dualzahl}
+:::
+
+::: {.callout-tip}
+## Berechnung einer reellen Zahl im Dualsystem
+$$
+\begin{align}
+1011,01_2&=1\cdot2^3+0\cdot2^2+1\cdot2^1+1\cdot2^0+0\cdot2^{-1}+1\cdot2^{-2}\\
+&=8+2+1+\frac{1}{4}=11,25_{10}
+\end{align}
+$$
+:::
+
+Mit der Berechnung des Wertes einer Dualzahl haben wir diese Zahl in eine Dezimalzahl umgerechnet; dies wird auch als *Konvertierung* bezeichnet.
+Mit diesen Regeln können wir jetzt eine Dualzahl in Python in eine Dezimalzahl konvertieren:
+
+```{python}
+def bin_to_dec(binary):
+  assert type(binary) == str            # <1>
+  s = binary.split(',')                 # <2>
+  n = len(s[0])                         # <3>
+  m = 1
+  decimal = 0
+  for bit in s[0]:                      # <4>
+    decimal += int(bit) * 2**(n-1)
+    n -= 1
+  for bit in s[1]:                      # <5>
+    decimal += int(bit) * 2**(-m)
+    m += 1
+  return decimal
+
+assert bin_to_dec("1011,01") == 11.25
+```
+1. Wir erwarten, dass die Funktion mit einem Argument vom Typ `str` (also einer Zeichenkette) aufgerufen wird.
+Wenn nicht, dann ergeben die nachfolgenden Berechnungen keinen Sinn, und wir brechen das Programm ab.
+2. Teilen des Eingabestrings in zwei Hälften, den Teil vor dem Komma und den Teil nach dem Komma.
+Das Ergebnis ist eine Liste mit zwei Teilstrings.
+3. Belegen der Variablen `n` mit der Länge des ersten Teilstrings (zur Erinnerung: der Index in Python beginnt mit 0).
+4. Wir durchlaufen die Zeichen im ersten Teilstring (die Ziffern vor dem Komma) und berechnen den Wert der jeweiligen Ziffer nach der Formel von @eq-dualzahl.
+Die Schleifenvariable haben wir hier `bit` genannt.
+Nach jedem Durchlauf verringern wir den Wert von `n` um 1.
+5. Berechnung der Werte für die *bits* nach dem Komma.
+Hier erhöhen wir den Wert von `m` nach jedem Durchlauf um 1.
+
+Für das Rechnen mit Binärzahlen stellt Python sogenannte *bitwise operations* bereit:
+
+| Operation | Ergebnis                                     |
+|:---------:|:-------------------------------------------- |
+| `x | y`   | bitwise *or* \ von `x` und `y`               |
+| `x ^ y`   | bitwise *exclusive or* \ von `x` und `y`     |
+| `x & y`   | bitwise *and* \ von `x` und `y`              |
+| `x << n`  | `x` um `n` bits nach links verschoben        |
+| `x >> n`  | `x` um `n` bits nach rechts verschoben       |
+| `~x`      | bitwise *not* \ : die bits von `x` umgekehrt |
+
+Binärzahlen werden in der Regel zu Einheiten von acht *bits* zusammengefasst, die wir dann *byte* nennen.
+Wenn wir ein *byte* in der Form $b=b_7 \ b_6 \ b_5 \ b_4 \ b_3 \ b_2 \ b_1 \ b_0$ darstellen, dann können wir die *bitwise operations* als Mengenoperationen (siehe @sec-mengen) auf *bytes* begreifen, indem wir jedes gesetzte *bit* über seinen Index darstellen:
+
+```{python}
+x = 0b10000010                                   # <1>
+y = 0b10010000
+print(f"x = {x:#0b}", "= {7, 1}")                # <2>
+print(f"y = {y:#0b}", "= {7, 4}")
+```
+1. Definition von `x` als Binärzahl: wir verwenden hierzu das Präfix `0b`.
+2. Ausgabe von `x` im Binärformat (wir verwenden hierzu einen sogenannten `f-string` für engl. *formatted string*) und der Menge der gesetzten *bits*.
+
+Die Mengenoperationen können dann so ausgeführt werden:
+
+```{python}
+# bitwise or
+print(f"Vereinigungsmenge (x|y): {x|y:#0b}", "= {7, 4, 1}")
+
+# bitwise and
+print(f"Schnittmenge (x&y): {x&y:#0b}", "= {7}")
+
+# bit clear (and not)
+print(f"Differenz (x&~y): {x&~y:#0b}", "= {1}")
+
+# bitwise xor
+print(f"Symmetrische Differenz (x^y): {x^y:#0b}", "= {4, 1}")
+```
+
+Die *shift* Operatoren `<<` und `>>` verschieben die *bits* einer Binärzahl um $n$ Stellen nach links bzw. rechts.
+Dabei wird die Zahl bei *links-shift* mit `<<` von rechts mit 0-*bits* aufgefüllt, der Wert der Zahl verdoppelt sich also mit jedem *shift*.
+Demnach ist z.B. `x << 3` gleichbedeutend mit $x\cdot2^3$.
+
+```{python}
+a = 5
+print(f"a = {a:#0b} = {a}")
+b = a << 3
+print(f"b = {b:#0b} = {b}")
+assert b == a * 2**3
+```
+
+Bei einem rechts-*shift* mit `x >> n` werden `n` Stellen am rechten Ende von `x` abgeschnitten, der Wert der Zahl halbiert sich also mit jedem *shift*.
+Wenn das letzte bit $b_0$ dabei gesetzt ist, die Zahl also ungerade ist, dann geht der Rest der Division durch 2 dabei verloren; es gilt also: `x >> 1` ist gleichbedeutend mit `x // 2`.
+
+```{python}
+print(f"a = {a:#0b} = {a}")
+c = a >> 1
+print(f"c = {c:#0b} = {c}")
+assert c == a // 2
+```
+
+## Übungen
+

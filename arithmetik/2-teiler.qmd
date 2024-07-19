@@ -328,7 +328,7 @@ Das liegt daran, dass $65 \div 143$ gleich 0, mit Rest 65 ist, d.h. beim nächst
 Die zusätzliche Operation können wir aus Effizienzsicht gut verkraften, da wir uns ja den Test auf `b > a` sparen.
 
 Der *ggT* wird häufig auch als *rekursive* Funktion realisiert.
-Wir werden *Rekursion* in einer späteren Lektion ausführlich behandeln (siehe ???); ich möchte die Implementierung eines rekursiven *ggT* hier aber schon als kleinen Vorgeschmack vorstellen:
+Wir werden [Rekursion](5-rekursion.qmd) in einer späteren Lektion ausführlich behandeln; ich möchte die Implementierung eines rekursiven *ggT* hier aber schon als kleinen Vorgeschmack vorstellen:
 
 ```{python}
 def ggT(a, b):
@@ -526,6 +526,16 @@ Ob diese Lösung dann leichter verständlich ist, kannst für dich selbst entsch
 
 ## Übungen
 
-In dieser Lektion hatten wir einige Zwischenübungen (insgesamt sechs in allen Kapiteln).
-Wenn du sie alle alle gemacht und verstanden hast, dann bist du mit dieser Lektion fertig.
-Wenn nicht, dann arbeite nochmal die gesamte Lektion durch versuche dich an den Übungen!
+Du bist jetzt bereit, deine ersten mathematischen Probleme mit Python zu lösen.
+
+Falls du Python und Jupyter noch nicht installiert hast, dann sieh in Lektion [Rechenregeln](1-rechenregeln.qmd#sec-ubung) nach und richte deine Arbeitsumgebung ein.
+
+Um mit den Jupyter-Notebooks dieses Tutorials arbeiten zu können, musst du sie dir zunächst herunterladen.
+Dafür brauchst du das Programm *Git*, dass du gemäß diesen [Installationsanleitungen](https://github.com/git-guides/install-git) installieren kannst.
+
+Wenn *Git* installiert ist, setze in deiner Kommandozeile den Befehl `git clone https://github.com/okrischer/matheKapierenMitPython.git` ab.
+Wechsle dann in das Verzeichnis `matheKapierenMitPython` und aktiviere deine Arbeitsumgebung mit `conda activate matheKapieren`.
+
+Jetzt kannst du mit `jupyter lab` *Jupyter* starten, und es sollte sich ein neues Browser-Fenster öffnen.
+Öffne dort im *File Browser* (der Spalte ganz links im Browser-Fenster) das Verzeichnis `arithmetik` und dann mit einem Doppel-Klick das Notebook `_teiler.ipynb`.
+Folge dann den Anweisungen im Notebook.

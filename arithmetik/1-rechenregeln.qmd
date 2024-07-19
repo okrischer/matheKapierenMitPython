@@ -81,7 +81,7 @@ Die folgende Tabelle zeigt die Entsprechungen einiger mathematischer Operatoren 
 
 ## Teilbarkeitsregeln
 
-Wir werden uns in der Lektion [Teiler und Vielfache](3-teiler.qmd) ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.
+Wir werden uns in der Lektion [Teiler und Vielfache](2-teiler.qmd) ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.
 An dieser Stelle wollen wir aber schon einige grundlegende Teilbarkeitsregeln betrachten.
 
 Die einzelnen Zeichen einer Zahl sind ihre Ziffern: $0,1,2,3,4,5,6,7,8,9$.
@@ -365,26 +365,27 @@ Diese Anweisung führt dazu, dass die nächste Code-Zeile (3) für jedes Element
 4. Python erzeugt automatisch einen Index für jedes `list` Objekt.
 Wir können mit dem Ausdruck `range(len(ks))` eine neue Liste dieser Indizes erzeugen.
 Die Indizes in Python beginnen, abweichend von der mathematischen Definition, mit 0 und enden demgemäß mit $n-1$, in unserem Beispiel mit 5.
-Wir werden in der nächsten Lektion [Zahlenbereiche und Zahlensyteme](2-mengen.qmd) sehen, wie wir die Funktion `range()` korrekt anwenden.
+Wir werden in der Lektion [Zahlenbereiche und Zahlensyteme](3-mengen.qmd) sehen, wie wir die Funktion `range()` korrekt anwenden.
 5. Auf das $i$-te Element einer Liste kann mit `list[i]` zugegriffen werden.
 Der Ausdruck `ks[i]` ist also synonym zum Ausdruck `s` im vorangehenden Code-Beispiel.
 
-## Übungen
+## Übungen {#sec-ubung}
 
-Mit der Mathematik verhält es sich nicht anders als mit dem Fußballspielen oder dem Klavierspielen.
-Wenn wir Fußballspielen lernen wollen, dann reicht es nicht, ein Fußballspiel anzuschauen; wenn wir Klavierspielen lernen wollen, dann reicht es nicht, ein Klavierkonzert anzuhören.
-Wir müssen es selbst tun, es wiederholt üben, um die notwendige Geschicklichkeit zu erlangen.
-Genauso können wir Mathematik nicht lernen, indem wir ein Tutorial (wie dieses hier) oder ein Lehrbuch über Mathematik lesen.
+Wir werden in dieser Lektion ein paar einfache Rechenübungen durchführen, bevor wir dann ab der nächsten Lektion mit [Jupyter Notebooks](https://jupyter.org/) arbeiten werden.
+Deine erste Aufgabe besteht also darin, dir eine entsprechende Arbeitsumgebung einzurichten.
+Falls du noch kein Python auf deinem Rechner hast, empfehle ich dir, zuerst *Miniconda* entsprechend diesen [Anleitungen](https://docs.anaconda.com/miniconda/miniconda-install/) zu installieren.
+Wenn das geschafft ist, dann kannst du mit einem Befehl wie
+```shell
+conda create -n matheKapieren python=3.12
+```
+in deiner Kommandozeile eine neue Arbeitsumgebung einrichten und Python installieren.
+Um die Arbeitsumgebung zu aktivieren, setze den Befehl `conda activate matheKapieren` ab, dann kannst du auf alle Python Werkzeuge zugreifen.
+Schließlich kannstdu mit `conda install -c conda-forge jupyter` Jupyter und später noch weitere Pakete installieren.
 
-Wir müssen auch Mathematik üben, selbst Berechnungen durchführen und dabei die gültigen Regeln anwenden, um mathematische Geschicklichkeit zu erlangen.
-Das ist weder schwer noch besonders aufwändig; wir müssen es einfach nur tun.
-
-Deshalb enthält jedes Kapitel einen abschließenden Abschnitt **Übungen**.
-Ich werde dir hier ein paar Aufgaben vorgeben, die du mit etwas Nachdenken sicher lösen kannst.
-Wenn du bei einer Aufgabe dennoch Schwierigkeiten hast, schau dir den entsprechenden Lösungshinweis an, und vergleiche dann deine Lösung mit meinem Lösungsvorschlag.
+Nun aber zu den Übungen:
+wenn du bei einer Aufgabe Schwierigkeiten hast, schau dir den entsprechenden Lösungshinweis an, und vergleiche dann deine Lösung mit meinem Lösungsvorschlag.
 Mache dir aber auf jeden Fall Gedanken, wie du die Aufgabe lösen kannst.
 Wenn du gleich zur Lösung springst, wirst du *nichts* lernen.
-Also, schnapp dir Papier und Bleistift und leg los.
 
 ::: {.callout-caution}
 ## Aufgabe 1
@@ -548,5 +549,17 @@ Versuche, die 3. binomische Formel anzuwenden.
 ## Lösung
 $$
 21 \cdot 19=(20+1)(20-1)=20^2-1^2=400-1=399
+$$
+:::
+
+::: {.callout-caution}
+## Aufgabe 12
+Berechne $17\cdot 23$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Lösung
+$$
+17 \cdot 23=(20-3)(20+3)=20^2-3^2=400-9=391
 $$
 :::
