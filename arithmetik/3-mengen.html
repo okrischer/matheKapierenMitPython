@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathe kapieren mit Python - Zahlenbereiche und Zahlensysteme</title>
+<title>Zahlenbereiche und Zahlensysteme – Mathe kapieren mit Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -141,13 +141,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../arithmetik/1-rechenregeln.html">Arithmetik</a></li><li class="breadcrumb-item"><a href="../arithmetik/3-mengen.html">Zahlenbereiche und Zahlensysteme</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -171,9 +171,9 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Arithmetik</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -303,7 +303,7 @@ Beispiele für Mengendefinitionen
 <p>Wenn jedes Element einer Menge <span class="math inline">\(M\)</span> auch Element einer Menge <span class="math inline">\(N\)</span> ist, so nennt man <span class="math inline">\(M\)</span> Teilmenge von <span class="math inline">\(N\)</span> und schreibt <span class="math inline">\(M \subset N\)</span>. Diese Schreibweise bedeutet auch, dass <span class="math inline">\(M\)</span> eine <em>echte</em> Teilmenge von <span class="math inline">\(N\)</span> ist; es gilt also <span class="math inline">\(M\neq N\)</span>. Wollte man zulassen, dass <span class="math inline">\(M\)</span> auch gleich <span class="math inline">\(N\)</span> sein könnte, also <span class="math inline">\(M=N\)</span>, dann würde man <span class="math inline">\(M\subseteq N\)</span> schreiben.<br>
 Die leere Menge <span class="math inline">\(\emptyset=\{\}\)</span> enthält kein Element.</p>
 <p>Die Zugehörigkeit von Objekten zu Mengen kann man auch grafisch in einem <em>Mengendiagramm</em> darstellen, wobei Mengen als Kreise oder Ellipsen dargestellt werden, und Elemente, die zur Menge gehören, in den Kreis geschrieben werden.</p>
-<div id="fig-euler" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-euler" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-euler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="media/images/euler/euler-diagramm.png" class="img-fluid figure-img">
@@ -375,7 +375,7 @@ A \Delta B = (A \cup B) \backslash (A \cap B)=(A \backslash B) \cup (B \backslas
 </div>
 </div>
 <p>Diese Mengenoperationen können mit einem sogenannten <em>Venn-Diagramm</em> veranschaulicht werden, in dem die Ergebnismenge einer Operation entsprechend eingefärbt wird (in diesem Beispiel in Rot):</p>
-<div id="fig-venn" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-venn" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="media/images/venn/venn-diagramm.png" class="img-fluid figure-img">
@@ -473,7 +473,7 @@ A ∆ B =  {2, 3, -1}</code></pre>
 <section id="zahlenbereiche" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="zahlenbereiche"><span class="header-section-number">2</span> Zahlenbereiche</h2>
 <p>Die Zahlen, mit denen wir rechnen, lassen sich in Teilmengen einteilen, die <strong>Zahlenbereiche</strong> genannt werden und üblicherweise in Mengenschreibweise dargestellt werden.</p>
-<div id="fig-zahlenbereiche" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-zahlenbereiche" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zahlenbereiche-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="media/images/zahlenbereiche/zahlenbereiche.png" class="img-fluid figure-img">
@@ -694,7 +694,7 @@ Aus rein geometrischen Überlegungen sollte es also eine Zahl geben, die diese D
 <em>Algebraisch</em> deshalb, weil sie als Lösung einer “gewöhnlichen” algebraischen Gleichung angegben werden können, zum Beispiel ist <span class="math inline">\(\sqrt{5}\)</span> die Lösung der Gleichung <span class="math inline">\(x^2=5\)</span>.</p>
 <p>Es gibt aber auch irrationale Zahlen, die nicht als Lösung einer algebraischen Gleichung angegeben werden können, man sagt, sie “übersteigen” (<em>transzendieren</em>) die Möglichkeiten der Algebra, und nennt sie daher <em>transzendente Zahlen</em>. Die bekanntesten dieser <em>transzendenten</em> Zahlen sind die Kreiszahl <span class="math inline">\(\pi\)</span> und die eulersche Zahl <span class="math inline">\(e\)</span>.</p>
 <p>Die Zahlen in <span class="math inline">\(\mathbb{R}\)</span> können in einer <em>Zahlengeraden</em> veranschaulicht werden, die verdeutlicht, dass die Menge der reelen Zahlen über die Vergleiche <span class="math inline">\(&lt; \mathrm{und}&gt;\)</span> eine <em>lineare Ordnung</em> bildet. Das beudeutet, dass wir für zwei verschiedene reelle Zahlen immer sagen können, welche von beiden größer bzw. kleiner ist:</p>
-<div id="fig-gerade" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-gerade" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gerade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="media/images/zahlengerade/zahlengerade.png" class="img-fluid figure-img">
@@ -727,13 +727,13 @@ Bei <em>Additionssystemen</em> wird der Wert aller Ziffern einfach addiert, um d
 <section id="römische-zahlen" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="römische-zahlen"><span class="header-section-number">3.1</span> Römische Zahlen</h3>
 <p><strong>Römische Zahlen</strong> sind ein Beispiel eines Additionssytems. Die Ziffern sind hier lateinische Großbuchstaben, denen ein fester Wert zugewiesen wird:</p>
-<div id="tbl-ziffern" class="quarto-float anchored">
+<div id="tbl-ziffern" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ziffern-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabelle&nbsp;1: Römische Ziffern
 </figcaption>
 <div aria-describedby="tbl-ziffern-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Buchstabe</th>
@@ -914,7 +914,7 @@ Berechnung des Wertes einer Dezimalzahl
 </div>
 </div>
 <p>Aus diesem gleichförmigen Aufbau der Dezimalzahlen ergeben sich dann die einfachen Rechenoperationen, die wir schon aus der Grundschule kennen. Zum Beispiel können wir Dezimalzahlen addieren, indem wir ihre jeweiligen Dezimalstellen addieren und bei einem Ergbnis <span class="math inline">\(\geq 10\)</span> die <span class="math inline">\(1\)</span> auf die nächste Stelle übertragen:</p>
-<div id="fig-addition" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-addition" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-addition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="media/videos/addition/480p15/addition.mp4"></video></div>
@@ -1047,7 +1047,7 @@ Berechnung einer reellen Zahl im Dualsystem
 </div>
 </div>
 <p>Für das Rechnen mit Binärzahlen stellt Python sogenannte <em>bitwise operations</em> bereit:</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: center;">Operation</th>
@@ -1194,18 +1194,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1237,7 +1226,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -1291,12 +1302,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/okrischer\.github\.io\/matheKapierenMitPython\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -2241,7 +2252,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-654"><a href="#cb23-654" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-655"><a href="#cb23-655" aria-hidden="true" tabindex="-1"></a>Die Übungen dieser Lektion findest du im Notebook <span class="in">`arithmetik/_mengen.ipynb`</span>.</span>
 <span id="cb23-656"><a href="#cb23-656" aria-hidden="true" tabindex="-1"></a>Öffne diese Datei in *Jupyter* und erforsche des Rechnen mit verschiedenen Zahlensystemen.</span>
-</code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="In die Zwischenablage kopieren" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>videojs(video_shortcode_videojs_video1);</script>
