@@ -40,7 +40,7 @@ Diese Schreibweise bedeutet auch, dass $M$ eine *echte* Teilmenge von $N$ ist; e
 Wollte man zulassen, dass $M$ auch gleich $N$ sein könnte, also $M=N$, dann würde man $M\subseteq N$ schreiben.\
 Die leere Menge $\emptyset=\{\}$ enthält kein Element.
 
-Die Zugehörigkeit von Objekten zu Mengen kann man auch grafisch in einem *Mengendiagramm* darstellen, wobei Mengen als Kreise dargestellt werden, und Elemente, die zur Menge gehören, in den Kreis geschrieben werden.
+Die Zugehörigkeit von Objekten zu Mengen kann man auch grafisch in einem *Mengendiagramm* darstellen, wobei Mengen als Kreise oder Ellipsen dargestellt werden, und Elemente, die zur Menge gehören, in den Kreis geschrieben werden.
 
 ![Euler-Diagramm: Zugehörigkeit zu Mengen](media/images/euler/euler-diagramm.png){#fig-euler}
 
@@ -147,7 +147,9 @@ assert A.symmetric_difference(B) == A ^ B
 
 ## Zahlenbereiche
 
-Die Zahlen, mit denen wir rechnen, lassen sich Teilmengen einteilen, die **Zahlenbereiche** genannt werden, und die üblicherweise in Mengenschreibweise dargestellt werden.
+Die Zahlen, mit denen wir rechnen, lassen sich in Teilmengen einteilen, die **Zahlenbereiche** genannt werden und üblicherweise in Mengenschreibweise dargestellt werden.
+
+![Die Zahlenbereiche in Mengendarstellung](media/images/zahlenbereiche/zahlenbereiche.png){#fig-zahlenbereiche}
 
 ### Natürliche Zahlen
 
@@ -308,8 +310,8 @@ Betrachtet man aber ein Quadrat der Seitenlänge eins, so sollte die Länge $x$ 
 Aus rein geometrischen Überlegungen sollte es also eine Zahl geben, die diese Darstellung besitzt.
 Tragischerweise hat ausgerechnet *Hippasos*, ein Schüler des *Pythagoras*, mit Hilfe dessen Satzes bewiesen, dass $\sqrt{2}$ keine rationale Zahl sein kann. (siehe ???).
 
-Die erste bekannte irrationale Zahl ist also $\sqrt{2}$; aus der Wurzel- und Logarithmenrechnung ??? folgt aber, dass es noch unendlich viele weitere solcher irrationaler Zahlen gibt, die auch als *algebraische* irrationale Zahlen bezeichnet werden.\
-*Algebraisch* deshalb, weil sie als Lösung einer "gewöhnlichen" algebraischen Gleichung angegben werden können, zum Beispiel ist $\sqrt{5}$ die Lösung der Gleichung $x^2=5$ und $\log_a b$ die Lösung $x$ der Gleichung $a^x=b$.
+Die erste bekannte irrationale Zahl ist also $\sqrt{2}$; aus der Wurzelrechnung ??? folgt aber, dass es noch unendlich viele weitere solcher irrationaler Zahlen gibt, die auch als *algebraische* irrationale Zahlen bezeichnet werden.\
+*Algebraisch* deshalb, weil sie als Lösung einer "gewöhnlichen" algebraischen Gleichung angegben werden können, zum Beispiel ist $\sqrt{5}$ die Lösung der Gleichung $x^2=5$.
 
 Es gibt aber auch irrationale Zahlen, die nicht als Lösung einer algebraischen Gleichung angegeben werden können, man sagt, sie "übersteigen" (*transzendieren*) die Möglichkeiten der Algebra, und nennt sie daher *transzendente Zahlen*.
 Die bekanntesten dieser *transzendenten* Zahlen sind die Kreiszahl $\pi$ und die eulersche Zahl $e$.
@@ -523,7 +525,7 @@ $$
 :::
 
 Mit der Berechnung des Wertes einer Dualzahl haben wir diese Zahl in eine Dezimalzahl umgerechnet; dies wird auch als *Konvertierung* bezeichnet.
-Mit diesen Regeln können wir jetzt eine Dualzahl in Python in eine Dezimalzahl konvertieren:
+Mit diesen Regeln können wir jetzt eine Dualzahl mit Python in eine Dezimalzahl konvertieren:
 
 ```{python}
 def bin_to_dec(binary):
@@ -574,7 +576,7 @@ print(f"x = {x:#0b}", "= {7, 1}")                # <2>
 print(f"y = {y:#0b}", "= {7, 4}")
 ```
 1. Definition von `x` als Binärzahl: wir verwenden hierzu das Präfix `0b`.
-2. Ausgabe von `x` im Binärformat (wir verwenden hierzu einen sogenannten `f-string` für engl. *formatted string*) und der Menge der gesetzten *bits*.
+2. Ausgabe von `x` im Binärformat und der Menge der gesetzten Indizes, das sind die Stellen der Binärzahl, an denen ein *bit* auf 1 gesetzt ist. Wir verwenden hierzu einen sogenannten `f-string` für engl. *formatted string*.
 
 Die Mengenoperationen können dann so ausgeführt werden:
 
@@ -616,3 +618,5 @@ assert c == a // 2
 
 ## Übungen
 
+Die Übungen dieser Lektion findest du im Notebook `arithmetik/_mengen.ipynb`.
+Öffne diese Datei in *Jupyter* und erforsche des Rechnen mit verschiedenen Zahlensystemen.
