@@ -1,0 +1,12 @@
+{
+  "hash": "f1b86cda4dfdc6add18858c726c7907f",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: Rekursion\n---\n\n",
+    "supporting": [
+      "5-rekursion_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -1,7 +1,5 @@
 /.quarto/
-/_freeze/
 __pycache__/
 .jupyter_cache/
 .ipynb_checkpoints/
 media/
-*.mp4
