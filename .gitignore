@@ -1,5 +1,6 @@
 /.quarto/
 __pycache__/
+/_site/
 .jupyter_cache/
 .ipynb_checkpoints/
 media/

@@ -2,3 +2,313 @@
 title: "Bruchrechnung"
 jupyter: python3
 ---
+
+## Definitionen
+
+::: {.callout-important}
+## Bruch
+Ein **Bruch** ist eine Zahl, die durch einen Ausdruck $\frac{m}{n}$ ($m$ geteilt durch $n$) dargestellt wird.
+Die Zahl $m$ heißt *Zähler* und die Zahl $n$ *Nenner* des Bruchs.\
+Ein Bruch ist also ein Quotient, der Zähler ist der Divident, und der Nenner ist der Divisor:
+$$
+\frac{m}{n}=m\div n, \quad \mathrm{mit} \ m, n \in \mathbb{Z} \ \mathrm{und}\ n \neq 0.
+$$
+:::
+
+Es gelten folgende Regeln:
+
+- Brüche, deren Zähler kleiner ist als der Nenner, heißen *echte Brüche*, z.B. $\frac{2}{3}$ (zwei Drittel), $\frac{5}{7}$ (fünf Siebtel).
+- Brüche mit dem Zähler 1 heißen *Stammbrüche*, z.B. $\frac{1}{4}$ (ein Viertel), $\frac{1}{10}$ (ein Zehntel).
+- Ganzzahlige Anteile *unechter* Brüchen können vorgezogen werden, z.B. $\frac{15}{4}=3\frac{3}{4}$.
+- Der *Kehrwert* eines Bruchs $\frac{p}{q}$ ist der Bruch $\frac{q}{p}$, also der Bruch, bei dem Zähler und Nenner vertauscht sind.
+
+Wir werden auch in dieser Lektion wieder mit Python rechnen.
+Da Python nicht über einen "eingebauten" Datentyp *Fraction* (engl. für Bruch) verfügt, werden wir uns selbst einen solchen Datentyp "bauen".
+Dafür verwenden wir das Konzept einer *Klasse*.
+
+Klassen sind der Grundbaustein für die [objektorientierte Programmierung](https://de.wikipedia.org/wiki/Objektorientierte_Programmierung) (OOP).\
+Eine Klasse ist dabei eine Art Schablone, aus der man beliebig viele *Instanzen* (Objekte) erzeugen kann, die dann die Eigenschaften der Klasse haben.
+
+Klassen in Python haben zwei Typen von Eigenschaften, *Attribute* und *Methoden*:
+
+- *Attribute* sind Variable, die einer Klasse zugeordnet sind, d.h. wir können in jedem Objekt bestimmte Werte unter einem festen Namen speichern.
+- *Methoden* sind nichts anderes als Funktionen, die einer Klasse zugeordnet sind, d.h. wir können diese Methoden für jedes Objekt der Klasse aufrufen.
+
+Unsere *initiale* Klassendefinition sieht folgendermaßen aus:
+
+```{python}
+class Bruch:                                        # <1>
+    def __init__(self, zähler, nenner):             # <2>
+        self.zähler = zähler                        # <3>
+        self.nenner = nenner
+        self.zahl = 0                               # <4>
+
+a = Bruch(3, 4)                                     # <5>
+a.zähler, a.nenner, a. zahl                         # <6>
+```
+1. Eine Klasse wird mit dem Schlüsselwort `class` definiert, gefolgt vom Namen der Klasse (der Klassenname sollte der Python-Konvention folgend mit einem Großbuchstaben beginnen).
+2. Definition der Methode `__init__`. Die doppelten Unterstriche vor und nach dem Methodennamen zeigen an, dass es sich hier um eine besondere Methode handelt, die sogenannte Initialisierungsmethode.
+Jede Klasse muss über diese Methode verfügen; sie wird beim Erzeugen eines Objekt der Klasse automatisch aufgerufen.
+Der erste Parameter `self` der Methode ist ebenfalls ein spezieller Parameter: er referenziert das aktuelle Objekt.
+3. Zuweisung des Parameters `zähler` an das Attribut `self.zähler`. Das Attribut wird dabei automatisch angelegt und erhält den Wert des entprechenden Arguments.
+4. Definition eines zusätzlichen Attributs `zahl`, dessen Wert immer 0 ist.
+Diese Attribut repräsentiert den ganzzahligen Anteil eines unechten Bruchs
+5. Instanziierung eines Objekts `a` vom Typ `Bruch` mit den Argumenten `3` und `4`.
+Die Argumente werden wie bei einer gewöhnlichen Funktion in runden Klammern angegeben.
+6. Auf die Attribute einer Objekts können wir mit der sogenannten *dot notation* zugreifen: `<Objektname>.<Attribut>`.
+
+## Erweitern und Kürzen
+
+Um einfacher mit Brüchen zu können, gibt es die Möglichkeit, Brüche zu *kürzen* oder zu *erweitern*.
+Ein Bruch $\frac{2}{3}$ kann z.B. auch so geschrieben werden $\frac{4}{6}$ oder $\frac{-6}{-9}$; das sind verschiedene Schreibweisen desselben Bruchs.
+
+Erweitern heißt, Zähler und Nenner eines Bruchs mit der selben Zahl zu miltiplizieren.
+Der Wert des Bruchs bleibt durch Erweitern unverändert.
+
+::: {.callout-important}
+## Erweitern
+$$
+\frac{a}{b}=\frac{a\cdot c}{b\cdot c}=\frac{ac}{bc}, \quad \mathrm{mit} \ c\neq 0
+$$ {#eq-erweitern}
+:::
+
+Ein Bruch kann auch mit einer Zahl multipliziert werden; das ist aber nicht das Gleiche wie Erweitern, da sich beim Multiplizieren der Wert des Bruchs ändert:
+
+::: {.callout-warning}
+## Unterscheide Erweitern und Multiplizieren
+- Erweitern mit 3:
+$$
+\frac{2}{5}=\frac{2\cdot3}{5\cdot3}=\frac{6}{15}
+$$
+- Multiplizieren mit 3:
+$$
+\frac{2}{5}\cdot3=\frac{2\cdot3}{5}=\frac{6}{5}
+$$
+:::
+
+Kürzen heißt, Zähler und Nenner eines Bruchs durch die selbe Zahl zu dividieren.
+Der Wert des Bruchs bleibt durch Kürzen unverändert.
+
+::: {.callout-important}
+## Kürzen
+$$
+\frac{a}{b}=\frac{a\div c}{b\div c}, \quad \mathrm{mit} \ c\neq 0
+$$ {#eq-kurzen}
+:::
+
+Ein Bruch kann auch durch eine Zahl dividiert werden; das ist aber nicht das Gleiche wie Kürzen, da sich beim Dividieren der Wert des Bruchs ändert:
+
+::: {.callout-warning}
+## Unterscheide Kürzen und Dividieren
+- Kürzen mit 3:
+$$
+\frac{6}{15}=\frac{6\div3}{15\div3}=\frac{2}{5}
+$$
+- Dividieren durch 3:
+$$
+\frac{6}{15}\div3=\frac{6\div3}{15}=\frac{2}{15}
+$$
+:::
+
+## Addieren und Subtrahieren
+
+Beim Addieren und Subtrahieren von Brüchen muss man unterscheiden zwischen *gleichnamigen* und *ungleichnamigen* Brüchen:
+
+- *Gleichnamige* Brüche sind Brüche mit dem gleichen Nenner.
+- *Ungleichnamige* Brüche sind Brüche mit verschiedenen Nennern.
+
+::: {.callout-important}
+## Addieren und Subtrahieren gleichnamiger Brüche
+Gleichnamige Brüche werden addiert oder subtrahiert, indem man die Zähler addiert oder subtrahiert und den Nenner beibehält:
+$$
+\frac{a}{c}\pm\frac{b}{c}=\frac{a\pm b}{c}
+$$ {#eq-add-gleich}
+:::
+
+::: {.callout-important}
+## Addieren und Subtrahieren ungleichnamiger Brüche
+Ungleichnamige Brüche werden addiert oder subtrahiert, indem man sie auf den *Hauptnenner* bringt, also durch Erweitern gleichnamig macht:
+$$
+\frac{a}{b}\pm\frac{c}{d}=\frac{a\cdot d}{b\cdot d}\pm\frac{c\cdot b}{d\cdot b}=\frac{ad\pm bc}{bd}
+$$ {#eq-add-ungleich}
+:::
+
+Mit dieser Formel berechnen wir den Hauptnenner, indem wir die beiden Nenner miteinander multiplizieren: $b\cdot d= d\cdot b=bd$.\
+Dann müssen wir auch die Zähler der Brüche mit dem jeweils anderen Nenner multiplizieren (erweitern), um den Wert der Brüche nicht zu verändern: $a\cdot d$ und $c\cdot b$.\
+Dann können wir die jetzt gleichnamigen Brüche addieren oder subtrahieren, indem wir ihre Zähler addieren oder subtrahieren ($ad\pm bc$) und den Nenner $bd$ beibehalten.
+
+::: {.callout-tip}
+## Beispiele
+- $\frac{2}{3}+\frac{4}{5}$. Der Hauptnenner ist $3\cdot5=15$.
+$$
+\frac{2}{3}+\frac{4}{5}=\frac{2\cdot5}{3\cdot5}\pm\frac{4\cdot3}{5\cdot3}=\frac{10+12}{15}=\frac{22}{15}
+$$
+- $\frac{3}{4}-\frac{5}{6}$. Der Hauptnenner ist $4\cdot6=24$.
+$$
+\frac{3}{4}-\frac{5}{6}=\frac{18}{24}-\frac{20}{24}=-\frac{2}{24}=-\frac{1}{12}
+$$
+:::
+
+Im zweiten Beispiel haben wir das Ergebnis $-\frac{2}{24}$ mit $2$ gekürzt und als Endergebnis $-\frac{1}{12}$ erhalten.
+Woher wissen wir aber, mit welchen Faktor wir kürzen sollen?
+
+Der Kürzungsfaktor ist gemäß @eq-kurzen ein gemeinsamer Teiler des Zählers und des Nenners.
+Wenn wir einen Bruch vollständig kürzen wollen, so dass keine weitere Kürzung mehr möglich ist, dann suchen wir nach dem größtmöglichen Kürzungsfaktor, also dem *größten gemeinsamen Teiler* des Zählers und des Nenners.
+
+In Lektion [Teiler und Vielfache](2-teiler.qmd#sec-ggT) haben wir bereits eine Funktion `eukild_modern` definiert, die den *größten gemeinsamen Teiler* zweier Zahlen mit Hilfe des *modernen euklidischen Algorithmus* berechnet.
+Diese Funktion wollen wir nun unserer Klasse `Bruch` als neue Methode `ggT` hinzufügen:
+
+```{python}
+def euklid_modern(self, a, b):                      # <1>
+  while b != 0:
+    a, b = b, a % b
+  return a
+
+Bruch.ggT = euklid_modern                           # <2>
+
+b = Bruch(12, 18)                                   # <3>
+assert b.ggT(b.nenner, b.zähler) == 6               # <4>
+```
+1. Definition von `euklid_modern` als "gewöhnliche" Funktion.
+Wenn wir eine Funktion außerhalb der eigentlichen Klassendefinition zu einer Klasse hinzufügen wollen, dann muss der erste Parameter der Funktion das Objekt `self` sein, d.h. eine Referenz auf die Klasse.
+2. Zuweisung der Funktion `euklid_modern` an die neue Methode `ggT` der Klasse `Bruch`.
+Bei der Zuweisung lassen wir die Klammern der Funktion weg, da wir die Funktion nicht aufrufen wollen. Mit diese Schreibweise weisen wir das *Funktionsobjekt* `euklid_modern` einem neuen Objekt des gleichen Typs der Klasse zu.
+3. Initialisierung des Objekts `b` vom Typ `Bruch` mit 12 als Zähler und 18 als Nenner.
+4. Aufruf der Methode `ggT` des Objekts `b` mit Nenner und Zähler des Objekts.
+Die Reihenfolge der Argumente dieser Methode spielt keine Rolle.
+Ich habe aber den größeren der beide Werte zuerst genannt, da diese Variante etwas effizienter ist.
+
+Wir können die Methode `ggt` jetzt verwenden, um eine neue Methode `kürze` zu definieren:
+
+```{python}
+def kürze_Bruch(self):
+    faktor = self.ggT(self.nenner, self.zähler)                 # <1>
+    return Bruch(self.zähler // faktor, self.nenner // faktor)  # <2>
+
+Bruch.kürze = kürze_Bruch
+
+b = b.kürze()                                                   # <3>
+assert (b.zähler, b.nenner) == (2, 3)
+```
+1. Berechnung des Kürzungsfaktors über den *ggT*
+2. Rückgabe eines neuen Bruchs, der mit dem `faktor` gekürzt ist.
+3. Aufruf der Methode `kürze` des Objekts `b` und Zuweisung des Ergebnisses an das Objekt `b`.
+Das ursprüngliche Objekt `b` wird dabei überschrieben und ist nicht mehr verfügbar.
+Beachte, dass wir die Methode `kürze` ohne Argument aufrufen; der Parameter `self` der Funktion wurde beim Zuweisen der Funktion an die Klasse bereits gesetzt.
+
+Der Bruch $b=\frac{12}{18}$ wird korrekt gekürzt zu $b=\frac{2}{3}$.
+Damit können wir jetzt die Addition von Brüchen gemäß den Formeln @eq-add-gleich und @eq-add-ungleich als neue Methode der Klasse `Bruch` definieren:
+
+```{python}
+def addiere_Bruch(self, other):
+    res = self                                                  # <1>
+    if self.nenner == other.nenner:                             # <2>
+        res = Bruch(self.zähler + other.zähler, self.nenner)
+    else:                                                       # <3>
+        res = Bruch(self.zähler*other.nenner + self.nenner*other.zähler,
+                    self.nenner*other.nenner)
+    return res.kürze()                                          # <4>
+
+Bruch.add = addiere_Bruch
+```
+1. Initialisierung des Ergebnisses
+2. Addition eines gleichnamigen Bruchs mit der entsprechendene Formel
+3. Addition eines ungleichnamigen Bruchs mit der der entsprechenden Formel
+4. Kürzen und Rückgabe des Ergebnisses
+
+Wir wollen testen, ob unsere Methode `add` für folgende Beispiele korrekt arbeitet:
+
+::: {.callout-tip}
+## Beispiele für Addition von Brüchen
+- $\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}$
+- $\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}$
+:::
+```{python}
+a = Bruch(1, 2)
+b = Bruch(1, 3)
+c = a.add(b)
+assert (c.zähler, c.nenner) == (5, 6)
+a = Bruch(1, 6)
+b = Bruch(3, 9)
+c = a.add(b)
+assert (c.zähler, c.nenner) == (1, 2)
+```
+
+Schließlich wollen wir noch eine Methode definieren, die einen Bruch in einer leichter lesbaren Form ausgibt und dabei gegebenenfall einen ganzzahligen Anteil berücksichtigt.
+Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen *unechten Bruch* handelt.
+
+```{python}
+def ganzzahliger_anteil(self):
+    b = self.kürze()                                        # <1>
+    if b.zähler == b.nenner:                                # <2>
+        b = Bruch(None, None)
+        b.zahl = 1
+    elif b.zähler > b.nenner:                               # <3>
+        zahl = b.zähler // b.nenner
+        rest = b.zähler % b.nenner
+        b = Bruch(rest, b.nenner)
+        b.zahl = zahl
+    return b
+
+Bruch.gza = ganzzahliger_anteil
+
+a = Bruch(12, 9)
+a = a.gza()
+assert (a.zahl, a.zähler, a.nenner) == (1, 1, 3)
+```
+1. Zuerst kürzen wird den Bruch.
+2. Wenn der Zähler gleich dem Nenner ist, dann ist der Wert des Bruchs immer 1.
+In diesem Fall erzeugen wir einen Bruch mit undefiniertem Zähler und Nenner, indem wir beiden den Wert `None` zuweisen.
+Das Attribut `zahl` des Bruchs setzen wir auf 1.
+3. Wenn es sich um einen *unechten Bruch* handelt (Zähler größer als der Nenner), dann berechnen wir die ganze Zahl als ganzzahlige Division von Zähler und Nenner, und den Rest der Division mit dem Modulo Operator `%`.
+Schließlich erzeugen wir einen neuen Bruch mit diesen Werten.
+
+Der Bruch $\frac{12}{9}$ im Code-Beispiel wird gekürzt zu $\frac{4}{3}$ und der ganzzahlige Anteil mit 1 berechnet; der verbleibende Bruch hat den Wert $\frac{1}{3}$.\
+Mit Hilfe dieser Methode können wir nun den Bruch in einer neuen Methode anzeigen:
+
+```{python}
+def zeige_Bruch(self):
+    b = self.gza()                                      # <1>
+    anzeige = str(b.zahl) if b.zahl else ""             # <2>
+    if b.zähler and b.nenner:                           # <3>
+        print(f"{anzeige}+{b.zähler}/{b.nenner}")
+    else:
+        print(anzeige)                                  # <4>
+
+Bruch.zeige = zeige_Bruch
+```
+1. Berechnung des ganzzahligen Anteils des Bruchs.
+2. Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-*string* hinzu.
+3. Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus.
+Ich habe mich hier für das Ausgabeformat $Z+zähler/nenner$ entschieden.
+
+Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen;
+wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:
+
+```{python}
+a = Bruch(12, 9)
+a.zeige()
+b = Bruch(4, 4)
+b.zeige()
+c = a.add(b)
+c.zeige()
+print("a = ", a.zahl, a.zähler, a.nenner)
+print("b = ", b.zahl, b.zähler, b.nenner)
+print("c = ", c.zahl, c.zähler, c.nenner)
+```
+
+## Multiplizieren von Brüchen
+
+Das Multiplizieren von Brüchen ist einfacher als das Addieren, da wir hier nicht auf *Gleichnamigkeit* achten müssen:
+
+::: {.callout-important}
+## Multiplizieren von Brüchen
+Brüche werden miteinander multipliziert, indem man Zähler mit Zähler und Nenner mit Nenner multipliziert. For dem Multiplizieren sollte man kürzen.
+$$
+\frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d}=\frac{ac}{bd}
+$$ {#eq-mult}
+Sonderfall: Ein Bruch wird mit einer einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert.
+$$
+\frac{a}{b}\cdot c=\frac{a\cdot c}{b}=\frac{ac}{b}
+$$
+:::
