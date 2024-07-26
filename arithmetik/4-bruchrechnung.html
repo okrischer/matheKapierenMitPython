@@ -222,6 +222,8 @@ window.Quarto = {
   <li><a href="#erweitern-und-kürzen" id="toc-erweitern-und-kürzen" class="nav-link" data-scroll-target="#erweitern-und-kürzen"><span class="header-section-number">2</span> Erweitern und Kürzen</a></li>
   <li><a href="#addieren-und-subtrahieren" id="toc-addieren-und-subtrahieren" class="nav-link" data-scroll-target="#addieren-und-subtrahieren"><span class="header-section-number">3</span> Addieren und Subtrahieren</a></li>
   <li><a href="#multiplizieren-von-brüchen" id="toc-multiplizieren-von-brüchen" class="nav-link" data-scroll-target="#multiplizieren-von-brüchen"><span class="header-section-number">4</span> Multiplizieren von Brüchen</a></li>
+  <li><a href="#dividieren-von-brüchen" id="toc-dividieren-von-brüchen" class="nav-link" data-scroll-target="#dividieren-von-brüchen"><span class="header-section-number">5</span> Dividieren von Brüchen</a></li>
+  <li><a href="#fehlerquellen" id="toc-fehlerquellen" class="nav-link" data-scroll-target="#fehlerquellen"><span class="header-section-number">6</span> Fehlerquellen</a></li>
   </ul>
 </nav>
     </div>
@@ -281,7 +283,7 @@ Eine Klasse ist dabei eine Art Schablone, aus der man beliebig viele <em>Instanz
 <li><em>Methoden</em> sind nichts anderes als Funktionen, die einer Klasse zugeordnet sind, d.h. wir können diese Methoden für jedes Objekt der Klasse aufrufen.</li>
 </ul>
 <p>Unsere <em>initiale</em> Klassendefinition sieht folgendermaßen aus:</p>
-<div id="a7aaed75" class="cell" data-execution_count="2">
+<div id="9854c3c1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Bruch:</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, zähler, nenner):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.zähler <span class="op">=</span> zähler</span>
@@ -464,7 +466,7 @@ Beispiele
 <p>Im zweiten Beispiel haben wir das Ergebnis <span class="math inline">\(-\frac{2}{24}\)</span> mit <span class="math inline">\(2\)</span> gekürzt und als Endergebnis <span class="math inline">\(-\frac{1}{12}\)</span> erhalten. Woher wissen wir aber, mit welchen Faktor wir kürzen sollen?</p>
 <p>Der Kürzungsfaktor ist gemäß <a href="#eq-kurzen" class="quarto-xref">Gleichung&nbsp;2</a> ein gemeinsamer Teiler des Zählers und des Nenners. Wenn wir einen Bruch vollständig kürzen wollen, so dass keine weitere Kürzung mehr möglich ist, dann suchen wir nach dem größtmöglichen Kürzungsfaktor, also dem <em>größten gemeinsamen Teiler</em> des Zählers und des Nenners.</p>
 <p>In Lektion <a href="../arithmetik/2-teiler.html#sec-ggT">Teiler und Vielfache</a> haben wir bereits eine Funktion <code>eukild_modern</code> definiert, die den <em>größten gemeinsamen Teiler</em> zweier Zahlen mit Hilfe des <em>modernen euklidischen Algorithmus</em> berechnet. Diese Funktion wollen wir nun unserer Klasse <code>Bruch</code> als neue Methode <code>ggT</code> hinzufügen:</p>
-<div id="33aee3ea" class="cell" data-execution_count="3">
+<div id="95d9ab74" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euklid_modern(<span class="va">self</span>, a, b):</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>    a, b <span class="op">=</span> b, a <span class="op">%</span> b</span>
@@ -478,7 +480,7 @@ Beispiele
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Definition von <code>euklid_modern</code> als “gewöhnliche” Funktion. Wenn wir eine Funktion außerhalb der eigentlichen Klassendefinition zu einer Klasse hinzufügen wollen, dann muss der erste Parameter der Funktion das Objekt <code>self</code> sein, d.h. eine Referenz auf die Klasse.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Definition von <code>euklid_modern</code> als “gewöhnliche” Funktion. Wenn wir eine Funktion zu einer Klasse hinzufügen, dann muss der erste Parameter der Funktion das Objekt <code>self</code> sein, d.h. eine Referenz auf die Klasse.</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
@@ -496,7 +498,7 @@ Beispiele
 </div>
 </div>
 <p>Wir können die Methode <code>ggt</code> jetzt verwenden, um eine neue Methode <code>kürze</code> zu definieren:</p>
-<div id="bf9c562b" class="cell" data-execution_count="4">
+<div id="fa1b0cd1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kürze_Bruch(<span class="va">self</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    faktor <span class="op">=</span> <span class="va">self</span>.ggT(<span class="va">self</span>.nenner, <span class="va">self</span>.zähler)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Bruch(<span class="va">self</span>.zähler <span class="op">//</span> faktor, <span class="va">self</span>.nenner <span class="op">//</span> faktor)</span>
@@ -523,7 +525,7 @@ Beispiele
 </div>
 </div>
 <p>Der Bruch <span class="math inline">\(b=\frac{12}{18}\)</span> wird korrekt gekürzt zu <span class="math inline">\(b=\frac{2}{3}\)</span>. Damit können wir jetzt die Addition von Brüchen gemäß den Formeln <a href="#eq-add-gleich" class="quarto-xref">Gleichung&nbsp;3</a> und <a href="#eq-add-ungleich" class="quarto-xref">Gleichung&nbsp;4</a> als neue Methode der Klasse <code>Bruch</code> definieren:</p>
-<div id="6489324c" class="cell" data-execution_count="5">
+<div id="01ad73e1" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> addiere_Bruch(<span class="va">self</span>, other):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="va">self</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">self</span>.nenner <span class="op">==</span> other.nenner:</span>
@@ -566,13 +568,13 @@ Beispiele für Addition von Brüchen
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><span class="math inline">\(\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}\)</span></li>
-<li><span class="math inline">\(\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}\)</span></li>
-</ul>
+<p><span class="math display">\[\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}
+\]</span> <span class="math display">\[
+\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}
+\]</span></p>
 </div>
 </div>
-<div id="4bfa8c9c" class="cell" data-execution_count="6">
+<div id="d7554b46" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
@@ -581,91 +583,6 @@ Beispiele für Addition von Brüchen
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">9</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Schließlich wollen wir noch eine Methode definieren, die einen Bruch in einer leichter lesbaren Form ausgibt und dabei gegebenenfall einen ganzzahligen Anteil berücksichtigt. Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen <em>unechten Bruch</em> handelt.</p>
-<div id="57ed54b1" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ganzzahliger_anteil(<span class="va">self</span>):</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.kürze()</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="op">==</span> b.nenner:</span>
-<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(<span class="va">None</span>, <span class="va">None</span>)</span>
-<span id="annotated-cell-6-5"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> <span class="dv">1</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-6" class="code-annotation-target"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> b.zähler <span class="op">&gt;</span> b.nenner:</span>
-<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>        zahl <span class="op">=</span> b.zähler <span class="op">//</span> b.nenner</span>
-<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a>        rest <span class="op">=</span> b.zähler <span class="op">%</span> b.nenner</span>
-<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(rest, b.nenner)</span>
-<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> zahl</span>
-<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b</span>
-<span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-6-13"><a href="#annotated-cell-6-13" aria-hidden="true" tabindex="-1"></a>Bruch.gza <span class="op">=</span> ganzzahliger_anteil</span>
-<span id="annotated-cell-6-14"><a href="#annotated-cell-6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-6-15"><a href="#annotated-cell-6-15" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
-<span id="annotated-cell-6-16"><a href="#annotated-cell-6-16" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> a.gza()</span>
-<span id="annotated-cell-6-17"><a href="#annotated-cell-6-17" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a.zahl, a.zähler, a.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1">Zuerst kürzen wird den Bruch.</span>
-</dd>
-<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="2">Wenn der Zähler gleich dem Nenner ist, dann ist der Wert des Bruchs immer 1. In diesem Fall erzeugen wir einen Bruch mit undefiniertem Zähler und Nenner, indem wir beiden den Wert <code>None</code> zuweisen. Das Attribut <code>zahl</code> des Bruchs setzen wir auf 1.</span>
-</dd>
-<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="6" data-code-annotation="3">Wenn es sich um einen <em>unechten Bruch</em> handelt (Zähler größer als der Nenner), dann berechnen wir die ganze Zahl als ganzzahlige Division von Zähler und Nenner, und den Rest der Division mit dem Modulo Operator <code>%</code>. Schließlich erzeugen wir einen neuen Bruch mit diesen Werten.</span>
-</dd>
-</dl>
-</div>
-</div>
-<p>Der Bruch <span class="math inline">\(\frac{12}{9}\)</span> im Code-Beispiel wird gekürzt zu <span class="math inline">\(\frac{4}{3}\)</span> und der ganzzahlige Anteil mit 1 berechnet; der verbleibende Bruch hat den Wert <span class="math inline">\(\frac{1}{3}\)</span>.<br>
-Mit Hilfe dieser Methode können wir nun den Bruch in einer neuen Methode anzeigen:</p>
-<div id="75ed0dff" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zeige_Bruch(<span class="va">self</span>):</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.gza()</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>    anzeige <span class="op">=</span> <span class="bu">str</span>(b.zahl) <span class="cf">if</span> b.zahl <span class="cf">else</span> <span class="st">""</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="kw">and</span> b.nenner:</span>
-<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>anzeige<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span>b<span class="sc">.</span>z<span class="sc">ä</span>hler<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>b<span class="sc">.</span>nenner<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(anzeige)</span>
-<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-7-9"><a href="#annotated-cell-7-9" aria-hidden="true" tabindex="-1"></a>Bruch.zeige <span class="op">=</span> zeige_Bruch</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1">Berechnung des ganzzahligen Anteils des Bruchs.</span>
-</dd>
-<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="2">Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-<em>string</em> hinzu.</span>
-</dd>
-<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="3">Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus. Ich habe mich hier für das Ausgabeformat <span class="math inline">\(Z+zähler/nenner\)</span> entschieden.</span>
-</dd>
-</dl>
-</div>
-</div>
-<p>Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen; wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:</p>
-<div id="ae08a77a" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a.zeige()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">4</span>, <span class="dv">4</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>b.zeige()</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>c.zeige()</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a = "</span>, a.zahl, a.zähler, a.nenner)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b = "</span>, b.zahl, b.zähler, b.nenner)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c = "</span>, c.zahl, c.zähler, c.nenner)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1+1/3
-1
-2+1/3
-a =  0 12 9
-b =  0 4 4
-c =  0 7 3</code></pre>
-</div>
 </div>
 </section>
 <section id="multiplizieren-von-brüchen" class="level2" data-number="4">
@@ -683,9 +600,258 @@ Multiplizieren von Brüchen
 <div class="callout-body-container callout-body">
 <p>Brüche werden miteinander multipliziert, indem man Zähler mit Zähler und Nenner mit Nenner multipliziert. For dem Multiplizieren sollte man kürzen. <span id="eq-mult"><span class="math display">\[
 \frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d}=\frac{ac}{bd}
-\tag{5}\]</span></span> Sonderfall: Ein Bruch wird mit einer einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert. <span class="math display">\[
+\tag{5}\]</span></span> Sonderfall: Ein Bruch wird mit einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert. <span class="math display">\[
 \frac{a}{b}\cdot c=\frac{a\cdot c}{b}=\frac{ac}{b}
 \]</span></p>
+</div>
+</div>
+<p>Die Implementierung in Python kann dann so aussehen:</p>
+<div id="455a0ce3" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multipliziere_Bruch(<span class="va">self</span>, other):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="va">self</span>.kürze()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> other.kürze()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> Bruch(a.zähler <span class="op">*</span> b.zähler, a.nenner <span class="op">*</span> b.nenner)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.kürze()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>Bruch.mul <span class="op">=</span> multipliziere_Bruch</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.mul(b)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">18</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Beispiel: Multiplikation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\frac{1}{6}\cdot\frac{3}{9}=\frac{1}{6}\cdot\frac{1}{3}=\frac{1}{18}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="dividieren-von-brüchen" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="dividieren-von-brüchen"><span class="header-section-number">5</span> Dividieren von Brüchen</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dividieren von Brüchen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Man dividiert duch einen Bruch, indem man mit seinem <em>Kehrwert</em> multipliziert. <span id="eq-div"><span class="math display">\[
+\frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}=\frac{ad}{bc}
+\tag{6}\]</span></span> Sonderfall: Ein Bruch wird durch eine Zahl dividiert, indem man den Nenner mit der Zahl multipliziert. <span class="math display">\[
+\frac{a}{b}\div c=\frac{a}{b\cdot c}=\frac{a}{bc}
+\]</span></p>
+</div>
+</div>
+<p>Die Division von Brüchen kann man wie folgt in Python implementieren:</p>
+<div id="b5c53e6c" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dividiere_Bruch(<span class="va">self</span>, other):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.mul(Bruch(other.nenner, other.zähler))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Bruch.div <span class="op">=</span> dividiere_Bruch</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.div(b)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Beispiel: Division
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\frac{1}{6}\div\frac{3}{9}=\frac{1}{6}\div\frac{1}{3}=\frac{1}{6}\cdot\frac{3}{1}=\frac{3}{6}=\frac{1}{2}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="fehlerquellen" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="fehlerquellen"><span class="header-section-number">6</span> Fehlerquellen</h2>
+<p>In diesem Kapitel wollen wir mögliche Fehlerquellen der Bruchrechnung anhand einiger Beispielrechnungen demonstrieren.</p>
+<p>Zuvor werden wir aber noch unser Python Klassendefinition vervollständigen, indem wir einen Bruch in einer leicht lesbaren Form ausgeben und dabei den ganzzahligen Anteil des Bruchs berücksichtigen. Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen <em>unechten Bruch</em> handelt.</p>
+<div id="e8b045ba" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ganzzahliger_anteil(<span class="va">self</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.kürze()</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="op">==</span> b.nenner:</span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(<span class="va">None</span>, <span class="va">None</span>)</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-8-6" class="code-annotation-target"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> b.zähler <span class="op">&gt;</span> b.nenner:</span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a>        zahl <span class="op">=</span> b.zähler <span class="op">//</span> b.nenner</span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>        rest <span class="op">=</span> b.zähler <span class="op">%</span> b.nenner</span>
+<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(rest, b.nenner)</span>
+<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> zahl</span>
+<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b</span>
+<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-8-13"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a>Bruch.gza <span class="op">=</span> ganzzahliger_anteil</span>
+<span id="annotated-cell-8-14"><a href="#annotated-cell-8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-8-15"><a href="#annotated-cell-8-15" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
+<span id="annotated-cell-8-16"><a href="#annotated-cell-8-16" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> a.gza()</span>
+<span id="annotated-cell-8-17"><a href="#annotated-cell-8-17" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a.zahl, a.zähler, a.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1">Zuerst kürzen wird den Bruch.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="2">Wenn der Zähler gleich dem Nenner ist, dann ist der Wert des Bruchs immer 1. In diesem Fall erzeugen wir einen Bruch mit undefiniertem Zähler und Nenner, indem wir beiden den Wert <code>None</code> zuweisen. Das Attribut <code>zahl</code> des Bruchs setzen wir auf 1.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="6" data-code-annotation="3">Wenn es sich um einen <em>unechten Bruch</em> handelt (Zähler größer als der Nenner), dann berechnen wir die ganze Zahl als ganzzahlige Division von Zähler und Nenner, und den Rest der Division mit dem Modulo Operator <code>%</code>. Schließlich erzeugen wir einen neuen Bruch mit diesen Werten.</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Beispiel: ganzzahliger Anteil
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\frac{12}{9}=\frac{4}{3}=1\frac{1}{3}
+\]</span></p>
+</div>
+</div>
+<p>Mit Hilfe dieser Methode können wir nun den Bruch mit einer neuen Methode anzeigen:</p>
+<div id="82e7ee3e" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zeige_Bruch(<span class="va">self</span>, end<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.gza()</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>    anzeige <span class="op">=</span> <span class="bu">str</span>(b.zahl) <span class="cf">if</span> b.zahl <span class="cf">else</span> <span class="st">""</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-9-4" class="code-annotation-target"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="kw">and</span> b.nenner:</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>anzeige<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>b<span class="sc">.</span>z<span class="sc">ä</span>hler<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>b<span class="sc">.</span>nenner<span class="sc">}</span><span class="ss">"</span>.strip(), end<span class="op">=</span>end)</span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-9-7" class="code-annotation-target"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(anzeige, end<span class="op">=</span>end)</span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-9"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a>Bruch.zeige <span class="op">=</span> zeige_Bruch</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1">Signatur mit Standardparameter <code>end='\n'</code>. Wenn <code>end</code> beim Aufruf der Funktion nicht gesetzt ist, dann hat <code>end</code> immer den Wert <code>\n</code> (<em>newline</em>).</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="2" data-code-annotation="2">Berechnung des ganzzahligen Anteils des Bruchs.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="3">Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-<em>string</em> hinzu.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="4" data-code-annotation="4">Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus. Der <code>end</code> Parameter der Funktion <code>print</code> gibt an, wie die Ausgabe beendet werden soll. Ich habe mich hier für das Ausgabeformat <code>zahl zähler/nenner</code> entschieden.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="5">Die Funktion hat keinen Rückgabewert; es gibt keine <code>return</code> Anweisung. Stattdessen wird der Ausgabe-<em>string</em> <code>anzeige</code> mit der Funktion <code>print</code> ausgegeben. Solche sogenannten <em>pretty-print</em> Methoden sind der einzige Fall, in dem wir eine Funktion oder Methode ohne Rückgabewert zulassen wollen.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen; wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:</p>
+<div id="6bc6c94c" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a.zeige()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>b.zeige()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>c.zeige()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># die interne Repräsentation der Brüche ist unverändert:</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a = "</span>, a.zahl, a.zähler, a.nenner)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b = "</span>, b.zahl, b.zähler, b.nenner)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c = "</span>, c.zahl, c.zähler, c.nenner)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 1/3
+1
+2 1/3
+a =  0 12 9
+b =  0 4 4
+c =  0 7 3</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Beispiel: Anzeige
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\frac{12}{9}+\frac{4}{4}=\frac{4}{3}+\frac{4}{4}=\frac{16}{12}+\frac{12}{12}=\frac{28}{12}=\frac{7}{3}=2\frac{1}{3}
+\]</span></p>
+</div>
+</div>
+<p>Jetzt, da wir die Möglichkeit haben Brüche anzuzeigen, wollen wir einige “beliebte” Fehlerquellen bei der Bruchrechnung analysieren:</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Fehlerwarnungen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(1\frac{2}{3}\neq1\cdot\frac{2}{3}\)</span>. Richtig ist: <span class="math inline">\(1\frac{2}{3}=1+\frac{2}{3}=\frac{5}{3}\)</span></li>
+<li><span class="math inline">\(\frac{a}{c}+\frac{b}{c}=\frac{a+b}{c}\)</span> darf nicht verwechselt werden mit <span class="math inline">\(\frac{a}{b}+\frac{a}{c}\neq\frac{a}{b+c}\)</span>. Richtig ist: <span class="math inline">\(\frac{a}{b}+\frac{a}{c}=\frac{ac+ab}{bc}\)</span></li>
+<li><span class="math inline">\(\frac{a}{b}+\frac{c}{d}\neq\frac{a+c}{b+d}\)</span>. Richtig ist: <span class="math inline">\(\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}\)</span></li>
+<li><span class="math inline">\(1\frac{3}{4}\cdot2\frac{2}{5}\neq1\cdot2+\frac{3}{4}\cdot\frac{2}{5}\)</span>. Richtig ist: <span class="math inline">\(1\frac{3}{4}\cdot2\frac{2}{5}=\frac{7\cdot12}{4\cdot5}=\frac{7\cdot3}{1\cdot5}=\frac{21}{5}=4\frac{1}{5}\)</span></li>
+</ul>
+</div>
+</div>
+<div id="11df812f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlerwarnungen:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>a.zeige(end<span class="op">=</span><span class="st">" = "</span>)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>a<span class="sc">.</span>z<span class="sc">ä</span>hler<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>a<span class="sc">.</span>nenner<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span><span class="op">+</span><span class="dv">3</span>) <span class="co"># falsch</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a.add(b) <span class="co"># richtig</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>c.zeige(end<span class="op">=</span><span class="st">" != "</span>)<span class="op">;</span> d.zeige()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 3:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Bruch(<span class="dv">1</span><span class="op">+</span><span class="dv">1</span>, <span class="dv">2</span><span class="op">+</span><span class="dv">3</span>) <span class="co"># falsch</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>c.zeige(end<span class="op">=</span><span class="st">" != "</span>)<span class="op">;</span> d.zeige()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 4:</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">7</span>, <span class="dv">4</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">5</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>af <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>bf <span class="op">=</span> Bruch(<span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> af.mul(bf) <span class="co"># falsch</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> c.add(Bruch(<span class="dv">2</span>, <span class="dv">1</span>)) <span class="co"># falsch</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a.mul(b) <span class="co"># richtig</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>c.zeige(end<span class="op">=</span><span class="st">" != "</span>)<span class="op">;</span> d.zeige()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 2/3 = 5/3
+1/5 != 5/6
+2/5 != 5/6
+2 3/10 != 4 1/5</code></pre>
 </div>
 </div>
 
@@ -1166,320 +1332,440 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Quellcode</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Bruchrechnung"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definitionen</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bruch</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>Ein **Bruch** ist eine Zahl, die durch einen Ausdruck $\frac{m}{n}$ ($m$ geteilt durch $n$) dargestellt wird.</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>Die Zahl $m$ heißt *Zähler* und die Zahl $n$ *Nenner* des Bruchs.\</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>Ein Bruch ist also ein Quotient, der Zähler ist der Divident, und der Nenner ist der Divisor:</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>\frac{m}{n}=m\div n, \quad \mathrm{mit} \ m, n \in \mathbb{Z} \ \mathrm{und}\ n \neq 0.</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Es gelten folgende Regeln:</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Brüche, deren Zähler kleiner ist als der Nenner, heißen *echte Brüche*, z.B. $\frac{2}{3}$ (zwei Drittel), $\frac{5}{7}$ (fünf Siebtel).</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Brüche mit dem Zähler 1 heißen *Stammbrüche*, z.B. $\frac{1}{4}$ (ein Viertel), $\frac{1}{10}$ (ein Zehntel).</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ganzzahlige Anteile *unechter* Brüchen können vorgezogen werden, z.B. $\frac{15}{4}=3\frac{3}{4}$.</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Der *Kehrwert* eines Bruchs $\frac{p}{q}$ ist der Bruch $\frac{q}{p}$, also der Bruch, bei dem Zähler und Nenner vertauscht sind.</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>Wir werden auch in dieser Lektion wieder mit Python rechnen.</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>Da Python nicht über einen "eingebauten" Datentyp *Fraction* (engl. für Bruch) verfügt, werden wir uns selbst einen solchen Datentyp "bauen".</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>Dafür verwenden wir das Konzept einer *Klasse*.</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>Klassen sind der Grundbaustein für die <span class="co">[</span><span class="ot">objektorientierte Programmierung</span><span class="co">](https://de.wikipedia.org/wiki/Objektorientierte_Programmierung)</span> (OOP).\</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>Eine Klasse ist dabei eine Art Schablone, aus der man beliebig viele *Instanzen* (Objekte) erzeugen kann, die dann die Eigenschaften der Klasse haben.</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>Klassen in Python haben zwei Typen von Eigenschaften, *Attribute* und *Methoden*:</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Attribute* sind Variable, die einer Klasse zugeordnet sind, d.h. wir können in jedem Objekt bestimmte Werte unter einem festen Namen speichern.</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Methoden* sind nichts anderes als Funktionen, die einer Klasse zugeordnet sind, d.h. wir können diese Methoden für jedes Objekt der Klasse aufrufen.</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>Unsere *initiale* Klassendefinition sieht folgendermaßen aus:</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Bruch:                                        <span class="co"># &lt;1&gt;</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, zähler, nenner):             <span class="co"># &lt;2&gt;</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.zähler <span class="op">=</span> zähler                        <span class="co"># &lt;3&gt;</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nenner <span class="op">=</span> nenner</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.zahl <span class="op">=</span> <span class="dv">0</span>                               <span class="co"># &lt;4&gt;</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">4</span>)                                     <span class="co"># &lt;5&gt;</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>a.zähler, a.nenner, a. zahl                         <span class="co"># &lt;6&gt;</span></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Eine Klasse wird mit dem Schlüsselwort <span class="in">`class`</span> definiert, gefolgt vom Namen der Klasse (der Klassenname sollte der Python-Konvention folgend mit einem Großbuchstaben beginnen).</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Definition der Methode <span class="in">`__init__`</span>. Die doppelten Unterstriche vor und nach dem Methodennamen zeigen an, dass es sich hier um eine besondere Methode handelt, die sogenannte Initialisierungsmethode.</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>Jede Klasse muss über diese Methode verfügen; sie wird beim Erzeugen eines Objekt der Klasse automatisch aufgerufen.</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>Der erste Parameter <span class="in">`self`</span> der Methode ist ebenfalls ein spezieller Parameter: er referenziert das aktuelle Objekt.</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Zuweisung des Parameters <span class="in">`zähler`</span> an das Attribut <span class="in">`self.zähler`</span>. Das Attribut wird dabei automatisch angelegt und erhält den Wert des entprechenden Arguments.</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Definition eines zusätzlichen Attributs <span class="in">`zahl`</span>, dessen Wert immer 0 ist.</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>Diese Attribut repräsentiert den ganzzahligen Anteil eines unechten Bruchs</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Instanziierung eines Objekts <span class="in">`a`</span> vom Typ <span class="in">`Bruch`</span> mit den Argumenten <span class="in">`3`</span> und <span class="in">`4`</span>.</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>Die Argumente werden wie bei einer gewöhnlichen Funktion in runden Klammern angegeben.</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Auf die Attribute einer Objekts können wir mit der sogenannten *dot notation* zugreifen: <span class="in">`&lt;Objektname&gt;.&lt;Attribut&gt;`</span>.</span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Erweitern und Kürzen</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>Um einfacher mit Brüchen zu können, gibt es die Möglichkeit, Brüche zu *kürzen* oder zu *erweitern*.</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>Ein Bruch $\frac{2}{3}$ kann z.B. auch so geschrieben werden $\frac{4}{6}$ oder $\frac{-6}{-9}$; das sind verschiedene Schreibweisen desselben Bruchs.</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>Erweitern heißt, Zähler und Nenner eines Bruchs mit der selben Zahl zu miltiplizieren.</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>Der Wert des Bruchs bleibt durch Erweitern unverändert.</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Erweitern</span></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}=\frac{a\cdot c}{b\cdot c}=\frac{ac}{bc}, \quad \mathrm{mit} \ c\neq 0</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>$$ {#eq-erweitern}</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>Ein Bruch kann auch mit einer Zahl multipliziert werden; das ist aber nicht das Gleiche wie Erweitern, da sich beim Multiplizieren der Wert des Bruchs ändert:</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unterscheide Erweitern und Multiplizieren</span></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Erweitern mit 3:</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>\frac{2}{5}=\frac{2\cdot3}{5\cdot3}=\frac{6}{15}</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Multiplizieren mit 3:</span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>\frac{2}{5}\cdot3=\frac{2\cdot3}{5}=\frac{6}{5}</span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>Kürzen heißt, Zähler und Nenner eines Bruchs durch die selbe Zahl zu dividieren.</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>Der Wert des Bruchs bleibt durch Kürzen unverändert.</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kürzen</span></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}=\frac{a\div c}{b\div c}, \quad \mathrm{mit} \ c\neq 0</span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>$$ {#eq-kurzen}</span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>Ein Bruch kann auch durch eine Zahl dividiert werden; das ist aber nicht das Gleiche wie Kürzen, da sich beim Dividieren der Wert des Bruchs ändert:</span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unterscheide Kürzen und Dividieren</span></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kürzen mit 3:</span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>\frac{6}{15}=\frac{6\div3}{15\div3}=\frac{2}{5}</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dividieren durch 3:</span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>\frac{6}{15}\div3=\frac{6\div3}{15}=\frac{2}{15}</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Addieren und Subtrahieren</span></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>Beim Addieren und Subtrahieren von Brüchen muss man unterscheiden zwischen *gleichnamigen* und *ungleichnamigen* Brüchen:</span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Gleichnamige* Brüche sind Brüche mit dem gleichen Nenner.</span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Ungleichnamige* Brüche sind Brüche mit verschiedenen Nennern.</span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Addieren und Subtrahieren gleichnamiger Brüche</span></span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>Gleichnamige Brüche werden addiert oder subtrahiert, indem man die Zähler addiert oder subtrahiert und den Nenner beibehält:</span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>\frac{a}{c}\pm\frac{b}{c}=\frac{a\pm b}{c}</span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>$$ {#eq-add-gleich}</span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## Addieren und Subtrahieren ungleichnamiger Brüche</span></span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>Ungleichnamige Brüche werden addiert oder subtrahiert, indem man sie auf den *Hauptnenner* bringt, also durch Erweitern gleichnamig macht:</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\pm\frac{c}{d}=\frac{a\cdot d}{b\cdot d}\pm\frac{c\cdot b}{d\cdot b}=\frac{ad\pm bc}{bd}</span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>$$ {#eq-add-ungleich}</span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>Mit dieser Formel berechnen wir den Hauptnenner, indem wir die beiden Nenner miteinander multiplizieren: $b\cdot d= d\cdot b=bd$.\</span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>Dann müssen wir auch die Zähler der Brüche mit dem jeweils anderen Nenner multiplizieren (erweitern), um den Wert der Brüche nicht zu verändern: $a\cdot d$ und $c\cdot b$.\</span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>Dann können wir die jetzt gleichnamigen Brüche addieren oder subtrahieren, indem wir ihre Zähler addieren oder subtrahieren ($ad\pm bc$) und den Nenner $bd$ beibehalten.</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele</span></span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{2}{3}+\frac{4}{5}$. Der Hauptnenner ist $3\cdot5=15$.</span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>\frac{2}{3}+\frac{4}{5}=\frac{2\cdot5}{3\cdot5}\pm\frac{4\cdot3}{5\cdot3}=\frac{10+12}{15}=\frac{22}{15}</span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{3}{4}-\frac{5}{6}$. Der Hauptnenner ist $4\cdot6=24$.</span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>\frac{3}{4}-\frac{5}{6}=\frac{18}{24}-\frac{20}{24}=-\frac{2}{24}=-\frac{1}{12}</span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a>Im zweiten Beispiel haben wir das Ergebnis $-\frac{2}{24}$ mit $2$ gekürzt und als Endergebnis $-\frac{1}{12}$ erhalten.</span>
-<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>Woher wissen wir aber, mit welchen Faktor wir kürzen sollen?</span>
-<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>Der Kürzungsfaktor ist gemäß @eq-kurzen ein gemeinsamer Teiler des Zählers und des Nenners.</span>
-<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>Wenn wir einen Bruch vollständig kürzen wollen, so dass keine weitere Kürzung mehr möglich ist, dann suchen wir nach dem größtmöglichen Kürzungsfaktor, also dem *größten gemeinsamen Teiler* des Zählers und des Nenners.</span>
-<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a>In Lektion <span class="co">[</span><span class="ot">Teiler und Vielfache</span><span class="co">](2-teiler.qmd#sec-ggT)</span> haben wir bereits eine Funktion <span class="in">`eukild_modern`</span> definiert, die den *größten gemeinsamen Teiler* zweier Zahlen mit Hilfe des *modernen euklidischen Algorithmus* berechnet.</span>
-<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a>Diese Funktion wollen wir nun unserer Klasse <span class="in">`Bruch`</span> als neue Methode <span class="in">`ggT`</span> hinzufügen:</span>
-<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euklid_modern(<span class="va">self</span>, a, b):                      <span class="co"># &lt;1&gt;</span></span>
-<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:</span>
-<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a>    a, b <span class="op">=</span> b, a <span class="op">%</span> b</span>
-<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a</span>
-<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a>Bruch.ggT <span class="op">=</span> euklid_modern                           <span class="co"># &lt;2&gt;</span></span>
-<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">18</span>)                                   <span class="co"># &lt;3&gt;</span></span>
-<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> b.ggT(b.nenner, b.zähler) <span class="op">==</span> <span class="dv">6</span>               <span class="co"># &lt;4&gt;</span></span>
-<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Definition von <span class="in">`euklid_modern`</span> als "gewöhnliche" Funktion.</span>
-<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a>Wenn wir eine Funktion außerhalb der eigentlichen Klassendefinition zu einer Klasse hinzufügen wollen, dann muss der erste Parameter der Funktion das Objekt <span class="in">`self`</span> sein, d.h. eine Referenz auf die Klasse.</span>
-<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Zuweisung der Funktion <span class="in">`euklid_modern`</span> an die neue Methode <span class="in">`ggT`</span> der Klasse <span class="in">`Bruch`</span>.</span>
-<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a>Bei der Zuweisung lassen wir die Klammern der Funktion weg, da wir die Funktion nicht aufrufen wollen. Mit diese Schreibweise weisen wir das *Funktionsobjekt* <span class="in">`euklid_modern`</span> einem neuen Objekt des gleichen Typs der Klasse zu.</span>
-<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Initialisierung des Objekts <span class="in">`b`</span> vom Typ <span class="in">`Bruch`</span> mit 12 als Zähler und 18 als Nenner.</span>
-<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Aufruf der Methode <span class="in">`ggT`</span> des Objekts <span class="in">`b`</span> mit Nenner und Zähler des Objekts.</span>
-<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a>Die Reihenfolge der Argumente dieser Methode spielt keine Rolle.</span>
-<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a>Ich habe aber den größeren der beide Werte zuerst genannt, da diese Variante etwas effizienter ist.</span>
-<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a>Wir können die Methode <span class="in">`ggt`</span> jetzt verwenden, um eine neue Methode <span class="in">`kürze`</span> zu definieren:</span>
-<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kürze_Bruch(<span class="va">self</span>):</span>
-<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a>    faktor <span class="op">=</span> <span class="va">self</span>.ggT(<span class="va">self</span>.nenner, <span class="va">self</span>.zähler)                 <span class="co"># &lt;1&gt;</span></span>
-<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Bruch(<span class="va">self</span>.zähler <span class="op">//</span> faktor, <span class="va">self</span>.nenner <span class="op">//</span> faktor)  <span class="co"># &lt;2&gt;</span></span>
-<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-194"><a href="#cb5-194" aria-hidden="true" tabindex="-1"></a>Bruch.kürze <span class="op">=</span> kürze_Bruch</span>
-<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> b.kürze()                                                   <span class="co"># &lt;3&gt;</span></span>
-<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (b.zähler, b.nenner) <span class="op">==</span> (<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Berechnung des Kürzungsfaktors über den *ggT*</span>
-<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rückgabe eines neuen Bruchs, der mit dem <span class="in">`faktor`</span> gekürzt ist.</span>
-<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Aufruf der Methode <span class="in">`kürze`</span> des Objekts <span class="in">`b`</span> und Zuweisung des Ergebnisses an das Objekt <span class="in">`b`</span>.</span>
-<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a>Das ursprüngliche Objekt <span class="in">`b`</span> wird dabei überschrieben und ist nicht mehr verfügbar.</span>
-<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a>Beachte, dass wir die Methode <span class="in">`kürze`</span> ohne Argument aufrufen; der Parameter <span class="in">`self`</span> der Funktion wurde beim Zuweisen der Funktion an die Klasse bereits gesetzt.</span>
-<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a>Der Bruch $b=\frac{12}{18}$ wird korrekt gekürzt zu $b=\frac{2}{3}$.</span>
-<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a>Damit können wir jetzt die Addition von Brüchen gemäß den Formeln @eq-add-gleich und @eq-add-ungleich als neue Methode der Klasse <span class="in">`Bruch`</span> definieren:</span>
-<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> addiere_Bruch(<span class="va">self</span>, other):</span>
-<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="va">self</span>                                                  <span class="co"># &lt;1&gt;</span></span>
-<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">self</span>.nenner <span class="op">==</span> other.nenner:                             <span class="co"># &lt;2&gt;</span></span>
-<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> Bruch(<span class="va">self</span>.zähler <span class="op">+</span> other.zähler, <span class="va">self</span>.nenner)</span>
-<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:                                                       <span class="co"># &lt;3&gt;</span></span>
-<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> Bruch(<span class="va">self</span>.zähler<span class="op">*</span>other.nenner <span class="op">+</span> <span class="va">self</span>.nenner<span class="op">*</span>other.zähler,</span>
-<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.nenner<span class="op">*</span>other.nenner)</span>
-<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.kürze()                                          <span class="co"># &lt;4&gt;</span></span>
-<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a>Bruch.add <span class="op">=</span> addiere_Bruch</span>
-<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Initialisierung des Ergebnisses</span>
-<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Addition eines gleichnamigen Bruchs mit der entsprechendene Formel</span>
-<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Addition eines ungleichnamigen Bruchs mit der der entsprechenden Formel</span>
-<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Kürzen und Rückgabe des Ergebnisses</span>
-<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a>Wir wollen testen, ob unsere Methode <span class="in">`add`</span> für folgende Beispiele korrekt arbeitet:</span>
-<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele für Addition von Brüchen</span></span>
-<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}$</span>
-<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}$</span>
-<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
-<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">6</span>)</span>
-<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">9</span>)</span>
-<span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
-<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-246"><a href="#cb5-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a>Schließlich wollen wir noch eine Methode definieren, die einen Bruch in einer leichter lesbaren Form ausgibt und dabei gegebenenfall einen ganzzahligen Anteil berücksichtigt.</span>
-<span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a>Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen *unechten Bruch* handelt.</span>
-<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ganzzahliger_anteil(<span class="va">self</span>):</span>
-<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.kürze()                                        <span class="co"># &lt;1&gt;</span></span>
-<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="op">==</span> b.nenner:                                <span class="co"># &lt;2&gt;</span></span>
-<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(<span class="va">None</span>, <span class="va">None</span>)</span>
-<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> b.zähler <span class="op">&gt;</span> b.nenner:                               <span class="co"># &lt;3&gt;</span></span>
-<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a>        zahl <span class="op">=</span> b.zähler <span class="op">//</span> b.nenner</span>
-<span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a>        rest <span class="op">=</span> b.zähler <span class="op">%</span> b.nenner</span>
-<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(rest, b.nenner)</span>
-<span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> zahl</span>
-<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b</span>
-<span id="cb5-264"><a href="#cb5-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a>Bruch.gza <span class="op">=</span> ganzzahliger_anteil</span>
-<span id="cb5-266"><a href="#cb5-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
-<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> a.gza()</span>
-<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a.zahl, a.zähler, a.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zuerst kürzen wird den Bruch.</span>
-<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Wenn der Zähler gleich dem Nenner ist, dann ist der Wert des Bruchs immer 1.</span>
-<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a>In diesem Fall erzeugen wir einen Bruch mit undefiniertem Zähler und Nenner, indem wir beiden den Wert <span class="in">`None`</span> zuweisen.</span>
-<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a>Das Attribut <span class="in">`zahl`</span> des Bruchs setzen wir auf 1.</span>
-<span id="cb5-275"><a href="#cb5-275" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Wenn es sich um einen *unechten Bruch* handelt (Zähler größer als der Nenner), dann berechnen wir die ganze Zahl als ganzzahlige Division von Zähler und Nenner, und den Rest der Division mit dem Modulo Operator <span class="in">`%`</span>.</span>
-<span id="cb5-276"><a href="#cb5-276" aria-hidden="true" tabindex="-1"></a>Schließlich erzeugen wir einen neuen Bruch mit diesen Werten.</span>
-<span id="cb5-277"><a href="#cb5-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-278"><a href="#cb5-278" aria-hidden="true" tabindex="-1"></a>Der Bruch $\frac{12}{9}$ im Code-Beispiel wird gekürzt zu $\frac{4}{3}$ und der ganzzahlige Anteil mit 1 berechnet; der verbleibende Bruch hat den Wert $\frac{1}{3}$.\</span>
-<span id="cb5-279"><a href="#cb5-279" aria-hidden="true" tabindex="-1"></a>Mit Hilfe dieser Methode können wir nun den Bruch in einer neuen Methode anzeigen:</span>
-<span id="cb5-280"><a href="#cb5-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-283"><a href="#cb5-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-284"><a href="#cb5-284" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zeige_Bruch(<span class="va">self</span>):</span>
-<span id="cb5-285"><a href="#cb5-285" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.gza()                                      <span class="co"># &lt;1&gt;</span></span>
-<span id="cb5-286"><a href="#cb5-286" aria-hidden="true" tabindex="-1"></a>    anzeige <span class="op">=</span> <span class="bu">str</span>(b.zahl) <span class="cf">if</span> b.zahl <span class="cf">else</span> <span class="st">""</span>             <span class="co"># &lt;2&gt;</span></span>
-<span id="cb5-287"><a href="#cb5-287" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="kw">and</span> b.nenner:                           <span class="co"># &lt;3&gt;</span></span>
-<span id="cb5-288"><a href="#cb5-288" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>anzeige<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span>b<span class="sc">.</span>z<span class="sc">ä</span>hler<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>b<span class="sc">.</span>nenner<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-289"><a href="#cb5-289" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-290"><a href="#cb5-290" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(anzeige)                                  <span class="co"># &lt;4&gt;</span></span>
-<span id="cb5-291"><a href="#cb5-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-292"><a href="#cb5-292" aria-hidden="true" tabindex="-1"></a>Bruch.zeige <span class="op">=</span> zeige_Bruch</span>
-<span id="cb5-293"><a href="#cb5-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-294"><a href="#cb5-294" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Berechnung des ganzzahligen Anteils des Bruchs.</span>
-<span id="cb5-295"><a href="#cb5-295" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-*string* hinzu.</span>
-<span id="cb5-296"><a href="#cb5-296" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus.</span>
-<span id="cb5-297"><a href="#cb5-297" aria-hidden="true" tabindex="-1"></a>Ich habe mich hier für das Ausgabeformat $Z+zähler/nenner$ entschieden.</span>
-<span id="cb5-298"><a href="#cb5-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-299"><a href="#cb5-299" aria-hidden="true" tabindex="-1"></a>Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen;</span>
-<span id="cb5-300"><a href="#cb5-300" aria-hidden="true" tabindex="-1"></a>wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:</span>
-<span id="cb5-301"><a href="#cb5-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-304"><a href="#cb5-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-305"><a href="#cb5-305" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
-<span id="cb5-306"><a href="#cb5-306" aria-hidden="true" tabindex="-1"></a>a.zeige()</span>
-<span id="cb5-307"><a href="#cb5-307" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">4</span>, <span class="dv">4</span>)</span>
-<span id="cb5-308"><a href="#cb5-308" aria-hidden="true" tabindex="-1"></a>b.zeige()</span>
-<span id="cb5-309"><a href="#cb5-309" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
-<span id="cb5-310"><a href="#cb5-310" aria-hidden="true" tabindex="-1"></a>c.zeige()</span>
-<span id="cb5-311"><a href="#cb5-311" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a = "</span>, a.zahl, a.zähler, a.nenner)</span>
-<span id="cb5-312"><a href="#cb5-312" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b = "</span>, b.zahl, b.zähler, b.nenner)</span>
-<span id="cb5-313"><a href="#cb5-313" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c = "</span>, c.zahl, c.zähler, c.nenner)</span>
-<span id="cb5-314"><a href="#cb5-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-315"><a href="#cb5-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-316"><a href="#cb5-316" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiplizieren von Brüchen</span></span>
-<span id="cb5-317"><a href="#cb5-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-318"><a href="#cb5-318" aria-hidden="true" tabindex="-1"></a>Das Multiplizieren von Brüchen ist einfacher als das Addieren, da wir hier nicht auf *Gleichnamigkeit* achten müssen:</span>
-<span id="cb5-319"><a href="#cb5-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-320"><a href="#cb5-320" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb5-321"><a href="#cb5-321" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiplizieren von Brüchen</span></span>
-<span id="cb5-322"><a href="#cb5-322" aria-hidden="true" tabindex="-1"></a>Brüche werden miteinander multipliziert, indem man Zähler mit Zähler und Nenner mit Nenner multipliziert. For dem Multiplizieren sollte man kürzen.</span>
-<span id="cb5-323"><a href="#cb5-323" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-324"><a href="#cb5-324" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d}=\frac{ac}{bd}</span>
-<span id="cb5-325"><a href="#cb5-325" aria-hidden="true" tabindex="-1"></a>$$ {#eq-mult}</span>
-<span id="cb5-326"><a href="#cb5-326" aria-hidden="true" tabindex="-1"></a>Sonderfall: Ein Bruch wird mit einer einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert.</span>
-<span id="cb5-327"><a href="#cb5-327" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-328"><a href="#cb5-328" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\cdot c=\frac{a\cdot c}{b}=\frac{ac}{b}</span>
-<span id="cb5-329"><a href="#cb5-329" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb5-330"><a href="#cb5-330" aria-hidden="true" tabindex="-1"></a>:::</span>
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Bruchrechnung"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definitionen</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bruch</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>Ein **Bruch** ist eine Zahl, die durch einen Ausdruck $\frac{m}{n}$ ($m$ geteilt durch $n$) dargestellt wird.</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>Die Zahl $m$ heißt *Zähler* und die Zahl $n$ *Nenner* des Bruchs.\</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>Ein Bruch ist also ein Quotient, der Zähler ist der Divident, und der Nenner ist der Divisor:</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>\frac{m}{n}=m\div n, \quad \mathrm{mit} \ m, n \in \mathbb{Z} \ \mathrm{und}\ n \neq 0.</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>Es gelten folgende Regeln:</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Brüche, deren Zähler kleiner ist als der Nenner, heißen *echte Brüche*, z.B. $\frac{2}{3}$ (zwei Drittel), $\frac{5}{7}$ (fünf Siebtel).</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Brüche mit dem Zähler 1 heißen *Stammbrüche*, z.B. $\frac{1}{4}$ (ein Viertel), $\frac{1}{10}$ (ein Zehntel).</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ganzzahlige Anteile *unechter* Brüchen können vorgezogen werden, z.B. $\frac{15}{4}=3\frac{3}{4}$.</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Der *Kehrwert* eines Bruchs $\frac{p}{q}$ ist der Bruch $\frac{q}{p}$, also der Bruch, bei dem Zähler und Nenner vertauscht sind.</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>Wir werden auch in dieser Lektion wieder mit Python rechnen.</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>Da Python nicht über einen "eingebauten" Datentyp *Fraction* (engl. für Bruch) verfügt, werden wir uns selbst einen solchen Datentyp "bauen".</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>Dafür verwenden wir das Konzept einer *Klasse*.</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>Klassen sind der Grundbaustein für die <span class="co">[</span><span class="ot">objektorientierte Programmierung</span><span class="co">](https://de.wikipedia.org/wiki/Objektorientierte_Programmierung)</span> (OOP).\</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>Eine Klasse ist dabei eine Art Schablone, aus der man beliebig viele *Instanzen* (Objekte) erzeugen kann, die dann die Eigenschaften der Klasse haben.</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>Klassen in Python haben zwei Typen von Eigenschaften, *Attribute* und *Methoden*:</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Attribute* sind Variable, die einer Klasse zugeordnet sind, d.h. wir können in jedem Objekt bestimmte Werte unter einem festen Namen speichern.</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Methoden* sind nichts anderes als Funktionen, die einer Klasse zugeordnet sind, d.h. wir können diese Methoden für jedes Objekt der Klasse aufrufen.</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>Unsere *initiale* Klassendefinition sieht folgendermaßen aus:</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Bruch:                                        <span class="co"># &lt;1&gt;</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, zähler, nenner):             <span class="co"># &lt;2&gt;</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.zähler <span class="op">=</span> zähler                        <span class="co"># &lt;3&gt;</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nenner <span class="op">=</span> nenner</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.zahl <span class="op">=</span> <span class="dv">0</span>                               <span class="co"># &lt;4&gt;</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">4</span>)                                     <span class="co"># &lt;5&gt;</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>a.zähler, a.nenner, a. zahl                         <span class="co"># &lt;6&gt;</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Eine Klasse wird mit dem Schlüsselwort <span class="in">`class`</span> definiert, gefolgt vom Namen der Klasse (der Klassenname sollte der Python-Konvention folgend mit einem Großbuchstaben beginnen).</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Definition der Methode <span class="in">`__init__`</span>. Die doppelten Unterstriche vor und nach dem Methodennamen zeigen an, dass es sich hier um eine besondere Methode handelt, die sogenannte Initialisierungsmethode.</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>Jede Klasse muss über diese Methode verfügen; sie wird beim Erzeugen eines Objekt der Klasse automatisch aufgerufen.</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>Der erste Parameter <span class="in">`self`</span> der Methode ist ebenfalls ein spezieller Parameter: er referenziert das aktuelle Objekt.</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Zuweisung des Parameters <span class="in">`zähler`</span> an das Attribut <span class="in">`self.zähler`</span>. Das Attribut wird dabei automatisch angelegt und erhält den Wert des entprechenden Arguments.</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Definition eines zusätzlichen Attributs <span class="in">`zahl`</span>, dessen Wert immer 0 ist.</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>Diese Attribut repräsentiert den ganzzahligen Anteil eines unechten Bruchs</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Instanziierung eines Objekts <span class="in">`a`</span> vom Typ <span class="in">`Bruch`</span> mit den Argumenten <span class="in">`3`</span> und <span class="in">`4`</span>.</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>Die Argumente werden wie bei einer gewöhnlichen Funktion in runden Klammern angegeben.</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Auf die Attribute einer Objekts können wir mit der sogenannten *dot notation* zugreifen: <span class="in">`&lt;Objektname&gt;.&lt;Attribut&gt;`</span>.</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Erweitern und Kürzen</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>Um einfacher mit Brüchen zu können, gibt es die Möglichkeit, Brüche zu *kürzen* oder zu *erweitern*.</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>Ein Bruch $\frac{2}{3}$ kann z.B. auch so geschrieben werden $\frac{4}{6}$ oder $\frac{-6}{-9}$; das sind verschiedene Schreibweisen desselben Bruchs.</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>Erweitern heißt, Zähler und Nenner eines Bruchs mit der selben Zahl zu miltiplizieren.</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>Der Wert des Bruchs bleibt durch Erweitern unverändert.</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Erweitern</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}=\frac{a\cdot c}{b\cdot c}=\frac{ac}{bc}, \quad \mathrm{mit} \ c\neq 0</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>$$ {#eq-erweitern}</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>Ein Bruch kann auch mit einer Zahl multipliziert werden; das ist aber nicht das Gleiche wie Erweitern, da sich beim Multiplizieren der Wert des Bruchs ändert:</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unterscheide Erweitern und Multiplizieren</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Erweitern mit 3:</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>\frac{2}{5}=\frac{2\cdot3}{5\cdot3}=\frac{6}{15}</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Multiplizieren mit 3:</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>\frac{2}{5}\cdot3=\frac{2\cdot3}{5}=\frac{6}{5}</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>Kürzen heißt, Zähler und Nenner eines Bruchs durch die selbe Zahl zu dividieren.</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>Der Wert des Bruchs bleibt durch Kürzen unverändert.</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kürzen</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}=\frac{a\div c}{b\div c}, \quad \mathrm{mit} \ c\neq 0</span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>$$ {#eq-kurzen}</span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>Ein Bruch kann auch durch eine Zahl dividiert werden; das ist aber nicht das Gleiche wie Kürzen, da sich beim Dividieren der Wert des Bruchs ändert:</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unterscheide Kürzen und Dividieren</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kürzen mit 3:</span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>\frac{6}{15}=\frac{6\div3}{15\div3}=\frac{2}{5}</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dividieren durch 3:</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>\frac{6}{15}\div3=\frac{6\div3}{15}=\frac{2}{15}</span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Addieren und Subtrahieren</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>Beim Addieren und Subtrahieren von Brüchen muss man unterscheiden zwischen *gleichnamigen* und *ungleichnamigen* Brüchen:</span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Gleichnamige* Brüche sind Brüche mit dem gleichen Nenner.</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Ungleichnamige* Brüche sind Brüche mit verschiedenen Nennern.</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Addieren und Subtrahieren gleichnamiger Brüche</span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>Gleichnamige Brüche werden addiert oder subtrahiert, indem man die Zähler addiert oder subtrahiert und den Nenner beibehält:</span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>\frac{a}{c}\pm\frac{b}{c}=\frac{a\pm b}{c}</span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>$$ {#eq-add-gleich}</span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## Addieren und Subtrahieren ungleichnamiger Brüche</span></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>Ungleichnamige Brüche werden addiert oder subtrahiert, indem man sie auf den *Hauptnenner* bringt, also durch Erweitern gleichnamig macht:</span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\pm\frac{c}{d}=\frac{a\cdot d}{b\cdot d}\pm\frac{c\cdot b}{d\cdot b}=\frac{ad\pm bc}{bd}</span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>$$ {#eq-add-ungleich}</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>Mit dieser Formel berechnen wir den Hauptnenner, indem wir die beiden Nenner miteinander multiplizieren: $b\cdot d= d\cdot b=bd$.\</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>Dann müssen wir auch die Zähler der Brüche mit dem jeweils anderen Nenner multiplizieren (erweitern), um den Wert der Brüche nicht zu verändern: $a\cdot d$ und $c\cdot b$.\</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>Dann können wir die jetzt gleichnamigen Brüche addieren oder subtrahieren, indem wir ihre Zähler addieren oder subtrahieren ($ad\pm bc$) und den Nenner $bd$ beibehalten.</span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele</span></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{2}{3}+\frac{4}{5}$. Der Hauptnenner ist $3\cdot5=15$.</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>\frac{2}{3}+\frac{4}{5}=\frac{2\cdot5}{3\cdot5}\pm\frac{4\cdot3}{5\cdot3}=\frac{10+12}{15}=\frac{22}{15}</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{3}{4}-\frac{5}{6}$. Der Hauptnenner ist $4\cdot6=24$.</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>\frac{3}{4}-\frac{5}{6}=\frac{18}{24}-\frac{20}{24}=-\frac{2}{24}=-\frac{1}{12}</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>Im zweiten Beispiel haben wir das Ergebnis $-\frac{2}{24}$ mit $2$ gekürzt und als Endergebnis $-\frac{1}{12}$ erhalten.</span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>Woher wissen wir aber, mit welchen Faktor wir kürzen sollen?</span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a>Der Kürzungsfaktor ist gemäß @eq-kurzen ein gemeinsamer Teiler des Zählers und des Nenners.</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>Wenn wir einen Bruch vollständig kürzen wollen, so dass keine weitere Kürzung mehr möglich ist, dann suchen wir nach dem größtmöglichen Kürzungsfaktor, also dem *größten gemeinsamen Teiler* des Zählers und des Nenners.</span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>In Lektion <span class="co">[</span><span class="ot">Teiler und Vielfache</span><span class="co">](2-teiler.qmd#sec-ggT)</span> haben wir bereits eine Funktion <span class="in">`eukild_modern`</span> definiert, die den *größten gemeinsamen Teiler* zweier Zahlen mit Hilfe des *modernen euklidischen Algorithmus* berechnet.</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>Diese Funktion wollen wir nun unserer Klasse <span class="in">`Bruch`</span> als neue Methode <span class="in">`ggT`</span> hinzufügen:</span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euklid_modern(<span class="va">self</span>, a, b):                      <span class="co"># &lt;1&gt;</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>    a, b <span class="op">=</span> b, a <span class="op">%</span> b</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>Bruch.ggT <span class="op">=</span> euklid_modern                           <span class="co"># &lt;2&gt;</span></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">18</span>)                                   <span class="co"># &lt;3&gt;</span></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> b.ggT(b.nenner, b.zähler) <span class="op">==</span> <span class="dv">6</span>               <span class="co"># &lt;4&gt;</span></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Definition von <span class="in">`euklid_modern`</span> als "gewöhnliche" Funktion.</span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>Wenn wir eine Funktion zu einer Klasse hinzufügen, dann muss der erste Parameter der Funktion das Objekt <span class="in">`self`</span> sein, d.h. eine Referenz auf die Klasse.</span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Zuweisung der Funktion <span class="in">`euklid_modern`</span> an die neue Methode <span class="in">`ggT`</span> der Klasse <span class="in">`Bruch`</span>.</span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a>Bei der Zuweisung lassen wir die Klammern der Funktion weg, da wir die Funktion nicht aufrufen wollen. Mit diese Schreibweise weisen wir das *Funktionsobjekt* <span class="in">`euklid_modern`</span> einem neuen Objekt des gleichen Typs der Klasse zu.</span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Initialisierung des Objekts <span class="in">`b`</span> vom Typ <span class="in">`Bruch`</span> mit 12 als Zähler und 18 als Nenner.</span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Aufruf der Methode <span class="in">`ggT`</span> des Objekts <span class="in">`b`</span> mit Nenner und Zähler des Objekts.</span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>Die Reihenfolge der Argumente dieser Methode spielt keine Rolle.</span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>Ich habe aber den größeren der beide Werte zuerst genannt, da diese Variante etwas effizienter ist.</span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a>Wir können die Methode <span class="in">`ggt`</span> jetzt verwenden, um eine neue Methode <span class="in">`kürze`</span> zu definieren:</span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kürze_Bruch(<span class="va">self</span>):</span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>    faktor <span class="op">=</span> <span class="va">self</span>.ggT(<span class="va">self</span>.nenner, <span class="va">self</span>.zähler)                 <span class="co"># &lt;1&gt;</span></span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Bruch(<span class="va">self</span>.zähler <span class="op">//</span> faktor, <span class="va">self</span>.nenner <span class="op">//</span> faktor)  <span class="co"># &lt;2&gt;</span></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a>Bruch.kürze <span class="op">=</span> kürze_Bruch</span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> b.kürze()                                                   <span class="co"># &lt;3&gt;</span></span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (b.zähler, b.nenner) <span class="op">==</span> (<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Berechnung des Kürzungsfaktors über den *ggT*</span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rückgabe eines neuen Bruchs, der mit dem <span class="in">`faktor`</span> gekürzt ist.</span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Aufruf der Methode <span class="in">`kürze`</span> des Objekts <span class="in">`b`</span> und Zuweisung des Ergebnisses an das Objekt <span class="in">`b`</span>.</span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a>Das ursprüngliche Objekt <span class="in">`b`</span> wird dabei überschrieben und ist nicht mehr verfügbar.</span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>Beachte, dass wir die Methode <span class="in">`kürze`</span> ohne Argument aufrufen; der Parameter <span class="in">`self`</span> der Funktion wurde beim Zuweisen der Funktion an die Klasse bereits gesetzt.</span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a>Der Bruch $b=\frac{12}{18}$ wird korrekt gekürzt zu $b=\frac{2}{3}$.</span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a>Damit können wir jetzt die Addition von Brüchen gemäß den Formeln @eq-add-gleich und @eq-add-ungleich als neue Methode der Klasse <span class="in">`Bruch`</span> definieren:</span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> addiere_Bruch(<span class="va">self</span>, other):</span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="va">self</span>                                                  <span class="co"># &lt;1&gt;</span></span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">self</span>.nenner <span class="op">==</span> other.nenner:                             <span class="co"># &lt;2&gt;</span></span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> Bruch(<span class="va">self</span>.zähler <span class="op">+</span> other.zähler, <span class="va">self</span>.nenner)</span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:                                                       <span class="co"># &lt;3&gt;</span></span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> Bruch(<span class="va">self</span>.zähler<span class="op">*</span>other.nenner <span class="op">+</span> <span class="va">self</span>.nenner<span class="op">*</span>other.zähler,</span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.nenner<span class="op">*</span>other.nenner)</span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.kürze()                                          <span class="co"># &lt;4&gt;</span></span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a>Bruch.add <span class="op">=</span> addiere_Bruch</span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Initialisierung des Ergebnisses</span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Addition eines gleichnamigen Bruchs mit der entsprechendene Formel</span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Addition eines ungleichnamigen Bruchs mit der der entsprechenden Formel</span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Kürzen und Rückgabe des Ergebnisses</span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a>Wir wollen testen, ob unsere Methode <span class="in">`add`</span> für folgende Beispiele korrekt arbeitet:</span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele für Addition von Brüchen</span></span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a>$$\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}</span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}</span>
+<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
+<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">6</span>)</span>
+<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">9</span>)</span>
+<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
+<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiplizieren von Brüchen</span></span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>Das Multiplizieren von Brüchen ist einfacher als das Addieren, da wir hier nicht auf *Gleichnamigkeit* achten müssen:</span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiplizieren von Brüchen</span></span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>Brüche werden miteinander multipliziert, indem man Zähler mit Zähler und Nenner mit Nenner multipliziert. For dem Multiplizieren sollte man kürzen.</span>
+<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d}=\frac{ac}{bd}</span>
+<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a>$$ {#eq-mult}</span>
+<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>Sonderfall: Ein Bruch wird mit einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert.</span>
+<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\cdot c=\frac{a\cdot c}{b}=\frac{ac}{b}</span>
+<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>Die Implementierung in Python kann dann so aussehen:</span>
+<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multipliziere_Bruch(<span class="va">self</span>, other):</span>
+<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="va">self</span>.kürze()</span>
+<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> other.kürze()</span>
+<span id="cb9-274"><a href="#cb9-274" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> Bruch(a.zähler <span class="op">*</span> b.zähler, a.nenner <span class="op">*</span> b.nenner)</span>
+<span id="cb9-275"><a href="#cb9-275" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.kürze()</span>
+<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a>Bruch.mul <span class="op">=</span> multipliziere_Bruch</span>
+<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.mul(b)</span>
+<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">18</span>)</span>
+<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiel: Multiplikation</span></span>
+<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>\frac{1}{6}\cdot\frac{3}{9}=\frac{1}{6}\cdot\frac{1}{3}=\frac{1}{18}</span>
+<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dividieren von Brüchen</span></span>
+<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dividieren von Brüchen</span></span>
+<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>Man dividiert duch einen Bruch, indem man mit seinem *Kehrwert* multipliziert.</span>
+<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}=\frac{ad}{bc}</span>
+<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>$$ {#eq-div}</span>
+<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>Sonderfall: Ein Bruch wird durch eine Zahl dividiert, indem man den Nenner mit der Zahl multipliziert.</span>
+<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>\frac{a}{b}\div c=\frac{a}{b\cdot c}=\frac{a}{bc}</span>
+<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a>Die Division von Brüchen kann man wie folgt in Python implementieren:</span>
+<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dividiere_Bruch(<span class="va">self</span>, other):</span>
+<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.mul(Bruch(other.nenner, other.zähler))</span>
+<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a>Bruch.div <span class="op">=</span> dividiere_Bruch</span>
+<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.div(b)</span>
+<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (c.zähler, c.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-318"><a href="#cb9-318" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-319"><a href="#cb9-319" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiel: Division</span></span>
+<span id="cb9-320"><a href="#cb9-320" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-321"><a href="#cb9-321" aria-hidden="true" tabindex="-1"></a>\frac{1}{6}\div\frac{3}{9}=\frac{1}{6}\div\frac{1}{3}=\frac{1}{6}\cdot\frac{3}{1}=\frac{3}{6}=\frac{1}{2}</span>
+<span id="cb9-322"><a href="#cb9-322" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-323"><a href="#cb9-323" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-324"><a href="#cb9-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-325"><a href="#cb9-325" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fehlerquellen</span></span>
+<span id="cb9-326"><a href="#cb9-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-327"><a href="#cb9-327" aria-hidden="true" tabindex="-1"></a>In diesem Kapitel wollen wir mögliche Fehlerquellen der Bruchrechnung anhand einiger Beispielrechnungen demonstrieren.</span>
+<span id="cb9-328"><a href="#cb9-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-329"><a href="#cb9-329" aria-hidden="true" tabindex="-1"></a>Zuvor werden wir aber noch unser Python Klassendefinition vervollständigen, indem wir einen Bruch in einer leicht lesbaren Form ausgeben und dabei den ganzzahligen Anteil des Bruchs berücksichtigen.</span>
+<span id="cb9-330"><a href="#cb9-330" aria-hidden="true" tabindex="-1"></a>Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen *unechten Bruch* handelt.</span>
+<span id="cb9-331"><a href="#cb9-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-334"><a href="#cb9-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-335"><a href="#cb9-335" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ganzzahliger_anteil(<span class="va">self</span>):</span>
+<span id="cb9-336"><a href="#cb9-336" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.kürze()                                        <span class="co"># &lt;1&gt;</span></span>
+<span id="cb9-337"><a href="#cb9-337" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="op">==</span> b.nenner:                                <span class="co"># &lt;2&gt;</span></span>
+<span id="cb9-338"><a href="#cb9-338" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(<span class="va">None</span>, <span class="va">None</span>)</span>
+<span id="cb9-339"><a href="#cb9-339" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-340"><a href="#cb9-340" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> b.zähler <span class="op">&gt;</span> b.nenner:                               <span class="co"># &lt;3&gt;</span></span>
+<span id="cb9-341"><a href="#cb9-341" aria-hidden="true" tabindex="-1"></a>        zahl <span class="op">=</span> b.zähler <span class="op">//</span> b.nenner</span>
+<span id="cb9-342"><a href="#cb9-342" aria-hidden="true" tabindex="-1"></a>        rest <span class="op">=</span> b.zähler <span class="op">%</span> b.nenner</span>
+<span id="cb9-343"><a href="#cb9-343" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bruch(rest, b.nenner)</span>
+<span id="cb9-344"><a href="#cb9-344" aria-hidden="true" tabindex="-1"></a>        b.zahl <span class="op">=</span> zahl</span>
+<span id="cb9-345"><a href="#cb9-345" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b</span>
+<span id="cb9-346"><a href="#cb9-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-347"><a href="#cb9-347" aria-hidden="true" tabindex="-1"></a>Bruch.gza <span class="op">=</span> ganzzahliger_anteil</span>
+<span id="cb9-348"><a href="#cb9-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-349"><a href="#cb9-349" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
+<span id="cb9-350"><a href="#cb9-350" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> a.gza()</span>
+<span id="cb9-351"><a href="#cb9-351" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a.zahl, a.zähler, a.nenner) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb9-352"><a href="#cb9-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-353"><a href="#cb9-353" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zuerst kürzen wird den Bruch.</span>
+<span id="cb9-354"><a href="#cb9-354" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Wenn der Zähler gleich dem Nenner ist, dann ist der Wert des Bruchs immer 1.</span>
+<span id="cb9-355"><a href="#cb9-355" aria-hidden="true" tabindex="-1"></a>In diesem Fall erzeugen wir einen Bruch mit undefiniertem Zähler und Nenner, indem wir beiden den Wert <span class="in">`None`</span> zuweisen.</span>
+<span id="cb9-356"><a href="#cb9-356" aria-hidden="true" tabindex="-1"></a>Das Attribut <span class="in">`zahl`</span> des Bruchs setzen wir auf 1.</span>
+<span id="cb9-357"><a href="#cb9-357" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Wenn es sich um einen *unechten Bruch* handelt (Zähler größer als der Nenner), dann berechnen wir die ganze Zahl als ganzzahlige Division von Zähler und Nenner, und den Rest der Division mit dem Modulo Operator <span class="in">`%`</span>.</span>
+<span id="cb9-358"><a href="#cb9-358" aria-hidden="true" tabindex="-1"></a>Schließlich erzeugen wir einen neuen Bruch mit diesen Werten.</span>
+<span id="cb9-359"><a href="#cb9-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-360"><a href="#cb9-360" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-361"><a href="#cb9-361" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiel: ganzzahliger Anteil</span></span>
+<span id="cb9-362"><a href="#cb9-362" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-363"><a href="#cb9-363" aria-hidden="true" tabindex="-1"></a>\frac{12}{9}=\frac{4}{3}=1\frac{1}{3}</span>
+<span id="cb9-364"><a href="#cb9-364" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-365"><a href="#cb9-365" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-366"><a href="#cb9-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-367"><a href="#cb9-367" aria-hidden="true" tabindex="-1"></a>Mit Hilfe dieser Methode können wir nun den Bruch mit einer neuen Methode anzeigen:</span>
+<span id="cb9-368"><a href="#cb9-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-371"><a href="#cb9-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-372"><a href="#cb9-372" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zeige_Bruch(<span class="va">self</span>, end<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>):                        <span class="co"># &lt;1&gt;</span></span>
+<span id="cb9-373"><a href="#cb9-373" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.gza()                                      <span class="co"># &lt;2&gt;</span></span>
+<span id="cb9-374"><a href="#cb9-374" aria-hidden="true" tabindex="-1"></a>    anzeige <span class="op">=</span> <span class="bu">str</span>(b.zahl) <span class="cf">if</span> b.zahl <span class="cf">else</span> <span class="st">""</span>             <span class="co"># &lt;3&gt;</span></span>
+<span id="cb9-375"><a href="#cb9-375" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="kw">and</span> b.nenner:                           <span class="co"># &lt;4&gt;</span></span>
+<span id="cb9-376"><a href="#cb9-376" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>anzeige<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>b<span class="sc">.</span>z<span class="sc">ä</span>hler<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>b<span class="sc">.</span>nenner<span class="sc">}</span><span class="ss">"</span>.strip(), end<span class="op">=</span>end)</span>
+<span id="cb9-377"><a href="#cb9-377" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-378"><a href="#cb9-378" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(anzeige, end<span class="op">=</span>end)                         <span class="co"># &lt;5&gt;</span></span>
+<span id="cb9-379"><a href="#cb9-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-380"><a href="#cb9-380" aria-hidden="true" tabindex="-1"></a>Bruch.zeige <span class="op">=</span> zeige_Bruch</span>
+<span id="cb9-381"><a href="#cb9-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-382"><a href="#cb9-382" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Signatur mit Standardparameter <span class="in">`end='\n'`</span>.</span>
+<span id="cb9-383"><a href="#cb9-383" aria-hidden="true" tabindex="-1"></a>Wenn <span class="in">`end`</span> beim Aufruf der Funktion nicht gesetzt ist, dann hat <span class="in">`end`</span> immer den Wert <span class="in">`\n`</span> (*newline*).</span>
+<span id="cb9-384"><a href="#cb9-384" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Berechnung des ganzzahligen Anteils des Bruchs.</span>
+<span id="cb9-385"><a href="#cb9-385" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-*string* hinzu.</span>
+<span id="cb9-386"><a href="#cb9-386" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus.</span>
+<span id="cb9-387"><a href="#cb9-387" aria-hidden="true" tabindex="-1"></a>Der <span class="in">`end`</span> Parameter der Funktion <span class="in">`print`</span> gibt an, wie die Ausgabe beendet werden soll.</span>
+<span id="cb9-388"><a href="#cb9-388" aria-hidden="true" tabindex="-1"></a>Ich habe mich hier für das Ausgabeformat <span class="in">`zahl zähler/nenner`</span> entschieden.</span>
+<span id="cb9-389"><a href="#cb9-389" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Die Funktion hat keinen Rückgabewert; es gibt keine <span class="in">`return`</span> Anweisung.</span>
+<span id="cb9-390"><a href="#cb9-390" aria-hidden="true" tabindex="-1"></a>Stattdessen wird der Ausgabe-*string* <span class="in">`anzeige`</span> mit der Funktion <span class="in">`print`</span> ausgegeben.</span>
+<span id="cb9-391"><a href="#cb9-391" aria-hidden="true" tabindex="-1"></a>Solche sogenannten *pretty-print* Methoden sind der einzige Fall, in dem wir eine Funktion oder Methode ohne Rückgabewert zulassen wollen.</span>
+<span id="cb9-392"><a href="#cb9-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-393"><a href="#cb9-393" aria-hidden="true" tabindex="-1"></a>Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen;</span>
+<span id="cb9-394"><a href="#cb9-394" aria-hidden="true" tabindex="-1"></a>wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:</span>
+<span id="cb9-395"><a href="#cb9-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-398"><a href="#cb9-398" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-399"><a href="#cb9-399" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
+<span id="cb9-400"><a href="#cb9-400" aria-hidden="true" tabindex="-1"></a>a.zeige()</span>
+<span id="cb9-401"><a href="#cb9-401" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb9-402"><a href="#cb9-402" aria-hidden="true" tabindex="-1"></a>b.zeige()</span>
+<span id="cb9-403"><a href="#cb9-403" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
+<span id="cb9-404"><a href="#cb9-404" aria-hidden="true" tabindex="-1"></a>c.zeige()</span>
+<span id="cb9-405"><a href="#cb9-405" aria-hidden="true" tabindex="-1"></a><span class="co"># die interne Repräsentation der Brüche ist unverändert:</span></span>
+<span id="cb9-406"><a href="#cb9-406" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a = "</span>, a.zahl, a.zähler, a.nenner)</span>
+<span id="cb9-407"><a href="#cb9-407" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b = "</span>, b.zahl, b.zähler, b.nenner)</span>
+<span id="cb9-408"><a href="#cb9-408" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c = "</span>, c.zahl, c.zähler, c.nenner)</span>
+<span id="cb9-409"><a href="#cb9-409" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-410"><a href="#cb9-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-411"><a href="#cb9-411" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-412"><a href="#cb9-412" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiel: Anzeige</span></span>
+<span id="cb9-413"><a href="#cb9-413" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-414"><a href="#cb9-414" aria-hidden="true" tabindex="-1"></a>\frac{12}{9}+\frac{4}{4}=\frac{4}{3}+\frac{4}{4}=\frac{16}{12}+\frac{12}{12}=\frac{28}{12}=\frac{7}{3}=2\frac{1}{3}</span>
+<span id="cb9-415"><a href="#cb9-415" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-416"><a href="#cb9-416" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-417"><a href="#cb9-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-418"><a href="#cb9-418" aria-hidden="true" tabindex="-1"></a>Jetzt, da wir die Möglichkeit haben Brüche anzuzeigen, wollen wir einige "beliebte" Fehlerquellen bei der Bruchrechnung analysieren:</span>
+<span id="cb9-419"><a href="#cb9-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-420"><a href="#cb9-420" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb9-421"><a href="#cb9-421" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fehlerwarnungen</span></span>
+<span id="cb9-422"><a href="#cb9-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$1\frac{2}{3}\neq1\cdot\frac{2}{3}$. Richtig ist: $1\frac{2}{3}=1+\frac{2}{3}=\frac{5}{3}$</span>
+<span id="cb9-423"><a href="#cb9-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{a}{c}+\frac{b}{c}=\frac{a+b}{c}$ darf nicht verwechselt werden mit $\frac{a}{b}+\frac{a}{c}\neq\frac{a}{b+c}$.</span>
+<span id="cb9-424"><a href="#cb9-424" aria-hidden="true" tabindex="-1"></a>Richtig ist: $\frac{a}{b}+\frac{a}{c}=\frac{ac+ab}{bc}$</span>
+<span id="cb9-425"><a href="#cb9-425" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\frac{a}{b}+\frac{c}{d}\neq\frac{a+c}{b+d}$.</span>
+<span id="cb9-426"><a href="#cb9-426" aria-hidden="true" tabindex="-1"></a>Richtig ist: $\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}$</span>
+<span id="cb9-427"><a href="#cb9-427" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$1\frac{3}{4}\cdot2\frac{2}{5}\neq1\cdot2+\frac{3}{4}\cdot\frac{2}{5}$.</span>
+<span id="cb9-428"><a href="#cb9-428" aria-hidden="true" tabindex="-1"></a>Richtig ist: $1\frac{3}{4}\cdot2\frac{2}{5}=\frac{7\cdot12}{4\cdot5}=\frac{7\cdot3}{1\cdot5}=\frac{21}{5}=4\frac{1}{5}$</span>
+<span id="cb9-429"><a href="#cb9-429" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-430"><a href="#cb9-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-433"><a href="#cb9-433" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-434"><a href="#cb9-434" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlerwarnungen:</span></span>
+<span id="cb9-435"><a href="#cb9-435" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 1</span></span>
+<span id="cb9-436"><a href="#cb9-436" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb9-437"><a href="#cb9-437" aria-hidden="true" tabindex="-1"></a>a.zeige(end<span class="op">=</span><span class="st">" = "</span>)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>a<span class="sc">.</span>z<span class="sc">ä</span>hler<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>a<span class="sc">.</span>nenner<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-438"><a href="#cb9-438" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 2</span></span>
+<span id="cb9-439"><a href="#cb9-439" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb9-440"><a href="#cb9-440" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb9-441"><a href="#cb9-441" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span><span class="op">+</span><span class="dv">3</span>) <span class="co"># falsch</span></span>
+<span id="cb9-442"><a href="#cb9-442" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a.add(b) <span class="co"># richtig</span></span>
+<span id="cb9-443"><a href="#cb9-443" aria-hidden="true" tabindex="-1"></a>c.zeige(end<span class="op">=</span><span class="st">" != "</span>)<span class="op">;</span> d.zeige()</span>
+<span id="cb9-444"><a href="#cb9-444" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 3:</span></span>
+<span id="cb9-445"><a href="#cb9-445" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Bruch(<span class="dv">1</span><span class="op">+</span><span class="dv">1</span>, <span class="dv">2</span><span class="op">+</span><span class="dv">3</span>) <span class="co"># falsch</span></span>
+<span id="cb9-446"><a href="#cb9-446" aria-hidden="true" tabindex="-1"></a>c.zeige(end<span class="op">=</span><span class="st">" != "</span>)<span class="op">;</span> d.zeige()</span>
+<span id="cb9-447"><a href="#cb9-447" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 4:</span></span>
+<span id="cb9-448"><a href="#cb9-448" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">7</span>, <span class="dv">4</span>)</span>
+<span id="cb9-449"><a href="#cb9-449" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">5</span>)</span>
+<span id="cb9-450"><a href="#cb9-450" aria-hidden="true" tabindex="-1"></a>af <span class="op">=</span> Bruch(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb9-451"><a href="#cb9-451" aria-hidden="true" tabindex="-1"></a>bf <span class="op">=</span> Bruch(<span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb9-452"><a href="#cb9-452" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> af.mul(bf) <span class="co"># falsch</span></span>
+<span id="cb9-453"><a href="#cb9-453" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> c.add(Bruch(<span class="dv">2</span>, <span class="dv">1</span>)) <span class="co"># falsch</span></span>
+<span id="cb9-454"><a href="#cb9-454" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a.mul(b) <span class="co"># richtig</span></span>
+<span id="cb9-455"><a href="#cb9-455" aria-hidden="true" tabindex="-1"></a>c.zeige(end<span class="op">=</span><span class="st">" != "</span>)<span class="op">;</span> d.zeige()</span>
+<span id="cb9-456"><a href="#cb9-456" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
