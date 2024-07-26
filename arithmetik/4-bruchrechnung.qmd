@@ -170,7 +170,7 @@ b = Bruch(12, 18)                                   # <3>
 assert b.ggT(b.nenner, b.zähler) == 6               # <4>
 ```
 1. Definition von `euklid_modern` als "gewöhnliche" Funktion.
-Wenn wir eine Funktion außerhalb der eigentlichen Klassendefinition zu einer Klasse hinzufügen wollen, dann muss der erste Parameter der Funktion das Objekt `self` sein, d.h. eine Referenz auf die Klasse.
+Wenn wir eine Funktion zu einer Klasse hinzufügen, dann muss der erste Parameter der Funktion das Objekt `self` sein, d.h. eine Referenz auf die Klasse.
 2. Zuweisung der Funktion `euklid_modern` an die neue Methode `ggT` der Klasse `Bruch`.
 Bei der Zuweisung lassen wir die Klammern der Funktion weg, da wir die Funktion nicht aufrufen wollen. Mit diese Schreibweise weisen wir das *Funktionsobjekt* `euklid_modern` einem neuen Objekt des gleichen Typs der Klasse zu.
 3. Initialisierung des Objekts `b` vom Typ `Bruch` mit 12 als Zähler und 18 als Nenner.
@@ -220,8 +220,11 @@ Wir wollen testen, ob unsere Methode `add` für folgende Beispiele korrekt arbei
 
 ::: {.callout-tip}
 ## Beispiele für Addition von Brüchen
-- $\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}$
-- $\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}$
+$$\frac{1}{2}+\frac{1}{3}=\frac{3}{6}+\frac{2}{6}=\frac{5}{6}
+$$
+$$
+\frac{1}{6}+\frac{3}{9}=\frac{1}{6}+\frac{1}{3}=\frac{3}{18}+\frac{6}{18}=\frac{9}{18}=\frac{1}{2}
+$$
 :::
 ```{python}
 a = Bruch(1, 2)
@@ -234,7 +237,82 @@ c = a.add(b)
 assert (c.zähler, c.nenner) == (1, 2)
 ```
 
-Schließlich wollen wir noch eine Methode definieren, die einen Bruch in einer leichter lesbaren Form ausgibt und dabei gegebenenfall einen ganzzahligen Anteil berücksichtigt.
+## Multiplizieren von Brüchen
+
+Das Multiplizieren von Brüchen ist einfacher als das Addieren, da wir hier nicht auf *Gleichnamigkeit* achten müssen:
+
+::: {.callout-important}
+## Multiplizieren von Brüchen
+Brüche werden miteinander multipliziert, indem man Zähler mit Zähler und Nenner mit Nenner multipliziert. For dem Multiplizieren sollte man kürzen.
+$$
+\frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d}=\frac{ac}{bd}
+$$ {#eq-mult}
+Sonderfall: Ein Bruch wird mit einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert.
+$$
+\frac{a}{b}\cdot c=\frac{a\cdot c}{b}=\frac{ac}{b}
+$$
+:::
+
+Die Implementierung in Python kann dann so aussehen:
+
+```{python}
+def multipliziere_Bruch(self, other):
+    a = self.kürze()
+    b = other.kürze()
+    res = Bruch(a.zähler * b.zähler, a.nenner * b.nenner)
+    return res.kürze()
+
+Bruch.mul = multipliziere_Bruch
+
+c = a.mul(b)
+assert (c.zähler, c.nenner) == (1, 18)
+```
+
+::: {.callout-tip}
+## Beispiel: Multiplikation
+$$
+\frac{1}{6}\cdot\frac{3}{9}=\frac{1}{6}\cdot\frac{1}{3}=\frac{1}{18}
+$$
+:::
+
+## Dividieren von Brüchen
+
+::: {.callout-important}
+## Dividieren von Brüchen
+Man dividiert duch einen Bruch, indem man mit seinem *Kehrwert* multipliziert.
+$$
+\frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}=\frac{ad}{bc}
+$$ {#eq-div}
+Sonderfall: Ein Bruch wird durch eine Zahl dividiert, indem man den Nenner mit der Zahl multipliziert.
+$$
+\frac{a}{b}\div c=\frac{a}{b\cdot c}=\frac{a}{bc}
+$$
+:::
+
+Die Division von Brüchen kann man wie folgt in Python implementieren:
+
+```{python}
+def dividiere_Bruch(self, other):
+    return self.mul(Bruch(other.nenner, other.zähler))
+
+Bruch.div = dividiere_Bruch
+
+c = a.div(b)
+assert (c.zähler, c.nenner) == (1, 2)
+```
+
+::: {.callout-tip}
+## Beispiel: Division
+$$
+\frac{1}{6}\div\frac{3}{9}=\frac{1}{6}\div\frac{1}{3}=\frac{1}{6}\cdot\frac{3}{1}=\frac{3}{6}=\frac{1}{2}
+$$
+:::
+
+## Fehlerquellen
+
+In diesem Kapitel wollen wir mögliche Fehlerquellen der Bruchrechnung anhand einiger Beispielrechnungen demonstrieren.
+
+Zuvor werden wir aber noch unser Python Klassendefinition vervollständigen, indem wir einen Bruch in einer leicht lesbaren Form ausgeben und dabei den ganzzahligen Anteil des Bruchs berücksichtigen.
 Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen *unechten Bruch* handelt.
 
 ```{python}
@@ -263,24 +341,36 @@ Das Attribut `zahl` des Bruchs setzen wir auf 1.
 3. Wenn es sich um einen *unechten Bruch* handelt (Zähler größer als der Nenner), dann berechnen wir die ganze Zahl als ganzzahlige Division von Zähler und Nenner, und den Rest der Division mit dem Modulo Operator `%`.
 Schließlich erzeugen wir einen neuen Bruch mit diesen Werten.
 
-Der Bruch $\frac{12}{9}$ im Code-Beispiel wird gekürzt zu $\frac{4}{3}$ und der ganzzahlige Anteil mit 1 berechnet; der verbleibende Bruch hat den Wert $\frac{1}{3}$.\
-Mit Hilfe dieser Methode können wir nun den Bruch in einer neuen Methode anzeigen:
+::: {.callout-tip}
+## Beispiel: ganzzahliger Anteil
+$$
+\frac{12}{9}=\frac{4}{3}=1\frac{1}{3}
+$$
+:::
+
+Mit Hilfe dieser Methode können wir nun den Bruch mit einer neuen Methode anzeigen:
 
 ```{python}
-def zeige_Bruch(self):
-    b = self.gza()                                      # <1>
-    anzeige = str(b.zahl) if b.zahl else ""             # <2>
-    if b.zähler and b.nenner:                           # <3>
-        print(f"{anzeige}+{b.zähler}/{b.nenner}")
+def zeige_Bruch(self, end='\n'):                        # <1>
+    b = self.gza()                                      # <2>
+    anzeige = str(b.zahl) if b.zahl else ""             # <3>
+    if b.zähler and b.nenner:                           # <4>
+        print(f"{anzeige} {b.zähler}/{b.nenner}".strip(), end=end)
     else:
-        print(anzeige)                                  # <4>
+        print(anzeige, end=end)                         # <5>
 
 Bruch.zeige = zeige_Bruch
 ```
-1. Berechnung des ganzzahligen Anteils des Bruchs.
-2. Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-*string* hinzu.
-3. Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus.
-Ich habe mich hier für das Ausgabeformat $Z+zähler/nenner$ entschieden.
+1. Signatur mit Standardparameter `end='\n'`.
+Wenn `end` beim Aufruf der Funktion nicht gesetzt ist, dann hat `end` immer den Wert `\n` (*newline*).
+2. Berechnung des ganzzahligen Anteils des Bruchs.
+3. Wenn der Bruch einen ganzzahligen Anteil hat, dann fügen wir diesen zum Ausgabe-*string* hinzu.
+4. Wenn Zähler und Nenner definiert sind, dann geben wir sie zusammen mit dem ganzzahligen Anteil aus.
+Der `end` Parameter der Funktion `print` gibt an, wie die Ausgabe beendet werden soll.
+Ich habe mich hier für das Ausgabeformat `zahl zähler/nenner` entschieden.
+5. Die Funktion hat keinen Rückgabewert; es gibt keine `return` Anweisung.
+Stattdessen wird der Ausgabe-*string* `anzeige` mit der Funktion `print` ausgegeben.
+Solche sogenannten *pretty-print* Methoden sind der einzige Fall, in dem wir eine Funktion oder Methode ohne Rückgabewert zulassen wollen.
 
 Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen;
 wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:
@@ -292,23 +382,53 @@ b = Bruch(4, 4)
 b.zeige()
 c = a.add(b)
 c.zeige()
+# die interne Repräsentation der Brüche ist unverändert:
 print("a = ", a.zahl, a.zähler, a.nenner)
 print("b = ", b.zahl, b.zähler, b.nenner)
 print("c = ", c.zahl, c.zähler, c.nenner)
 ```
 
-## Multiplizieren von Brüchen
-
-Das Multiplizieren von Brüchen ist einfacher als das Addieren, da wir hier nicht auf *Gleichnamigkeit* achten müssen:
-
-::: {.callout-important}
-## Multiplizieren von Brüchen
-Brüche werden miteinander multipliziert, indem man Zähler mit Zähler und Nenner mit Nenner multipliziert. For dem Multiplizieren sollte man kürzen.
+::: {.callout-tip}
+## Beispiel: Anzeige
 $$
-\frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d}=\frac{ac}{bd}
-$$ {#eq-mult}
-Sonderfall: Ein Bruch wird mit einer einer Zahl multipliziert, indem man nur den Zähler mit der Zahl multipliziert.
-$$
-\frac{a}{b}\cdot c=\frac{a\cdot c}{b}=\frac{ac}{b}
+\frac{12}{9}+\frac{4}{4}=\frac{4}{3}+\frac{4}{4}=\frac{16}{12}+\frac{12}{12}=\frac{28}{12}=\frac{7}{3}=2\frac{1}{3}
 $$
 :::
+
+Jetzt, da wir die Möglichkeit haben Brüche anzuzeigen, wollen wir einige "beliebte" Fehlerquellen bei der Bruchrechnung analysieren:
+
+::: {.callout-warning}
+## Fehlerwarnungen
+- $1\frac{2}{3}\neq1\cdot\frac{2}{3}$. Richtig ist: $1\frac{2}{3}=1+\frac{2}{3}=\frac{5}{3}$
+- $\frac{a}{c}+\frac{b}{c}=\frac{a+b}{c}$ darf nicht verwechselt werden mit $\frac{a}{b}+\frac{a}{c}\neq\frac{a}{b+c}$.
+Richtig ist: $\frac{a}{b}+\frac{a}{c}=\frac{ac+ab}{bc}$
+- $\frac{a}{b}+\frac{c}{d}\neq\frac{a+c}{b+d}$.
+Richtig ist: $\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}$
+- $1\frac{3}{4}\cdot2\frac{2}{5}\neq1\cdot2+\frac{3}{4}\cdot\frac{2}{5}$.
+Richtig ist: $1\frac{3}{4}\cdot2\frac{2}{5}=\frac{7\cdot12}{4\cdot5}=\frac{7\cdot3}{1\cdot5}=\frac{21}{5}=4\frac{1}{5}$
+:::
+
+```{python}
+# Fehlerwarnungen:
+# Warnung 1
+a = Bruch(5, 3)
+a.zeige(end=" = "); print(f"{a.zähler}/{a.nenner}")
+# Warnung 2
+a = Bruch(1, 2)
+b = Bruch(1, 3)
+c = Bruch(1, 2+3) # falsch
+d = a.add(b) # richtig
+c.zeige(end=" != "); d.zeige()
+# Warnung 3:
+c = Bruch(1+1, 2+3) # falsch
+c.zeige(end=" != "); d.zeige()
+# Warnung 4:
+a = Bruch(7, 4)
+b = Bruch(12, 5)
+af = Bruch(3, 4)
+bf = Bruch(2, 5)
+c = af.mul(bf) # falsch
+c = c.add(Bruch(2, 1)) # falsch
+d = a.mul(b) # richtig
+c.zeige(end=" != "); d.zeige()
+```
