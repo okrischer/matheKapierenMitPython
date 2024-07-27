@@ -3,3 +3,5 @@ __pycache__/
 /_site/
 .jupyter_cache/
 .ipynb_checkpoints/
+Tex/
+partial_movie_files/
