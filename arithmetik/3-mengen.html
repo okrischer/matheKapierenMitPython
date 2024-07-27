@@ -386,7 +386,7 @@ Abbildung&nbsp;2: Venn-Diagramm der Operationen auf Mengen
 </figure>
 </div>
 <p>Wir können auch in Python mit Mengen rechnen (wir beschränken uns dabei auf ganze Zahlen). Dazu müssen wir die Zahlen, die zu einer Menge gehören sollen, in einem Datentyp <code>set</code> zusammenfassen, der weitgehend unserem Mengenbegriff entpricht. Da alle Schlüsselwörter in Python (und damit auch die Bezeichnungen der Datentypen) in englischer Sprache angegeben werden, verwenden wir in diesem Tutorial ausschließlich die englischen Bezeichnungen.</p>
-<div id="c1f6bd75" class="cell" data-execution_count="1">
+<div id="a2ea8e26" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> <span class="bu">set</span>()</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (<span class="bu">len</span>(A), <span class="bu">len</span>(B)) <span class="op">==</span> (<span class="dv">3</span>, <span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -408,12 +408,12 @@ Abbildung&nbsp;2: Venn-Diagramm der Operationen auf Mengen
 </div>
 </div>
 <p>Der Test auf Mitgliedschaft in einer Menge (<span class="math inline">\(\in\)</span>) wird mit dem Schlüsselwort <code>in</code> durchgeführt, das Gegenstück (<span class="math inline">\(\notin\)</span>) mit <code>not in</code>, wobei <code>not</code> ein sogenannter <em>Bool’scher Operator</em> ist, der das gegebene Argument verneint:</p>
-<div id="45c2ff97" class="cell" data-execution_count="2">
+<div id="4f47f3f3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">1</span> <span class="kw">in</span> A</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">1</span> <span class="kw">not</span> <span class="kw">in</span> B</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die beiden anderen Bool’schen Operatoren in Python sind <code>and</code> und <code>or</code> mit denen wir zwei Wahrheitsaussagen verknüpfen können:</p>
-<div id="2db7f949" class="cell" data-execution_count="3">
+<div id="cdcbc10f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (<span class="dv">1</span> <span class="kw">in</span> A) <span class="kw">or</span> (<span class="dv">1</span> <span class="kw">in</span> B)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>B.add(<span class="dv">1</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (<span class="dv">1</span> <span class="kw">in</span> A) <span class="kw">and</span> (<span class="dv">1</span> <span class="kw">in</span> B)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -435,12 +435,12 @@ Abbildung&nbsp;2: Venn-Diagramm der Operationen auf Mengen
 </div>
 </div>
 <p>Ob ein <code>set</code> B eine <em>echte</em> Teilmenge vom <code>set</code> A ist (<span class="math inline">\(B\subset A\)</span>), kann mit dem Operator <code>B &lt; A</code> getstet werden. Das ist dann gleichbedeutend mit <code>A &gt; B</code>, d.h. A ist die <em>Obermenge</em> von B:</p>
-<div id="803b24fb" class="cell" data-execution_count="4">
+<div id="a396ce5e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> B <span class="op">&lt;</span> A</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> A <span class="op">&gt;</span> B</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Und schließlich können wir auch die Mengenoperationen auf <code>set</code> A und B ausführen:</p>
-<div id="0c2e2fd1" class="cell" data-execution_count="5">
+<div id="c4e27ba5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>B.add(<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A = "</span>, A)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"B = "</span>, B)</span>
@@ -556,7 +556,7 @@ Gerade und ungerade Zahlen
 </div>
 </div>
 <p>Solche Zahlenmengen lassen sich auch in Python mit sogenannten <em>set comprehensions</em> erstellen, die eng an die mathematische Schreibweise von Mengen angelehnt sind:</p>
-<div id="dec5d32b" class="cell" data-execution_count="6">
+<div id="c05976ff" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menge der geraden natürlichen Zahlen bis 20</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>}</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>{<span class="dv">2</span><span class="op">*</span>n <span class="cf">for</span> n <span class="kw">in</span> N}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -566,7 +566,7 @@ Gerade und ungerade Zahlen
 </div>
 <p>Hier haben wir gegenüber der mathematischen Notation lediglich den vertikalen Strich <span class="math inline">\(\mid\)</span> durch das Schlüsselwort <code>for</code> ersetzt, und die Menge der natürlichen Zahlen, für die die Anweisung gelten soll, zuvor explizit als <code>set</code> definiert.</p>
 <p>Natürlich ist es etwas umständlich, die Elemente der Ausgangsmenge konkret aufzuzählen; Python bieter daher eine <code>range()</code> Funktion an, die zwei ganze Zahlen als Argumente akzeptiert und daraus ein Intervall berechnet, das als Ausgangsmenge dienen kann:</p>
-<div id="5e67ad07" class="cell" data-execution_count="7">
+<div id="489913e9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menge der ungeraden Zahlen im Intervall [-5, 17)</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>{<span class="dv">2</span><span class="op">*</span>z<span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">9</span>)}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -594,7 +594,7 @@ Intervalle
 <p>Eckige Klammern <span class="math inline">\([]\)</span> bedeuten also, dass der jeweilige Begrenzer mit zur Menge gehört, runde Klammern <span class="math inline">\(()\)</span>dagegen, dass der Begrenzer nicht mehr zur Menge gehört. In Python erzeugt der Aufruf von <code>range(a, b)</code> immer ein halboffenes Intervall in der Form <span class="math inline">\([a, b)\)</span>, so dass also <code>a</code> zur Menge gehört, <code>b</code> aber nicht. Das erklärt, warum im letzten Code-Beispiel das Intervall <span class="math inline">\([-5, 17)\)</span> angegeben wurde, mit dem Ergebnis <span class="math inline">\(\{-5,-3,\dots,13,15\}\)</span>, da 17 nicht mehr zum Intervall gehört.</p>
 <p>Die Angabe der <em>range</em> mit <code>range(-2, 9)</code> ist trotzdem etwas verwirrend, liegt aber daran, dass <span class="math inline">\(2\cdot -2-1=-5\)</span> und <span class="math inline">\(2\cdot 8-1=15\)</span> ist (die 9 in der <code>range</code> gehört nicht mehr zum Intervall und Python wählt den nächstkleineren Wert 8).<br>
 Um diese Verwirrung auszuschließen, können wir eine <em>set comprehension</em> auch anders definieren, und zwar indem wir die Forderung für <em>ungerade</em> als zusätzliche Bedingung formulieren:</p>
-<div id="bcee8d64" class="cell" data-execution_count="8">
+<div id="98d67143" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menge der ungeraden Zahlen im Intervall [-5, 17)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>{z <span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">17</span>) <span class="cf">if</span> z <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span>}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -655,7 +655,7 @@ Beispiele für Dezimalbrüche
 </div>
 </div>
 <p>In Python erzeugt der Divisionsoperator <code>/</code> eine Dezimalzahl, die hier allerdings <em>floating point number</em> genannt wird und dem Datentyp <code>float</code> zugeordnet ist. Beachte den <strong>point</strong> in der englischen Bezeichnung: das deutsche <em>Dezimalkomma</em> wird zum <em>Dezimalpunkt</em> im gesamten englischen Sprachraum: <span class="math inline">\(1,5 (de)= 1.5(en)\)</span>.</p>
-<div id="4198ced1" class="cell" data-execution_count="9">
+<div id="0344997d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"3/2 ="</span>, <span class="dv">3</span> <span class="op">/</span> <span class="dv">2</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-1/8 ="</span>, <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> <span class="dv">8</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"4/3 ="</span>, <span class="dv">4</span> <span class="op">/</span> <span class="dv">3</span>)</span>
@@ -797,12 +797,12 @@ Der Wert der römischen Zahl <code>MCMLXXXIV</code>
 </div>
 <p>Das Rechnen mit römischen Zahlen ist allerdings recht schwierig; hierfür wurden Hilfsmittel wie das <a href="https://de.wikipedia.org/wiki/Rechnen_auf_Linien">Rechenbrett</a> und der <a href="https://de.wikipedia.org/wiki/Abakus_(Rechenhilfsmittel)">Abakus</a> verwendet. Dabei werden die römischen Zahlen in ein Positionssystem überführt und Werten in der Form von Rechenmünzen oder Kugeln zugeordnet, mit denen dann die Rechenoperationen durchgeführt werden. Das Rechnen mit Rechenbrett und Abakus war bis zum Ende des Mittelalters weit verbreitet und wurde erst durch die Einführung der indischen Zahlenschrift und des heute gebräuchlichen Dezimalsystems (siehe <a href="#sec-dezimal" class="quarto-xref">Kapitel&nbsp;3.2</a>) abgelöst.</p>
 <p>Wir wollen aber nicht mit dem Abakus rechnen, sondern mit Python; dazu entwickeln wir eine Funktion, die römische Zahlen in das Dezimalsystem überführt. Als ersten Schritt definieren wir hierzu ein <em>dictionary</em>, ein Objekt mit dem Datentyp <code>dict</code>:</p>
-<div id="51ab51b0" class="cell" data-execution_count="10">
+<div id="81aa7744" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rom <span class="op">=</span> {<span class="st">'I'</span>: <span class="dv">1</span>, <span class="st">'V'</span>: <span class="dv">5</span>, <span class="st">'X'</span>: <span class="dv">10</span>, <span class="st">'L'</span>: <span class="dv">50</span>, <span class="st">'C'</span>: <span class="dv">100</span>, <span class="st">'D'</span>: <span class="dv">500</span>, <span class="st">'M'</span>: <span class="dv">1000</span>}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ein <code>dict</code> ist ein Objekt, dessen Elemente sogenannte <em>key-value pairs</em> sind, also Paare von Schlüsseln und zugehörigen Werten. Diese Paare werden in Mengenklammern geschrieben und mit einem Komma voneinander getrennt. Ein einzelnes Paar wird dabei in Form <code>k: v</code> geschrieben, also Schlüssel, gefolgt von Doppelpunkt, gefolgt von zugeordnetem Wert. Das Leerzeichen ist optional und kann weggelassen werden. Wir haben unser <em>dictionary</em> <code>rom</code> mit den Werten aus <a href="#tbl-ziffern" class="quarto-xref">Tabelle&nbsp;1</a> initialisiert.</p>
 <p>Die Elemente können dann in einer <code>for</code> Schleife durchlaufen und ausgegeben oder manipuliert werden:</p>
-<div id="72034647" class="cell" data-execution_count="11">
+<div id="1fc748d1" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k, v) <span class="kw">in</span> rom.items():</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Schlüssel: "</span>, k, <span class="st">", "</span>,<span class="st">"Wert: "</span>, v)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -816,7 +816,7 @@ Schlüssel:  M ,  Wert:  1000</code></pre>
 </div>
 </div>
 <p>Damit können wir dann die eigentliche Funktion definieren:</p>
-<div id="cbb7ac65" class="cell" data-execution_count="12">
+<div id="843e6f77" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roman_to_decimal(roman):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> <span class="dv">0</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(roman)):</span>
@@ -1005,7 +1005,7 @@ Berechnung einer reellen Zahl im Dualsystem
 </div>
 </div>
 <p>Mit der Berechnung des Wertes einer Dualzahl haben wir diese Zahl in eine Dezimalzahl umgerechnet; dies wird auch als <em>Konvertierung</em> bezeichnet. Mit diesen Regeln können wir jetzt eine Dualzahl mit Python in eine Dezimalzahl konvertieren:</p>
-<div id="2af3b6fd" class="cell" data-execution_count="13">
+<div id="d135f2d6" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bin_to_dec(binary):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">assert</span> <span class="bu">type</span>(binary) <span class="op">==</span> <span class="bu">str</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> binary.split(<span class="st">','</span>)</span>
@@ -1082,7 +1082,7 @@ Berechnung einer reellen Zahl im Dualsystem
 </tbody>
 </table>
 <p>Binärzahlen werden in der Regel zu Einheiten von acht <em>bits</em> zusammengefasst, die wir dann <em>byte</em> nennen. Wenn wir ein <em>byte</em> in der Form <span class="math inline">\(b=b_7 \ b_6 \ b_5 \ b_4 \ b_3 \ b_2 \ b_1 \ b_0\)</span> darstellen, dann können wir die <em>bitwise operations</em> als Mengenoperationen (siehe <a href="#sec-mengen" class="quarto-xref">Kapitel&nbsp;1</a>) auf <em>bytes</em> begreifen, indem wir jedes gesetzte <em>bit</em> über seinen Index darstellen:</p>
-<div id="d113c9d2" class="cell" data-execution_count="14">
+<div id="b5815449" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="bn">0b10000010</span></span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="bn">0b10010000</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x = </span><span class="sc">{</span>x<span class="sc">:#0b}</span><span class="ss">"</span>, <span class="st">"= {7, 1}"</span>)</span>
@@ -1105,7 +1105,7 @@ y = 0b10010000 = {7, 4}</code></pre>
 </div>
 </div>
 <p>Die Mengenoperationen können dann so ausgeführt werden:</p>
-<div id="0bad005f" class="cell" data-execution_count="15">
+<div id="152d21f5" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bitwise or</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vereinigungsmenge (x|y): </span><span class="sc">{</span>x<span class="op">|</span>y<span class="sc">:#0b}</span><span class="ss">"</span>, <span class="st">"= {7, 4, 1}"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1125,7 +1125,7 @@ Symmetrische Differenz (x^y): 0b10010 = {4, 1}</code></pre>
 </div>
 </div>
 <p>Die <em>shift</em> Operatoren <code>&lt;&lt;</code> und <code>&gt;&gt;</code> verschieben die <em>bits</em> einer Binärzahl um <span class="math inline">\(n\)</span> Stellen nach links bzw. rechts. Dabei wird die Zahl bei <em>links-shift</em> mit <code>&lt;&lt;</code> von rechts mit 0-<em>bits</em> aufgefüllt, der Wert der Zahl verdoppelt sich also mit jedem <em>shift</em>. Demnach ist z.B. <code>x &lt;&lt; 3</code> gleichbedeutend mit <span class="math inline">\(x\cdot2^3\)</span>.</p>
-<div id="47322fd3" class="cell" data-execution_count="16">
+<div id="e673c562" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a = </span><span class="sc">{</span>a<span class="sc">:#0b}</span><span class="ss"> = </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a <span class="op">&lt;&lt;</span> <span class="dv">3</span></span>
@@ -1137,7 +1137,7 @@ b = 0b101000 = 40</code></pre>
 </div>
 </div>
 <p>Bei einem rechts-<em>shift</em> mit <code>x &gt;&gt; n</code> werden <code>n</code> Stellen am rechten Ende von <code>x</code> abgeschnitten, der Wert der Zahl halbiert sich also mit jedem <em>shift</em>. Wenn das letzte bit <span class="math inline">\(b_0\)</span> dabei gesetzt ist, die Zahl also ungerade ist, dann geht der Rest der Division durch 2 dabei verloren; es gilt also: <code>x &gt;&gt; 1</code> ist gleichbedeutend mit <code>x // 2</code>.</p>
-<div id="921bbaf7" class="cell" data-execution_count="17">
+<div id="b53bbbfb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a = </span><span class="sc">{</span>a<span class="sc">:#0b}</span><span class="ss"> = </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">&gt;&gt;</span> <span class="dv">1</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"c = </span><span class="sc">{</span>c<span class="sc">:#0b}</span><span class="ss"> = </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">"</span>)</span>

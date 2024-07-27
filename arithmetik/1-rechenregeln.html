@@ -259,7 +259,7 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="buchstabenrechnen"><span class="header-section-number">1</span> Buchstabenrechnen</h2>
 <p>Buchstabenrechnen ist das Rechnen mit unbestimmten Zahlen. Wenn wir eine mathematische Aussage formulieren, die nicht nur für eine bestimmte Zahl, sondern für einen ganzen Zahlenbereich oder sogar für alle Zahlen gilt, dann benutzen wir statt einer Zahl einen Buchstaben. Der Buchstabe heißt dann <em>Variable</em>.</p>
 <p>Auch in Python können wir Variablen anlegen und ihnen gleichzeitig mit <code>=</code> einen Wert zuweisen. Das Gleichheitszeichen in Python darf also nicht mit dem mathematischen Gleichheitszeichen verwechselt werden. Wenn Variablen einmal angelegt sind, können wir mit ihnen wie mit Zahlen rechnen:</p>
-<div id="888ac7d4" class="cell" data-execution_count="1">
+<div id="aa7ce5c5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b <span class="op">-</span> <span class="dv">2</span></span>
@@ -321,7 +321,7 @@ T_1 = T_2
 </div>
 <p>Wir sehen hier die wahre Bedeutung des Gleichheitszeichen in der Mathematik: der Term auf der linken Seite von <span class="math inline">\(=\)</span> ist gleichbedeutend mit dem Term auf der rechten Seite.</p>
 <p>In Python können wir auch Terme definieren; allerdings wertet Python solche Terme sofort aus, d.h. es wird das Ergebnis berechnet, wenn alle Variablen bekannt sind:</p>
-<div id="b9d31adc" class="cell" data-execution_count="2">
+<div id="9da565df" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>T_1 <span class="op">=</span> a <span class="op">*</span> c <span class="op">+</span> b <span class="op">*</span> c <span class="op">-</span> c</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>T_1</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -432,7 +432,7 @@ Beispiele für Teilbarkeit
 <h2 data-number="3" class="anchored" data-anchor-id="grundgesetze-der-addition-und-multiplikation"><span class="header-section-number">3</span> Grundgesetze der Addition und Multiplikation</h2>
 <p>Wenn wir einen Term betrachten, wie z.B. im letzten Code-Beispiel <span class="math inline">\(T_1=a \cdot c + b \cdot c - c\)</span>, dann ist nicht sofort offensichtlich, wie wir das Ergebnis am besten berechnen. In diesem Abschnitt wollen wir erkunden, wie wir solche komplexe Ausdrücke vereinfachen können, um uns Rechenarbeit zu ersparen.</p>
 <p>Ein erstes Beispiel in Python:</p>
-<div id="67dcb16e" class="cell" data-execution_count="3">
+<div id="13c4ef99" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>T_2 <span class="op">=</span> c<span class="op">*</span>(a<span class="op">+</span>b<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> T_1 <span class="op">==</span> T_2</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -470,7 +470,7 @@ a \cdot b &amp;= b \cdot a
 \tag{1}\]</span></span> Bei der Addition kann man also die <em>Summanden</em> vertauschen und bei der Multiplikation die <em>Faktoren</em>.</p>
 </div>
 </div>
-<div id="ab5c7d78" class="cell" data-execution_count="4">
+<div id="4c7b1692" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">+</span> b <span class="op">==</span> b <span class="op">+</span> a</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> b <span class="op">==</span> b <span class="op">*</span> a</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -492,7 +492,7 @@ Assoziativgestz
 \tag{2}\]</span></span> Bei der Addition kann man also die Summanden beliebig zusammenfassen, bei der Multiplikation die Faktoren beliebig verknüpfen.</p>
 </div>
 </div>
-<div id="ff170bc3" class="cell" data-execution_count="5">
+<div id="e536027d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">+</span> c <span class="op">==</span> a <span class="op">+</span> (b <span class="op">+</span> c)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">*</span> b) <span class="op">*</span> c <span class="op">==</span> a <span class="op">*</span> (b <span class="op">*</span> c)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -514,7 +514,7 @@ a \cdot (b + c) \cdot c &amp;= a \cdot b + a \cdot c\\
 \tag{3}\]</span></span></p>
 </div>
 </div>
-<div id="4d21e910" class="cell" data-execution_count="6">
+<div id="41cb2f95" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">+</span> b<span class="op">*</span>c</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> (b <span class="op">+</span> c) <span class="op">==</span> a<span class="op">*</span>b <span class="op">+</span> a<span class="op">*</span>c</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -570,7 +570,7 @@ Warnung
 \]</span></p>
 </div>
 </div>
-<div id="62bd36ca" class="cell" data-execution_count="7">
+<div id="a43705ee" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">*</span>b)<span class="op">*</span>c <span class="op">==</span> a<span class="op">*</span>b<span class="op">*</span>c</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>(a<span class="op">*</span>b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">*</span> b<span class="op">*</span>c</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -662,7 +662,7 @@ Binomische Formeln
 \tag{4}\]</span></span></p>
 </div>
 </div>
-<div id="04b16a3c" class="cell" data-execution_count="8">
+<div id="55b6f1dd" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">-</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">*</span>(a<span class="op">-</span>b) <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> b<span class="op">**</span><span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -685,7 +685,7 @@ Warnung
 \]</span></p>
 </div>
 </div>
-<div id="dc772215" class="cell" data-execution_count="9">
+<div id="c6500a37" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>False</code></pre>
@@ -727,7 +727,7 @@ Beispiel für Summen
 </div>
 </div>
 <p>In Python können wir Summen auf verschiedene Weisen berechnen:</p>
-<div id="60c99492" class="cell" data-execution_count="10">
+<div id="5c585c7c" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># manuelles Addieren</span></span>
 <span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a>sum_1 <span class="op">=</span> <span class="dv">1</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">4</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">6</span><span class="op">**</span><span class="dv">2</span></span>
 <span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sum_1 <span class="op">==</span> <span class="dv">91</span></span>

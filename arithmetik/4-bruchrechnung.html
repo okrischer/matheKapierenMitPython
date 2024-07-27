@@ -283,7 +283,7 @@ Eine Klasse ist dabei eine Art Schablone, aus der man beliebig viele <em>Instanz
 <li><em>Methoden</em> sind nichts anderes als Funktionen, die einer Klasse zugeordnet sind, d.h. wir können diese Methoden für jedes Objekt der Klasse aufrufen.</li>
 </ul>
 <p>Unsere <em>initiale</em> Klassendefinition sieht folgendermaßen aus:</p>
-<div id="9854c3c1" class="cell" data-execution_count="2">
+<div id="dd17cceb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Bruch:</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, zähler, nenner):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.zähler <span class="op">=</span> zähler</span>
@@ -466,7 +466,7 @@ Beispiele
 <p>Im zweiten Beispiel haben wir das Ergebnis <span class="math inline">\(-\frac{2}{24}\)</span> mit <span class="math inline">\(2\)</span> gekürzt und als Endergebnis <span class="math inline">\(-\frac{1}{12}\)</span> erhalten. Woher wissen wir aber, mit welchen Faktor wir kürzen sollen?</p>
 <p>Der Kürzungsfaktor ist gemäß <a href="#eq-kurzen" class="quarto-xref">Gleichung&nbsp;2</a> ein gemeinsamer Teiler des Zählers und des Nenners. Wenn wir einen Bruch vollständig kürzen wollen, so dass keine weitere Kürzung mehr möglich ist, dann suchen wir nach dem größtmöglichen Kürzungsfaktor, also dem <em>größten gemeinsamen Teiler</em> des Zählers und des Nenners.</p>
 <p>In Lektion <a href="../arithmetik/2-teiler.html#sec-ggT">Teiler und Vielfache</a> haben wir bereits eine Funktion <code>eukild_modern</code> definiert, die den <em>größten gemeinsamen Teiler</em> zweier Zahlen mit Hilfe des <em>modernen euklidischen Algorithmus</em> berechnet. Diese Funktion wollen wir nun unserer Klasse <code>Bruch</code> als neue Methode <code>ggT</code> hinzufügen:</p>
-<div id="95d9ab74" class="cell" data-execution_count="3">
+<div id="6dac10a2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euklid_modern(<span class="va">self</span>, a, b):</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>    a, b <span class="op">=</span> b, a <span class="op">%</span> b</span>
@@ -498,7 +498,7 @@ Beispiele
 </div>
 </div>
 <p>Wir können die Methode <code>ggt</code> jetzt verwenden, um eine neue Methode <code>kürze</code> zu definieren:</p>
-<div id="fa1b0cd1" class="cell" data-execution_count="4">
+<div id="bd0db8b4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kürze_Bruch(<span class="va">self</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    faktor <span class="op">=</span> <span class="va">self</span>.ggT(<span class="va">self</span>.nenner, <span class="va">self</span>.zähler)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Bruch(<span class="va">self</span>.zähler <span class="op">//</span> faktor, <span class="va">self</span>.nenner <span class="op">//</span> faktor)</span>
@@ -525,7 +525,7 @@ Beispiele
 </div>
 </div>
 <p>Der Bruch <span class="math inline">\(b=\frac{12}{18}\)</span> wird korrekt gekürzt zu <span class="math inline">\(b=\frac{2}{3}\)</span>. Damit können wir jetzt die Addition von Brüchen gemäß den Formeln <a href="#eq-add-gleich" class="quarto-xref">Gleichung&nbsp;3</a> und <a href="#eq-add-ungleich" class="quarto-xref">Gleichung&nbsp;4</a> als neue Methode der Klasse <code>Bruch</code> definieren:</p>
-<div id="01ad73e1" class="cell" data-execution_count="5">
+<div id="003d1cbb" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> addiere_Bruch(<span class="va">self</span>, other):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="va">self</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">self</span>.nenner <span class="op">==</span> other.nenner:</span>
@@ -574,7 +574,7 @@ Beispiele für Addition von Brüchen
 \]</span></p>
 </div>
 </div>
-<div id="d7554b46" class="cell" data-execution_count="6">
+<div id="666f786c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a.add(b)</span>
@@ -606,7 +606,7 @@ Multiplizieren von Brüchen
 </div>
 </div>
 <p>Die Implementierung in Python kann dann so aussehen:</p>
-<div id="455a0ce3" class="cell" data-execution_count="7">
+<div id="e8026082" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multipliziere_Bruch(<span class="va">self</span>, other):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="va">self</span>.kürze()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> other.kürze()</span>
@@ -654,7 +654,7 @@ Dividieren von Brüchen
 </div>
 </div>
 <p>Die Division von Brüchen kann man wie folgt in Python implementieren:</p>
-<div id="b5c53e6c" class="cell" data-execution_count="8">
+<div id="c1aeb3ce" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dividiere_Bruch(<span class="va">self</span>, other):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.mul(Bruch(other.nenner, other.zähler))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -683,7 +683,7 @@ Beispiel: Division
 <h2 data-number="6" class="anchored" data-anchor-id="fehlerquellen"><span class="header-section-number">6</span> Fehlerquellen</h2>
 <p>In diesem Kapitel wollen wir mögliche Fehlerquellen der Bruchrechnung anhand einiger Beispielrechnungen demonstrieren.</p>
 <p>Zuvor werden wir aber noch unser Python Klassendefinition vervollständigen, indem wir einen Bruch in einer leicht lesbaren Form ausgeben und dabei den ganzzahligen Anteil des Bruchs berücksichtigen. Dazu müssen wir zunächst den ganzzahligen Anteil berechnen, falls es sich um einen <em>unechten Bruch</em> handelt.</p>
-<div id="e8b045ba" class="cell" data-execution_count="9">
+<div id="1b8c397f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ganzzahliger_anteil(<span class="va">self</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.kürze()</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b.zähler <span class="op">==</span> b.nenner:</span>
@@ -734,7 +734,7 @@ Beispiel: ganzzahliger Anteil
 </div>
 </div>
 <p>Mit Hilfe dieser Methode können wir nun den Bruch mit einer neuen Methode anzeigen:</p>
-<div id="82e7ee3e" class="cell" data-execution_count="10">
+<div id="13213354" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zeige_Bruch(<span class="va">self</span>, end<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="va">self</span>.gza()</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>    anzeige <span class="op">=</span> <span class="bu">str</span>(b.zahl) <span class="cf">if</span> b.zahl <span class="cf">else</span> <span class="st">""</span></span>
@@ -770,7 +770,7 @@ Beispiel: ganzzahliger Anteil
 </div>
 </div>
 <p>Beachte, dass wir in dieser Implementierung nie mit dem ganzzahligen Anteil eines Bruchs rechnen; wir benutzen ihn ausschließlich zur Ausgabe eines Bruchs:</p>
-<div id="6bc6c94c" class="cell" data-execution_count="11">
+<div id="f77956ae" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">12</span>, <span class="dv">9</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a.zeige()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bruch(<span class="dv">4</span>, <span class="dv">4</span>)</span>
@@ -824,7 +824,7 @@ Fehlerwarnungen
 </ul>
 </div>
 </div>
-<div id="11df812f" class="cell" data-execution_count="12">
+<div id="7924b3d7" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlerwarnungen:</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Warnung 1</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bruch(<span class="dv">5</span>, <span class="dv">3</span>)</span>
