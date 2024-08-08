@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/4-bruchrechnung.html</loc>
-    <lastmod>2024-07-27T09:37:08.736Z</lastmod>
-  </url>
-  <url>
     <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/1-rechenregeln.html</loc>
-    <lastmod>2024-07-27T09:37:08.736Z</lastmod>
+    <lastmod>2024-08-08T13:33:45.593Z</lastmod>
   </url>
   <url>
-    <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/5-rekursion.html</loc>
-    <lastmod>2024-07-27T09:37:08.736Z</lastmod>
+    <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/6-rekursion.html</loc>
+    <lastmod>2024-08-08T13:33:45.593Z</lastmod>
   </url>
   <url>
     <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/3-mengen.html</loc>
-    <lastmod>2024-07-27T09:37:08.736Z</lastmod>
+    <lastmod>2024-08-08T13:33:45.593Z</lastmod>
+  </url>
+  <url>
+    <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/5-logarithmen.html</loc>
+    <lastmod>2024-08-08T13:33:45.593Z</lastmod>
   </url>
   <url>
     <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/2-teiler.html</loc>
-    <lastmod>2024-07-27T09:37:08.736Z</lastmod>
+    <lastmod>2024-08-08T13:33:45.593Z</lastmod>
+  </url>
+  <url>
+    <loc>https://okrischer.github.io/matheKapierenMitPython/arithmetik/4-bruchrechnung.html</loc>
+    <lastmod>2024-08-08T13:33:45.593Z</lastmod>
   </url>
 </urlset>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -202,7 +202,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../arithmetik/5-rekursion.html" class="sidebar-item-text sidebar-link">
+  <a href="../arithmetik/5-logarithmen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Potenzen, Wurzeln, Logarithmen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../arithmetik/6-rekursion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rekursion</span></a>
   </div>
 </li>
@@ -259,7 +265,7 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="buchstabenrechnen"><span class="header-section-number">1</span> Buchstabenrechnen</h2>
 <p>Buchstabenrechnen ist das Rechnen mit unbestimmten Zahlen. Wenn wir eine mathematische Aussage formulieren, die nicht nur für eine bestimmte Zahl, sondern für einen ganzen Zahlenbereich oder sogar für alle Zahlen gilt, dann benutzen wir statt einer Zahl einen Buchstaben. Der Buchstabe heißt dann <em>Variable</em>.</p>
 <p>Auch in Python können wir Variablen anlegen und ihnen gleichzeitig mit <code>=</code> einen Wert zuweisen. Das Gleichheitszeichen in Python darf also nicht mit dem mathematischen Gleichheitszeichen verwechselt werden. Wenn Variablen einmal angelegt sind, können wir mit ihnen wie mit Zahlen rechnen:</p>
-<div id="aa7ce5c5" class="cell" data-execution_count="1">
+<div id="aa7ce5c5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b <span class="op">-</span> <span class="dv">2</span></span>
@@ -321,7 +327,7 @@ T_1 = T_2
 </div>
 <p>Wir sehen hier die wahre Bedeutung des Gleichheitszeichen in der Mathematik: der Term auf der linken Seite von <span class="math inline">\(=\)</span> ist gleichbedeutend mit dem Term auf der rechten Seite.</p>
 <p>In Python können wir auch Terme definieren; allerdings wertet Python solche Terme sofort aus, d.h. es wird das Ergebnis berechnet, wenn alle Variablen bekannt sind:</p>
-<div id="9da565df" class="cell" data-execution_count="2">
+<div id="9da565df" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>T_1 <span class="op">=</span> a <span class="op">*</span> c <span class="op">+</span> b <span class="op">*</span> c <span class="op">-</span> c</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>T_1</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -432,7 +438,7 @@ Beispiele für Teilbarkeit
 <h2 data-number="3" class="anchored" data-anchor-id="grundgesetze-der-addition-und-multiplikation"><span class="header-section-number">3</span> Grundgesetze der Addition und Multiplikation</h2>
 <p>Wenn wir einen Term betrachten, wie z.B. im letzten Code-Beispiel <span class="math inline">\(T_1=a \cdot c + b \cdot c - c\)</span>, dann ist nicht sofort offensichtlich, wie wir das Ergebnis am besten berechnen. In diesem Abschnitt wollen wir erkunden, wie wir solche komplexe Ausdrücke vereinfachen können, um uns Rechenarbeit zu ersparen.</p>
 <p>Ein erstes Beispiel in Python:</p>
-<div id="13c4ef99" class="cell" data-execution_count="3">
+<div id="13c4ef99" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>T_2 <span class="op">=</span> c<span class="op">*</span>(a<span class="op">+</span>b<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> T_1 <span class="op">==</span> T_2</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -470,7 +476,7 @@ a \cdot b &amp;= b \cdot a
 \tag{1}\]</span></span> Bei der Addition kann man also die <em>Summanden</em> vertauschen und bei der Multiplikation die <em>Faktoren</em>.</p>
 </div>
 </div>
-<div id="4c7b1692" class="cell" data-execution_count="4">
+<div id="4c7b1692" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">+</span> b <span class="op">==</span> b <span class="op">+</span> a</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> b <span class="op">==</span> b <span class="op">*</span> a</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -492,7 +498,7 @@ Assoziativgestz
 \tag{2}\]</span></span> Bei der Addition kann man also die Summanden beliebig zusammenfassen, bei der Multiplikation die Faktoren beliebig verknüpfen.</p>
 </div>
 </div>
-<div id="e536027d" class="cell" data-execution_count="5">
+<div id="e536027d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">+</span> c <span class="op">==</span> a <span class="op">+</span> (b <span class="op">+</span> c)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">*</span> b) <span class="op">*</span> c <span class="op">==</span> a <span class="op">*</span> (b <span class="op">*</span> c)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -514,7 +520,7 @@ a \cdot (b + c) \cdot c &amp;= a \cdot b + a \cdot c\\
 \tag{3}\]</span></span></p>
 </div>
 </div>
-<div id="41cb2f95" class="cell" data-execution_count="6">
+<div id="41cb2f95" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">+</span> b<span class="op">*</span>c</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> (b <span class="op">+</span> c) <span class="op">==</span> a<span class="op">*</span>b <span class="op">+</span> a<span class="op">*</span>c</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -570,7 +576,7 @@ Warnung
 \]</span></p>
 </div>
 </div>
-<div id="a43705ee" class="cell" data-execution_count="7">
+<div id="a43705ee" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">*</span>b)<span class="op">*</span>c <span class="op">==</span> a<span class="op">*</span>b<span class="op">*</span>c</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>(a<span class="op">*</span>b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">*</span> b<span class="op">*</span>c</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -662,7 +668,7 @@ Binomische Formeln
 \tag{4}\]</span></span></p>
 </div>
 </div>
-<div id="55b6f1dd" class="cell" data-execution_count="8">
+<div id="55b6f1dd" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">-</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">*</span>(a<span class="op">-</span>b) <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> b<span class="op">**</span><span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -685,7 +691,7 @@ Warnung
 \]</span></p>
 </div>
 </div>
-<div id="c6500a37" class="cell" data-execution_count="9">
+<div id="c6500a37" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>False</code></pre>
@@ -727,7 +733,7 @@ Beispiel für Summen
 </div>
 </div>
 <p>In Python können wir Summen auf verschiedene Weisen berechnen:</p>
-<div id="5c585c7c" class="cell" data-execution_count="10">
+<div id="5c585c7c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># manuelles Addieren</span></span>
 <span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a>sum_1 <span class="op">=</span> <span class="dv">1</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">4</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">6</span><span class="op">**</span><span class="dv">2</span></span>
 <span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sum_1 <span class="op">==</span> <span class="dv">91</span></span>
@@ -1727,569 +1733,568 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Quellcode</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Grundlegende Rechenregeln"</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Um mit Zahlen rechnen zu können, verknüpfen wir sie mit mathematischen *Operatoren*.</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>Ein Operator in diesem Sinn ist nichts anders als ein Symbol für die beabsichtigte Berechnung.</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>So werden zum Beispiel die vier Grundrechenarten Addition, Subtraktion, Multiplikation und Division durch die Operatoren $+, \ -, \ \cdot, \ \div$ ausgedrückt, während das Gleichheitszeichen ($=$) das Ergebnis der Berechnung angibt.</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>In diesem Kapitel werden wir untersuchen, wie wir verschiedene Operatoren miteinander verknüpfen können, um sinnvolle Ergebnisse für unsere Berechnungen zu erhalten.</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Buchstabenrechnen</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>Buchstabenrechnen ist das Rechnen mit unbestimmten Zahlen.</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>Wenn wir eine mathematische Aussage formulieren, die nicht nur für eine bestimmte Zahl, sondern für einen ganzen Zahlenbereich oder sogar für alle Zahlen gilt, dann benutzen wir statt einer Zahl einen Buchstaben.</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>Der Buchstabe heißt dann *Variable*.</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>Auch in Python können wir Variablen anlegen und ihnen gleichzeitig mit <span class="in">`=`</span> einen Wert zuweisen.</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>Das Gleichheitszeichen in Python darf also nicht mit dem mathematischen Gleichheitszeichen verwechselt werden.</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>Wenn Variablen einmal angelegt sind, können wir mit ihnen wie mit Zahlen rechnen:</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span>                                         <span class="co"># &lt;1&gt;</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span>                                         <span class="co"># &lt;2&gt;</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b <span class="op">-</span> <span class="dv">2</span>                                 <span class="co"># &lt;3&gt;</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Die nächste Zeile gibt den Wert von c aus   # &lt;4&gt;</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>c</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zuweisung der Zahl 3 an die Variable <span class="in">`a`</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Zuweisung der Zahl 4 an die Variable <span class="in">`b`</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Berechnung von <span class="in">`a + b - 2`</span> und Zuweisung des Ergebnisses an die Variable <span class="in">`c`</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Eingaben, die nach dem <span class="in">`#`</span> Zeichen erfolgen, werden als Kommentar gewertet.</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>Kommentare bleiben bei der Auswertung eines Programms in Python unberücksichtigt.</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>Wenn wir nun mehrere Berechnungen gleichzeitig durchführen wollen, dann verknüpfen wir Zahlen und Variablen mit den entsprechenden Operatoren und erhalten einen zusammengesetzten Ausdruck, den wir *Term* nennen.</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Term</span></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>Ein **Term** ist ein mathematischer Ausdruck, der aus Zahlen, Variablen, mathematischen Operatoren und möglicherweise noch anderen mathematischen Symbolen besteht.</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>Diese Definition führt uns gleich zur nächsten:</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gleichung</span></span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>Will man ausdrücken, dass ein Term $T_1$ zu einem anderen Term $T_2$ gleichwertig ist, so schreibt man</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>T_1 = T_2</span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>Eine solche Darstellung heißt **Gleichung**.</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>Die *linke* Seite der Gleichung ist $T_1$, die *rechte* Seite ist $T_2$.</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>Wir sehen hier die wahre Bedeutung des Gleichheitszeichen in der Mathematik:</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>der Term auf der linken Seite von $=$ ist gleichbedeutend mit dem Term auf der rechten Seite.</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>In Python können wir auch Terme definieren; allerdings wertet Python solche Terme sofort aus, d.h. es wird das Ergebnis berechnet, wenn alle Variablen bekannt sind:</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>T_1 <span class="op">=</span> a <span class="op">*</span> c <span class="op">+</span> b <span class="op">*</span> c <span class="op">-</span> c</span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>T_1</span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>Bei der Auswertung geht die ursprüngliche Form des Terms $T_1 = a \cdot c + b \cdot c - c$ unwiederbringlich verloren, es bleibt nur das Ergebnis, in diesem Fall die Zahl $30$.</span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>Aus diesem Grund ist Standard-Python nicht besonders gut für das Betreiben von Mathematik geeignet; seine Stärke liegt in der schnellen Berechnung von Ausdrücken, nicht in deren mathematischer Umformung.\</span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>Wir werden in einer späteren Lektion (siehe ???) sehen, wie wir diese Beschränkung umgehen können, indem wir eine zusätzliche Bibliothek (engl. *library*) installieren.</span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>Im letzten Code-Beispiel haben wir ein unbekanntes Zeichen <span class="in">`*`</span> gesehen.</span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>Das liegt daran, dass die Operatoren in Python nicht eins zu eins den mathematischen Operatoren entsprechen.</span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>Die folgende Tabelle zeigt die Entsprechungen einiger mathematischer Operatoren mit denen in Python:</span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>| Bedeutung            | mathematischer Operator | Python Operator |</span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>|:---------------------|:-----------------------:|:---------------:|</span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>| Addition             | $+$                     | <span class="in">`+`</span>             |</span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>| Subtraktion          | $-$                     | <span class="in">`-`</span>             |</span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>| Multiplikation       | $\cdot$                 | <span class="in">`*`</span>             |</span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>| Division             | $\div$                  | <span class="in">`/`</span>             |</span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>| ganzzahlige Division |                         | <span class="in">`//`</span>            |</span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>| Rest der Division    | $n \mod{m}$             | <span class="in">`n % m`</span>         |</span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>| Potenz               | $a^x$                   | <span class="in">`a**x`</span>          |</span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## Teilbarkeitsregeln</span></span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>Wir werden uns in der Lektion <span class="co">[</span><span class="ot">Teiler und Vielfache</span><span class="co">](2-teiler.qmd)</span> ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.</span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>An dieser Stelle wollen wir aber schon einige grundlegende Teilbarkeitsregeln betrachten.</span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>Die einzelnen Zeichen einer Zahl sind ihre Ziffern: $0,1,2,3,4,5,6,7,8,9$.</span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>Aus den Eigenschaften der Ziffern lassen sich Teilbarkeitseigenschaften der Zahlen ableiten:</span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Teilbarkeitsregeln</span></span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>Eine ganze Zahl ist teilbar durch</span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2, wenn die letzte Ziffer durch 2 teilbar ist</span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>3, wenn die *Quersumme* der Zahl (also die Summe der Ziffern) durch 3 teilbar ist</span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>4, wenn die Zahl aus den letzten beiden Ziffern durch 4 teilbar ist</span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>5, wenn die letzte Ziffer durch 5 teilbar ist (also 0 oder 5 ist)</span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>6, wenn die letzte Ziffer durch 2 und die Quersumme der Zahl durch 3 teilbar ist</span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>8, wenn die Zahl aus den letzten 3 Ziffern durch 8 teilbar ist</span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>9, wenn die Quersumme der Zahl durch 9 teilbar ist</span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>11, wenn die alternierende Quersumme der Zahl (also die Summe der Ziffern, die abwechselnd positives und negatives Vozeichen erhalten) durch 11 teilbar ist.</span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele für Teilbarkeit</span></span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2486 ist teilbar durch 2, denn 6 ist teilbar durch 2</span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>263.451 ist teilbar durch 3, denn die Quersumme $2+6+3+4+5+1=21$ ist teilbar druch 3</span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2.563.488 ist teilbar durch 4, denn 88 ist teilbar durch 4 ($22\cdot4=88$)</span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>823.620 ist teilbar durch 5, denn die letzte Ziffer ist 0</span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2.598.018 ist teilbar durch 6, denn 8 ist teilbar durch 2 und die Quersumme $2+5+9+8+0+1+8=33$ ist teilbar durch 3</span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>524.299.168 ist teilbar durch 8, denn 168 ist teilbar durch 8 ($21\cdot8=168$)</span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>11.929.545 ist teilbar durch 9, denn die Quersumme $1+1+9+2+9+5+4+5=36$ ist teilbar durch 9 ($4\cdot9=36$)</span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>14.739.296 ist teilbar durch 11, denn die alternierende Quersumme $+1-4+7-3+9-2+9-6=11$ ist teilbar durch 11</span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>Um mit Zahlen rechnen zu können, verknüpfen wir sie mit mathematischen *Operatoren*.</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Ein Operator in diesem Sinn ist nichts anders als ein Symbol für die beabsichtigte Berechnung.</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>So werden zum Beispiel die vier Grundrechenarten Addition, Subtraktion, Multiplikation und Division durch die Operatoren $+, \ -, \ \cdot, \ \div$ ausgedrückt, während das Gleichheitszeichen ($=$) das Ergebnis der Berechnung angibt.</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>In diesem Kapitel werden wir untersuchen, wie wir verschiedene Operatoren miteinander verknüpfen können, um sinnvolle Ergebnisse für unsere Berechnungen zu erhalten.</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Buchstabenrechnen</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>Buchstabenrechnen ist das Rechnen mit unbestimmten Zahlen.</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>Wenn wir eine mathematische Aussage formulieren, die nicht nur für eine bestimmte Zahl, sondern für einen ganzen Zahlenbereich oder sogar für alle Zahlen gilt, dann benutzen wir statt einer Zahl einen Buchstaben.</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>Der Buchstabe heißt dann *Variable*.</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>Auch in Python können wir Variablen anlegen und ihnen gleichzeitig mit <span class="in">`=`</span> einen Wert zuweisen.</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>Das Gleichheitszeichen in Python darf also nicht mit dem mathematischen Gleichheitszeichen verwechselt werden.</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>Wenn Variablen einmal angelegt sind, können wir mit ihnen wie mit Zahlen rechnen:</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span>                                         <span class="co"># &lt;1&gt;</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span>                                         <span class="co"># &lt;2&gt;</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b <span class="op">-</span> <span class="dv">2</span>                                 <span class="co"># &lt;3&gt;</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Die nächste Zeile gibt den Wert von c aus   # &lt;4&gt;</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>c</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zuweisung der Zahl 3 an die Variable <span class="in">`a`</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Zuweisung der Zahl 4 an die Variable <span class="in">`b`</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Berechnung von <span class="in">`a + b - 2`</span> und Zuweisung des Ergebnisses an die Variable <span class="in">`c`</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Eingaben, die nach dem <span class="in">`#`</span> Zeichen erfolgen, werden als Kommentar gewertet.</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>Kommentare bleiben bei der Auswertung eines Programms in Python unberücksichtigt.</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>Wenn wir nun mehrere Berechnungen gleichzeitig durchführen wollen, dann verknüpfen wir Zahlen und Variablen mit den entsprechenden Operatoren und erhalten einen zusammengesetzten Ausdruck, den wir *Term* nennen.</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Term</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>Ein **Term** ist ein mathematischer Ausdruck, der aus Zahlen, Variablen, mathematischen Operatoren und möglicherweise noch anderen mathematischen Symbolen besteht.</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>Diese Definition führt uns gleich zur nächsten:</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gleichung</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>Will man ausdrücken, dass ein Term $T_1$ zu einem anderen Term $T_2$ gleichwertig ist, so schreibt man</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>T_1 = T_2</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>Eine solche Darstellung heißt **Gleichung**.</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>Die *linke* Seite der Gleichung ist $T_1$, die *rechte* Seite ist $T_2$.</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>Wir sehen hier die wahre Bedeutung des Gleichheitszeichen in der Mathematik:</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>der Term auf der linken Seite von $=$ ist gleichbedeutend mit dem Term auf der rechten Seite.</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>In Python können wir auch Terme definieren; allerdings wertet Python solche Terme sofort aus, d.h. es wird das Ergebnis berechnet, wenn alle Variablen bekannt sind:</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>T_1 <span class="op">=</span> a <span class="op">*</span> c <span class="op">+</span> b <span class="op">*</span> c <span class="op">-</span> c</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>T_1</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>Bei der Auswertung geht die ursprüngliche Form des Terms $T_1 = a \cdot c + b \cdot c - c$ unwiederbringlich verloren, es bleibt nur das Ergebnis, in diesem Fall die Zahl $30$.</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>Aus diesem Grund ist Standard-Python nicht besonders gut für das Betreiben von Mathematik geeignet; seine Stärke liegt in der schnellen Berechnung von Ausdrücken, nicht in deren mathematischer Umformung.\</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>Wir werden in einer späteren Lektion (siehe ???) sehen, wie wir diese Beschränkung umgehen können, indem wir eine zusätzliche Bibliothek (engl. *library*) installieren.</span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>Im letzten Code-Beispiel haben wir ein unbekanntes Zeichen <span class="in">`*`</span> gesehen.</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>Das liegt daran, dass die Operatoren in Python nicht eins zu eins den mathematischen Operatoren entsprechen.</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>Die folgende Tabelle zeigt die Entsprechungen einiger mathematischer Operatoren mit denen in Python:</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>| Bedeutung            | mathematischer Operator | Python Operator |</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>|:---------------------|:-----------------------:|:---------------:|</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>| Addition             | $+$                     | <span class="in">`+`</span>             |</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>| Subtraktion          | $-$                     | <span class="in">`-`</span>             |</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>| Multiplikation       | $\cdot$                 | <span class="in">`*`</span>             |</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>| Division             | $\div$                  | <span class="in">`/`</span>             |</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>| ganzzahlige Division |                         | <span class="in">`//`</span>            |</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>| Rest der Division    | $n \mod{m}$             | <span class="in">`n % m`</span>         |</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>| Potenz               | $a^x$                   | <span class="in">`a**x`</span>          |</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Teilbarkeitsregeln</span></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>Wir werden uns in der Lektion <span class="co">[</span><span class="ot">Teiler und Vielfache</span><span class="co">](2-teiler.qmd)</span> ausführlich mit der Teilbarkeit natürlicher Zahlen befassen.</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>An dieser Stelle wollen wir aber schon einige grundlegende Teilbarkeitsregeln betrachten.</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>Die einzelnen Zeichen einer Zahl sind ihre Ziffern: $0,1,2,3,4,5,6,7,8,9$.</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>Aus den Eigenschaften der Ziffern lassen sich Teilbarkeitseigenschaften der Zahlen ableiten:</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## Teilbarkeitsregeln</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>Eine ganze Zahl ist teilbar durch</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2, wenn die letzte Ziffer durch 2 teilbar ist</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>3, wenn die *Quersumme* der Zahl (also die Summe der Ziffern) durch 3 teilbar ist</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>4, wenn die Zahl aus den letzten beiden Ziffern durch 4 teilbar ist</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>5, wenn die letzte Ziffer durch 5 teilbar ist (also 0 oder 5 ist)</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>6, wenn die letzte Ziffer durch 2 und die Quersumme der Zahl durch 3 teilbar ist</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>8, wenn die Zahl aus den letzten 3 Ziffern durch 8 teilbar ist</span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>9, wenn die Quersumme der Zahl durch 9 teilbar ist</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>11, wenn die alternierende Quersumme der Zahl (also die Summe der Ziffern, die abwechselnd positives und negatives Vozeichen erhalten) durch 11 teilbar ist.</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele für Teilbarkeit</span></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2486 ist teilbar durch 2, denn 6 ist teilbar durch 2</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>263.451 ist teilbar durch 3, denn die Quersumme $2+6+3+4+5+1=21$ ist teilbar druch 3</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2.563.488 ist teilbar durch 4, denn 88 ist teilbar durch 4 ($22\cdot4=88$)</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>823.620 ist teilbar durch 5, denn die letzte Ziffer ist 0</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>2.598.018 ist teilbar durch 6, denn 8 ist teilbar durch 2 und die Quersumme $2+5+9+8+0+1+8=33$ ist teilbar durch 3</span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>524.299.168 ist teilbar durch 8, denn 168 ist teilbar durch 8 ($21\cdot8=168$)</span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>11.929.545 ist teilbar durch 9, denn die Quersumme $1+1+9+2+9+5+4+5=36$ ist teilbar durch 9 ($4\cdot9=36$)</span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>14.739.296 ist teilbar durch 11, denn die alternierende Quersumme $+1-4+7-3+9-2+9-6=11$ ist teilbar durch 11</span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grundgesetze der Addition und Multiplikation</span></span>
-<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>Wenn wir einen Term betrachten, wie z.B. im letzten Code-Beispiel $T_1=a \cdot c + b \cdot c - c$, dann ist nicht sofort offensichtlich, wie wir das Ergebnis am besten berechnen.</span>
-<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>In diesem Abschnitt wollen wir erkunden, wie wir solche komplexe Ausdrücke vereinfachen können, um uns Rechenarbeit zu ersparen.</span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>Ein erstes Beispiel in Python:</span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>T_2 <span class="op">=</span> c<span class="op">*</span>(a<span class="op">+</span>b<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> T_1 <span class="op">==</span> T_2</span>
-<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a>Wir sehen hier eine neue Anweisung <span class="in">`assert`</span>, deren Bedeutung so zu verstehen ist:</span>
-<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gleichheit mit `assert`</span></span>
-<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>Die <span class="in">`assert`</span> Anweisung in Python prüft, ob der nachfolgend angegebene Ausdruck wahr ist.</span>
-<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>Um zwei Werte auf Gleichheit zu überprüfen, verwenden wir in Python das doppeltes Gleichheitsyeichen <span class="in">`==`</span>, das einen Wahrheitswert <span class="in">`True`</span> oder <span class="in">`False`</span> zurückliefert.\</span>
-<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>Wenn der Wahrheitswert <span class="in">`True`</span> ist, dann passiert beim Aufruf von <span class="in">`assert`</span> gar nichts, anderenfalls wird ein Fehler ausgegeben.</span>
-<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>Offensichtlich gilt also die Gleichung $T_1=T_2$ und damit $a \cdot c + b \cdot c - c = c \cdot(a+b-1)$, zumindest für die gegebenen Werte von $a, b$ und $c$.</span>
-<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>Wir wollen in der Mathematik aber zeigen, dass die Gleichung für alle möglichen Werte von $a, b$ und $c$ gilt.</span>
-<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>Deshalb brauchen wir Rechengesetze, die eine äquivalente Umformung eines Ausdrucks in einen anderen Ausdruck ermöglichen, d.h. eine Umformung, die die Bedeutung (oder den Wert) eines Ausdrucks nicht verändert.</span>
-<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kommutativgesetz</span></span>
-<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>Für reelle Zahlen gilt bezüglich der Addition und Multiplikation das Kommutativgesetz:</span>
-<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>a + b &amp;= b + a<span class="sc">\\</span></span>
-<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a>a \cdot b &amp;= b \cdot a</span>
-<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>$$ {#eq-kommutativ}</span>
-<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>Bei der Addition kann man also die *Summanden* vertauschen und bei der Multiplikation die *Faktoren*.</span>
-<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">+</span> b <span class="op">==</span> b <span class="op">+</span> a</span>
-<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> b <span class="op">==</span> b <span class="op">*</span> a</span>
-<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Assoziativgestz</span></span>
-<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>Für reelle Zahlen gilt bezüglich der Addition und Multiplikation das Assoziativgesetz:</span>
-<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>(a + b) + c &amp;= a + (b + c)<span class="sc">\\</span></span>
-<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>(a \cdot b) \cdot c &amp;= a \cdot (b \cdot c)</span>
-<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>$$ {#eq-assoziativ}</span>
-<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a>Bei der Addition kann man also die Summanden beliebig zusammenfassen, bei der Multiplikation die Faktoren beliebig verknüpfen.</span>
-<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">+</span> c <span class="op">==</span> a <span class="op">+</span> (b <span class="op">+</span> c)</span>
-<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">*</span> b) <span class="op">*</span> c <span class="op">==</span> a <span class="op">*</span> (b <span class="op">*</span> c)</span>
-<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a><span class="fu">## Distributivgesetze</span></span>
-<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>Für reelle Zahlen gelten die Distributivgesetze:</span>
-<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>(a + b) \cdot c &amp;= a \cdot c + b \cdot c<span class="sc">\\</span></span>
-<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>a \cdot (b + c) \cdot c &amp;= a \cdot b + a \cdot c<span class="sc">\\</span></span>
-<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>$$ {#eq-distributiv}</span>
-<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">+</span> b<span class="op">*</span>c</span>
-<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> (b <span class="op">+</span> c) <span class="op">==</span> a<span class="op">*</span>b <span class="op">+</span> a<span class="op">*</span>c</span>
-<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## Punktrechnung vor Strichrechnung</span></span>
-<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a>Die Rechenzeichen $\cdot$ und $\div$ binden stärker als $+$ und $-$, das heißt, Multiplikation und Division müssen vor Addition und Subtraktion ausgeführt werden.</span>
-<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a>a + b \cdot c &amp;= a + (b \cdot c)<span class="sc">\\</span></span>
-<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>a - b \div c &amp;= a - (b \div c)</span>
-<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>Python berücksichtigt diese Regeln automatisch, so dass wir im letzten Codebeispiel die Klammern auf der rechten Seite weglassen konnten.</span>
-<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grundregeln der Klammerrechnung</span></span>
-<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a>Aus den Grundgesetzen der Addition und Multiplikation ergeben sich die wichtigen Regeln der Klammerrechnung, die wir in diesem Abschnitt untersuchen wollen.</span>
-<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a>Zuvor aber noch einen Hinweis für die mathematische Schreibweise von Produkten:</span>
-<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## Schreibweise von Produkten</span></span>
-<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>Beim Aufschreiben von Produkten in der Form $a \cdot b$ lassen wir oft den Operator für die Multiplikation weg.</span>
-<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>Das heißt, $a \cdot b$ ist gleichbedeutend mit $ab$.\</span>
-<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a>Das gilt aber nicht für Python-Code: hier muss ein Produkt immer in der Form <span class="in">`a * b`</span> angegeben werden; die Leerzeichen können aber auch weggelassen werden: <span class="in">`a*b`</span>.</span>
-<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a>Außerdem ist noch eine Warnung angebracht: das Distributivgestz (@eq-distributiv) gilt nicht für die reine Multiplikation:</span>
-<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>(a\cdot b)\cdot c\neq ac\cdot bc, \ \mathrm{sondern} \ (a\cdot b)\cdot c=abc</span>
-<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">*</span>b)<span class="op">*</span>c <span class="op">==</span> a<span class="op">*</span>b<span class="op">*</span>c</span>
-<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a>(a<span class="op">*</span>b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">*</span> b<span class="op">*</span>c</span>
-<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiplikation mit Klammern</span></span>
-<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>Summen und Differenzen von Produkten können vereinfacht werden, indem man gemeinsame Faktoren *ausklammert*.</span>
-<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ausklammern</span></span>
-<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a>Enthalten alle Glieder einer Summe oder Differenz den gleichen Faktor so kann man diesen ausklammern:</span>
-<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a>ab + ac &amp;= a(b+c)<span class="sc">\\</span></span>
-<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a>ac - bc &amp;= (a-b)c</span>
-<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>Produkte von Summen und Differenzen werden berechnet, indem man ihre Glieder multipliziert.</span>
-<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ausmultiplizieren</span></span>
-<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a>Man multipliziert zwei Summen (bzw. Differenzen) miteinander, indem man jedes Glied der einen Summe mit jedem Glied der anderen Summe multipliziert und die erhaltenen Produkte addiert (bzw. subtrahiert):</span>
-<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a>(a+b)(c+d) &amp;= ac+ad+bc+bd<span class="sc">\\</span></span>
-<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a>(a+b)(c-d) &amp;= ac-ad+bc-bd<span class="sc">\\</span></span>
-<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a>(a-b)(c+d) &amp;= ac+ad-bc-bd<span class="sc">\\</span></span>
-<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a>(a-b)(c-d) &amp;= ac-ad-bc+bd</span>
-<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a>Die grundsätzlich Bedeutung von Klammern ist, dass Teilausdrücke, die innerhalb einer Klammer stehen, vor allen anderen Operationen ausgewertet werden.</span>
-<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>Bei verschachtelten Klammern sind die Klammern immer von innen nach außen aufzulösen:</span>
-<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a>a(b+c(d+e))=a(b+cd+ce)=ab+acd+ace</span>
-<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binomische Formeln {#sec-binom}</span></span>
-<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a>Ein *Binom* ist ein zweigliedriger Ausdruck in der Form $a+b$ oder $a-b$.</span>
-<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>Die Multiplikation von Binomen führt zu den **Binomischen Formeln** (mit zwei Faktoren).</span>
-<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a>Sie heißen daher auch *binomische Gleichungen 2. Grades*.</span>
-<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a>Bevor wir uns diese Gleichungen anschauen, wollen wir erst den Begiff der Quadratzahl einführen:</span>
-<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quadratzahl</span></span>
-<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a>Eine reelle Zahl $a$, multipliziert mit sich selbst, heißt **Quadratzahl** von $a$ (gesprochen *a Quadrat*):</span>
-<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a>a \cdot a = a^2</span>
-<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-296"><a href="#cb14-296" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-297"><a href="#cb14-297" aria-hidden="true" tabindex="-1"></a><span class="fu">## Binomische Formeln</span></span>
-<span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a>Die binomischen Formeln für zwei beliebige reelle Zahlen lauten:</span>
-<span id="cb14-299"><a href="#cb14-299" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-300"><a href="#cb14-300" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a>(a+b)^2 &amp;= a^2+2ab+b^2<span class="sc">\\</span></span>
-<span id="cb14-302"><a href="#cb14-302" aria-hidden="true" tabindex="-1"></a>(a-b)^2 &amp;= a^2-2ab+b^2<span class="sc">\\</span></span>
-<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a>(a+b)(a-b) &amp;= a^2-b^2</span>
-<span id="cb14-304"><a href="#cb14-304" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a>$$ {#eq-binom}</span>
-<span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-307"><a href="#cb14-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-311"><a href="#cb14-311" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb14-312"><a href="#cb14-312" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">-</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb14-313"><a href="#cb14-313" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">*</span>(a<span class="op">-</span>b) <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> b<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb14-314"><a href="#cb14-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-315"><a href="#cb14-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-316"><a href="#cb14-316" aria-hidden="true" tabindex="-1"></a>Diese Formeln sind keine Hexerei, sondern können mit den jetzt bekannten Rechenregeln hergeleitet werden.</span>
-<span id="cb14-317"><a href="#cb14-317" aria-hidden="true" tabindex="-1"></a>Für die erste binomische Formel könnte das so aussehen:</span>
-<span id="cb14-318"><a href="#cb14-318" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-319"><a href="#cb14-319" aria-hidden="true" tabindex="-1"></a>(a+b)^2=(a+b)(a+b)=aa+ab+ba+bb=a^2+2ab+b^2</span>
-<span id="cb14-320"><a href="#cb14-320" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-321"><a href="#cb14-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-322"><a href="#cb14-322" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb14-323"><a href="#cb14-323" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-324"><a href="#cb14-324" aria-hidden="true" tabindex="-1"></a>(a+b)^2 \neq a^2+b^2, \ \mathrm{sondern} \ (a+b)^2=a^2+2ab+b^2</span>
-<span id="cb14-325"><a href="#cb14-325" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-326"><a href="#cb14-326" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-327"><a href="#cb14-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-330"><a href="#cb14-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-331"><a href="#cb14-331" aria-hidden="true" tabindex="-1"></a>(a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb14-332"><a href="#cb14-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-333"><a href="#cb14-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-334"><a href="#cb14-334" aria-hidden="true" tabindex="-1"></a><span class="fu">## Indizes und Summenzeichen</span></span>
-<span id="cb14-335"><a href="#cb14-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-336"><a href="#cb14-336" aria-hidden="true" tabindex="-1"></a>Ein Index (Plural Indizes) ist ein Zeichen, das an Symbole für Variable, Funktionen oder Operationen angebracht wird.</span>
-<span id="cb14-337"><a href="#cb14-337" aria-hidden="true" tabindex="-1"></a>Bezeichnet man z.B. Variable mit $x$, dann kennzeichent man verschiedene Variable dudurch, dass man an das $x$ verschiedene tiefgestellte Indizes anhängt: $x_1, x_2, x_3, \dots$</span>
-<span id="cb14-338"><a href="#cb14-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-339"><a href="#cb14-339" aria-hidden="true" tabindex="-1"></a>Das Summenzeichen, (entstanden aus dem griechischen Buchstaben für S) dient zur vereinfachten Darstellung von Summen:</span>
-<span id="cb14-340"><a href="#cb14-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-341"><a href="#cb14-341" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb14-342"><a href="#cb14-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summenzeichen</span></span>
-<span id="cb14-343"><a href="#cb14-343" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-344"><a href="#cb14-344" aria-hidden="true" tabindex="-1"></a>\sum_{k=1}^n = a_k=a_1+a_2+a_3+\cdots+a_n,</span>
-<span id="cb14-345"><a href="#cb14-345" aria-hidden="true" tabindex="-1"></a>$$ {#eq-summe}</span>
-<span id="cb14-346"><a href="#cb14-346" aria-hidden="true" tabindex="-1"></a>gespochen als: Summe über $a_k$ von $k=1$ bis $k=n$.</span>
-<span id="cb14-347"><a href="#cb14-347" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-348"><a href="#cb14-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-349"><a href="#cb14-349" aria-hidden="true" tabindex="-1"></a>Man erhält alle Summanden der Summe, wenn man in $a_k$ für den Index $k$ zunächst 1, dann 2 usw. und schließlich $n$ setzt.</span>
-<span id="cb14-350"><a href="#cb14-350" aria-hidden="true" tabindex="-1"></a>Dieser Buchstabe $k$ heißt Summationsindex und kann durch einen beleibigen anderen Buchstaben ersetzt werden.</span>
-<span id="cb14-351"><a href="#cb14-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-352"><a href="#cb14-352" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb14-353"><a href="#cb14-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiel für Summen</span></span>
-<span id="cb14-354"><a href="#cb14-354" aria-hidden="true" tabindex="-1"></a>$\sum_{k=1}^6 k^2= 1^2+2^2+3^2+4^2+5^2+6^2=1+4+9+16+25+36=91$</span>
-<span id="cb14-355"><a href="#cb14-355" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-356"><a href="#cb14-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-357"><a href="#cb14-357" aria-hidden="true" tabindex="-1"></a>In Python können wir Summen auf verschiedene Weisen berechnen:</span>
-<span id="cb14-358"><a href="#cb14-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-361"><a href="#cb14-361" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb14-362"><a href="#cb14-362" aria-hidden="true" tabindex="-1"></a><span class="co"># manuelles Addieren</span></span>
-<span id="cb14-363"><a href="#cb14-363" aria-hidden="true" tabindex="-1"></a>sum_1 <span class="op">=</span> <span class="dv">1</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">4</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">6</span><span class="op">**</span><span class="dv">2</span></span>
-<span id="cb14-364"><a href="#cb14-364" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sum_1 <span class="op">==</span> <span class="dv">91</span></span>
-<span id="cb14-365"><a href="#cb14-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-366"><a href="#cb14-366" aria-hidden="true" tabindex="-1"></a><span class="co"># Addieren in einer for-Schleife</span></span>
-<span id="cb14-367"><a href="#cb14-367" aria-hidden="true" tabindex="-1"></a>sum_2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb14-368"><a href="#cb14-368" aria-hidden="true" tabindex="-1"></a>ks <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]                  <span class="co"># &lt;1&gt;</span></span>
-<span id="cb14-369"><a href="#cb14-369" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> ks:                        <span class="co"># &lt;2&gt;</span></span>
-<span id="cb14-370"><a href="#cb14-370" aria-hidden="true" tabindex="-1"></a>  sum_2 <span class="op">+=</span> s<span class="op">**</span><span class="dv">2</span>                     <span class="co"># &lt;3&gt;</span></span>
-<span id="cb14-371"><a href="#cb14-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-372"><a href="#cb14-372" aria-hidden="true" tabindex="-1"></a><span class="co">## Addieren über den Index</span></span>
-<span id="cb14-373"><a href="#cb14-373" aria-hidden="true" tabindex="-1"></a>sum_3 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb14-374"><a href="#cb14-374" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ks)):            <span class="co"># &lt;4&gt;</span></span>
-<span id="cb14-375"><a href="#cb14-375" aria-hidden="true" tabindex="-1"></a>  sum_3 <span class="op">+=</span> ks[i]<span class="op">**</span><span class="dv">2</span>                 <span class="co"># &lt;5&gt;</span></span>
-<span id="cb14-376"><a href="#cb14-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-377"><a href="#cb14-377" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sum_1 <span class="op">==</span> sum_2 <span class="op">==</span> sum_3</span>
-<span id="cb14-378"><a href="#cb14-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-379"><a href="#cb14-379" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Definition der Werte für den Summationsindex $k$ als Python Liste.</span>
-<span id="cb14-380"><a href="#cb14-380" aria-hidden="true" tabindex="-1"></a>Zur Erstellung einer Liste geben wir die Werte, getrennt durch ein Komma, in eckigen Klammern an.</span>
-<span id="cb14-381"><a href="#cb14-381" aria-hidden="true" tabindex="-1"></a>Das Ergebis dieser Definition ist Objekt des Datentyps <span class="in">`list`</span>.</span>
-<span id="cb14-382"><a href="#cb14-382" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Beginn einer <span class="in">`for`</span> Schleife mit <span class="in">`s`</span> als Schleifenvariable und dem Objekt <span class="in">`ks`</span>.</span>
-<span id="cb14-383"><a href="#cb14-383" aria-hidden="true" tabindex="-1"></a>Diese Anweisung führt dazu, dass die nächste Code-Zeile (3) für jedes Element in <span class="in">`ks`</span> einmal ausgeführt wird.</span>
-<span id="cb14-384"><a href="#cb14-384" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Der Wert von <span class="in">`sum_2`</span> wird um das Quadrat des jeweiligen Elements <span class="in">`s`</span> erhöht.</span>
-<span id="cb14-385"><a href="#cb14-385" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Python erzeugt automatisch einen Index für jedes <span class="in">`list`</span> Objekt.</span>
-<span id="cb14-386"><a href="#cb14-386" aria-hidden="true" tabindex="-1"></a>Wir können mit dem Ausdruck <span class="in">`range(len(ks))`</span> eine neue Liste dieser Indizes erzeugen.</span>
-<span id="cb14-387"><a href="#cb14-387" aria-hidden="true" tabindex="-1"></a>Die Indizes in Python beginnen, abweichend von der mathematischen Definition, mit 0 und enden demgemäß mit $n-1$, in unserem Beispiel mit 5.</span>
-<span id="cb14-388"><a href="#cb14-388" aria-hidden="true" tabindex="-1"></a>Wir werden in der Lektion <span class="co">[</span><span class="ot">Zahlenbereiche und Zahlensyteme</span><span class="co">](3-mengen.qmd)</span> sehen, wie wir die Funktion <span class="in">`range()`</span> korrekt anwenden.</span>
-<span id="cb14-389"><a href="#cb14-389" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Auf das $i$-te Element einer Liste kann mit <span class="in">`list[i]`</span> zugegriffen werden.</span>
-<span id="cb14-390"><a href="#cb14-390" aria-hidden="true" tabindex="-1"></a>Der Ausdruck <span class="in">`ks[i]`</span> ist also synonym zum Ausdruck <span class="in">`s`</span> im vorangehenden Code-Beispiel.</span>
-<span id="cb14-391"><a href="#cb14-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-392"><a href="#cb14-392" aria-hidden="true" tabindex="-1"></a><span class="fu">## Übungen {#sec-ubung}</span></span>
-<span id="cb14-393"><a href="#cb14-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-394"><a href="#cb14-394" aria-hidden="true" tabindex="-1"></a>Wir werden in dieser Lektion ein paar einfache Rechenübungen durchführen, bevor wir dann ab der nächsten Lektion mit <span class="co">[</span><span class="ot">Jupyter Notebooks</span><span class="co">](https://jupyter.org/)</span> arbeiten werden.</span>
-<span id="cb14-395"><a href="#cb14-395" aria-hidden="true" tabindex="-1"></a>Deine erste Aufgabe besteht also darin, dir eine entsprechende Arbeitsumgebung einzurichten.</span>
-<span id="cb14-396"><a href="#cb14-396" aria-hidden="true" tabindex="-1"></a>Falls du noch kein Python auf deinem Rechner hast, empfehle ich dir, zuerst *Miniconda* entsprechend diesen <span class="co">[</span><span class="ot">Anleitungen</span><span class="co">](https://docs.anaconda.com/miniconda/miniconda-install/)</span> zu installieren.</span>
-<span id="cb14-397"><a href="#cb14-397" aria-hidden="true" tabindex="-1"></a>Wenn das geschafft ist, dann kannst du mit einem Befehl wie</span>
-<span id="cb14-398"><a href="#cb14-398" aria-hidden="true" tabindex="-1"></a><span class="in">```shell</span></span>
-<span id="cb14-399"><a href="#cb14-399" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> matheKapieren python=3.12</span>
-<span id="cb14-400"><a href="#cb14-400" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-401"><a href="#cb14-401" aria-hidden="true" tabindex="-1"></a>in deiner Kommandozeile eine neue Arbeitsumgebung einrichten und Python installieren.</span>
-<span id="cb14-402"><a href="#cb14-402" aria-hidden="true" tabindex="-1"></a>Um die Arbeitsumgebung zu aktivieren, setze den Befehl <span class="in">`conda activate matheKapieren`</span> ab, dann kannst du auf alle Python Werkzeuge zugreifen.</span>
-<span id="cb14-403"><a href="#cb14-403" aria-hidden="true" tabindex="-1"></a>Schließlich kannstdu mit <span class="in">`conda install -c conda-forge jupyter`</span> Jupyter und später noch weitere Pakete installieren.</span>
-<span id="cb14-404"><a href="#cb14-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-405"><a href="#cb14-405" aria-hidden="true" tabindex="-1"></a>Nun aber zu den Übungen:</span>
-<span id="cb14-406"><a href="#cb14-406" aria-hidden="true" tabindex="-1"></a>wenn du bei einer Aufgabe Schwierigkeiten hast, schau dir den entsprechenden Lösungshinweis an, und vergleiche dann deine Lösung mit meinem Lösungsvorschlag.</span>
-<span id="cb14-407"><a href="#cb14-407" aria-hidden="true" tabindex="-1"></a>Mache dir aber auf jeden Fall Gedanken, wie du die Aufgabe lösen kannst.</span>
-<span id="cb14-408"><a href="#cb14-408" aria-hidden="true" tabindex="-1"></a>Wenn du gleich zur Lösung springst, wirst du *nichts* lernen.</span>
-<span id="cb14-409"><a href="#cb14-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-410"><a href="#cb14-410" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-411"><a href="#cb14-411" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 1</span></span>
-<span id="cb14-412"><a href="#cb14-412" aria-hidden="true" tabindex="-1"></a>Berechne die Quersumme von $1.234.567.890$.</span>
-<span id="cb14-413"><a href="#cb14-413" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-414"><a href="#cb14-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-415"><a href="#cb14-415" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-416"><a href="#cb14-416" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
-<span id="cb14-417"><a href="#cb14-417" aria-hidden="true" tabindex="-1"></a>Die Quersumme einer Zahl ist die Summe ihrer Ziffern.</span>
-<span id="cb14-418"><a href="#cb14-418" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-419"><a href="#cb14-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-420"><a href="#cb14-420" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-421"><a href="#cb14-421" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-422"><a href="#cb14-422" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-423"><a href="#cb14-423" aria-hidden="true" tabindex="-1"></a>1+2+3+4+5+6+7+8+9+0=45</span>
-<span id="cb14-424"><a href="#cb14-424" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-425"><a href="#cb14-425" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-426"><a href="#cb14-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-427"><a href="#cb14-427" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-428"><a href="#cb14-428" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 2</span></span>
-<span id="cb14-429"><a href="#cb14-429" aria-hidden="true" tabindex="-1"></a>Leite die 2. binomische Formel her.</span>
-<span id="cb14-430"><a href="#cb14-430" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-431"><a href="#cb14-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-432"><a href="#cb14-432" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-433"><a href="#cb14-433" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
-<span id="cb14-434"><a href="#cb14-434" aria-hidden="true" tabindex="-1"></a>Gehe genauso vor wie bei der Herleitung der 1. binomischen Formel in @sec-binom.</span>
-<span id="cb14-435"><a href="#cb14-435" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-436"><a href="#cb14-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-437"><a href="#cb14-437" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-438"><a href="#cb14-438" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-439"><a href="#cb14-439" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-440"><a href="#cb14-440" aria-hidden="true" tabindex="-1"></a>(a-b)^2=(a-b)(a-b)=aa-ab-ba+bb=a^2-2ab+b^2</span>
-<span id="cb14-441"><a href="#cb14-441" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-442"><a href="#cb14-442" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-443"><a href="#cb14-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-444"><a href="#cb14-444" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-445"><a href="#cb14-445" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 3</span></span>
-<span id="cb14-446"><a href="#cb14-446" aria-hidden="true" tabindex="-1"></a>Leite die 3. binomische Formel her.</span>
-<span id="cb14-447"><a href="#cb14-447" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-448"><a href="#cb14-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-449"><a href="#cb14-449" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-450"><a href="#cb14-450" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-451"><a href="#cb14-451" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-452"><a href="#cb14-452" aria-hidden="true" tabindex="-1"></a>(a+b)(a-b)=aa-ab+ba-bb=aa-bb=a^2-b^2</span>
-<span id="cb14-453"><a href="#cb14-453" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-454"><a href="#cb14-454" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-455"><a href="#cb14-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-456"><a href="#cb14-456" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-457"><a href="#cb14-457" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 4</span></span>
-<span id="cb14-458"><a href="#cb14-458" aria-hidden="true" tabindex="-1"></a>Berechne $3(200+7)$.</span>
-<span id="cb14-459"><a href="#cb14-459" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-460"><a href="#cb14-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-461"><a href="#cb14-461" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-462"><a href="#cb14-462" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-463"><a href="#cb14-463" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-464"><a href="#cb14-464" aria-hidden="true" tabindex="-1"></a>3(200+7)=3\cdot 200+3\cdot 7= 600+21=621</span>
-<span id="cb14-465"><a href="#cb14-465" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-466"><a href="#cb14-466" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-467"><a href="#cb14-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-468"><a href="#cb14-468" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-469"><a href="#cb14-469" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 5</span></span>
-<span id="cb14-470"><a href="#cb14-470" aria-hidden="true" tabindex="-1"></a>Vereinfache den Term: $abc-acd+ace$.</span>
-<span id="cb14-471"><a href="#cb14-471" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-472"><a href="#cb14-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-473"><a href="#cb14-473" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-474"><a href="#cb14-474" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
-<span id="cb14-475"><a href="#cb14-475" aria-hidden="true" tabindex="-1"></a>Klammere die gemeinsamen Faktoren aus.</span>
-<span id="cb14-476"><a href="#cb14-476" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-477"><a href="#cb14-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-478"><a href="#cb14-478" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-479"><a href="#cb14-479" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-480"><a href="#cb14-480" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-481"><a href="#cb14-481" aria-hidden="true" tabindex="-1"></a>abc-acd+ace=ac(b-d+e)</span>
-<span id="cb14-482"><a href="#cb14-482" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-483"><a href="#cb14-483" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-484"><a href="#cb14-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-485"><a href="#cb14-485" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-486"><a href="#cb14-486" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 6</span></span>
-<span id="cb14-487"><a href="#cb14-487" aria-hidden="true" tabindex="-1"></a>Vereinfache den Term: $-5x^2+25xy-35zx$.</span>
-<span id="cb14-488"><a href="#cb14-488" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-489"><a href="#cb14-489" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-490"><a href="#cb14-490" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-491"><a href="#cb14-491" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-492"><a href="#cb14-492" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-493"><a href="#cb14-493" aria-hidden="true" tabindex="-1"></a>-5x^2+25xy-35zx=-5x(x-5y+7z)</span>
-<span id="cb14-494"><a href="#cb14-494" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-495"><a href="#cb14-495" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-496"><a href="#cb14-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-497"><a href="#cb14-497" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-498"><a href="#cb14-498" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 7</span></span>
-<span id="cb14-499"><a href="#cb14-499" aria-hidden="true" tabindex="-1"></a>Ist 11.543.711 durch 11 teilbar?</span>
-<span id="cb14-500"><a href="#cb14-500" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-501"><a href="#cb14-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-502"><a href="#cb14-502" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-503"><a href="#cb14-503" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
-<span id="cb14-504"><a href="#cb14-504" aria-hidden="true" tabindex="-1"></a>Verwende die alternierende Quersumme.</span>
-<span id="cb14-505"><a href="#cb14-505" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-506"><a href="#cb14-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-507"><a href="#cb14-507" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-508"><a href="#cb14-508" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-509"><a href="#cb14-509" aria-hidden="true" tabindex="-1"></a>11.513.511 ist nicht durch 11 teilbar, denn die alternierende Quersumme $+1-1+5-1+3-5+1-1=2$ ist nicht teilbar durch 11.</span>
-<span id="cb14-510"><a href="#cb14-510" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-511"><a href="#cb14-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-512"><a href="#cb14-512" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-513"><a href="#cb14-513" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 8</span></span>
-<span id="cb14-514"><a href="#cb14-514" aria-hidden="true" tabindex="-1"></a>Berechne $21^2$.</span>
-<span id="cb14-515"><a href="#cb14-515" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-516"><a href="#cb14-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-517"><a href="#cb14-517" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-518"><a href="#cb14-518" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
-<span id="cb14-519"><a href="#cb14-519" aria-hidden="true" tabindex="-1"></a>Versuche, die 1. binomische Formel anzuwenden.</span>
-<span id="cb14-520"><a href="#cb14-520" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-521"><a href="#cb14-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-522"><a href="#cb14-522" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-523"><a href="#cb14-523" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-524"><a href="#cb14-524" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-525"><a href="#cb14-525" aria-hidden="true" tabindex="-1"></a>21^2=(20+1)^2=20^2+2\cdot 20\cdot 1+1^2=400+40+1=441</span>
-<span id="cb14-526"><a href="#cb14-526" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-527"><a href="#cb14-527" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-528"><a href="#cb14-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-529"><a href="#cb14-529" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-530"><a href="#cb14-530" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 9</span></span>
-<span id="cb14-531"><a href="#cb14-531" aria-hidden="true" tabindex="-1"></a>Berechne $19^2$.</span>
-<span id="cb14-532"><a href="#cb14-532" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-533"><a href="#cb14-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-534"><a href="#cb14-534" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-535"><a href="#cb14-535" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-536"><a href="#cb14-536" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-537"><a href="#cb14-537" aria-hidden="true" tabindex="-1"></a>19^2=(20-1)^2=20^2-2\cdot 20\cdot 1+1^2=400-40+1=361</span>
-<span id="cb14-538"><a href="#cb14-538" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-539"><a href="#cb14-539" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-540"><a href="#cb14-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-541"><a href="#cb14-541" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-542"><a href="#cb14-542" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 10</span></span>
-<span id="cb14-543"><a href="#cb14-543" aria-hidden="true" tabindex="-1"></a>Vereinfache den Term: $5(x-2(x-y-3y-6x-3y)+2y)$.</span>
-<span id="cb14-544"><a href="#cb14-544" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-545"><a href="#cb14-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-546"><a href="#cb14-546" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-547"><a href="#cb14-547" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-548"><a href="#cb14-548" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-549"><a href="#cb14-549" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb14-550"><a href="#cb14-550" aria-hidden="true" tabindex="-1"></a>5(x-2(x-y-3y-6x-3y)+2y) &amp;= 5(x-2(-5x-7y)+2y)<span class="sc">\\</span></span>
-<span id="cb14-551"><a href="#cb14-551" aria-hidden="true" tabindex="-1"></a>&amp;=5(x+10x+14y+2y)<span class="sc">\\</span></span>
-<span id="cb14-552"><a href="#cb14-552" aria-hidden="true" tabindex="-1"></a>&amp;=5(11x+16y)<span class="sc">\\</span></span>
-<span id="cb14-553"><a href="#cb14-553" aria-hidden="true" tabindex="-1"></a>&amp;=55x+80y</span>
-<span id="cb14-554"><a href="#cb14-554" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb14-555"><a href="#cb14-555" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-556"><a href="#cb14-556" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-557"><a href="#cb14-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-558"><a href="#cb14-558" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-559"><a href="#cb14-559" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 11</span></span>
-<span id="cb14-560"><a href="#cb14-560" aria-hidden="true" tabindex="-1"></a>Berechne $21\cdot 19$.</span>
-<span id="cb14-561"><a href="#cb14-561" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-562"><a href="#cb14-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-563"><a href="#cb14-563" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-564"><a href="#cb14-564" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
-<span id="cb14-565"><a href="#cb14-565" aria-hidden="true" tabindex="-1"></a>Versuche, die 3. binomische Formel anzuwenden.</span>
-<span id="cb14-566"><a href="#cb14-566" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-567"><a href="#cb14-567" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-568"><a href="#cb14-568" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-569"><a href="#cb14-569" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-570"><a href="#cb14-570" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-571"><a href="#cb14-571" aria-hidden="true" tabindex="-1"></a>21 \cdot 19=(20+1)(20-1)=20^2-1^2=400-1=399</span>
-<span id="cb14-572"><a href="#cb14-572" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-573"><a href="#cb14-573" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-574"><a href="#cb14-574" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-575"><a href="#cb14-575" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
-<span id="cb14-576"><a href="#cb14-576" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 12</span></span>
-<span id="cb14-577"><a href="#cb14-577" aria-hidden="true" tabindex="-1"></a>Berechne $17\cdot 23$.</span>
-<span id="cb14-578"><a href="#cb14-578" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-579"><a href="#cb14-579" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-580"><a href="#cb14-580" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb14-581"><a href="#cb14-581" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
-<span id="cb14-582"><a href="#cb14-582" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-583"><a href="#cb14-583" aria-hidden="true" tabindex="-1"></a>17 \cdot 23=(20-3)(20+3)=20^2-3^2=400-9=391</span>
-<span id="cb14-584"><a href="#cb14-584" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-585"><a href="#cb14-585" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grundgesetze der Addition und Multiplikation</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>Wenn wir einen Term betrachten, wie z.B. im letzten Code-Beispiel $T_1=a \cdot c + b \cdot c - c$, dann ist nicht sofort offensichtlich, wie wir das Ergebnis am besten berechnen.</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>In diesem Abschnitt wollen wir erkunden, wie wir solche komplexe Ausdrücke vereinfachen können, um uns Rechenarbeit zu ersparen.</span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>Ein erstes Beispiel in Python:</span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>T_2 <span class="op">=</span> c<span class="op">*</span>(a<span class="op">+</span>b<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> T_1 <span class="op">==</span> T_2</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>Wir sehen hier eine neue Anweisung <span class="in">`assert`</span>, deren Bedeutung so zu verstehen ist:</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gleichheit mit `assert`</span></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>Die <span class="in">`assert`</span> Anweisung in Python prüft, ob der nachfolgend angegebene Ausdruck wahr ist.</span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>Um zwei Werte auf Gleichheit zu überprüfen, verwenden wir in Python das doppeltes Gleichheitsyeichen <span class="in">`==`</span>, das einen Wahrheitswert <span class="in">`True`</span> oder <span class="in">`False`</span> zurückliefert.\</span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>Wenn der Wahrheitswert <span class="in">`True`</span> ist, dann passiert beim Aufruf von <span class="in">`assert`</span> gar nichts, anderenfalls wird ein Fehler ausgegeben.</span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>Offensichtlich gilt also die Gleichung $T_1=T_2$ und damit $a \cdot c + b \cdot c - c = c \cdot(a+b-1)$, zumindest für die gegebenen Werte von $a, b$ und $c$.</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>Wir wollen in der Mathematik aber zeigen, dass die Gleichung für alle möglichen Werte von $a, b$ und $c$ gilt.</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>Deshalb brauchen wir Rechengesetze, die eine äquivalente Umformung eines Ausdrucks in einen anderen Ausdruck ermöglichen, d.h. eine Umformung, die die Bedeutung (oder den Wert) eines Ausdrucks nicht verändert.</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kommutativgesetz</span></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>Für reelle Zahlen gilt bezüglich der Addition und Multiplikation das Kommutativgesetz:</span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a>a + b &amp;= b + a<span class="sc">\\</span></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>a \cdot b &amp;= b \cdot a</span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>$$ {#eq-kommutativ}</span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>Bei der Addition kann man also die *Summanden* vertauschen und bei der Multiplikation die *Faktoren*.</span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">+</span> b <span class="op">==</span> b <span class="op">+</span> a</span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> b <span class="op">==</span> b <span class="op">*</span> a</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a><span class="fu">## Assoziativgestz</span></span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>Für reelle Zahlen gilt bezüglich der Addition und Multiplikation das Assoziativgesetz:</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a>(a + b) + c &amp;= a + (b + c)<span class="sc">\\</span></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>(a \cdot b) \cdot c &amp;= a \cdot (b \cdot c)</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>$$ {#eq-assoziativ}</span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>Bei der Addition kann man also die Summanden beliebig zusammenfassen, bei der Multiplikation die Faktoren beliebig verknüpfen.</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">+</span> c <span class="op">==</span> a <span class="op">+</span> (b <span class="op">+</span> c)</span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">*</span> b) <span class="op">*</span> c <span class="op">==</span> a <span class="op">*</span> (b <span class="op">*</span> c)</span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## Distributivgesetze</span></span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>Für reelle Zahlen gelten die Distributivgesetze:</span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a>(a + b) \cdot c &amp;= a \cdot c + b \cdot c<span class="sc">\\</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>a \cdot (b + c) \cdot c &amp;= a \cdot b + a \cdot c<span class="sc">\\</span></span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>$$ {#eq-distributiv}</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a <span class="op">+</span> b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">+</span> b<span class="op">*</span>c</span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> a <span class="op">*</span> (b <span class="op">+</span> c) <span class="op">==</span> a<span class="op">*</span>b <span class="op">+</span> a<span class="op">*</span>c</span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Punktrechnung vor Strichrechnung</span></span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>Die Rechenzeichen $\cdot$ und $\div$ binden stärker als $+$ und $-$, das heißt, Multiplikation und Division müssen vor Addition und Subtraktion ausgeführt werden.</span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a>a + b \cdot c &amp;= a + (b \cdot c)<span class="sc">\\</span></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a>a - b \div c &amp;= a - (b \div c)</span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>Python berücksichtigt diese Regeln automatisch, so dass wir im letzten Codebeispiel die Klammern auf der rechten Seite weglassen konnten.</span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grundregeln der Klammerrechnung</span></span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a>Aus den Grundgesetzen der Addition und Multiplikation ergeben sich die wichtigen Regeln der Klammerrechnung, die wir in diesem Abschnitt untersuchen wollen.</span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a>Zuvor aber noch einen Hinweis für die mathematische Schreibweise von Produkten:</span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## Schreibweise von Produkten</span></span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a>Beim Aufschreiben von Produkten in der Form $a \cdot b$ lassen wir oft den Operator für die Multiplikation weg.</span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>Das heißt, $a \cdot b$ ist gleichbedeutend mit $ab$.\</span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>Das gilt aber nicht für Python-Code: hier muss ein Produkt immer in der Form <span class="in">`a * b`</span> angegeben werden; die Leerzeichen können aber auch weggelassen werden: <span class="in">`a*b`</span>.</span>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a>Außerdem ist noch eine Warnung angebracht: das Distributivgestz (@eq-distributiv) gilt nicht für die reine Multiplikation:</span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>(a\cdot b)\cdot c\neq ac\cdot bc, \ \mathrm{sondern} \ (a\cdot b)\cdot c=abc</span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">*</span>b)<span class="op">*</span>c <span class="op">==</span> a<span class="op">*</span>b<span class="op">*</span>c</span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>(a<span class="op">*</span>b) <span class="op">*</span> c <span class="op">==</span> a<span class="op">*</span>c <span class="op">*</span> b<span class="op">*</span>c</span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiplikation mit Klammern</span></span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>Summen und Differenzen von Produkten können vereinfacht werden, indem man gemeinsame Faktoren *ausklammert*.</span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ausklammern</span></span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a>Enthalten alle Glieder einer Summe oder Differenz den gleichen Faktor so kann man diesen ausklammern:</span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a>ab + ac &amp;= a(b+c)<span class="sc">\\</span></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a>ac - bc &amp;= (a-b)c</span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a>Produkte von Summen und Differenzen werden berechnet, indem man ihre Glieder multipliziert.</span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ausmultiplizieren</span></span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a>Man multipliziert zwei Summen (bzw. Differenzen) miteinander, indem man jedes Glied der einen Summe mit jedem Glied der anderen Summe multipliziert und die erhaltenen Produkte addiert (bzw. subtrahiert):</span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a>(a+b)(c+d) &amp;= ac+ad+bc+bd<span class="sc">\\</span></span>
+<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a>(a+b)(c-d) &amp;= ac-ad+bc-bd<span class="sc">\\</span></span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a>(a-b)(c+d) &amp;= ac+ad-bc-bd<span class="sc">\\</span></span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a>(a-b)(c-d) &amp;= ac-ad-bc+bd</span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a>Die grundsätzlich Bedeutung von Klammern ist, dass Teilausdrücke, die innerhalb einer Klammer stehen, vor allen anderen Operationen ausgewertet werden.</span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a>Bei verschachtelten Klammern sind die Klammern immer von innen nach außen aufzulösen:</span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a>a(b+c(d+e))=a(b+cd+ce)=ab+acd+ace</span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binomische Formeln {#sec-binom}</span></span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a>Ein *Binom* ist ein zweigliedriger Ausdruck in der Form $a+b$ oder $a-b$.</span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a>Die Multiplikation von Binomen führt zu den **Binomischen Formeln** (mit zwei Faktoren).</span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>Sie heißen daher auch *binomische Gleichungen 2. Grades*.</span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a>Bevor wir uns diese Gleichungen anschauen, wollen wir erst den Begiff der Quadratzahl einführen:</span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quadratzahl</span></span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a>Eine reelle Zahl $a$, multipliziert mit sich selbst, heißt **Quadratzahl** von $a$ (gesprochen *a Quadrat*):</span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a>a \cdot a = a^2</span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-296"><a href="#cb14-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Binomische Formeln</span></span>
+<span id="cb14-297"><a href="#cb14-297" aria-hidden="true" tabindex="-1"></a>Die binomischen Formeln für zwei beliebige reelle Zahlen lauten:</span>
+<span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-299"><a href="#cb14-299" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-300"><a href="#cb14-300" aria-hidden="true" tabindex="-1"></a>(a+b)^2 &amp;= a^2+2ab+b^2<span class="sc">\\</span></span>
+<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a>(a-b)^2 &amp;= a^2-2ab+b^2<span class="sc">\\</span></span>
+<span id="cb14-302"><a href="#cb14-302" aria-hidden="true" tabindex="-1"></a>(a+b)(a-b) &amp;= a^2-b^2</span>
+<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-304"><a href="#cb14-304" aria-hidden="true" tabindex="-1"></a>$$ {#eq-binom}</span>
+<span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-309"><a href="#cb14-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-311"><a href="#cb14-311" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">-</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">*</span>b <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-312"><a href="#cb14-312" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (a<span class="op">+</span>b)<span class="op">*</span>(a<span class="op">-</span>b) <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> b<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-313"><a href="#cb14-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-314"><a href="#cb14-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-315"><a href="#cb14-315" aria-hidden="true" tabindex="-1"></a>Diese Formeln sind keine Hexerei, sondern können mit den jetzt bekannten Rechenregeln hergeleitet werden.</span>
+<span id="cb14-316"><a href="#cb14-316" aria-hidden="true" tabindex="-1"></a>Für die erste binomische Formel könnte das so aussehen:</span>
+<span id="cb14-317"><a href="#cb14-317" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-318"><a href="#cb14-318" aria-hidden="true" tabindex="-1"></a>(a+b)^2=(a+b)(a+b)=aa+ab+ba+bb=a^2+2ab+b^2</span>
+<span id="cb14-319"><a href="#cb14-319" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-320"><a href="#cb14-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-321"><a href="#cb14-321" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb14-322"><a href="#cb14-322" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-323"><a href="#cb14-323" aria-hidden="true" tabindex="-1"></a>(a+b)^2 \neq a^2+b^2, \ \mathrm{sondern} \ (a+b)^2=a^2+2ab+b^2</span>
+<span id="cb14-324"><a href="#cb14-324" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-325"><a href="#cb14-325" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-326"><a href="#cb14-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-329"><a href="#cb14-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-330"><a href="#cb14-330" aria-hidden="true" tabindex="-1"></a>(a<span class="op">+</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-331"><a href="#cb14-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-332"><a href="#cb14-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-333"><a href="#cb14-333" aria-hidden="true" tabindex="-1"></a><span class="fu">## Indizes und Summenzeichen</span></span>
+<span id="cb14-334"><a href="#cb14-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-335"><a href="#cb14-335" aria-hidden="true" tabindex="-1"></a>Ein Index (Plural Indizes) ist ein Zeichen, das an Symbole für Variable, Funktionen oder Operationen angebracht wird.</span>
+<span id="cb14-336"><a href="#cb14-336" aria-hidden="true" tabindex="-1"></a>Bezeichnet man z.B. Variable mit $x$, dann kennzeichent man verschiedene Variable dudurch, dass man an das $x$ verschiedene tiefgestellte Indizes anhängt: $x_1, x_2, x_3, \dots$</span>
+<span id="cb14-337"><a href="#cb14-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-338"><a href="#cb14-338" aria-hidden="true" tabindex="-1"></a>Das Summenzeichen, (entstanden aus dem griechischen Buchstaben für S) dient zur vereinfachten Darstellung von Summen:</span>
+<span id="cb14-339"><a href="#cb14-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-340"><a href="#cb14-340" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-341"><a href="#cb14-341" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summenzeichen</span></span>
+<span id="cb14-342"><a href="#cb14-342" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-343"><a href="#cb14-343" aria-hidden="true" tabindex="-1"></a>\sum_{k=1}^n = a_k=a_1+a_2+a_3+\cdots+a_n,</span>
+<span id="cb14-344"><a href="#cb14-344" aria-hidden="true" tabindex="-1"></a>$$ {#eq-summe}</span>
+<span id="cb14-345"><a href="#cb14-345" aria-hidden="true" tabindex="-1"></a>gespochen als: Summe über $a_k$ von $k=1$ bis $k=n$.</span>
+<span id="cb14-346"><a href="#cb14-346" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-347"><a href="#cb14-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-348"><a href="#cb14-348" aria-hidden="true" tabindex="-1"></a>Man erhält alle Summanden der Summe, wenn man in $a_k$ für den Index $k$ zunächst 1, dann 2 usw. und schließlich $n$ setzt.</span>
+<span id="cb14-349"><a href="#cb14-349" aria-hidden="true" tabindex="-1"></a>Dieser Buchstabe $k$ heißt Summationsindex und kann durch einen beleibigen anderen Buchstaben ersetzt werden.</span>
+<span id="cb14-350"><a href="#cb14-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-351"><a href="#cb14-351" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb14-352"><a href="#cb14-352" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiel für Summen</span></span>
+<span id="cb14-353"><a href="#cb14-353" aria-hidden="true" tabindex="-1"></a>$\sum_{k=1}^6 k^2= 1^2+2^2+3^2+4^2+5^2+6^2=1+4+9+16+25+36=91$</span>
+<span id="cb14-354"><a href="#cb14-354" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-355"><a href="#cb14-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-356"><a href="#cb14-356" aria-hidden="true" tabindex="-1"></a>In Python können wir Summen auf verschiedene Weisen berechnen:</span>
+<span id="cb14-357"><a href="#cb14-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-360"><a href="#cb14-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-361"><a href="#cb14-361" aria-hidden="true" tabindex="-1"></a><span class="co"># manuelles Addieren</span></span>
+<span id="cb14-362"><a href="#cb14-362" aria-hidden="true" tabindex="-1"></a>sum_1 <span class="op">=</span> <span class="dv">1</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">4</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">6</span><span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-363"><a href="#cb14-363" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sum_1 <span class="op">==</span> <span class="dv">91</span></span>
+<span id="cb14-364"><a href="#cb14-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-365"><a href="#cb14-365" aria-hidden="true" tabindex="-1"></a><span class="co"># Addieren in einer for-Schleife</span></span>
+<span id="cb14-366"><a href="#cb14-366" aria-hidden="true" tabindex="-1"></a>sum_2 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-367"><a href="#cb14-367" aria-hidden="true" tabindex="-1"></a>ks <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]                  <span class="co"># &lt;1&gt;</span></span>
+<span id="cb14-368"><a href="#cb14-368" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> ks:                        <span class="co"># &lt;2&gt;</span></span>
+<span id="cb14-369"><a href="#cb14-369" aria-hidden="true" tabindex="-1"></a>  sum_2 <span class="op">+=</span> s<span class="op">**</span><span class="dv">2</span>                     <span class="co"># &lt;3&gt;</span></span>
+<span id="cb14-370"><a href="#cb14-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-371"><a href="#cb14-371" aria-hidden="true" tabindex="-1"></a><span class="co">## Addieren über den Index</span></span>
+<span id="cb14-372"><a href="#cb14-372" aria-hidden="true" tabindex="-1"></a>sum_3 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-373"><a href="#cb14-373" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ks)):            <span class="co"># &lt;4&gt;</span></span>
+<span id="cb14-374"><a href="#cb14-374" aria-hidden="true" tabindex="-1"></a>  sum_3 <span class="op">+=</span> ks[i]<span class="op">**</span><span class="dv">2</span>                 <span class="co"># &lt;5&gt;</span></span>
+<span id="cb14-375"><a href="#cb14-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-376"><a href="#cb14-376" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sum_1 <span class="op">==</span> sum_2 <span class="op">==</span> sum_3</span>
+<span id="cb14-377"><a href="#cb14-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-378"><a href="#cb14-378" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Definition der Werte für den Summationsindex $k$ als Python Liste.</span>
+<span id="cb14-379"><a href="#cb14-379" aria-hidden="true" tabindex="-1"></a>Zur Erstellung einer Liste geben wir die Werte, getrennt durch ein Komma, in eckigen Klammern an.</span>
+<span id="cb14-380"><a href="#cb14-380" aria-hidden="true" tabindex="-1"></a>Das Ergebis dieser Definition ist Objekt des Datentyps <span class="in">`list`</span>.</span>
+<span id="cb14-381"><a href="#cb14-381" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Beginn einer <span class="in">`for`</span> Schleife mit <span class="in">`s`</span> als Schleifenvariable und dem Objekt <span class="in">`ks`</span>.</span>
+<span id="cb14-382"><a href="#cb14-382" aria-hidden="true" tabindex="-1"></a>Diese Anweisung führt dazu, dass die nächste Code-Zeile (3) für jedes Element in <span class="in">`ks`</span> einmal ausgeführt wird.</span>
+<span id="cb14-383"><a href="#cb14-383" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Der Wert von <span class="in">`sum_2`</span> wird um das Quadrat des jeweiligen Elements <span class="in">`s`</span> erhöht.</span>
+<span id="cb14-384"><a href="#cb14-384" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Python erzeugt automatisch einen Index für jedes <span class="in">`list`</span> Objekt.</span>
+<span id="cb14-385"><a href="#cb14-385" aria-hidden="true" tabindex="-1"></a>Wir können mit dem Ausdruck <span class="in">`range(len(ks))`</span> eine neue Liste dieser Indizes erzeugen.</span>
+<span id="cb14-386"><a href="#cb14-386" aria-hidden="true" tabindex="-1"></a>Die Indizes in Python beginnen, abweichend von der mathematischen Definition, mit 0 und enden demgemäß mit $n-1$, in unserem Beispiel mit 5.</span>
+<span id="cb14-387"><a href="#cb14-387" aria-hidden="true" tabindex="-1"></a>Wir werden in der Lektion <span class="co">[</span><span class="ot">Zahlenbereiche und Zahlensyteme</span><span class="co">](3-mengen.qmd)</span> sehen, wie wir die Funktion <span class="in">`range()`</span> korrekt anwenden.</span>
+<span id="cb14-388"><a href="#cb14-388" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Auf das $i$-te Element einer Liste kann mit <span class="in">`list[i]`</span> zugegriffen werden.</span>
+<span id="cb14-389"><a href="#cb14-389" aria-hidden="true" tabindex="-1"></a>Der Ausdruck <span class="in">`ks[i]`</span> ist also synonym zum Ausdruck <span class="in">`s`</span> im vorangehenden Code-Beispiel.</span>
+<span id="cb14-390"><a href="#cb14-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-391"><a href="#cb14-391" aria-hidden="true" tabindex="-1"></a><span class="fu">## Übungen {#sec-ubung}</span></span>
+<span id="cb14-392"><a href="#cb14-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-393"><a href="#cb14-393" aria-hidden="true" tabindex="-1"></a>Wir werden in dieser Lektion ein paar einfache Rechenübungen durchführen, bevor wir dann ab der nächsten Lektion mit <span class="co">[</span><span class="ot">Jupyter Notebooks</span><span class="co">](https://jupyter.org/)</span> arbeiten werden.</span>
+<span id="cb14-394"><a href="#cb14-394" aria-hidden="true" tabindex="-1"></a>Deine erste Aufgabe besteht also darin, dir eine entsprechende Arbeitsumgebung einzurichten.</span>
+<span id="cb14-395"><a href="#cb14-395" aria-hidden="true" tabindex="-1"></a>Falls du noch kein Python auf deinem Rechner hast, empfehle ich dir, zuerst *Miniconda* entsprechend diesen <span class="co">[</span><span class="ot">Anleitungen</span><span class="co">](https://docs.anaconda.com/miniconda/miniconda-install/)</span> zu installieren.</span>
+<span id="cb14-396"><a href="#cb14-396" aria-hidden="true" tabindex="-1"></a>Wenn das geschafft ist, dann kannst du mit einem Befehl wie</span>
+<span id="cb14-397"><a href="#cb14-397" aria-hidden="true" tabindex="-1"></a><span class="in">```shell</span></span>
+<span id="cb14-398"><a href="#cb14-398" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> matheKapieren python=3.12</span>
+<span id="cb14-399"><a href="#cb14-399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-400"><a href="#cb14-400" aria-hidden="true" tabindex="-1"></a>in deiner Kommandozeile eine neue Arbeitsumgebung einrichten und Python installieren.</span>
+<span id="cb14-401"><a href="#cb14-401" aria-hidden="true" tabindex="-1"></a>Um die Arbeitsumgebung zu aktivieren, setze den Befehl <span class="in">`conda activate matheKapieren`</span> ab, dann kannst du auf alle Python Werkzeuge zugreifen.</span>
+<span id="cb14-402"><a href="#cb14-402" aria-hidden="true" tabindex="-1"></a>Schließlich kannstdu mit <span class="in">`conda install -c conda-forge jupyter`</span> Jupyter und später noch weitere Pakete installieren.</span>
+<span id="cb14-403"><a href="#cb14-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-404"><a href="#cb14-404" aria-hidden="true" tabindex="-1"></a>Nun aber zu den Übungen:</span>
+<span id="cb14-405"><a href="#cb14-405" aria-hidden="true" tabindex="-1"></a>wenn du bei einer Aufgabe Schwierigkeiten hast, schau dir den entsprechenden Lösungshinweis an, und vergleiche dann deine Lösung mit meinem Lösungsvorschlag.</span>
+<span id="cb14-406"><a href="#cb14-406" aria-hidden="true" tabindex="-1"></a>Mache dir aber auf jeden Fall Gedanken, wie du die Aufgabe lösen kannst.</span>
+<span id="cb14-407"><a href="#cb14-407" aria-hidden="true" tabindex="-1"></a>Wenn du gleich zur Lösung springst, wirst du *nichts* lernen.</span>
+<span id="cb14-408"><a href="#cb14-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-409"><a href="#cb14-409" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-410"><a href="#cb14-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 1</span></span>
+<span id="cb14-411"><a href="#cb14-411" aria-hidden="true" tabindex="-1"></a>Berechne die Quersumme von $1.234.567.890$.</span>
+<span id="cb14-412"><a href="#cb14-412" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-413"><a href="#cb14-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-414"><a href="#cb14-414" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-415"><a href="#cb14-415" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
+<span id="cb14-416"><a href="#cb14-416" aria-hidden="true" tabindex="-1"></a>Die Quersumme einer Zahl ist die Summe ihrer Ziffern.</span>
+<span id="cb14-417"><a href="#cb14-417" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-418"><a href="#cb14-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-419"><a href="#cb14-419" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-420"><a href="#cb14-420" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-421"><a href="#cb14-421" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-422"><a href="#cb14-422" aria-hidden="true" tabindex="-1"></a>1+2+3+4+5+6+7+8+9+0=45</span>
+<span id="cb14-423"><a href="#cb14-423" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-424"><a href="#cb14-424" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-425"><a href="#cb14-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-426"><a href="#cb14-426" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-427"><a href="#cb14-427" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 2</span></span>
+<span id="cb14-428"><a href="#cb14-428" aria-hidden="true" tabindex="-1"></a>Leite die 2. binomische Formel her.</span>
+<span id="cb14-429"><a href="#cb14-429" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-430"><a href="#cb14-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-431"><a href="#cb14-431" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-432"><a href="#cb14-432" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
+<span id="cb14-433"><a href="#cb14-433" aria-hidden="true" tabindex="-1"></a>Gehe genauso vor wie bei der Herleitung der 1. binomischen Formel in @sec-binom.</span>
+<span id="cb14-434"><a href="#cb14-434" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-435"><a href="#cb14-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-436"><a href="#cb14-436" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-437"><a href="#cb14-437" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-438"><a href="#cb14-438" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-439"><a href="#cb14-439" aria-hidden="true" tabindex="-1"></a>(a-b)^2=(a-b)(a-b)=aa-ab-ba+bb=a^2-2ab+b^2</span>
+<span id="cb14-440"><a href="#cb14-440" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-441"><a href="#cb14-441" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-442"><a href="#cb14-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-443"><a href="#cb14-443" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-444"><a href="#cb14-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 3</span></span>
+<span id="cb14-445"><a href="#cb14-445" aria-hidden="true" tabindex="-1"></a>Leite die 3. binomische Formel her.</span>
+<span id="cb14-446"><a href="#cb14-446" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-447"><a href="#cb14-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-448"><a href="#cb14-448" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-449"><a href="#cb14-449" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-450"><a href="#cb14-450" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-451"><a href="#cb14-451" aria-hidden="true" tabindex="-1"></a>(a+b)(a-b)=aa-ab+ba-bb=aa-bb=a^2-b^2</span>
+<span id="cb14-452"><a href="#cb14-452" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-453"><a href="#cb14-453" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-454"><a href="#cb14-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-455"><a href="#cb14-455" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-456"><a href="#cb14-456" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 4</span></span>
+<span id="cb14-457"><a href="#cb14-457" aria-hidden="true" tabindex="-1"></a>Berechne $3(200+7)$.</span>
+<span id="cb14-458"><a href="#cb14-458" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-459"><a href="#cb14-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-460"><a href="#cb14-460" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-461"><a href="#cb14-461" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-462"><a href="#cb14-462" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-463"><a href="#cb14-463" aria-hidden="true" tabindex="-1"></a>3(200+7)=3\cdot 200+3\cdot 7= 600+21=621</span>
+<span id="cb14-464"><a href="#cb14-464" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-465"><a href="#cb14-465" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-466"><a href="#cb14-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-467"><a href="#cb14-467" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-468"><a href="#cb14-468" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 5</span></span>
+<span id="cb14-469"><a href="#cb14-469" aria-hidden="true" tabindex="-1"></a>Vereinfache den Term: $abc-acd+ace$.</span>
+<span id="cb14-470"><a href="#cb14-470" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-471"><a href="#cb14-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-472"><a href="#cb14-472" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-473"><a href="#cb14-473" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
+<span id="cb14-474"><a href="#cb14-474" aria-hidden="true" tabindex="-1"></a>Klammere die gemeinsamen Faktoren aus.</span>
+<span id="cb14-475"><a href="#cb14-475" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-476"><a href="#cb14-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-477"><a href="#cb14-477" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-478"><a href="#cb14-478" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-479"><a href="#cb14-479" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-480"><a href="#cb14-480" aria-hidden="true" tabindex="-1"></a>abc-acd+ace=ac(b-d+e)</span>
+<span id="cb14-481"><a href="#cb14-481" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-482"><a href="#cb14-482" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-483"><a href="#cb14-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-484"><a href="#cb14-484" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-485"><a href="#cb14-485" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 6</span></span>
+<span id="cb14-486"><a href="#cb14-486" aria-hidden="true" tabindex="-1"></a>Vereinfache den Term: $-5x^2+25xy-35zx$.</span>
+<span id="cb14-487"><a href="#cb14-487" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-488"><a href="#cb14-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-489"><a href="#cb14-489" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-490"><a href="#cb14-490" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-491"><a href="#cb14-491" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-492"><a href="#cb14-492" aria-hidden="true" tabindex="-1"></a>-5x^2+25xy-35zx=-5x(x-5y+7z)</span>
+<span id="cb14-493"><a href="#cb14-493" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-494"><a href="#cb14-494" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-495"><a href="#cb14-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-496"><a href="#cb14-496" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-497"><a href="#cb14-497" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 7</span></span>
+<span id="cb14-498"><a href="#cb14-498" aria-hidden="true" tabindex="-1"></a>Ist 11.543.711 durch 11 teilbar?</span>
+<span id="cb14-499"><a href="#cb14-499" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-500"><a href="#cb14-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-501"><a href="#cb14-501" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-502"><a href="#cb14-502" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
+<span id="cb14-503"><a href="#cb14-503" aria-hidden="true" tabindex="-1"></a>Verwende die alternierende Quersumme.</span>
+<span id="cb14-504"><a href="#cb14-504" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-505"><a href="#cb14-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-506"><a href="#cb14-506" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-507"><a href="#cb14-507" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-508"><a href="#cb14-508" aria-hidden="true" tabindex="-1"></a>11.513.511 ist nicht durch 11 teilbar, denn die alternierende Quersumme $+1-1+5-1+3-5+1-1=2$ ist nicht teilbar durch 11.</span>
+<span id="cb14-509"><a href="#cb14-509" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-510"><a href="#cb14-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-511"><a href="#cb14-511" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-512"><a href="#cb14-512" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 8</span></span>
+<span id="cb14-513"><a href="#cb14-513" aria-hidden="true" tabindex="-1"></a>Berechne $21^2$.</span>
+<span id="cb14-514"><a href="#cb14-514" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-515"><a href="#cb14-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-516"><a href="#cb14-516" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-517"><a href="#cb14-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
+<span id="cb14-518"><a href="#cb14-518" aria-hidden="true" tabindex="-1"></a>Versuche, die 1. binomische Formel anzuwenden.</span>
+<span id="cb14-519"><a href="#cb14-519" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-520"><a href="#cb14-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-521"><a href="#cb14-521" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-522"><a href="#cb14-522" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-523"><a href="#cb14-523" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-524"><a href="#cb14-524" aria-hidden="true" tabindex="-1"></a>21^2=(20+1)^2=20^2+2\cdot 20\cdot 1+1^2=400+40+1=441</span>
+<span id="cb14-525"><a href="#cb14-525" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-526"><a href="#cb14-526" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-527"><a href="#cb14-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-528"><a href="#cb14-528" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-529"><a href="#cb14-529" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 9</span></span>
+<span id="cb14-530"><a href="#cb14-530" aria-hidden="true" tabindex="-1"></a>Berechne $19^2$.</span>
+<span id="cb14-531"><a href="#cb14-531" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-532"><a href="#cb14-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-533"><a href="#cb14-533" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-534"><a href="#cb14-534" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-535"><a href="#cb14-535" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-536"><a href="#cb14-536" aria-hidden="true" tabindex="-1"></a>19^2=(20-1)^2=20^2-2\cdot 20\cdot 1+1^2=400-40+1=361</span>
+<span id="cb14-537"><a href="#cb14-537" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-538"><a href="#cb14-538" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-539"><a href="#cb14-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-540"><a href="#cb14-540" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-541"><a href="#cb14-541" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 10</span></span>
+<span id="cb14-542"><a href="#cb14-542" aria-hidden="true" tabindex="-1"></a>Vereinfache den Term: $5(x-2(x-y-3y-6x-3y)+2y)$.</span>
+<span id="cb14-543"><a href="#cb14-543" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-544"><a href="#cb14-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-545"><a href="#cb14-545" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-546"><a href="#cb14-546" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-547"><a href="#cb14-547" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-548"><a href="#cb14-548" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb14-549"><a href="#cb14-549" aria-hidden="true" tabindex="-1"></a>5(x-2(x-y-3y-6x-3y)+2y) &amp;= 5(x-2(-5x-7y)+2y)<span class="sc">\\</span></span>
+<span id="cb14-550"><a href="#cb14-550" aria-hidden="true" tabindex="-1"></a>&amp;=5(x+10x+14y+2y)<span class="sc">\\</span></span>
+<span id="cb14-551"><a href="#cb14-551" aria-hidden="true" tabindex="-1"></a>&amp;=5(11x+16y)<span class="sc">\\</span></span>
+<span id="cb14-552"><a href="#cb14-552" aria-hidden="true" tabindex="-1"></a>&amp;=55x+80y</span>
+<span id="cb14-553"><a href="#cb14-553" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb14-554"><a href="#cb14-554" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-555"><a href="#cb14-555" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-556"><a href="#cb14-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-557"><a href="#cb14-557" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-558"><a href="#cb14-558" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 11</span></span>
+<span id="cb14-559"><a href="#cb14-559" aria-hidden="true" tabindex="-1"></a>Berechne $21\cdot 19$.</span>
+<span id="cb14-560"><a href="#cb14-560" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-561"><a href="#cb14-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-562"><a href="#cb14-562" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-563"><a href="#cb14-563" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hinweis</span></span>
+<span id="cb14-564"><a href="#cb14-564" aria-hidden="true" tabindex="-1"></a>Versuche, die 3. binomische Formel anzuwenden.</span>
+<span id="cb14-565"><a href="#cb14-565" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-566"><a href="#cb14-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-567"><a href="#cb14-567" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-568"><a href="#cb14-568" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-569"><a href="#cb14-569" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-570"><a href="#cb14-570" aria-hidden="true" tabindex="-1"></a>21 \cdot 19=(20+1)(20-1)=20^2-1^2=400-1=399</span>
+<span id="cb14-571"><a href="#cb14-571" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-572"><a href="#cb14-572" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-573"><a href="#cb14-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-574"><a href="#cb14-574" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb14-575"><a href="#cb14-575" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aufgabe 12</span></span>
+<span id="cb14-576"><a href="#cb14-576" aria-hidden="true" tabindex="-1"></a>Berechne $17\cdot 23$.</span>
+<span id="cb14-577"><a href="#cb14-577" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-578"><a href="#cb14-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-579"><a href="#cb14-579" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb14-580"><a href="#cb14-580" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb14-581"><a href="#cb14-581" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-582"><a href="#cb14-582" aria-hidden="true" tabindex="-1"></a>17 \cdot 23=(20-3)(20+3)=20^2-3^2=400-9=391</span>
+<span id="cb14-583"><a href="#cb14-583" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-584"><a href="#cb14-584" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
