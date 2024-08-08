@@ -1,6 +1,5 @@
 ---
 title: "Zahlenbereiche und Zahlensysteme"
-jupyter: python3
 ---
 
 Bisher haben wir wie selbstverständlich von natürlichen und reellen Zahlen gesprochen, ohne überhaupt genau zu wissen, was wir darunter verstehen wollen.

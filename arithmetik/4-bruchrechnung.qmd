@@ -1,6 +1,5 @@
 ---
 title: "Bruchrechnung"
-jupyter: python3
 ---
 
 ## Definitionen

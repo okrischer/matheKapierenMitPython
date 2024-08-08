@@ -1,6 +1,5 @@
 ---
 title: "Grundlegende Rechenregeln"
-jupyter: python3
 ---
 
 Um mit Zahlen rechnen zu können, verknüpfen wir sie mit mathematischen *Operatoren*.

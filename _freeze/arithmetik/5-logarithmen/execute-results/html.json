@@ -1,0 +1,12 @@
+{
+  "hash": "c4c327aa619cfe752953927ad425a3d5",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: 'Potenzen, Wurzeln, Logarithmen'\n---\n\n",
+    "supporting": [
+      "5-logarithmen_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

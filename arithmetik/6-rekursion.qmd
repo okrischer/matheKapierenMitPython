@@ -1,0 +1,622 @@
+---
+title: "Rekursion"
+---
+
+Rekursion ist eine wichtige Problemlösungsstrategie der Mathematik und der Programmierung.
+Komplexe Sachverhalte können oft mit rekursiv formulierten Regeln sehr elegant erfasst werden.
+Das Grundprinzip der Rekursion besteht darin, eine komplexe Aufgabe in gleichförmige Teilaufgaben zu zerlegen, die dann einfach gelöst werden können.
+
+::: {.callout-important}
+## Rekursion
+Als Rekursion wird ein prinzipiell unendlicher Vorgang bezeichnet, der sich selbst als Teil enthält oder mithilfe von sich selbst definierbar ist.\
+Die bei der Rekursion aufeinander folgenden Teilvorgänge sind nicht unabhängig voneinander, sondern zwischen jedem Schrittpaar besteht eine besondere, die *rekursive Beziehung*.
+:::
+
+Das klingt erstmal nicht besonders einleuchtend.
+Ein alltägliches Beispiel kann das Funktionsprinzip der Rekursion vielleicht erhellen:
+
+::: {.callout-tip}
+## Einschrauben ein Glühbirne
+**Frage**: Wie viele Umdrehungen sind nötig, um eine Glühbirne einzuschrauben?\
+**Antwort**: Ist sie bereits eingeschraubt? Dann ist die Antwort null.
+Wenn nicht, dann drehe sie einmal, frage mich erneut, und addiere 1 zu meiner Antwort.
+:::
+
+## Mathematische Beispiele
+
+Mathematische Objekte werden häufig *rekursiv* definiert, d.h. mit Bezug auf sich selbst.
+Solche Objekte können dann mit Hilfe von Rekursion bestimmt werden.
+
+### Fakultät
+
+Als erstes Beispiel für Rekursion wollen wir die Berechnung der *Fakultät* untersuchen.
+
+::: {.callout-important}
+## Fakultät
+Die Funktion Fakultät ($n!$) einer natürlichen Zahl $n \geq 1$ ist definiert als das Produkt der Zahlen 1 bis $n$:
+$$
+n! = 1\cdot2\cdot3\cdots n=\prod_{k=1}^n{k}
+$$ {#eq-fakt}
+:::
+
+::: {.callout-tip}
+## Beispiele
+$$
+\begin{align}
+1! &= 1 &= & 1 \\
+2! &= 1\cdot2 &= & 2 \\
+3! &= 1\cdot2\cdot3 &= & 6 \\
+4! &= 1\cdot2\cdot3\cdot4 &= & 24 \\
+\end{align}
+$$
+:::
+
+Soll diese Liste fortgesetzt werden, ergibt sich die Rekursivität nahezu von selbst.
+Für die Berechnung von $5!$ wollen wir nicht von vorn beginnen, sondern wir greifen auf das vorherige Ergebniss zurück, also $5! = 4! \cdot 5=24\cdot5=120$.
+
+::: {.callout-important}
+## Rekursive Definition der Fakultät
+Verallgemeinert lässt sich die Funktion Fakultät somit *rekursiv* definieren:
+$$
+n! =
+\begin{cases}
+1 &\text{, falls} \ n=1 &\text{(Rekursionsanfang)}\\
+n \cdot (n-1)! &\text{, sonst} &\text{(Rekursionsschritt)}
+\end{cases}
+$$ {#eq-fakt-rek}
+:::
+
+
+Wir können den Wert der Fakultät also mittes Rekursion in Python bestimmen:
+
+```{python}
+def fakultät(n):                                                    # <1>
+    if n == 1:                                                      # <2>
+        return 1
+    else:
+        return n * fakultät(n-1)                                    # <3>
+
+assert fakultät(5) == 120
+```
+1. Signatur der rekursiven Funktion `fakultät`.
+Das entspricht einer "gewöhnlichen" Funktionsdefinition; eine rekursive Funktion muss in Python nicht besonders gekennzeichnet werden.
+2. **Rekursionsanfang**: Test, ob der Eingabewert dem definierten Rekursionsanfang entspricht.
+Falls ja, geben wir den Wert 1 zurück.
+3. **Rekursionsschritt**: Wenn der Eingabewert nicht dem Rekursionsanfang entspricht, dann wird das Ergebnis rekursiv berechnet, d.h. die Funktion ruft sich selbst mit neuem Argument auf.
+Das neue Argument ist in diesem Fall `n-1`.
+
+::: {.callout-note}
+## Rekursive Funktion
+Rekursion wird in der Programmierung über eine *rekursive Funktion* abgebildet, d.h. mit einer Funktion, die sich selbst wiederholt aufruft.\
+Entsprechend der rekursiven Definition muss auch eine rekursive Funktion dabei immer zwei Fälle berücksichtigen:
+
+- **Rekursionsanfang**: Falls der definierte Wert für den Rekursionsanfang erreicht ist, gibt die Funktion das dafür definierte Ergebnis aus.
+In diesem Fall darf kein weiterer rekursiver Aufruf erfolgen.
+- **Rekursionsschritt**: Falls der Eingabewert nicht dem Rekursionsanfang entspricht, wird der nächste Schritt der Berechnung durchgeführt, indem sich die Funktion mit einem neuen Argument selbst wieder aufruft.
+
+**Beachte**: Das neue Argument für den rekursiven Aufruf muss *immer* so gewählt werden, dass es sich dem Wert des Rekursionsanfangs annähert und am Ende auch diesen Wert erreicht.
+:::
+
+Bei der Fakultät handelt es sich um eine *linear rekursive* Definition, bei der höchstens *ein* rekursiver Aufruf vorkommt.
+Die Berechnung mittels Python verläuft daher entlang einer Kette von Aufrufen.
+Bei einer solchen Rekursion enthält der *Aufrufbaum* also keine Verzweigungen.
+
+Um die Abarbeitung des Aufrufbaums verdeutlichen, ergänzen wir die Funktion `fakultät` um zwei Ausgaben:
+
+```{python}
+def fakultät(n):
+    if n == 1:
+        print(f"n = {n}: Rekursionsanfang erreicht")
+        return 1
+    else:
+        print(f"n = {n}: Rekursionsschritt mit neuem Argument {n-1}")
+        return n * fakultät(n-1)
+
+fakultät(5)
+```
+
+Damit ein rekursives Programm das Ergebnis berechnen kann, müssen alle bisherigen Teilergebnisse zwischengespeichert werden.
+Das passiert automatisch in einem besonderen Programmspeicher, dem sogenannten *program stack*.
+Wenn es sich um eine sehr komplexe Berechnung handelt, oder wenn sich das Argument des rekursiven Aufrufs nicht dem Wert des Rekursionsanfangs annähert, dann muss das Programm sehr viele dieser Zwischenergebnisse speichern.
+Im schlimmsten Fall führt das zu einem Programmabruch, weil der Progammspeicher voll ist; das ist bekannt als *stack overflow*.
+
+Einige funktionale Programmiersprachen (wie z.B. Haskell, F# oder Scala) umgehen dieses Problem, indem sie eine optimierte Abarbeitung ermöglichen, die eine rekursive Schleife intern in eine iterative Schleife umwandelt.
+Dazu muss aber eine sogenannte *endständige Rekursion* vorliegen, in der der rekursive Aufruf der letzte Aufruf der Funktion ist; außerdem dürfen bei diesem Aufruf keine weiteren Operationen durchgeführt werden.
+
+Unsere Funktion `fakultät` ist also nicht *endständig rekursiv*, da der rekursive Aufruf zusätzlich mit einer Multiplikation verknüpft ist.
+Das Problem kann aber gelöst werden, indem wir die Multiplikation vorher durchführen und das Produkt mit einem zusätzlichen Parameter dem rekursiven Aufruf hinzufügen.
+
+```{python}
+def fakultät(n):                                                # <1>
+    def rek(n, p):                                              # <2>
+        if n == 1:
+            print(f"Rekursionsanfang, Ergebnis = {p}")
+            return p                                            # <3>
+        else:
+            p *= n                                              # <4>
+            print(f"n = {n}, produkt = {p}")
+            return rek(n-1, p)                                  # <5>
+    return rek(n, 1)                                            # <6>
+
+fakultät(5)
+```
+1. Definition einer "gewöhnlichen" Funktion.
+2. Definition einer inneren, rekursiven Funktion mit einem zweiten Parameter für die Speicherung der Zwischenergebnisse.
+3. Rekursionsanfang: wir geben hier anstelle der 1 das letzte Teilergebnis zurück.
+4. Durchführung der Multiplikation und Zuweisung an `p`, dem Teilergebnis.
+5. Rekursiver Aufruf mit neuem Argument und bisherigem Teilergebnis.
+6. Aufruf der rekursiven Funktion mit dem definierten Wert für den Rekursionsanfang.
+
+In einer imperativen Sprachen wie Python ist diese Optimierung aber ohne Belang: der Compiler bzw. Interpreter kann kann eine endständige Rekursion nicht automatisch in eine iterative Schleife überführen.\
+Aber wir können eine lineare Rekursion auch explizit als iterative Schleife ausdrücken.
+Das Vorgehen hierzu entspricht dem der endständigen Rekursion: 
+
+```{python}
+def fakultät(n):
+    p = 1                                           # <1>
+    while n != 1:                                   # <2>
+        p *= n                                      # <3>
+        n -= 1                                      # <4>
+        print(f"n = {n}, produkt = {p}")
+    print(f"Rekursionsanfang, Ergebnis = {p}")
+    return p
+
+fakultät(5)
+```
+1. Initialisierung des Ergebnisses mit 1, dem Wert für den Rekursionsanfang.
+2. Beginn einer iterativen Schleife, deren Bedingung prüft, ob der Rekursionsanfang erreicht wurde.
+3. Durchführung der Multiplikation und Zuweisung an `p`, dem Teilergebnis.
+4. Verringerung der Schleifenvariablen um 1.
+
+### Größter gemeinsamer Teiler
+
+In Lektion [Teiler und Vielfache](2-teiler.qmd#sec-ggT) haben wir den größten gemeinsamen Teiler zweier ganzer Zahlen iterativ berechnet mit folgender Funktion:
+
+
+```{python}
+def ggT_iter(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+```
+
+Hier werden innerhalb der itertiven Schleife nur zwei Anweisungen wiederholt ausgeführt:
+
+> setze `a` gleich `b`, und `b` gleich `a % b`.
+
+Genauso, wie wir eine rekursive Schleife in eine iterative Schleife überführen können, können wir auch den umgekehrten Schritt machen: eine itertive Schleife als rekursive Schleife ausdrücken:
+
+```{python}
+def ggT_rek(a, b):
+    if b == 0: return a
+    else: return ggT_rek(b, a % b)
+```
+
+Hier werden die selben Anweisungen ausgeführt, aber dieses mal in einer rekursiven Schleife, indem die Funktion mit den entprechenden Argumenten aufgerufen wird:
+
+> setze Parameter `a` auf `b`, und Parameter `b` auf `a % b`.
+
+Wir haben in beiden Versionen exakt denselben Algorithmus implementiert, mit der Folge, dass die Funktionen das selbe Ergebnis mit der selben Anzahl von Berechnungsschritten liefern:
+
+```{python}
+assert ggT_iter(143, 65) == ggT_rek(143, 65)
+assert ggT_iter(3780, 3528) == ggT_rek(3780, 3528)
+```
+
+Es besteht aber ein *semantischer* Unterschied, d.h. in der Art *wie* wir den Algorithmus ausdrücken.\
+Die **iterative Variante** folgt diesem Muster:
+
+> solange der Rekursionsanfang *nicht* erreicht ist:\
+> >>> wiederhole die Anweisungen\
+> anderenfalls gib das Ergebnis aus
+
+Die **rekursive Variante** folgt diesem Muster:
+
+> wenn der Rekursionsanfang erreicht ist:\
+> gib das Ergebnis aus\
+> >>> anderenfalls wiederhole die Anweisungen
+
+
+
+
+### Fibonacci-Folge
+
+Das Paradebeispiel rekursiver Definitionen in der Mathematik ist die sogenannte *Fibonacci Folge*.
+Benannt ist die Folge nach dem italienischen Mathematiker Leonardo Fibonacci, den wir bereits in der Lektion [Zahlenbereiche und Zahlensysteme](3-mengen.qmd#sec-dezimal) kennengelernt haben.
+Fibonacci hatte mit dieser Zahlenfolge in seinem Rechenbuch *Liber abbaci* das Wachstum einer (fiktiven) Kaninchenpopulation beschrieben.
+
+Die Fibonacci-Folge ist die unendliche Folge natürlicher Zahlen, die mit den Zahlen 0 und 1 beginnt, und bei der jede Zahl die Summe der beiden ihr vorangehenden Zahlen ist.
+Die Fibonacci-Folge ist also deshalb *rekursiv*, weil ihre Elemente in Bezug auf ihre jeweils vorangehenden Elemente definiert sind.
+
+::: {.callout-important}
+## Rekursive Definition der Fibonacci-Folge
+Die Fibonacci-Folge ist wie folgt mathematisch definiert:
+$$
+\begin{align}
+F_0 &= 0 \\
+F_1 &= 1 \\
+F_n &= F_{n-1} + F_{n-2}
+\end{align}
+$$ {#eq-fibonacci}
+:::
+
+Wir können die Zahlen der Fibonacci-Folge also mittels Rekursion in Python bestimmen:
+
+```{python}
+def fib_rek(n):
+    if n < 2:                                           # <1>
+        return n
+    else:
+        return fib_rek(n-1) + fib_rek(n-2)          # <2>
+
+assert fib_rek(10) == 55
+```
+1. *Rekursionsanfang*: Test, ob `n` gleich 0 oder 1 ist. Falls ja, dann geben wir `n` als Ergebnis zurück
+2. *Rekursionsschritt*: Wenn `n` größer als 1 ist, dann wird das Ergebnis durch zwei rekursive Aufrufe der Funktion berechnet.
+Das Ergebnis ist dann die $n$-te Fibonacci-Zahl.
+
+Diese Rekursion ist also nicht linear, da hier zwei rekursive Aufrufe nacheinander vorkommen.
+Man nennt diese Form auch *kaskadenförmige* oder *verschachtelte* Rekursion, da die Aufrufe hier einen verschachtelten Baum bilden, der sich bei jedem Aufruf zweifach verzweigt.
+
+Wir können auch das wieder veranschaulichen, indem wir Programmausgaben einfügen:
+
+```{python}
+def fib_print(n):
+    if n < 2:                                           # <1>
+        print(f"Rekursionsanfang mit n = {n}")
+        return n
+    else:
+        print(f"Rekursionsschritt mit n = {n}")
+        return fib_print(n-1) + fib_print(n-2)          # <2>
+
+fib_print(4)
+```
+Es ist nicht notwendig, diesen Ablaufbaum im Detail zu verstehen, das kann bei einer verschachtelten Rekursion recht schwierig sein.
+Wir wollen aber wissen, wie schnell der Baum wächst; ich habe dazu `fib_print` mit den Argumenten 3, 4 und 5 aufgerufen und jeweils die Ausgabezeilen gezählt:
+
+- $fib(3)=5$
+- $fib(4)=9$
+- $fib(5)=15$
+
+Mit ein wenig Intuition (oder ausprobieren) finden wir heraus, dass die Wachstumsrate ungefähr gleich $2^{n-1}$ ist, d.h. der Aufwand steigt exponentiell in Abhängigkeit vom Eingabewert $n$.
+Schon bei einem Eingabewert größer als 30 müssen wir mit mehr als einer Milliarde Aufrufen rechnen.
+Wir können die Bearbeitungszeit einer Anweisung in Python mit dem *magic command* `%time` messen:
+
+```{python}
+%time fib_rek(35)
+```
+
+Die Bearbeitungszeit beträgt knapp 900 Millisekunden ($1ms = 10^{-3}s$), also fast eine Sekunde.
+Das ist für größere Eingabewerte nicht mehr praktikabel.
+
+Eine Möglichkeit zur Lösung des Problems ist die Anwendung einer Technik, die als *memoization* bezeichnet wird.
+Dabei werden Teilergebnisse, die bereits berechnet wurden, in einem Zwischenspeicher (engl. *cache*) gespeichert, und aus diesem cache abgerufen, ohne eine erneute Berechnung durchzuführen.
+
+```{python}
+cache = {0: 0, 1: 1}                                # <1>
+
+def fib_mem(n):
+    if n not in cache:                              # <2>
+        cache[n] = fib_mem(n-1) + fib_mem(n-2)      # <3>
+    return cache[n]                                 # <4>
+
+assert fib_mem(10) == fib_rek(10)
+print(cache)
+```
+1. Definition des Zwischenspeichers als `dict` mit den Werten aus dem Rekursionsanfang.
+2. Test, ob das Ergebnis für `n` bereits vorliegt.
+3. Falls nicht, berechnen wir das Ergebnisses für `n` mittels Rekursion und fügen es zum Zwischenspeicher hinzu.
+4. In jedem Fall geben wir das Ergebnis für `n` aus dem Zwischenspeicher aus, da der cache den Wert für `n` jetzt enthalten muss.
+
+Nach der Ausführung der Funktion enthält der cache alle Fibonacci-Zahlen bis einschließlich $n$.
+
+Wir messen die Bearbeitungszeit der neuen Version ebenfalls mit dem Eingabewert 35:
+
+```{python}
+%time fib_mem(35)
+```
+Die Bearbeitungszeit beträgt jetzt rund 11 Mikrosekunden ($1\mu s=10^{-6}s$).
+Die neue Version ist damit um den Faktor $10^5$ schneller als die Version ohne *memoization*.
+Es lohnt sich also auf jeden Fall, Algorithmen mit einer exponentiellen Laufzeit zu optimieren.
+
+Die Fibonacci-Folge kann aber auch mit einer iterativen Schleife berechnet werden; hierfür benötigen wir zwei Variable, eine für die letzte und die andere für die vorletzte Zahl der bisherigen Folge:
+
+```{python}
+def fib_iter(n):
+    a, b = 0, 1                                     # <1>
+    c = 0                                           # <2>
+    while c != n:                                   # <3>
+        a, b = b, a + b                             # <4>
+        c += 1                                      # <5>
+    return a
+
+assert fib_iter(10) == fib_mem(10)
+```
+1. Die ersten beiden Zahlen der Folge aus dem Rekursionsanfang.
+2. Initialisierung eines Zählers.
+3. Iterative Schleife: wiederhole die Anweisungen, solange `c != n`.
+Wir verwenden hier einen Zähler als Schleifenvariable, um die Berechnung abzubrechen, sobald die gesuchte Fibonacci-Zahl berechnet wurde.
+4. Berechnung der nächsten Zahl der Folge als Summe der beiden vorangehenden Zahlen.
+5. Hochzählen des Zählers.
+
+Wir messen erneut die Laufzeit der neuen Version:
+
+```{python}
+%time fib_iter(35)
+```
+
+Die Laufzeit beträgt hier nur noch rund 6 $\mu s$; die iterative Version ist also ungefähr doppelt so schnell wie die optimierte rekursive Version.
+
+In der Regel können verschachtelte Rekursionen aber nicht ohne Weiteres in iterative Schleifen überführt werden.
+Bei der Fibonacci-Folge klappt das nur deshalb, weil es sich hier um eine sogenannte *primitive* Rekursion handelt, bei der das Ergebnis jeden Teilschrittes über eine einfache mathematische Operation (wie z.B. der Addition) berechnet werden kann.
+Wir werden im nächsten Kapitel ein Beispiel einer nicht-primitiven Rekursion kennenlernen, die sich nicht direkt in eine iterative Schleife überführen läßt.
+
+::: {.callout-note}
+## Rekursion vs. Iteration
+Eine **Rekursion** kommt i.d.R. mit weniger Quellcode aus und ist (für erfahrene Programmierer) übersichtlicher – es müssen hier keine Hilfsvariablen und Schleifenzähler definiert werden.\
+In der Abarbeitung sind **iterative Verfahren** meist effizienter und benötigen weniger Speicherplatz.
+:::
+
+## Die Türme von Hanoi
+
+Die Türme von Hanoi sind ein mathematisches Knobel- und Geduldsspiel, das als Standardbeispiel für rekursive Programmierung dient.
+Das Spiel wird von einer Person gespielt.
+Es besteht aus drei gleich großen Stäben, auf die mehrere gelochte Scheiben gesteckt werden, alle verschieden groß.
+
+Zu Beginn liegen alle Scheiben auf dem linken Stab, der Größe nach geordnet, mit der größten Scheibe unten und der kleinsten oben.
+
+![Türme von Hanoi - Spielaufbau](https://upload.wikimedia.org/wikipedia/commons/0/07/Tower_of_Hanoi.jpeg){#fig-hanoi-aufbau}
+
+Ziel des Spiels ist es, den kompletten Scheiben-Stapel vom linken Stab auf den rechten Stab zu versetzen, wobei der mittlere Stab als temporäre Ablage dient.
+Hierbei gelten zwei Regeln:
+
+1. Es darf in jedem Zug nur eine Scheibe bewegt werden.
+2. Eine Scheibe muss immer auf einer größeren Scheibe abgelegt werden.
+
+Folglich sind zu jedem Zeitpunkt des Spieles die Scheiben auf jedem Stapel der Größe nach geordnet.
+
+### Lösungsansatz
+
+Es ist nicht sofort offensichtlich, wie das Spiel gelöst werden kann.
+In der Praxis wird man durch Ausprobieren versuchen, ein Muster für geeignete Zugfolgen zu erkennen, und dieses Muster dann wiederholt anwenden, bis alle Scheiben auf dem Zielstab abgelegt sind.
+
+In der Programmierung führt Ausprobieren in der Regel nicht zum Erfolg.
+Stattdessen wollen wir uns *vor* der Implementierung überlegen, wie wir das Problem am besten lösen können.
+Wir versuchen also, das Muster anhand theoretischer Überlegungen zu erkennen, und es dann in Form eines Algorithmus im Programm-Code abzubilden.
+
+Als erstes benennen wir dazu die bekannten Fakten:
+Den linken Stab (Start) nennen wir `A`, den mittleren (temporären) Stab `B` und den rechten Zielstab `C`.\
+Die Anzahl der Scheiben, mit denen gespielt wird, nennen wir `n`, wobei die kleinste (oberste) Scheibe den Wert 1 erhält, und der Wert jeder weiteren darunter liegende Scheibe jeweils um eins vergrößert wird; die unterste (größte) Scheibe hat dann den Wert `n`.
+
+Typischerweise wird das Spiel mit acht Scheiben gespielt.
+Um uns die Analyse zu erleichtern, betrachten wir zunächst ein einfacheres Problem mit nur drei Schreiben.
+Um dieses Problem zu lösen, müssen wir
+
+1. die beiden kleinsten Scheiben (mit den Werten `1` und `2`) auf den temporären Stapel `B` verschieben
+2. die größte Scheibe mit dem Wert `3` auf den Zielstapel `C` verschieben
+3. die beiden kleinsten Scheiben vom temporären Stapel `B` auf den Zielstapel `C` verschieben.
+
+::: {#fig-hanoi-analyze}
+{{< video media/videos/hanoi_analyze/480p15/hanoi_analyze.mp4 >}}
+Hanoi - Lösungsansatz in drei Schritten
+:::
+
+Das Muster ist nachvollziehbar, aber es scheint, als gäbe es ein Problem:\
+in den Schritten 1 und 3 verschieben wir mehr als eine Scheibe, was nach den Regeln nicht erlaubt ist.
+
+Wir könnten versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen.
+Bei näherer Betrachtung erkennen wir aber, dass das gar nicht notwendig ist:
+
+- Schritt 2 mit dem Verschieben einer einzelnen Scheibe ist trivial (das entspricht einem Rekursionsanfang mit `n==1`)
+- die Schritte 1 und 3 verschieben jeweils `n-1` Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument `n-1`).
+
+Es handelt sich also offensichtlich um ein rekursives Problem, und wir können den Algorithmus beschreiben, indem wir unser Muster für ein beliebiges `n` verallgemeinern:
+
+::: {.callout-note}
+## Rekursiver Algorithmus
+1. Verschiebe die `n-1` kleinsten Scheiben rekursiv auf den temporären Stapel
+2. Verschiebe die verbleibende Scheibe auf den Zielstapel
+3. Verschiebe die `n-1` kleinsten Scheiben rekursiv vom temporären auf den Zielstapel.
+:::
+
+Wenn wir den Algorithmus als verschachtelte Rekursion implementieren, d.h. alle drei Schritte als rekursive Aufrufe direkt nacheinander ausführen, dann wird zunächst Schritt 1 `n-1` mal aufgerufen, bevor in Schritt 2 tatsächlich nur eine Scheibe bewegt wird.
+Wir bewegen also nie mehr als eine Scheibe mit einem einzelnen Aufruf, wie gefordert.
+
+### Implementierung
+
+Für unsere erste Implementierung verwenden wir zur Repräsentation der Scheibenstapel eine Datenstrukur [Stapel](https://de.wikipedia.org/wiki/Stapelspeicher).
+Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge vom Stapel genommen.
+Dies wird auch Last-In-First-Out-Prinzip [LIFO](https://de.wikipedia.org/wiki/Last_In_%E2%80%93_First_Out) genannt.
+
+Ein Stapel verfügt typischerweise über zwei Methoden `push` und `pop`, mit denen Elemente auf dem Stapel abgelegt bzw. wieder ausgelagert werden.
+Da Python nicht über einen eingebauten Datentyp *stack* verfügt, bauen wir uns einen eigenen mit Hilfe einer Liste:
+
+```{python}
+class Stapel():
+    def __init__(self):
+        self.speicher = []                             # <1>
+
+    def push(self, elem):
+        self.speicher.append(elem)                     # <2>
+
+    def pop(self):
+        return self.speicher.pop()                     # <3>
+
+    def __repr__(self):
+        return repr(self.speicher)                     # <4>
+```
+1. Initialisierung einer leeren Liste als Datenspeicher.
+2. Implementierung der `push` Methode: das neue Element wird am Ende der Liste angehängt.
+3. Implementierung der `pop` Methode: das letzte Element der Liste wird aus dem Datenspeicher entfernt und zurückgegeben.
+4. Ausgabe der Elemente im Datenspeicher.
+
+
+```{python}
+n = 8
+A = Stapel()
+B = Stapel()
+C = Stapel()
+for i in range(n, 0, -1):
+    A.push(i)
+
+A
+```
+
+Ich habe hier den Startstapel mit den Werten 1 bis `n` befüllt, so dass, unserer Konvention folgend, das oberste Element (der letzte Eintrag in der Liste) den Wert 1 hat und das unterste Element (der erste Eintrag in der Liste) den Wert `n` hat.
+
+Diese Stapel können wir nun in einer rekursiven Funktion `hanoi` verwenden, um den rekursiven Algorithmus abzubilden:
+
+```{python}
+def hanoi(start, ziel, temp, n):                    # <1>
+    if n == 1:
+        ziel.push(start.pop())                      # <2>
+    else:
+        hanoi(start, temp, ziel, n-1)               # <3>
+        hanoi(start, ziel, temp, 1)                 # <4>
+        hanoi(temp, ziel, start, n-1)               # <5>
+```
+1. Signatur mit vier Parametern: `start`, `ziel` und `temp`, die die jeweiligen Scheibenstapel repräsentieren; `n` für die Gesamtanzahl der Scheiben.
+2. Rekursionsanfang: wenn `n` gleich 1 ist, also die unterste Scheibe im Stapel erreicht ist, dann wird diese Scheibe vom Startstapel entfernt und auf dem Zielstapel abgelegt.
+3. Rekursionsschritt 1: verschieben der obersten `n-1` Scheiben von `start` nach `temp`.
+Beachte die Reihenfolge der Argumente: das erste Argument entpricht gemäß der Funktionssignatur dem Startstapel, das zweite dem Zielstapel und das dritte dem temporären Stapel.
+4. Rekursionsschritt 2: verschieben der untersten Scheibe von `start` nach `ziel`.
+5. Rekursionsschritt 3: verschieben der `n-1` Scheiben von `temp` nach `ziel`.
+
+Mit dieser Implementierung wird offensichtlich, dass nur im Rekursionsanfang (`n==1`) tatsächlich eine Scheibe verschoben wird.
+Die Rekursionsschritte dienen lediglich dazu, die korrekte Reihenfolge der Züge zu berechnen.
+
+Wir rufen `hanoi` mit den Scheibenstapeln `A`, `C` und `B` auf (beachte die Reihenfolge gem. Funktionssignatur) und prüfen das Ergebnis:
+
+```{python}
+hanoi(A, C, B, n)
+print(A)
+print(B)
+print(C)
+```
+
+Offensichtlich wurden alle Scheiben in der richtigen Reihenfolge von `A` nach `C` verschoben.
+Leider gibt diese Implementierung keinen Aufschluss darüber, in welcher Reihenfolge die Scheiben *tatsächlich* verschoben wurden.
+Wenn wir das Spiel manuell lösen wollen, haben wir also immer noch keinen brauchbaren Lösungsweg.
+
+Um den Lösungsweg zu erhalten, nehmen wir eine kleine Korrektur vor:
+anstatt konkrete Scheiben zu verschieben, zeichnen wir lediglich jeden Zug auf, der in Schritt 2 unseres Algorithmus ausgeführt wird.
+
+```{python}
+züge = Stapel()
+
+def hanoi(start, ziel, temp, n):
+    if n == 0: return                               # <1>
+    hanoi(start, temp, ziel, n-1)                   # <2>
+    züge.push((start, ziel))                        # <3>
+    hanoi(temp, ziel, start, n-1)                   # <4>
+```
+1. Rekursionsanfang: wenn alle Scheiben verschoben wurden (`n==0`), dann gibt es nichts mehr zu tun, und wir beenden das Programm.
+Damit sparen wir uns auch die `if-else` Verzweigung der bisherigen Version.
+2. Rekursionsschritt 1: verschiebe die obersten `n-1` Scheiben von `start` nach `temp`.
+3. Schritt 2: speichere den Zug der aktuellen Scheibe von `start` nach `ziel`.
+Dazu muss sich die Funktion gar nicht rekursiv aufrufen, sondern die Speicherung erfolgt direkt hier.
+4. Rekursionsschritt 3: verschiebe die `n-1` Scheiben von `temp` nach `ziel`.
+
+Wir rufen die neue Version jetzt nicht mit den konkreten Stapeln auf, sondern mit den Buchstaben 'A', 'B' und 'C', die diese Stapel repräsentieren.
+
+```{python}
+hanoi('A', 'C', 'B', 3)
+züge
+```
+
+Die Züge sind wie folgt zu interpretieren:
+jedes Paar in runden Klammern repräsentiert einen Zug, wobei jeweils die oberste Scheibe des erstgenannten Stapels auf den zweiten Stapel verschoben wird.
+Du kannst das z.B. mit einem Stapel verschiedengroßer Münzen ausprobieren und wirst feststellen, dass das Problem damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.
+
+Ich habe die zweite Versionen der Funktion `hanoi` benutzt, um nachfolgende Animation für vier Scheiben zu erstellen.
+Wenn du wissen willst wie das geht, dann sieh dir den Quellcode unter `arithmetik/hanoi_solve.py` an.
+
+::: {#fig-hanoi-solve}
+{{< video media/videos/hanoi_solve/480p15/hanoi_solve.mp4 >}}
+Hanoi - Lösung für vier Scheiben
+:::
+
+
+### Laufzeitanalyse
+
+Das Problem ist gelöst.
+Bleibt nur noch, die Anzahl der dazu notwendigen Schritte zu berechnen, um eine Aussage über die Effizienz des Algorithmus zu erhalten.
+Wir rufen dafür die Funktion `hanoi` mit verschiedener Scheibenanzahl auf und zählen die Züge im jeweiligen Ergebnis:
+
+```{python}
+def size(self):
+    return len(self.speicher)
+
+Stapel.size = size
+
+for n in range(3, 9):
+    züge = Stapel()
+    hanoi('A', 'C', 'B', n)
+    print(f"{n} Scheiben: {züge.size()} Züge")
+```
+
+Offensichtlich ist die Anzahl der Züge $H_n$ abhängig von der Anzahl der Scheiben $n$, und mit etwas Intuition erkennen wir:
+$$
+H_n=2^n-1, \quad \mathrm{mit} \ n \geq 0.
+$$ {#eq-zuege}
+Wir haben es also wieder mit einem exponentiellen Wachstum zu tun.
+
+Wir wollen uns aber als angehende Mathematiker nicht auf unsere Intuition verlassen.
+Außerdem wollen wir prüfen, ob es, ähnlich wie bei der Fibonacci-Folge, eine effizientere Lösung gibt, indem wir z.B. die verschachtelte Rekursion in eine lineare Rekursion überführen.
+
+Dazu analysieren wir nochmal unseren Algorithmus:
+
+- zuerst verschieben wir die `n-1` kleinsten Scheiben, was $H_{n-1}$ Züge erfordert
+- dann verschieben wir die größte Scheibe, was einen Zug erfordert
+- schließlich verschieben wir erneut `n-1` Scheiben, was weitere $H_{n-1}$ Züge erfordert.
+
+Wir können also $n$ Scheiben in höchstens $2H_{n-1}+1$ Zügen verschieben:
+$$
+H_n \leq 2H_{n-1} + 1, \quad \mathrm{mit} \ n > 0.
+$$
+
+Die obige Formel verwendet $\leq$ anstatt $=$, da wir bisher nur gezeigt haben, dass $2H_{n-1}+1$ Züge auf jeden Fall ausreichen.
+Vielleicht gibt es aber einen schnelleren Weg zur Lösung.
+
+Können wir das tatsächlich besser machen?\
+Irgendwann müssen wir die größte Scheibe verschieben.
+Zu diesem Zeitpunkt müssen sich die `n-1` kleinsten Scheiben auf einem einzelnen Stapel befinden, und es hat mindestens $H_{n-1}$ Züge gebraucht, um sie dorthin zu bewegen.\
+Es spielt keine Rolle, wie viele Züge wir für das Verschieben der größten Scheibe an die richtige Position brauchen.
+Aber nach dem letzten Zug der größten Scheibe müssen wir die `n-1` kleinsten Scheiben (die dann wieder auf einem einzelnen Stapel liegen müssen), zurück auf die größte Scheibe verschieben; das erfordert wieder mindestens $H_{n-1}$ Züge.
+Daraus folgt
+$$
+H_n \geq 2H_{n-1} + 1, \quad \mathrm{mit} \ n > 0.
+$$
+
+Diese zwei Ungleichungen führen zu folgenden Gleichungen
+
+$$
+\begin{align}
+H_0 &= 0\\
+H_n &= 2H_{n-1} + 1, \quad \mathrm{mit} \ n > 0.
+\end{align}
+$$ {#eq-recurrence}
+
+Das entspricht offensichtlich einer rekursiven Definition für die Anzahl der notwendigen Züge.
+Wir wollen diese Anzahl aber nicht rekursiv berechnen, sondern wir suchen eine *geschlossene Formel*, mit der wir die Anzahl der Züge in einem Schritt berechnen können.
+
+Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, ist die sogenannte *mathematische Induktion*.
+Wir werden uns im Abschnitt [Beweise](???) dieses Tutorials ausführlich mit mathematischer Induktion beschäftigen.
+An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.
+
+Der Grundgedanke besteht darin, unsere Behauptung aus @eq-zuege (die *Induktionsbehauptung*) in die Gleichungen der rekursiven Definition (@eq-recurrence) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch für jedes $n$ gelten.
+
+Der erste Fall für $n=0$ (*Induktionsanfang*) ist trivial, da $H_0 = 2^0-1=1-1=0$.
+
+Für den zweiten Fall $n\neq0$ (*Induktionsschritt*) kann die Behauptung für jedes $n$ bewiesen werden, indem wir zeigen, dass sie auch für $n-1$ gilt:
+
+$$
+H_n=2H_{n-1}+1=2(2^{n-1}-1)+1=2^n-1.
+$$
+
+Wir haben damit mathematisch bewiesen, dass die Anzahl der Züge *immer* gleich $2^n-1$ ist.
+Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.
+
+## Übungen
+
+Die Übungen zu dieser Lektion findest du im Notebook `artithmetik/_rekursion.ipynb`.

@@ -18,5 +18,6 @@ format:
     code-annotations: below
 
 execute:
+  jupyter: python3
   cache: true
   freeze: auto

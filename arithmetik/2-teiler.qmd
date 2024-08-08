@@ -1,6 +1,5 @@
 ---
 title: "Teiler und Vielfache"
-jupyter: python3
 ---
 
 In diesem Kapitel machen wir einen kleinen Ausflug in die Welt der Zahlen und beschäftigen uns mit der Teilbarkeit natürlicher Zahlen.
@@ -291,7 +290,7 @@ Führe die Berechnung des *ggT* für die Werte 3780 und 3528 gemäß dem letzten
 Mit diesem Wissen können wir den modernen euklidischen Algorithmus in Python implementieren:
 
 ```{python}
-def euklid_modern(a, b):
+def ggT(a, b):
   zähler = 0
   while b != 0:           # <1>
     r = mod(a, b)         # <2>
@@ -310,8 +309,8 @@ Da dieser Test aber erst vor dem nächsten Schleifendurchlauf durchgeführt wird
 Das führt dazu, dass nach Beendigung der Schleife `b` immer gleich 0 ist; wir müssen also `a` als letzten Divisor ausgeben.
 
 ```{python}
-assert euklid_modern(143, 65) == 13
-assert euklid_modern(3780, 3528) == 252
+assert ggT(143, 65) == 13
+assert ggT(3780, 3528) == 252
 ```
 
 Aufgrund der Möglichkeit, in Python mehrere Zuweisungen gleichzeitig vorzunehmen, indem wir die Bezeichner und die zugewiesen Werte jeweils mit einem Komma trennen, hätten wir den kompletten Algorithmus der Zeilen (2) bis (4) auch in eine Zeile schreiben können:\
@@ -320,41 +319,12 @@ Aufgrund der Möglichkeit, in Python mehrere Zuweisungen gleichzeitig vorzunehme
 Auch bei dieser Implementierung spielt die Reihenfolge der Argumente keine Rolle:
 
 ```{python}
-assert euklid_modern(143, 65) == euklid_modern(65, 143)
+assert ggT(143, 65) == ggT(65, 143)
 ```
 
 Wir sehen aber, dass eine zusätzliche Operation notwendig wird, wenn das kleinere Argument zuerst kommt.
 Das liegt daran, dass $65 \div 143$ gleich 0, mit Rest 65 ist, d.h. beim nächsten Schleifendurchlauf wird `mod(143, 65)` aufgerufen, die Variante mit dem größeren Argument zuerst.
 Die zusätzliche Operation können wir aus Effizienzsicht gut verkraften, da wir uns ja den Test auf `b > a` sparen.
-
-Der *ggT* wird häufig auch als *rekursive* Funktion realisiert.
-Wir werden [Rekursion](5-rekursion.qmd) in einer späteren Lektion ausführlich behandeln; ich möchte die Implementierung eines rekursiven *ggT* hier aber schon als kleinen Vorgeschmack vorstellen:
-
-```{python}
-def ggT(a, b):
-  if b == 0:                    # <1>
-    return a                    # <2>
-  else:
-    return ggT(b, mod(a, b))    # <3>
-```
-1. Abbruchbedingung: wenn `b` gleich 0 ist, dann wird die Rekursion gestoppt.
-2. Wenn die Abbruchbedingung greift, geben wir `a` als Ergebnis der Berechnung aus, und der Programmablauf ist beendet.
-3. Rekursiver Aufruf: die Funktion ruft sich selbst mit neuen Argumenten auf.
-Die Argumente werden entsprechend dem Algorithmus gesetzt:
-der Divisor wird zum neuen Dividenden und der Rest zum neuen Divisor.
-
-```{python}
-assert ggT(143, 65) == 13
-assert ggT(3780, 3528) == 252
-```
-
-Die *rekursive* Implementierung kommt ohne zusätzliche Variablen aus, und wir benötigen auch keine explizite Schleife, da diese durch den rekursiven Aufruf ersetzt wird.
-Das kann zu einem sehr übesichtlichen und eleganten Programm führen, dessen Bedeutung sich dem Leser sofort erschließt.
-Viele erfahrene Programmierer bevorzugen daher eine rekursive Implementierung.
-
-Auf der anderen Seite ist es nicht immer sofort ersichtlich, wie eine *iterative* Implementierung (d.h. eine Implementierung mit Schleifen) in eine rekursive Variante überführt werden kann.
-Dazu bedarf es einiger Erfahrung; ich erwarte nicht, dass du jetzt bereits eigene rekursive Programme schreiben kannst.
-
 
 ## Kleinstes gemeinsames Vielfaches
 ### Das *kgV* von zwei Zahlen

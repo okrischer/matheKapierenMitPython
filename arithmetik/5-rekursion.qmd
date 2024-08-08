@@ -1,4 +1,0 @@
----
-title: "Rekursion"
-jupyter: python3
----
