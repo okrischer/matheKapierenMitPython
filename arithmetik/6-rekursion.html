@@ -507,7 +507,7 @@ Aber wir können eine lineare Rekursion auch explizit als iterative Schleife aus
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="4">Verringerung der Schleifenvariablen um 1.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="4">Verringerung der Schleifenvariable um 1.</span>
 </dd>
 </dl>
 </div>
@@ -702,7 +702,7 @@ Wall time: 12.2 μs</code></pre>
 <pre><code>9227465</code></pre>
 </div>
 </div>
-<p>Die Bearbeitungszeit beträgt jetzt rund 11 Mikrosekunden (<span class="math inline">\(1\mu s=10^{-6}s\)</span>). Die neue Version ist damit um den Faktor <span class="math inline">\(10^5\)</span> schneller als die Version ohne <em>memoization</em>. Es lohnt sich also auf jeden Fall, Algorithmen mit einer exponentiellen Laufzeit zu optimieren.</p>
+<p>Die Bearbeitungszeit beträgt jetzt rund 12 Mikrosekunden (<span class="math inline">\(1\mu s=10^{-6}s\)</span>). Die neue Version ist damit um den Faktor <span class="math inline">\(10^5\)</span> schneller als die Version ohne <em>memoization</em>. Es lohnt sich also auf jeden Fall, Algorithmen mit einer exponentiellen Laufzeit zu optimieren.</p>
 <p>Die Fibonacci-Folge kann aber auch mit einer iterativen Schleife berechnet werden; hierfür benötigen wir zwei Variable, eine für die letzte und die andere für die vorletzte Zahl der bisherigen Folge:</p>
 <div id="293aa30d" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fib_iter(n):</span>
@@ -785,7 +785,7 @@ Abbildung&nbsp;1: Türme von Hanoi - Spielaufbau
 <p>Ziel des Spiels ist es, den kompletten Scheiben-Stapel vom linken Stab auf den rechten Stab zu versetzen, wobei der mittlere Stab als temporäre Ablage dient. Hierbei gelten zwei Regeln:</p>
 <ol type="1">
 <li>Es darf in jedem Zug nur eine Scheibe bewegt werden.</li>
-<li>Eine Scheibe muss immer auf einer größeren Scheibe abgelegt werden.</li>
+<li>Eine Scheibe darf nie auf einer kleineren Scheibe abgelegt werden.</li>
 </ol>
 <p>Folglich sind zu jedem Zeitpunkt des Spieles die Scheiben auf jedem Stapel der Größe nach geordnet.</p>
 <section id="lösungsansatz" class="level3" data-number="2.1">
@@ -812,10 +812,10 @@ Abbildung&nbsp;2: Hanoi - Lösungsansatz in drei Schritten
 </div>
 <p>Das Muster ist nachvollziehbar, aber es scheint, als gäbe es ein Problem:<br>
 in den Schritten 1 und 3 verschieben wir mehr als eine Scheibe, was nach den Regeln nicht erlaubt ist.</p>
-<p>Wir könnten versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen. Bei näherer Betrachtung erkennen wir aber, dass das gar nicht notwendig ist:</p>
+<p>Wir könnten nun versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen. Bei näherer Betrachtung erkennen wir aber, dass das gar nicht notwendig ist:</p>
 <ul>
-<li>Schritt 2 mit dem Verschieben einer einzelnen Scheibe ist trivial (das entspricht einem Rekursionsanfang mit <code>n==1</code>)</li>
-<li>die Schritte 1 und 3 verschieben jeweils <code>n-1</code> Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument <code>n-1</code>).</li>
+<li>Schritt 2 mit dem Verschieben der untersten Scheibe ist trivial (das entspricht einem Rekursionsanfang mit der Scheibenanzahl <span class="math inline">\(n=1\)</span>)</li>
+<li>die Schritte 1 und 3 verschieben jeweils <span class="math inline">\(n-1\)</span> Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument <code>n-1</code>).</li>
 </ul>
 <p>Es handelt sich also offensichtlich um ein rekursives Problem, und wir können den Algorithmus beschreiben, indem wir unser Muster für ein beliebiges <code>n</code> verallgemeinern:</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -830,7 +830,7 @@ Rekursiver Algorithmus
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Verschiebe die <code>n-1</code> kleinsten Scheiben rekursiv auf den temporären Stapel</li>
-<li>Verschiebe die verbleibende Scheibe auf den Zielstapel</li>
+<li>Verschiebe die verbleibende größte Scheibe auf den Zielstapel</li>
 <li>Verschiebe die <code>n-1</code> kleinsten Scheiben rekursiv vom temporären auf den Zielstapel.</li>
 </ol>
 </div>
@@ -839,7 +839,7 @@ Rekursiver Algorithmus
 </section>
 <section id="implementierung" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="implementierung"><span class="header-section-number">2.2</span> Implementierung</h3>
-<p>Für unsere erste Implementierung verwenden wir zur Repräsentation der Scheibenstapel eine Datenstrukur <a href="https://de.wikipedia.org/wiki/Stapelspeicher">Stapel</a>. Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge vom Stapel genommen. Dies wird auch Last-In-First-Out-Prinzip <a href="https://de.wikipedia.org/wiki/Last_In_%E2%80%93_First_Out">LIFO</a> genannt.</p>
+<p>Für unsere erste Implementierung verwenden wir zur Repräsentation der Scheibenstapel eine Datenstrukur <a href="https://de.wikipedia.org/wiki/Stapelspeicher">Stapel</a>. Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge (d.h. von oben) vom Stapel genommen. Dies wird auch Last-In-First-Out-Prinzip <a href="https://de.wikipedia.org/wiki/Last_In_%E2%80%93_First_Out">LIFO</a> genannt.</p>
 <p>Ein Stapel verfügt typischerweise über zwei Methoden <code>push</code> und <code>pop</code>, mit denen Elemente auf dem Stapel abgelegt bzw. wieder ausgelagert werden. Da Python nicht über einen eingebauten Datentyp <em>stack</em> verfügt, bauen wir uns einen eigenen mit Hilfe einer Liste:</p>
 <div id="3a8db0f9" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Stapel():</span>
@@ -914,11 +914,11 @@ Rekursiver Algorithmus
 </dd>
 <dt data-target-cell="annotated-cell-17" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-17" data-code-lines="6" data-code-annotation="4">Rekursionsschritt 2: verschieben der untersten Scheibe von <code>start</code> nach <code>ziel</code>.</span>
+<span data-code-cell="annotated-cell-17" data-code-lines="6" data-code-annotation="4">Rekursionsschritt 2: verschieben der größten Scheibe von <code>start</code> nach <code>ziel</code>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-17" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-17" data-code-lines="7" data-code-annotation="5">Rekursionsschritt 3: verschieben der <code>n-1</code> Scheiben von <code>temp</code> nach <code>ziel</code>.</span>
+<span data-code-cell="annotated-cell-17" data-code-lines="7" data-code-annotation="5">Rekursionsschritt 3: verschieben der <code>n-1</code> kleinsten Scheiben von <code>temp</code> nach <code>ziel</code>.</span>
 </dd>
 </dl>
 </div>
@@ -950,7 +950,7 @@ Rekursiver Algorithmus
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="4" data-code-annotation="1">Rekursionsanfang: wenn alle Scheiben verschoben wurden (<code>n==0</code>), dann gibt es nichts mehr zu tun, und wir beenden das Programm. Damit sparen wir uns auch die <code>if-else</code> Verzweigung der bisherigen Version.</span>
+<span data-code-cell="annotated-cell-19" data-code-lines="4" data-code-annotation="1">Rekursionsanfang: wenn alle Scheiben verschoben wurden (<code>n==0</code>), dann gibt es nichts mehr zu tun, und wir beenden das Programm. Damit sparen wir uns auch die <code>if-else</code> Verzweigung der vorherigen Version.</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
 <dd>
@@ -958,11 +958,11 @@ Rekursiver Algorithmus
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="6" data-code-annotation="3">Schritt 2: speichere den Zug der aktuellen Scheibe von <code>start</code> nach <code>ziel</code>. Dazu muss sich die Funktion gar nicht rekursiv aufrufen, sondern die Speicherung erfolgt direkt hier.</span>
+<span data-code-cell="annotated-cell-19" data-code-lines="6" data-code-annotation="3">Schritt 2: speichere den Zug der aktuellen Scheibe von <code>start</code> nach <code>ziel</code> in einem neuen Stapel <code>züge</code>. Dazu muss sich die Funktion gar nicht rekursiv aufrufen, da hier nur eine einzelne Anweisung ausgeführt wird.</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="7" data-code-annotation="4">Rekursionsschritt 3: verschiebe die <code>n-1</code> Scheiben von <code>temp</code> nach <code>ziel</code>.</span>
+<span data-code-cell="annotated-cell-19" data-code-lines="7" data-code-annotation="4">Rekursionsschritt 3: verschiebe die <code>n-1</code> keinsten Scheiben von <code>temp</code> nach <code>ziel</code>.</span>
 </dd>
 </dl>
 </div>
@@ -975,15 +975,15 @@ Rekursiver Algorithmus
 <pre><code>[('A', 'C'), ('A', 'B'), ('C', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('A', 'C')]</code></pre>
 </div>
 </div>
-<p>Die Züge sind wie folgt zu interpretieren: jedes Paar in runden Klammern repräsentiert einen Zug, wobei jeweils die oberste Scheibe des erstgenannten Stapels auf den zweiten Stapel verschoben wird. Du kannst das z.B. mit einem Stapel verschiedengroßer Münzen ausprobieren und wirst feststellen, dass das Problem damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.</p>
-<p>Ich habe die zweite Versionen der Funktion <code>hanoi</code> benutzt, um nachfolgende Animation für vier Scheiben zu erstellen. Wenn du wissen willst wie das geht, dann sieh dir den Quellcode unter <code>arithmetik/hanoi_solve.py</code> an.</p>
+<p>Die Züge sind wie folgt zu interpretieren: jedes Paar in runden Klammern repräsentiert einen Zug, wobei jeweils die oberste Scheibe des erstgenannten Stapels auf den zweiten Stapel verschoben wird. Du kannst das z.B. mit einem Stapel verschieden großer Münzen ausprobieren und wirst feststellen, dass das Spiel damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.</p>
+<p>Ich habe beide Ansätze kombiniert, um die nachfolgende Animation zu erstellen. Du kannst dir den Quellcode dafür unter <code>arithmetik/hanoi_solve.py</code> ansehen und dort auch die Anzahl der Scheiben ändern und dann mit <code>manim -ql hanoi_solve.py</code> die Animation neu erstellen. Dafür musst du aber das Python Programm <code>Manim</code> bei dir <a href="https://docs.manim.community/en/stable/installation.html">installieren</a>.</p>
 <div id="fig-hanoi-solve" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hanoi-solve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="media/videos/hanoi_solve/480p15/hanoi_solve.mp4"></video></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hanoi-solve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;3: Hanoi - Lösung für vier Scheiben
+Abbildung&nbsp;3: Hanoi - Animation mit fünf Scheiben
 </figcaption>
 </figure>
 </div>
@@ -1037,14 +1037,19 @@ H_n &amp;= 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.
 \end{align}
 \tag{5}\]</span></span></p>
 <p>Das entspricht offensichtlich einer rekursiven Definition für die Anzahl der notwendigen Züge. Wir wollen diese Anzahl aber nicht rekursiv berechnen, sondern wir suchen eine <em>geschlossene Formel</em>, mit der wir die Anzahl der Züge in einem Schritt berechnen können.</p>
-<p>Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, ist die sogenannte <em>mathematische Induktion</em>. Wir werden uns im Abschnitt <a href="???">Beweise</a> dieses Tutorials ausführlich mit mathematischer Induktion beschäftigen. An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.</p>
-<p>Der Grundgedanke besteht darin, unsere Behauptung aus <a href="#eq-zuege" class="quarto-xref">Gleichung&nbsp;4</a> (die <em>Induktionsbehauptung</em>) in die Gleichungen der rekursiven Definition (<a href="#eq-recurrence" class="quarto-xref">Gleichung&nbsp;5</a>) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch für jedes <span class="math inline">\(n\)</span> gelten.</p>
+<p>Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, bietet die sogenannte <em>mathematische Induktion</em>. Wir werden uns im Abschnitt <a href="???">Beweise</a> dieses Tutorials ausführlich mit der Beweistechnik <em>Induktion</em> beschäftigen. An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.</p>
+<p>Der Grundgedanke besteht darin, unsere Behauptung aus <a href="#eq-zuege" class="quarto-xref">Gleichung&nbsp;4</a> (die <em>Induktionsbehauptung</em>) in die Gleichungen der rekursiven Definition (<a href="#eq-recurrence" class="quarto-xref">Gleichung&nbsp;5</a>) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch gelten.</p>
 <p>Der erste Fall für <span class="math inline">\(n=0\)</span> (<em>Induktionsanfang</em>) ist trivial, da <span class="math inline">\(H_0 = 2^0-1=1-1=0\)</span>.</p>
-<p>Für den zweiten Fall <span class="math inline">\(n\neq0\)</span> (<em>Induktionsschritt</em>) kann die Behauptung für jedes <span class="math inline">\(n\)</span> bewiesen werden, indem wir zeigen, dass sie auch für <span class="math inline">\(n-1\)</span> gilt:</p>
+<p>Für den zweiten Fall <span class="math inline">\(n&gt;0\)</span> (<em>Induktionsschritt</em>) kann die Behauptung für jedes <span class="math inline">\(n\)</span> bewiesen werden, indem wir zeigen, dass sie auch für <span class="math inline">\(n-1\)</span> gilt:</p>
 <p><span class="math display">\[
-H_n=2H_{n-1}+1=2(2^{n-1}-1)+1=2^n-1.
+\begin{align}
+H_n&amp;=2H_{n-1}+1\\
+&amp;=2(2^{n-1}-1)+1\\
+&amp;=2^n-2+1\\
+&amp;=2^n-1. \ \blacksquare
+\end{align}
 \]</span></p>
-<p>Wir haben damit mathematisch bewiesen, dass die Anzahl der Züge <em>immer</em> gleich <span class="math inline">\(2^n-1\)</span> ist. Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.</p>
+<p>Wir haben damit mathematisch bewiesen, dass die Anzahl der notwendigen Züge <em>immer</em> gleich <span class="math inline">\(2^n-1\)</span> ist. Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.</p>
 </section>
 </section>
 <section id="übungen" class="level2" data-number="3">
@@ -1696,7 +1701,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-174"><a href="#cb31-174" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Initialisierung des Ergebnisses mit 1, dem Wert für den Rekursionsanfang.</span>
 <span id="cb31-175"><a href="#cb31-175" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Beginn einer iterativen Schleife, deren Bedingung prüft, ob der Rekursionsanfang erreicht wurde.</span>
 <span id="cb31-176"><a href="#cb31-176" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Durchführung der Multiplikation und Zuweisung an <span class="in">`p`</span>, dem Teilergebnis.</span>
-<span id="cb31-177"><a href="#cb31-177" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Verringerung der Schleifenvariablen um 1.</span>
+<span id="cb31-177"><a href="#cb31-177" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Verringerung der Schleifenvariable um 1.</span>
 <span id="cb31-178"><a href="#cb31-178" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-179"><a href="#cb31-179" aria-hidden="true" tabindex="-1"></a><span class="fu">### Größter gemeinsamer Teiler</span></span>
 <span id="cb31-180"><a href="#cb31-180" aria-hidden="true" tabindex="-1"></a></span>
@@ -1845,7 +1850,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-339"><a href="#cb31-339" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb31-340"><a href="#cb31-340" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>time fib_mem(<span class="dv">35</span>)</span>
 <span id="cb31-341"><a href="#cb31-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-342"><a href="#cb31-342" aria-hidden="true" tabindex="-1"></a>Die Bearbeitungszeit beträgt jetzt rund 11 Mikrosekunden ($1\mu s=10^{-6}s$).</span>
+<span id="cb31-342"><a href="#cb31-342" aria-hidden="true" tabindex="-1"></a>Die Bearbeitungszeit beträgt jetzt rund 12 Mikrosekunden ($1\mu s=10^{-6}s$).</span>
 <span id="cb31-343"><a href="#cb31-343" aria-hidden="true" tabindex="-1"></a>Die neue Version ist damit um den Faktor $10^5$ schneller als die Version ohne *memoization*.</span>
 <span id="cb31-344"><a href="#cb31-344" aria-hidden="true" tabindex="-1"></a>Es lohnt sich also auf jeden Fall, Algorithmen mit einer exponentiellen Laufzeit zu optimieren.</span>
 <span id="cb31-345"><a href="#cb31-345" aria-hidden="true" tabindex="-1"></a></span>
@@ -1901,7 +1906,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-399"><a href="#cb31-399" aria-hidden="true" tabindex="-1"></a>Hierbei gelten zwei Regeln:</span>
 <span id="cb31-400"><a href="#cb31-400" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-401"><a href="#cb31-401" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Es darf in jedem Zug nur eine Scheibe bewegt werden.</span>
-<span id="cb31-402"><a href="#cb31-402" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Eine Scheibe muss immer auf einer größeren Scheibe abgelegt werden.</span>
+<span id="cb31-402"><a href="#cb31-402" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Eine Scheibe darf nie auf einer kleineren Scheibe abgelegt werden.</span>
 <span id="cb31-403"><a href="#cb31-403" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-404"><a href="#cb31-404" aria-hidden="true" tabindex="-1"></a>Folglich sind zu jedem Zeitpunkt des Spieles die Scheiben auf jedem Stapel der Größe nach geordnet.</span>
 <span id="cb31-405"><a href="#cb31-405" aria-hidden="true" tabindex="-1"></a></span>
@@ -1934,18 +1939,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-432"><a href="#cb31-432" aria-hidden="true" tabindex="-1"></a>Das Muster ist nachvollziehbar, aber es scheint, als gäbe es ein Problem:\</span>
 <span id="cb31-433"><a href="#cb31-433" aria-hidden="true" tabindex="-1"></a>in den Schritten 1 und 3 verschieben wir mehr als eine Scheibe, was nach den Regeln nicht erlaubt ist.</span>
 <span id="cb31-434"><a href="#cb31-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-435"><a href="#cb31-435" aria-hidden="true" tabindex="-1"></a>Wir könnten versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen.</span>
+<span id="cb31-435"><a href="#cb31-435" aria-hidden="true" tabindex="-1"></a>Wir könnten nun versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen.</span>
 <span id="cb31-436"><a href="#cb31-436" aria-hidden="true" tabindex="-1"></a>Bei näherer Betrachtung erkennen wir aber, dass das gar nicht notwendig ist:</span>
 <span id="cb31-437"><a href="#cb31-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-438"><a href="#cb31-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Schritt 2 mit dem Verschieben einer einzelnen Scheibe ist trivial (das entspricht einem Rekursionsanfang mit <span class="in">`n==1`</span>)</span>
-<span id="cb31-439"><a href="#cb31-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>die Schritte 1 und 3 verschieben jeweils <span class="in">`n-1`</span> Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument <span class="in">`n-1`</span>).</span>
+<span id="cb31-438"><a href="#cb31-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Schritt 2 mit dem Verschieben der untersten Scheibe ist trivial (das entspricht einem Rekursionsanfang mit der Scheibenanzahl $n=1$)</span>
+<span id="cb31-439"><a href="#cb31-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>die Schritte 1 und 3 verschieben jeweils $n-1$ Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument <span class="in">`n-1`</span>).</span>
 <span id="cb31-440"><a href="#cb31-440" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-441"><a href="#cb31-441" aria-hidden="true" tabindex="-1"></a>Es handelt sich also offensichtlich um ein rekursives Problem, und wir können den Algorithmus beschreiben, indem wir unser Muster für ein beliebiges <span class="in">`n`</span> verallgemeinern:</span>
 <span id="cb31-442"><a href="#cb31-442" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-443"><a href="#cb31-443" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
 <span id="cb31-444"><a href="#cb31-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rekursiver Algorithmus</span></span>
 <span id="cb31-445"><a href="#cb31-445" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Verschiebe die <span class="in">`n-1`</span> kleinsten Scheiben rekursiv auf den temporären Stapel</span>
-<span id="cb31-446"><a href="#cb31-446" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Verschiebe die verbleibende Scheibe auf den Zielstapel</span>
+<span id="cb31-446"><a href="#cb31-446" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Verschiebe die verbleibende größte Scheibe auf den Zielstapel</span>
 <span id="cb31-447"><a href="#cb31-447" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Verschiebe die <span class="in">`n-1`</span> kleinsten Scheiben rekursiv vom temporären auf den Zielstapel.</span>
 <span id="cb31-448"><a href="#cb31-448" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb31-449"><a href="#cb31-449" aria-hidden="true" tabindex="-1"></a></span>
@@ -1955,7 +1960,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-453"><a href="#cb31-453" aria-hidden="true" tabindex="-1"></a><span class="fu">### Implementierung</span></span>
 <span id="cb31-454"><a href="#cb31-454" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-455"><a href="#cb31-455" aria-hidden="true" tabindex="-1"></a>Für unsere erste Implementierung verwenden wir zur Repräsentation der Scheibenstapel eine Datenstrukur <span class="co">[</span><span class="ot">Stapel</span><span class="co">](https://de.wikipedia.org/wiki/Stapelspeicher)</span>.</span>
-<span id="cb31-456"><a href="#cb31-456" aria-hidden="true" tabindex="-1"></a>Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge vom Stapel genommen.</span>
+<span id="cb31-456"><a href="#cb31-456" aria-hidden="true" tabindex="-1"></a>Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge (d.h. von oben) vom Stapel genommen.</span>
 <span id="cb31-457"><a href="#cb31-457" aria-hidden="true" tabindex="-1"></a>Dies wird auch Last-In-First-Out-Prinzip <span class="co">[</span><span class="ot">LIFO</span><span class="co">](https://de.wikipedia.org/wiki/Last_In_%E2%80%93_First_Out)</span> genannt.</span>
 <span id="cb31-458"><a href="#cb31-458" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-459"><a href="#cb31-459" aria-hidden="true" tabindex="-1"></a>Ein Stapel verfügt typischerweise über zwei Methoden <span class="in">`push`</span> und <span class="in">`pop`</span>, mit denen Elemente auf dem Stapel abgelegt bzw. wieder ausgelagert werden.</span>
@@ -2009,8 +2014,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-513"><a href="#cb31-513" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rekursionsanfang: wenn <span class="in">`n`</span> gleich 1 ist, also die unterste Scheibe im Stapel erreicht ist, dann wird diese Scheibe vom Startstapel entfernt und auf dem Zielstapel abgelegt.</span>
 <span id="cb31-514"><a href="#cb31-514" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Rekursionsschritt 1: verschieben der obersten <span class="in">`n-1`</span> Scheiben von <span class="in">`start`</span> nach <span class="in">`temp`</span>.</span>
 <span id="cb31-515"><a href="#cb31-515" aria-hidden="true" tabindex="-1"></a>Beachte die Reihenfolge der Argumente: das erste Argument entpricht gemäß der Funktionssignatur dem Startstapel, das zweite dem Zielstapel und das dritte dem temporären Stapel.</span>
-<span id="cb31-516"><a href="#cb31-516" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Rekursionsschritt 2: verschieben der untersten Scheibe von <span class="in">`start`</span> nach <span class="in">`ziel`</span>.</span>
-<span id="cb31-517"><a href="#cb31-517" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Rekursionsschritt 3: verschieben der <span class="in">`n-1`</span> Scheiben von <span class="in">`temp`</span> nach <span class="in">`ziel`</span>.</span>
+<span id="cb31-516"><a href="#cb31-516" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Rekursionsschritt 2: verschieben der größten Scheibe von <span class="in">`start`</span> nach <span class="in">`ziel`</span>.</span>
+<span id="cb31-517"><a href="#cb31-517" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Rekursionsschritt 3: verschieben der <span class="in">`n-1`</span> kleinsten Scheiben von <span class="in">`temp`</span> nach <span class="in">`ziel`</span>.</span>
 <span id="cb31-518"><a href="#cb31-518" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-519"><a href="#cb31-519" aria-hidden="true" tabindex="-1"></a>Mit dieser Implementierung wird offensichtlich, dass nur im Rekursionsanfang (<span class="in">`n==1`</span>) tatsächlich eine Scheibe verschoben wird.</span>
 <span id="cb31-520"><a href="#cb31-520" aria-hidden="true" tabindex="-1"></a>Die Rekursionsschritte dienen lediglich dazu, die korrekte Reihenfolge der Züge zu berechnen.</span>
@@ -2041,11 +2046,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-549"><a href="#cb31-549" aria-hidden="true" tabindex="-1"></a>    hanoi(temp, ziel, start, n<span class="op">-</span><span class="dv">1</span>)                   <span class="co"># &lt;4&gt;</span></span>
 <span id="cb31-550"><a href="#cb31-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb31-551"><a href="#cb31-551" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Rekursionsanfang: wenn alle Scheiben verschoben wurden (<span class="in">`n==0`</span>), dann gibt es nichts mehr zu tun, und wir beenden das Programm.</span>
-<span id="cb31-552"><a href="#cb31-552" aria-hidden="true" tabindex="-1"></a>Damit sparen wir uns auch die <span class="in">`if-else`</span> Verzweigung der bisherigen Version.</span>
+<span id="cb31-552"><a href="#cb31-552" aria-hidden="true" tabindex="-1"></a>Damit sparen wir uns auch die <span class="in">`if-else`</span> Verzweigung der vorherigen Version.</span>
 <span id="cb31-553"><a href="#cb31-553" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rekursionsschritt 1: verschiebe die obersten <span class="in">`n-1`</span> Scheiben von <span class="in">`start`</span> nach <span class="in">`temp`</span>.</span>
-<span id="cb31-554"><a href="#cb31-554" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Schritt 2: speichere den Zug der aktuellen Scheibe von <span class="in">`start`</span> nach <span class="in">`ziel`</span>.</span>
-<span id="cb31-555"><a href="#cb31-555" aria-hidden="true" tabindex="-1"></a>Dazu muss sich die Funktion gar nicht rekursiv aufrufen, sondern die Speicherung erfolgt direkt hier.</span>
-<span id="cb31-556"><a href="#cb31-556" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Rekursionsschritt 3: verschiebe die <span class="in">`n-1`</span> Scheiben von <span class="in">`temp`</span> nach <span class="in">`ziel`</span>.</span>
+<span id="cb31-554"><a href="#cb31-554" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Schritt 2: speichere den Zug der aktuellen Scheibe von <span class="in">`start`</span> nach <span class="in">`ziel`</span> in einem neuen Stapel <span class="in">`züge`</span>.</span>
+<span id="cb31-555"><a href="#cb31-555" aria-hidden="true" tabindex="-1"></a>Dazu muss sich die Funktion gar nicht rekursiv aufrufen, da hier nur eine einzelne Anweisung ausgeführt wird.</span>
+<span id="cb31-556"><a href="#cb31-556" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Rekursionsschritt 3: verschiebe die <span class="in">`n-1`</span> keinsten Scheiben von <span class="in">`temp`</span> nach <span class="in">`ziel`</span>.</span>
 <span id="cb31-557"><a href="#cb31-557" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-558"><a href="#cb31-558" aria-hidden="true" tabindex="-1"></a>Wir rufen die neue Version jetzt nicht mit den konkreten Stapeln auf, sondern mit den Buchstaben 'A', 'B' und 'C', die diese Stapel repräsentieren.</span>
 <span id="cb31-559"><a href="#cb31-559" aria-hidden="true" tabindex="-1"></a></span>
@@ -2056,100 +2061,106 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb31-566"><a href="#cb31-566" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-567"><a href="#cb31-567" aria-hidden="true" tabindex="-1"></a>Die Züge sind wie folgt zu interpretieren:</span>
 <span id="cb31-568"><a href="#cb31-568" aria-hidden="true" tabindex="-1"></a>jedes Paar in runden Klammern repräsentiert einen Zug, wobei jeweils die oberste Scheibe des erstgenannten Stapels auf den zweiten Stapel verschoben wird.</span>
-<span id="cb31-569"><a href="#cb31-569" aria-hidden="true" tabindex="-1"></a>Du kannst das z.B. mit einem Stapel verschiedengroßer Münzen ausprobieren und wirst feststellen, dass das Problem damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.</span>
+<span id="cb31-569"><a href="#cb31-569" aria-hidden="true" tabindex="-1"></a>Du kannst das z.B. mit einem Stapel verschieden großer Münzen ausprobieren und wirst feststellen, dass das Spiel damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.</span>
 <span id="cb31-570"><a href="#cb31-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-571"><a href="#cb31-571" aria-hidden="true" tabindex="-1"></a>Ich habe die zweite Versionen der Funktion <span class="in">`hanoi`</span> benutzt, um nachfolgende Animation für vier Scheiben zu erstellen.</span>
-<span id="cb31-572"><a href="#cb31-572" aria-hidden="true" tabindex="-1"></a>Wenn du wissen willst wie das geht, dann sieh dir den Quellcode unter <span class="in">`arithmetik/hanoi_solve.py`</span> an.</span>
-<span id="cb31-573"><a href="#cb31-573" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-574"><a href="#cb31-574" aria-hidden="true" tabindex="-1"></a>::: {#fig-hanoi-solve}</span>
-<span id="cb31-575"><a href="#cb31-575" aria-hidden="true" tabindex="-1"></a>{{&lt; video media/videos/hanoi_solve/480p15/hanoi_solve.mp4 &gt;}}</span>
-<span id="cb31-576"><a href="#cb31-576" aria-hidden="true" tabindex="-1"></a>Hanoi - Lösung für vier Scheiben</span>
-<span id="cb31-577"><a href="#cb31-577" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb31-578"><a href="#cb31-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-571"><a href="#cb31-571" aria-hidden="true" tabindex="-1"></a>Ich habe beide Ansätze kombiniert, um die nachfolgende Animation zu erstellen.</span>
+<span id="cb31-572"><a href="#cb31-572" aria-hidden="true" tabindex="-1"></a>Du kannst dir den Quellcode dafür unter <span class="in">`arithmetik/hanoi_solve.py`</span> ansehen und dort auch die Anzahl der Scheiben ändern und dann mit <span class="in">`manim -ql hanoi_solve.py`</span> die Animation neu erstellen.</span>
+<span id="cb31-573"><a href="#cb31-573" aria-hidden="true" tabindex="-1"></a>Dafür musst du aber das Python Programm <span class="in">`Manim`</span> bei dir <span class="co">[</span><span class="ot">installieren</span><span class="co">](https://docs.manim.community/en/stable/installation.html)</span>.</span>
+<span id="cb31-574"><a href="#cb31-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-575"><a href="#cb31-575" aria-hidden="true" tabindex="-1"></a>::: {#fig-hanoi-solve}</span>
+<span id="cb31-576"><a href="#cb31-576" aria-hidden="true" tabindex="-1"></a>{{&lt; video media/videos/hanoi_solve/480p15/hanoi_solve.mp4 &gt;}}</span>
+<span id="cb31-577"><a href="#cb31-577" aria-hidden="true" tabindex="-1"></a>Hanoi - Animation mit fünf Scheiben</span>
+<span id="cb31-578"><a href="#cb31-578" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb31-579"><a href="#cb31-579" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-580"><a href="#cb31-580" aria-hidden="true" tabindex="-1"></a><span class="fu">### Laufzeitanalyse</span></span>
-<span id="cb31-581"><a href="#cb31-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-582"><a href="#cb31-582" aria-hidden="true" tabindex="-1"></a>Das Problem ist gelöst.</span>
-<span id="cb31-583"><a href="#cb31-583" aria-hidden="true" tabindex="-1"></a>Bleibt nur noch, die Anzahl der dazu notwendigen Schritte zu berechnen, um eine Aussage über die Effizienz des Algorithmus zu erhalten.</span>
-<span id="cb31-584"><a href="#cb31-584" aria-hidden="true" tabindex="-1"></a>Wir rufen dafür die Funktion <span class="in">`hanoi`</span> mit verschiedener Scheibenanzahl auf und zählen die Züge im jeweiligen Ergebnis:</span>
-<span id="cb31-585"><a href="#cb31-585" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-588"><a href="#cb31-588" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb31-589"><a href="#cb31-589" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb31-590"><a href="#cb31-590" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.speicher)</span>
-<span id="cb31-591"><a href="#cb31-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-592"><a href="#cb31-592" aria-hidden="true" tabindex="-1"></a>Stapel.size <span class="op">=</span> size</span>
-<span id="cb31-593"><a href="#cb31-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-594"><a href="#cb31-594" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>):</span>
-<span id="cb31-595"><a href="#cb31-595" aria-hidden="true" tabindex="-1"></a>    züge <span class="op">=</span> Stapel()</span>
-<span id="cb31-596"><a href="#cb31-596" aria-hidden="true" tabindex="-1"></a>    hanoi(<span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'B'</span>, n)</span>
-<span id="cb31-597"><a href="#cb31-597" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> Scheiben: </span><span class="sc">{</span>z<span class="sc">ü</span>ge<span class="sc">.</span>size()<span class="sc">}</span><span class="ss"> Züge"</span>)</span>
-<span id="cb31-598"><a href="#cb31-598" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-599"><a href="#cb31-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-600"><a href="#cb31-600" aria-hidden="true" tabindex="-1"></a>Offensichtlich ist die Anzahl der Züge $H_n$ abhängig von der Anzahl der Scheiben $n$, und mit etwas Intuition erkennen wir:</span>
-<span id="cb31-601"><a href="#cb31-601" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-602"><a href="#cb31-602" aria-hidden="true" tabindex="-1"></a>H_n=2^n-1, \quad \mathrm{mit} \ n \geq 0.</span>
-<span id="cb31-603"><a href="#cb31-603" aria-hidden="true" tabindex="-1"></a>$$ {#eq-zuege}</span>
-<span id="cb31-604"><a href="#cb31-604" aria-hidden="true" tabindex="-1"></a>Wir haben es also wieder mit einem exponentiellen Wachstum zu tun.</span>
-<span id="cb31-605"><a href="#cb31-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-606"><a href="#cb31-606" aria-hidden="true" tabindex="-1"></a>Wir wollen uns aber als angehende Mathematiker nicht auf unsere Intuition verlassen.</span>
-<span id="cb31-607"><a href="#cb31-607" aria-hidden="true" tabindex="-1"></a>Außerdem wollen wir prüfen, ob es, ähnlich wie bei der Fibonacci-Folge, eine effizientere Lösung gibt, indem wir z.B. die verschachtelte Rekursion in eine lineare Rekursion überführen.</span>
-<span id="cb31-608"><a href="#cb31-608" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-609"><a href="#cb31-609" aria-hidden="true" tabindex="-1"></a>Dazu analysieren wir nochmal unseren Algorithmus:</span>
-<span id="cb31-610"><a href="#cb31-610" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-611"><a href="#cb31-611" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>zuerst verschieben wir die <span class="in">`n-1`</span> kleinsten Scheiben, was $H_{n-1}$ Züge erfordert</span>
-<span id="cb31-612"><a href="#cb31-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>dann verschieben wir die größte Scheibe, was einen Zug erfordert</span>
-<span id="cb31-613"><a href="#cb31-613" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>schließlich verschieben wir erneut <span class="in">`n-1`</span> Scheiben, was weitere $H_{n-1}$ Züge erfordert.</span>
-<span id="cb31-614"><a href="#cb31-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-615"><a href="#cb31-615" aria-hidden="true" tabindex="-1"></a>Wir können also $n$ Scheiben in höchstens $2H_{n-1}+1$ Zügen verschieben:</span>
-<span id="cb31-616"><a href="#cb31-616" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-617"><a href="#cb31-617" aria-hidden="true" tabindex="-1"></a>H_n \leq 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.</span>
-<span id="cb31-618"><a href="#cb31-618" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-619"><a href="#cb31-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-620"><a href="#cb31-620" aria-hidden="true" tabindex="-1"></a>Die obige Formel verwendet $\leq$ anstatt $=$, da wir bisher nur gezeigt haben, dass $2H_{n-1}+1$ Züge auf jeden Fall ausreichen.</span>
-<span id="cb31-621"><a href="#cb31-621" aria-hidden="true" tabindex="-1"></a>Vielleicht gibt es aber einen schnelleren Weg zur Lösung.</span>
-<span id="cb31-622"><a href="#cb31-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-623"><a href="#cb31-623" aria-hidden="true" tabindex="-1"></a>Können wir das tatsächlich besser machen?\</span>
-<span id="cb31-624"><a href="#cb31-624" aria-hidden="true" tabindex="-1"></a>Irgendwann müssen wir die größte Scheibe verschieben.</span>
-<span id="cb31-625"><a href="#cb31-625" aria-hidden="true" tabindex="-1"></a>Zu diesem Zeitpunkt müssen sich die <span class="in">`n-1`</span> kleinsten Scheiben auf einem einzelnen Stapel befinden, und es hat mindestens $H_{n-1}$ Züge gebraucht, um sie dorthin zu bewegen.\</span>
-<span id="cb31-626"><a href="#cb31-626" aria-hidden="true" tabindex="-1"></a>Es spielt keine Rolle, wie viele Züge wir für das Verschieben der größten Scheibe an die richtige Position brauchen.</span>
-<span id="cb31-627"><a href="#cb31-627" aria-hidden="true" tabindex="-1"></a>Aber nach dem letzten Zug der größten Scheibe müssen wir die <span class="in">`n-1`</span> kleinsten Scheiben (die dann wieder auf einem einzelnen Stapel liegen müssen), zurück auf die größte Scheibe verschieben; das erfordert wieder mindestens $H_{n-1}$ Züge.</span>
-<span id="cb31-628"><a href="#cb31-628" aria-hidden="true" tabindex="-1"></a>Daraus folgt</span>
-<span id="cb31-629"><a href="#cb31-629" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-630"><a href="#cb31-630" aria-hidden="true" tabindex="-1"></a>H_n \geq 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.</span>
-<span id="cb31-631"><a href="#cb31-631" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-632"><a href="#cb31-632" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-633"><a href="#cb31-633" aria-hidden="true" tabindex="-1"></a>Diese zwei Ungleichungen führen zu folgenden Gleichungen</span>
-<span id="cb31-634"><a href="#cb31-634" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-635"><a href="#cb31-635" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-636"><a href="#cb31-636" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb31-637"><a href="#cb31-637" aria-hidden="true" tabindex="-1"></a>H_0 &amp;= 0<span class="sc">\\</span></span>
-<span id="cb31-638"><a href="#cb31-638" aria-hidden="true" tabindex="-1"></a>H_n &amp;= 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.</span>
-<span id="cb31-639"><a href="#cb31-639" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb31-640"><a href="#cb31-640" aria-hidden="true" tabindex="-1"></a>$$ {#eq-recurrence}</span>
-<span id="cb31-641"><a href="#cb31-641" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-642"><a href="#cb31-642" aria-hidden="true" tabindex="-1"></a>Das entspricht offensichtlich einer rekursiven Definition für die Anzahl der notwendigen Züge.</span>
-<span id="cb31-643"><a href="#cb31-643" aria-hidden="true" tabindex="-1"></a>Wir wollen diese Anzahl aber nicht rekursiv berechnen, sondern wir suchen eine *geschlossene Formel*, mit der wir die Anzahl der Züge in einem Schritt berechnen können.</span>
-<span id="cb31-644"><a href="#cb31-644" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-645"><a href="#cb31-645" aria-hidden="true" tabindex="-1"></a>Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, ist die sogenannte *mathematische Induktion*.</span>
-<span id="cb31-646"><a href="#cb31-646" aria-hidden="true" tabindex="-1"></a>Wir werden uns im Abschnitt <span class="co">[</span><span class="ot">Beweise</span><span class="co">](???)</span> dieses Tutorials ausführlich mit mathematischer Induktion beschäftigen.</span>
-<span id="cb31-647"><a href="#cb31-647" aria-hidden="true" tabindex="-1"></a>An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.</span>
-<span id="cb31-648"><a href="#cb31-648" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-649"><a href="#cb31-649" aria-hidden="true" tabindex="-1"></a>Der Grundgedanke besteht darin, unsere Behauptung aus @eq-zuege (die *Induktionsbehauptung*) in die Gleichungen der rekursiven Definition (@eq-recurrence) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch für jedes $n$ gelten.</span>
-<span id="cb31-650"><a href="#cb31-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-651"><a href="#cb31-651" aria-hidden="true" tabindex="-1"></a>Der erste Fall für $n=0$ (*Induktionsanfang*) ist trivial, da $H_0 = 2^0-1=1-1=0$.</span>
-<span id="cb31-652"><a href="#cb31-652" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-653"><a href="#cb31-653" aria-hidden="true" tabindex="-1"></a>Für den zweiten Fall $n\neq0$ (*Induktionsschritt*) kann die Behauptung für jedes $n$ bewiesen werden, indem wir zeigen, dass sie auch für $n-1$ gilt:</span>
-<span id="cb31-654"><a href="#cb31-654" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-655"><a href="#cb31-655" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-656"><a href="#cb31-656" aria-hidden="true" tabindex="-1"></a>H_n=2H_{n-1}+1=2(2^{n-1}-1)+1=2^n-1.</span>
-<span id="cb31-657"><a href="#cb31-657" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb31-658"><a href="#cb31-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-659"><a href="#cb31-659" aria-hidden="true" tabindex="-1"></a>Wir haben damit mathematisch bewiesen, dass die Anzahl der Züge *immer* gleich $2^n-1$ ist.</span>
-<span id="cb31-660"><a href="#cb31-660" aria-hidden="true" tabindex="-1"></a>Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.</span>
-<span id="cb31-661"><a href="#cb31-661" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-662"><a href="#cb31-662" aria-hidden="true" tabindex="-1"></a><span class="fu">## Übungen</span></span>
-<span id="cb31-663"><a href="#cb31-663" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-664"><a href="#cb31-664" aria-hidden="true" tabindex="-1"></a>Die Übungen zu dieser Lektion findest du im Notebook <span class="in">`artithmetik/_rekursion.ipynb`</span>.</span>
+<span id="cb31-580"><a href="#cb31-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-581"><a href="#cb31-581" aria-hidden="true" tabindex="-1"></a><span class="fu">### Laufzeitanalyse</span></span>
+<span id="cb31-582"><a href="#cb31-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-583"><a href="#cb31-583" aria-hidden="true" tabindex="-1"></a>Das Problem ist gelöst.</span>
+<span id="cb31-584"><a href="#cb31-584" aria-hidden="true" tabindex="-1"></a>Bleibt nur noch, die Anzahl der dazu notwendigen Schritte zu berechnen, um eine Aussage über die Effizienz des Algorithmus zu erhalten.</span>
+<span id="cb31-585"><a href="#cb31-585" aria-hidden="true" tabindex="-1"></a>Wir rufen dafür die Funktion <span class="in">`hanoi`</span> mit verschiedener Scheibenanzahl auf und zählen die Züge im jeweiligen Ergebnis:</span>
+<span id="cb31-586"><a href="#cb31-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-589"><a href="#cb31-589" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb31-590"><a href="#cb31-590" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> size(<span class="va">self</span>):</span>
+<span id="cb31-591"><a href="#cb31-591" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.speicher)</span>
+<span id="cb31-592"><a href="#cb31-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-593"><a href="#cb31-593" aria-hidden="true" tabindex="-1"></a>Stapel.size <span class="op">=</span> size</span>
+<span id="cb31-594"><a href="#cb31-594" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-595"><a href="#cb31-595" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>):</span>
+<span id="cb31-596"><a href="#cb31-596" aria-hidden="true" tabindex="-1"></a>    züge <span class="op">=</span> Stapel()</span>
+<span id="cb31-597"><a href="#cb31-597" aria-hidden="true" tabindex="-1"></a>    hanoi(<span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'B'</span>, n)</span>
+<span id="cb31-598"><a href="#cb31-598" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> Scheiben: </span><span class="sc">{</span>z<span class="sc">ü</span>ge<span class="sc">.</span>size()<span class="sc">}</span><span class="ss"> Züge"</span>)</span>
+<span id="cb31-599"><a href="#cb31-599" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb31-600"><a href="#cb31-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-601"><a href="#cb31-601" aria-hidden="true" tabindex="-1"></a>Offensichtlich ist die Anzahl der Züge $H_n$ abhängig von der Anzahl der Scheiben $n$, und mit etwas Intuition erkennen wir:</span>
+<span id="cb31-602"><a href="#cb31-602" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-603"><a href="#cb31-603" aria-hidden="true" tabindex="-1"></a>H_n=2^n-1, \quad \mathrm{mit} \ n \geq 0.</span>
+<span id="cb31-604"><a href="#cb31-604" aria-hidden="true" tabindex="-1"></a>$$ {#eq-zuege}</span>
+<span id="cb31-605"><a href="#cb31-605" aria-hidden="true" tabindex="-1"></a>Wir haben es also wieder mit einem exponentiellen Wachstum zu tun.</span>
+<span id="cb31-606"><a href="#cb31-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-607"><a href="#cb31-607" aria-hidden="true" tabindex="-1"></a>Wir wollen uns aber als angehende Mathematiker nicht auf unsere Intuition verlassen.</span>
+<span id="cb31-608"><a href="#cb31-608" aria-hidden="true" tabindex="-1"></a>Außerdem wollen wir prüfen, ob es, ähnlich wie bei der Fibonacci-Folge, eine effizientere Lösung gibt, indem wir z.B. die verschachtelte Rekursion in eine lineare Rekursion überführen.</span>
+<span id="cb31-609"><a href="#cb31-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-610"><a href="#cb31-610" aria-hidden="true" tabindex="-1"></a>Dazu analysieren wir nochmal unseren Algorithmus:</span>
+<span id="cb31-611"><a href="#cb31-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-612"><a href="#cb31-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>zuerst verschieben wir die <span class="in">`n-1`</span> kleinsten Scheiben, was $H_{n-1}$ Züge erfordert</span>
+<span id="cb31-613"><a href="#cb31-613" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>dann verschieben wir die größte Scheibe, was einen Zug erfordert</span>
+<span id="cb31-614"><a href="#cb31-614" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>schließlich verschieben wir erneut <span class="in">`n-1`</span> Scheiben, was weitere $H_{n-1}$ Züge erfordert.</span>
+<span id="cb31-615"><a href="#cb31-615" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-616"><a href="#cb31-616" aria-hidden="true" tabindex="-1"></a>Wir können also $n$ Scheiben in höchstens $2H_{n-1}+1$ Zügen verschieben:</span>
+<span id="cb31-617"><a href="#cb31-617" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-618"><a href="#cb31-618" aria-hidden="true" tabindex="-1"></a>H_n \leq 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.</span>
+<span id="cb31-619"><a href="#cb31-619" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-620"><a href="#cb31-620" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-621"><a href="#cb31-621" aria-hidden="true" tabindex="-1"></a>Die obige Formel verwendet $\leq$ anstatt $=$, da wir bisher nur gezeigt haben, dass $2H_{n-1}+1$ Züge auf jeden Fall ausreichen.</span>
+<span id="cb31-622"><a href="#cb31-622" aria-hidden="true" tabindex="-1"></a>Vielleicht gibt es aber einen schnelleren Weg zur Lösung.</span>
+<span id="cb31-623"><a href="#cb31-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-624"><a href="#cb31-624" aria-hidden="true" tabindex="-1"></a>Können wir das tatsächlich besser machen?\</span>
+<span id="cb31-625"><a href="#cb31-625" aria-hidden="true" tabindex="-1"></a>Irgendwann müssen wir die größte Scheibe verschieben.</span>
+<span id="cb31-626"><a href="#cb31-626" aria-hidden="true" tabindex="-1"></a>Zu diesem Zeitpunkt müssen sich die <span class="in">`n-1`</span> kleinsten Scheiben auf einem einzelnen Stapel befinden, und es hat mindestens $H_{n-1}$ Züge gebraucht, um sie dorthin zu bewegen.\</span>
+<span id="cb31-627"><a href="#cb31-627" aria-hidden="true" tabindex="-1"></a>Es spielt keine Rolle, wie viele Züge wir für das Verschieben der größten Scheibe an die richtige Position brauchen.</span>
+<span id="cb31-628"><a href="#cb31-628" aria-hidden="true" tabindex="-1"></a>Aber nach dem letzten Zug der größten Scheibe müssen wir die <span class="in">`n-1`</span> kleinsten Scheiben (die dann wieder auf einem einzelnen Stapel liegen müssen), zurück auf die größte Scheibe verschieben; das erfordert wieder mindestens $H_{n-1}$ Züge.</span>
+<span id="cb31-629"><a href="#cb31-629" aria-hidden="true" tabindex="-1"></a>Daraus folgt</span>
+<span id="cb31-630"><a href="#cb31-630" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-631"><a href="#cb31-631" aria-hidden="true" tabindex="-1"></a>H_n \geq 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.</span>
+<span id="cb31-632"><a href="#cb31-632" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-633"><a href="#cb31-633" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-634"><a href="#cb31-634" aria-hidden="true" tabindex="-1"></a>Diese zwei Ungleichungen führen zu folgenden Gleichungen</span>
+<span id="cb31-635"><a href="#cb31-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-636"><a href="#cb31-636" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-637"><a href="#cb31-637" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb31-638"><a href="#cb31-638" aria-hidden="true" tabindex="-1"></a>H_0 &amp;= 0<span class="sc">\\</span></span>
+<span id="cb31-639"><a href="#cb31-639" aria-hidden="true" tabindex="-1"></a>H_n &amp;= 2H_{n-1} + 1, \quad \mathrm{mit} \ n &gt; 0.</span>
+<span id="cb31-640"><a href="#cb31-640" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb31-641"><a href="#cb31-641" aria-hidden="true" tabindex="-1"></a>$$ {#eq-recurrence}</span>
+<span id="cb31-642"><a href="#cb31-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-643"><a href="#cb31-643" aria-hidden="true" tabindex="-1"></a>Das entspricht offensichtlich einer rekursiven Definition für die Anzahl der notwendigen Züge.</span>
+<span id="cb31-644"><a href="#cb31-644" aria-hidden="true" tabindex="-1"></a>Wir wollen diese Anzahl aber nicht rekursiv berechnen, sondern wir suchen eine *geschlossene Formel*, mit der wir die Anzahl der Züge in einem Schritt berechnen können.</span>
+<span id="cb31-645"><a href="#cb31-645" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-646"><a href="#cb31-646" aria-hidden="true" tabindex="-1"></a>Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, bietet die sogenannte *mathematische Induktion*.</span>
+<span id="cb31-647"><a href="#cb31-647" aria-hidden="true" tabindex="-1"></a>Wir werden uns im Abschnitt <span class="co">[</span><span class="ot">Beweise</span><span class="co">](???)</span> dieses Tutorials ausführlich mit der Beweistechnik *Induktion* beschäftigen.</span>
+<span id="cb31-648"><a href="#cb31-648" aria-hidden="true" tabindex="-1"></a>An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.</span>
+<span id="cb31-649"><a href="#cb31-649" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-650"><a href="#cb31-650" aria-hidden="true" tabindex="-1"></a>Der Grundgedanke besteht darin, unsere Behauptung aus @eq-zuege (die *Induktionsbehauptung*) in die Gleichungen der rekursiven Definition (@eq-recurrence) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch gelten.</span>
+<span id="cb31-651"><a href="#cb31-651" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-652"><a href="#cb31-652" aria-hidden="true" tabindex="-1"></a>Der erste Fall für $n=0$ (*Induktionsanfang*) ist trivial, da $H_0 = 2^0-1=1-1=0$.</span>
+<span id="cb31-653"><a href="#cb31-653" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-654"><a href="#cb31-654" aria-hidden="true" tabindex="-1"></a>Für den zweiten Fall $n&gt;0$ (*Induktionsschritt*) kann die Behauptung für jedes $n$ bewiesen werden, indem wir zeigen, dass sie auch für $n-1$ gilt:</span>
+<span id="cb31-655"><a href="#cb31-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-656"><a href="#cb31-656" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-657"><a href="#cb31-657" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb31-658"><a href="#cb31-658" aria-hidden="true" tabindex="-1"></a>H_n&amp;=2H_{n-1}+1<span class="sc">\\</span></span>
+<span id="cb31-659"><a href="#cb31-659" aria-hidden="true" tabindex="-1"></a>&amp;=2(2^{n-1}-1)+1<span class="sc">\\</span></span>
+<span id="cb31-660"><a href="#cb31-660" aria-hidden="true" tabindex="-1"></a>&amp;=2^n-2+1<span class="sc">\\</span></span>
+<span id="cb31-661"><a href="#cb31-661" aria-hidden="true" tabindex="-1"></a>&amp;=2^n-1. \ \blacksquare</span>
+<span id="cb31-662"><a href="#cb31-662" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb31-663"><a href="#cb31-663" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb31-664"><a href="#cb31-664" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-665"><a href="#cb31-665" aria-hidden="true" tabindex="-1"></a>Wir haben damit mathematisch bewiesen, dass die Anzahl der notwendigen Züge *immer* gleich $2^n-1$ ist.</span>
+<span id="cb31-666"><a href="#cb31-666" aria-hidden="true" tabindex="-1"></a>Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.</span>
+<span id="cb31-667"><a href="#cb31-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-668"><a href="#cb31-668" aria-hidden="true" tabindex="-1"></a><span class="fu">## Übungen</span></span>
+<span id="cb31-669"><a href="#cb31-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-670"><a href="#cb31-670" aria-hidden="true" tabindex="-1"></a>Die Übungen zu dieser Lektion findest du im Notebook <span class="in">`artithmetik/_rekursion.ipynb`</span>.</span>
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
