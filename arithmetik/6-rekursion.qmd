@@ -166,7 +166,7 @@ fakultät(5)
 1. Initialisierung des Ergebnisses mit 1, dem Wert für den Rekursionsanfang.
 2. Beginn einer iterativen Schleife, deren Bedingung prüft, ob der Rekursionsanfang erreicht wurde.
 3. Durchführung der Multiplikation und Zuweisung an `p`, dem Teilergebnis.
-4. Verringerung der Schleifenvariablen um 1.
+4. Verringerung der Schleifenvariable um 1.
 
 ### Größter gemeinsamer Teiler
 
@@ -315,7 +315,7 @@ Wir messen die Bearbeitungszeit der neuen Version ebenfalls mit dem Eingabewert 
 ```{python}
 %time fib_mem(35)
 ```
-Die Bearbeitungszeit beträgt jetzt rund 11 Mikrosekunden ($1\mu s=10^{-6}s$).
+Die Bearbeitungszeit beträgt jetzt rund 12 Mikrosekunden ($1\mu s=10^{-6}s$).
 Die neue Version ist damit um den Faktor $10^5$ schneller als die Version ohne *memoization*.
 Es lohnt sich also auf jeden Fall, Algorithmen mit einer exponentiellen Laufzeit zu optimieren.
 
@@ -371,7 +371,7 @@ Ziel des Spiels ist es, den kompletten Scheiben-Stapel vom linken Stab auf den r
 Hierbei gelten zwei Regeln:
 
 1. Es darf in jedem Zug nur eine Scheibe bewegt werden.
-2. Eine Scheibe muss immer auf einer größeren Scheibe abgelegt werden.
+2. Eine Scheibe darf nie auf einer kleineren Scheibe abgelegt werden.
 
 Folglich sind zu jedem Zeitpunkt des Spieles die Scheiben auf jedem Stapel der Größe nach geordnet.
 
@@ -404,18 +404,18 @@ Hanoi - Lösungsansatz in drei Schritten
 Das Muster ist nachvollziehbar, aber es scheint, als gäbe es ein Problem:\
 in den Schritten 1 und 3 verschieben wir mehr als eine Scheibe, was nach den Regeln nicht erlaubt ist.
 
-Wir könnten versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen.
+Wir könnten nun versuchen, das Problem iterativ zu lösen, indem wir explizite Zugfolgen für 2, 3, 4, oder mehr Scheiben berechnen, die verschoben werden sollen.
 Bei näherer Betrachtung erkennen wir aber, dass das gar nicht notwendig ist:
 
-- Schritt 2 mit dem Verschieben einer einzelnen Scheibe ist trivial (das entspricht einem Rekursionsanfang mit `n==1`)
-- die Schritte 1 und 3 verschieben jeweils `n-1` Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument `n-1`).
+- Schritt 2 mit dem Verschieben der untersten Scheibe ist trivial (das entspricht einem Rekursionsanfang mit der Scheibenanzahl $n=1$)
+- die Schritte 1 und 3 verschieben jeweils $n-1$ Scheiben (das entspricht einem Rekursionsschritt mit neuem Argument `n-1`).
 
 Es handelt sich also offensichtlich um ein rekursives Problem, und wir können den Algorithmus beschreiben, indem wir unser Muster für ein beliebiges `n` verallgemeinern:
 
 ::: {.callout-note}
 ## Rekursiver Algorithmus
 1. Verschiebe die `n-1` kleinsten Scheiben rekursiv auf den temporären Stapel
-2. Verschiebe die verbleibende Scheibe auf den Zielstapel
+2. Verschiebe die verbleibende größte Scheibe auf den Zielstapel
 3. Verschiebe die `n-1` kleinsten Scheiben rekursiv vom temporären auf den Zielstapel.
 :::
 
@@ -425,7 +425,7 @@ Wir bewegen also nie mehr als eine Scheibe mit einem einzelnen Aufruf, wie gefor
 ### Implementierung
 
 Für unsere erste Implementierung verwenden wir zur Repräsentation der Scheibenstapel eine Datenstrukur [Stapel](https://de.wikipedia.org/wiki/Stapelspeicher).
-Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge vom Stapel genommen.
+Die Elemente eines Stapels werden wie bei einem Stapel Spielkarten übereinander gelegt und in umgekehrter Reihenfolge (d.h. von oben) vom Stapel genommen.
 Dies wird auch Last-In-First-Out-Prinzip [LIFO](https://de.wikipedia.org/wiki/Last_In_%E2%80%93_First_Out) genannt.
 
 Ein Stapel verfügt typischerweise über zwei Methoden `push` und `pop`, mit denen Elemente auf dem Stapel abgelegt bzw. wieder ausgelagert werden.
@@ -479,8 +479,8 @@ def hanoi(start, ziel, temp, n):                    # <1>
 2. Rekursionsanfang: wenn `n` gleich 1 ist, also die unterste Scheibe im Stapel erreicht ist, dann wird diese Scheibe vom Startstapel entfernt und auf dem Zielstapel abgelegt.
 3. Rekursionsschritt 1: verschieben der obersten `n-1` Scheiben von `start` nach `temp`.
 Beachte die Reihenfolge der Argumente: das erste Argument entpricht gemäß der Funktionssignatur dem Startstapel, das zweite dem Zielstapel und das dritte dem temporären Stapel.
-4. Rekursionsschritt 2: verschieben der untersten Scheibe von `start` nach `ziel`.
-5. Rekursionsschritt 3: verschieben der `n-1` Scheiben von `temp` nach `ziel`.
+4. Rekursionsschritt 2: verschieben der größten Scheibe von `start` nach `ziel`.
+5. Rekursionsschritt 3: verschieben der `n-1` kleinsten Scheiben von `temp` nach `ziel`.
 
 Mit dieser Implementierung wird offensichtlich, dass nur im Rekursionsanfang (`n==1`) tatsächlich eine Scheibe verschoben wird.
 Die Rekursionsschritte dienen lediglich dazu, die korrekte Reihenfolge der Züge zu berechnen.
@@ -511,11 +511,11 @@ def hanoi(start, ziel, temp, n):
     hanoi(temp, ziel, start, n-1)                   # <4>
 ```
 1. Rekursionsanfang: wenn alle Scheiben verschoben wurden (`n==0`), dann gibt es nichts mehr zu tun, und wir beenden das Programm.
-Damit sparen wir uns auch die `if-else` Verzweigung der bisherigen Version.
+Damit sparen wir uns auch die `if-else` Verzweigung der vorherigen Version.
 2. Rekursionsschritt 1: verschiebe die obersten `n-1` Scheiben von `start` nach `temp`.
-3. Schritt 2: speichere den Zug der aktuellen Scheibe von `start` nach `ziel`.
-Dazu muss sich die Funktion gar nicht rekursiv aufrufen, sondern die Speicherung erfolgt direkt hier.
-4. Rekursionsschritt 3: verschiebe die `n-1` Scheiben von `temp` nach `ziel`.
+3. Schritt 2: speichere den Zug der aktuellen Scheibe von `start` nach `ziel` in einem neuen Stapel `züge`.
+Dazu muss sich die Funktion gar nicht rekursiv aufrufen, da hier nur eine einzelne Anweisung ausgeführt wird.
+4. Rekursionsschritt 3: verschiebe die `n-1` keinsten Scheiben von `temp` nach `ziel`.
 
 Wir rufen die neue Version jetzt nicht mit den konkreten Stapeln auf, sondern mit den Buchstaben 'A', 'B' und 'C', die diese Stapel repräsentieren.
 
@@ -526,14 +526,15 @@ züge
 
 Die Züge sind wie folgt zu interpretieren:
 jedes Paar in runden Klammern repräsentiert einen Zug, wobei jeweils die oberste Scheibe des erstgenannten Stapels auf den zweiten Stapel verschoben wird.
-Du kannst das z.B. mit einem Stapel verschiedengroßer Münzen ausprobieren und wirst feststellen, dass das Problem damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.
+Du kannst das z.B. mit einem Stapel verschieden großer Münzen ausprobieren und wirst feststellen, dass das Spiel damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.
 
-Ich habe die zweite Versionen der Funktion `hanoi` benutzt, um nachfolgende Animation für vier Scheiben zu erstellen.
-Wenn du wissen willst wie das geht, dann sieh dir den Quellcode unter `arithmetik/hanoi_solve.py` an.
+Ich habe beide Ansätze kombiniert, um die nachfolgende Animation zu erstellen.
+Du kannst dir den Quellcode dafür unter `arithmetik/hanoi_solve.py` ansehen und dort auch die Anzahl der Scheiben ändern und dann mit `manim -ql hanoi_solve.py` die Animation neu erstellen.
+Dafür musst du aber das Python Programm `Manim` bei dir [installieren](https://docs.manim.community/en/stable/installation.html).
 
 ::: {#fig-hanoi-solve}
 {{< video media/videos/hanoi_solve/480p15/hanoi_solve.mp4 >}}
-Hanoi - Lösung für vier Scheiben
+Hanoi - Animation mit fünf Scheiben
 :::
 
 
@@ -600,21 +601,26 @@ $$ {#eq-recurrence}
 Das entspricht offensichtlich einer rekursiven Definition für die Anzahl der notwendigen Züge.
 Wir wollen diese Anzahl aber nicht rekursiv berechnen, sondern wir suchen eine *geschlossene Formel*, mit der wir die Anzahl der Züge in einem Schritt berechnen können.
 
-Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, ist die sogenannte *mathematische Induktion*.
-Wir werden uns im Abschnitt [Beweise](???) dieses Tutorials ausführlich mit mathematischer Induktion beschäftigen.
+Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, bietet die sogenannte *mathematische Induktion*.
+Wir werden uns im Abschnitt [Beweise](???) dieses Tutorials ausführlich mit der Beweistechnik *Induktion* beschäftigen.
 An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.
 
-Der Grundgedanke besteht darin, unsere Behauptung aus @eq-zuege (die *Induktionsbehauptung*) in die Gleichungen der rekursiven Definition (@eq-recurrence) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch für jedes $n$ gelten.
+Der Grundgedanke besteht darin, unsere Behauptung aus @eq-zuege (die *Induktionsbehauptung*) in die Gleichungen der rekursiven Definition (@eq-recurrence) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch gelten.
 
 Der erste Fall für $n=0$ (*Induktionsanfang*) ist trivial, da $H_0 = 2^0-1=1-1=0$.
 
-Für den zweiten Fall $n\neq0$ (*Induktionsschritt*) kann die Behauptung für jedes $n$ bewiesen werden, indem wir zeigen, dass sie auch für $n-1$ gilt:
+Für den zweiten Fall $n>0$ (*Induktionsschritt*) kann die Behauptung für jedes $n$ bewiesen werden, indem wir zeigen, dass sie auch für $n-1$ gilt:
 
 $$
-H_n=2H_{n-1}+1=2(2^{n-1}-1)+1=2^n-1.
+\begin{align}
+H_n&=2H_{n-1}+1\\
+&=2(2^{n-1}-1)+1\\
+&=2^n-2+1\\
+&=2^n-1. \ \blacksquare
+\end{align}
 $$
 
-Wir haben damit mathematisch bewiesen, dass die Anzahl der Züge *immer* gleich $2^n-1$ ist.
+Wir haben damit mathematisch bewiesen, dass die Anzahl der notwendigen Züge *immer* gleich $2^n-1$ ist.
 Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.
 
 ## Übungen

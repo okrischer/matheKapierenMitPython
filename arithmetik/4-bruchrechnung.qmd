@@ -431,3 +431,7 @@ c = c.add(Bruch(2, 1)) # falsch
 d = a.mul(b) # richtig
 c.zeige(end=" != "); d.zeige()
 ```
+
+## Übungen
+
+Die Übungen zu dieser Lektion findest du im Notebook `artithmetik/_bruch.ipynb`.
