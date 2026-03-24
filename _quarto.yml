@@ -19,5 +19,3 @@ format:
 
 execute:
   jupyter: python3
-  cache: true
-  freeze: auto

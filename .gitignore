@@ -1,6 +1,7 @@
 /.quarto/
 __pycache__/
 /_site/
+/_freeze/
 .jupyter_cache/
 .ipynb_checkpoints/
 Tex/

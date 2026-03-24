@@ -1,5 +1,6 @@
 ---
 title: "Zahlenbereiche und Zahlensysteme"
+order: 4
 ---
 
 Bisher haben wir wie selbstverständlich von natürlichen und reellen Zahlen gesprochen, ohne überhaupt genau zu wissen, was wir darunter verstehen wollen.
@@ -55,7 +56,7 @@ $$
 
 ::: {.callout-important}
 ## Schnittmenge
-Die Durchschnitt $A\cap B$ zweier Mengen $A$ und $B$ besteht aus denjenigen Elementen, die sowohl in $A$ als auch in $B$, also gleichzeitig in beiden Mengen $A, B$ enthalten sind:
+Die Schnittmenge $A\cap B$ zweier Mengen $A$ und $B$ besteht aus denjenigen Elementen, die sowohl in $A$ als auch in $B$, also gleichzeitig in beiden Mengen $A, B$ enthalten sind:
 $$
 A \cap B = \{x \mid x \in A \ \mathrm{und} \ x \in B\}
 $$
@@ -83,7 +84,6 @@ Diese Mengenoperationen können mit einem sogenannten *Venn-Diagramm* veranschau
 
 Wir können auch in Python mit Mengen rechnen (wir beschränken uns dabei auf ganze Zahlen).
 Dazu müssen wir die Zahlen, die zu einer Menge gehören sollen, in einem Datentyp `set`  zusammenfassen, der weitgehend unserem Mengenbegriff entpricht.
-Da alle Schlüsselwörter in Python (und damit auch die Bezeichnungen der Datentypen) in englischer Sprache angegeben werden, verwenden wir in diesem Tutorial ausschließlich die englischen Bezeichnungen.
 
 ```{python}
 A = {1,2,3}                         # <1>
@@ -98,8 +98,11 @@ Wir haben hier auf der linken und rechten Seite des `==` jeweils zwei Werte zu e
 Der Test auf Mitgliedschaft in einer Menge ($\in$) wird mit dem Schlüsselwort `in` durchgeführt, das Gegenstück ($\notin$) mit `not in`, wobei `not` ein sogenannter *Bool'scher Operator* ist, der das gegebene Argument verneint:
 
 ```{python}
-assert 1 in A
-assert 1 not in B
+1 in A
+```
+
+```{python}
+1 in B
 ```
 
 Die beiden anderen Bool'schen Operatoren in Python sind `and` und `or` mit denen wir zwei Wahrheitsaussagen verknüpfen können:
@@ -243,7 +246,7 @@ Um diese Verwirrung auszuschließen, können wir eine *set comprehension* auch a
 {z for z in range(-5, 17) if z % 2 != 0}
 ```
 
-Hier haben wir den Modulo Operator `%` verwendet, der den Rest einer [ganzzahligen Division](2-teiler.qmd#sec-division) ausgibt, um zu testen, ob `z` eine ungerade Zahl ist.
+Hier haben wir den Modulo Operator `%` verwendet, der den Rest einer [ganzzahligen Division](teiler_vielfache.qmd#sec-division) ausgibt, um zu testen, ob `z` eine ungerade Zahl ist.
 
 ### Rationale Zahlen
 
@@ -307,15 +310,15 @@ $$
 In der Antike hatten die *Pythagoräer* (die Schüler des berühmten Mathematikers *Pythagoras*) angenommen, dass sich alles im Universum mit rationalen Zahlen darstellen lässt.
 Betrachtet man aber ein Quadrat der Seitenlänge eins, so sollte die Länge $x$ von dessen Diagonale, folgend dem *Satz des Pythagoras*, die Gleichung $x^2 = 2$ erfüllen, und damit $x=\sqrt{2}$.\
 Aus rein geometrischen Überlegungen sollte es also eine Zahl geben, die diese Darstellung besitzt.
-Tragischerweise hat ausgerechnet *Hippasos*, ein Schüler des *Pythagoras*, mit Hilfe dessen Satzes bewiesen, dass $\sqrt{2}$ keine rationale Zahl sein kann. (siehe ???).
+Tragischerweise hat ausgerechnet *Hippasos*, ein Schüler des *Pythagoras*, mit Hilfe dessen Satzes bewiesen, dass $\sqrt{2}$ keine rationale Zahl sein kann.
 
-Die erste bekannte irrationale Zahl ist also $\sqrt{2}$; aus der Wurzelrechnung ??? folgt aber, dass es noch unendlich viele weitere solcher irrationaler Zahlen gibt, die auch als *algebraische* irrationale Zahlen bezeichnet werden.\
+Die erste bekannte irrationale Zahl ist also $\sqrt{2}$; es gibt aber unendlich viele weitere solcher irrationaler Zahlen, die auch als *algebraische* irrationale Zahlen bezeichnet werden.\
 *Algebraisch* deshalb, weil sie als Lösung einer "gewöhnlichen" algebraischen Gleichung angegben werden können, zum Beispiel ist $\sqrt{5}$ die Lösung der Gleichung $x^2=5$.
 
 Es gibt aber auch irrationale Zahlen, die nicht als Lösung einer algebraischen Gleichung angegeben werden können, man sagt, sie "übersteigen" (*transzendieren*) die Möglichkeiten der Algebra, und nennt sie daher *transzendente Zahlen*.
 Die bekanntesten dieser *transzendenten* Zahlen sind die Kreiszahl $\pi$ und die eulersche Zahl $e$.
 
-Die Zahlen in $\mathbb{R}$ können in einer *Zahlengeraden* veranschaulicht werden, die verdeutlicht, dass die Menge der reelen Zahlen über die Vergleiche $< \mathrm{und}>$ eine *lineare Ordnung* bildet.
+Die Zahlen in $\mathbb{R}$ können in einer *Zahlengeraden* veranschaulicht werden, die verdeutlicht, dass die Menge der reelen Zahlen über die Vergleiche $<$ und $>$ eine *lineare Ordnung* bildet.
 Das beudeutet, dass wir für zwei verschiedene reelle Zahlen immer sagen können, welche von beiden größer bzw. kleiner ist:
 
 ![Ausschnitt der Zahlengeraden der reellen Zahlen](media/images/zahlengerade/zahlengerade.png){#fig-gerade}

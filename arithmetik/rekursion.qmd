@@ -1,5 +1,6 @@
 ---
 title: "Rekursion"
+order: 5
 ---
 
 Rekursion ist eine wichtige Problemlösungsstrategie der Mathematik und der Programmierung.
@@ -170,7 +171,7 @@ fakultät(5)
 
 ### Größter gemeinsamer Teiler
 
-In Lektion [Teiler und Vielfache](2-teiler.qmd#sec-ggT) haben wir den größten gemeinsamen Teiler zweier ganzer Zahlen iterativ berechnet mit folgender Funktion:
+In Lektion [Teiler und Vielfache](teiler_vielfache.qmd#sec-ggT) haben wir den größten gemeinsamen Teiler zweier ganzer Zahlen iterativ berechnet mit folgender Funktion:
 
 
 ```{python}
@@ -222,7 +223,7 @@ Die **rekursive Variante** folgt diesem Muster:
 ### Fibonacci-Folge
 
 Das Paradebeispiel rekursiver Definitionen in der Mathematik ist die sogenannte *Fibonacci Folge*.
-Benannt ist die Folge nach dem italienischen Mathematiker Leonardo Fibonacci, den wir bereits in der Lektion [Zahlenbereiche und Zahlensysteme](3-mengen.qmd#sec-dezimal) kennengelernt haben.
+Benannt ist die Folge nach dem italienischen Mathematiker Leonardo Fibonacci, den wir bereits in der Lektion [Zahlenbereiche und Zahlensysteme](zahlen.qmd#sec-dezimal) kennengelernt haben.
 Fibonacci hatte mit dieser Zahlenfolge in seinem Rechenbuch *Liber abbaci* das Wachstum einer (fiktiven) Kaninchenpopulation beschrieben.
 
 Die Fibonacci-Folge ist die unendliche Folge natürlicher Zahlen, die mit den Zahlen 0 und 1 beginnt, und bei der jede Zahl die Summe der beiden ihr vorangehenden Zahlen ist.
@@ -271,22 +272,28 @@ def fib_print(n):
 
 fib_print(4)
 ```
+
 Es ist nicht notwendig, diesen Ablaufbaum im Detail zu verstehen, das kann bei einer verschachtelten Rekursion recht schwierig sein.
-Wir wollen aber wissen, wie schnell der Baum wächst; ich habe dazu `fib_print` mit den Argumenten 3, 4 und 5 aufgerufen und jeweils die Ausgabezeilen gezählt:
+Wir können aber erkennen, dass sich die Funktion bei der Abarbeitung sehr oft mit kleineren Argumenten selbst aufruft.
+Es kann gezeigt werden, dass dies zu einem exponentiellen Wachstum der Arbeitsschritte für größere Eingaben führt; das kann man dann in mathematischer Schreibweise wie folgt ausdrücken:
 
-- $fib(3)=5$
-- $fib(4)=9$
-- $fib(5)=15$
+$$
+\mathcal{O}(\varphi^n),
+$$
 
-Mit ein wenig Intuition (oder ausprobieren) finden wir heraus, dass die Wachstumsrate ungefähr gleich $2^{n-1}$ ist, d.h. der Aufwand steigt exponentiell in Abhängigkeit vom Eingabewert $n$.
-Schon bei einem Eingabewert größer als 30 müssen wir mit mehr als einer Milliarde Aufrufen rechnen.
+was wir wie folgt lesen können: \
+die Anzahl der Schritte zur Abarbeitung des Algorithmus liegt in der Größenordung von $\varphi^n$,
+wobei der griechische Buchstabe $\varphi$ (gesprochen als phi) einen konstanten Faktor von ungefähr 1,618 angibt.
+Da $n$ im Exponent dieser Formel steht, sprechen wir von einem exponentiellen Wachstum.
+
+Schon bei einem Eingabewert von 35 müssen wir mit $1,618^{35} \approx 2.1e7$, also mehr als als 20 Millionen Aufrufen rechnen.
 Wir können die Bearbeitungszeit einer Anweisung in Python mit dem *magic command* `%time` messen:
 
 ```{python}
 %time fib_rek(35)
 ```
 
-Die Bearbeitungszeit beträgt knapp 900 Millisekunden ($1ms = 10^{-3}s$), also fast eine Sekunde.
+Die Bearbeitungszeit beträgt knapp eine Sekunde.
 Das ist für größere Eingabewerte nicht mehr praktikabel.
 
 Eine Möglichkeit zur Lösung des Problems ist die Anwendung einer Technik, die als *memoization* bezeichnet wird.
@@ -310,12 +317,13 @@ print(cache)
 
 Nach der Ausführung der Funktion enthält der cache alle Fibonacci-Zahlen bis einschließlich $n$.
 
-Wir messen die Bearbeitungszeit der neuen Version ebenfalls mit dem Eingabewert 35:
+Wir messen die Laufzeit der neuen Version ebenfalls mit dem Eingabewert 35:
 
 ```{python}
 %time fib_mem(35)
 ```
-Die Bearbeitungszeit beträgt jetzt rund 12 Mikrosekunden ($1\mu s=10^{-6}s$).
+
+Die Laufzeit beträgt jetzt rund 5 Mikrosekunden ($1\mu s=10^{-6}s$).
 Die neue Version ist damit um den Faktor $10^5$ schneller als die Version ohne *memoization*.
 Es lohnt sich also auf jeden Fall, Algorithmen mit einer exponentiellen Laufzeit zu optimieren.
 
@@ -345,7 +353,7 @@ Wir messen erneut die Laufzeit der neuen Version:
 %time fib_iter(35)
 ```
 
-Die Laufzeit beträgt hier nur noch rund 6 $\mu s$; die iterative Version ist also ungefähr doppelt so schnell wie die optimierte rekursive Version.
+Die Laufzeit beträgt hier 2 $\mu s$, die iterative Version ist also ungefähr doppelt so schnell wie die optimierte rekursive Version.
 
 In der Regel können verschachtelte Rekursionen aber nicht ohne Weiteres in iterative Schleifen überführt werden.
 Bei der Fibonacci-Folge klappt das nur deshalb, weil es sich hier um eine sogenannte *primitive* Rekursion handelt, bei der das Ergebnis jeden Teilschrittes über eine einfache mathematische Operation (wie z.B. der Addition) berechnet werden kann.
@@ -601,13 +609,11 @@ $$ {#eq-recurrence}
 Das entspricht offensichtlich einer rekursiven Definition für die Anzahl der notwendigen Züge.
 Wir wollen diese Anzahl aber nicht rekursiv berechnen, sondern wir suchen eine *geschlossene Formel*, mit der wir die Anzahl der Züge in einem Schritt berechnen können.
 
-Eine Möglichkeit, eine rekursive Formel in eine geschlossene Formel zu überführen, bietet die sogenannte *mathematische Induktion*.
-Wir werden uns im Abschnitt [Beweise](???) dieses Tutorials ausführlich mit der Beweistechnik *Induktion* beschäftigen.
-An dieser Stelle geben wir aber schon mal ein Beispiel, um zu zeigen, wie eng das Prinzip der Induktion mit dem der Rekursion verwandt ist.
+Dazu nehmen wir an, dass unsere intuitiv gefundene Formel aus @eq-zuege korrekt ist und werden dies mittels *mathematischer Induktion* beweisen.
 
 Der Grundgedanke besteht darin, unsere Behauptung aus @eq-zuege (die *Induktionsbehauptung*) in die Gleichungen der rekursiven Definition (@eq-recurrence) einzusetzen und zu prüfen, ob die Gleichungen dann immer noch gelten.
 
-Der erste Fall für $n=0$ (*Induktionsanfang*) ist trivial, da $H_0 = 2^0-1=1-1=0$.
+Der erste Fall für $n_0=0$ (*Induktionsanfang*) ist trivial, da $H_0 = 2^0-1=1-1=0$.
 
 Für den zweiten Fall $n>0$ (*Induktionsschritt*) kann die Behauptung für jedes $n$ bewiesen werden, indem wir zeigen, dass sie auch für $n-1$ gilt:
 
@@ -620,6 +626,7 @@ H_n&=2H_{n-1}+1\\
 \end{align}
 $$
 
+Da die Behauptung für ein beliebig ausgewähltes $n_0$ und für $n-1$ gilt, gilt sie nach den Regeln der vollständigen Induktion für jedes beliebige $n$.
 Wir haben damit mathematisch bewiesen, dass die Anzahl der notwendigen Züge *immer* gleich $2^n-1$ ist.
 Damit kann es auch keine effizientere Lösung für unser Problem geben: die verschachtelte Rekursion kann nicht in eine lineare Rekursion überführt werden.
 

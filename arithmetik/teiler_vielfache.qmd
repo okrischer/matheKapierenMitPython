@@ -1,5 +1,6 @@
 ---
 title: "Teiler und Vielfache"
+order: 2
 ---
 
 In diesem Kapitel machen wir einen kleinen Ausflug in die Welt der Zahlen und beschäftigen uns mit der Teilbarkeit natürlicher Zahlen.
@@ -29,8 +30,6 @@ Jede natürliche Zahl $n>1$ besitzt eine (bis auf die Reihenfolge) eindeutige **
 - $10000=2^4\cdot 5^4$ (Zehnerpotenz)
 :::
 
-Wenn du mit der Potenzdartsellung von Zahlen noch nicht vertraut bist, schaue dir ??? an; dort erhältst du eine Einführung in Potenzrechnung.
-
 ::: {.callout-caution}
 ## Zwischenübung
 Zerlege die Zahlen 12, 60, 128 und 1.000 in ihre Primfaktoren und stelle sie in Potenzen dieser Faktoren dar.
@@ -58,9 +57,9 @@ Hier ist $q$ der sogenannte *Ganzzahlqotient* und $r$ der *Rest* der Division.
 Entscheidende Nebenbedingung ist, dass $r$ eine ganze Zahl größer oder gleich 0 und kleiner $m$ ist.
 :::
 
-Der Rest ist also die Differenz zwischen dem Dividenden $n$ und dem größten Vielfachen des Divisors $m$, das höchstens so groß ist wie der Dividend: $\ r=n-m\cdot q$.\
+Der Rest ist also die Differenz zwischen dem Dividenden $n$ und dem größten Vielfachen des Divisors $m$: $\ r=n-m\cdot q$.\
 Ein Rest ungleich 0 ergibt sich folglich genau dann, wenn der Dividend kein Vielfaches des Divisors ist.
-Man sagt auch: Der Dividend ist nicht durch den Divisor teilbar, weshalb ein Rest übrigbleibt.
+Man sagt auch: der Dividend ist nicht durch den Divisor teilbar, weshalb ein Rest übrigbleibt.
 
 ::: {.callout-tip}
 ## Beispiele für Division mit Rest
@@ -87,7 +86,7 @@ Stelle das Ergebnis der fogenden Divisionen als ganze Zahl mit Rest dar:
 
 Man kann eine Funktion definieren, die jedem Zahlenpaar $(n, m)$ einen eindeutigen Teilerrest $r$ zuordnet. Diese Funktion nennt man *Modulo* und kürzt sie meistens mit *mod* ab.
 
-Wir werden uns in späteren Kapiteln ausführlich mit Funktionen beschäftigen (siehe ???);
+Wir werden uns in späteren Kapiteln ausführlich mit Funktionen beschäftigen;
 ohne auf die Details einzugehen, wollen wir an dieser Stelle die Funktion Modulo in Python implementieren, um uns mit der Syntax einer Funktionsdefinition vertraut zu machen.
 Vergegenwärtigen wir uns hierzu nochmal die obige Definition des Restes einer ganzzahligen Division:
 $$
@@ -111,6 +110,33 @@ Alle nachfolgenden Zeilen, die zu diesem Code-Block gehören sollen, werden um d
 3. Berechnung des Restes der Division gemäß der mathematischen Definition und Zuweisung an den Bezeichner `r`.
 4. Die Funtion liefert den Rest der Division `r` als ihr Ergebnis zurück.
 Dies wird mit dem Schlüsselwort `return` angezeigt.
+
+Unsere Funktion `mod` benutzt den Python Operator `//` für die ganzzahlige Division.
+Wir wissen aber nicht, wie dieser Operator in Python implementiert ist, d.h. wie hier das Ergebnis berechnet wird.
+Deshalb wollen wir eine eigene Funktion schreiben, die diese Berechnung im einfachsten Fall veranschaulicht:
+wir berechnen den Quotienten und den Rest einer ganzzahligen Division mittels wiederholter Subtraktion, und nennen die Funktion `quotrem`.
+
+```{python}
+def quotrem(n, m):
+  q = 0                             # <1>
+  while n >= m:                     # <2>
+    n -= m                          # <3>
+    q += 1                          # <4>
+  return (q, n)                     # <5>
+
+assert quotrem(9,4) == (2, 1)
+assert quotrem(2,4) == (0, 2)
+assert quotrem(4,4) == (1, 0)
+```
+1. Initialisiert den Quotienten `q` mit 0
+2. Beginn einer Schleife, die solange ausgeführt wird, wie `n` größer oder gleich `m` ist
+3. Ziehe `m` einmal von `n` ab
+4. Erhöhe den Quotienten `q` um eins
+5. Gib das Ergebis von Quotient und Rest der Divsison als Tupel zurück.
+
+Die Funktion `quotrem` macht nichts anderes als zu abzuzählen, wie oft der Divisor `m` in den Dividend `n` passt.
+Sobald `n` kleiner als `m` ist, passt `m` kein weiteres mal in `n`, und `n` ist der Rest der Division.
+Die Funktion `quotrem` ist dabei nicht sonderlich effizient, da sie $n \div m$ Subtraktionen durchführen muss.
 
 ## Gößter gemeinsamer Teiler {#sec-ggT}
 
@@ -137,7 +163,7 @@ $x^0$ ergibt immer 1, daher hat dieser zusätzliche Faktor keinen Einfluß auf d
 Für den *ggT* nimmt man die Primfaktoren, die in beiden Zerlegungen vorkommen, und als zugehörigen Exponenten den jeweils *kleineren* der Ausgangsexponenten:
 
 ::: {.callout-tip}
-## Größter gemeinsamer Teiler für 3528 und 7380
+## Größter gemeinsamer Teiler für 3528 und 3780
 $ggT(3528, 3780)=2^2\cdot 3^2\cdot 5^0\cdot 7^1=252$
 :::
 
@@ -155,8 +181,8 @@ Unter einem *Algorithmus* verstehen wir eine detaillierte, schrittweise Rechenvo
 Der *klassische* euklidische Algorithmus berechnet den größten gemeinsamen Teiler, indem er nach einem gemeinsamen Maß für die Längen zweier Linien sucht:
 
 1. Die kleinere zweier Längen wird von der größeren mehrfach abgezogen, bis ein Ergebnis übrig bleibt, das kleiner als die kleinere Länge ist.
-2. Bei einer Differenz von 0 ist man fertig und die kleinere Länge das Ergebnis.
-3. Andernfalls wiederholt man dieses Abziehen – jetzt aber mit der kleineren Länge anstelle der größeren und der letzten Differenz anstelle der kleineren Länge.
+2. Bei einer Differenz von 0 ist man fertig und die kleinere Länge ist das Ergebnis.
+3. Andernfalls wiederholt man dieses Abziehen – jetzt aber mit der kleineren Länge anstelle der größeren, und der letzten Differenz anstelle der kleineren Länge.
 :::
 
 ::: {.callout-tip}
@@ -445,7 +471,7 @@ kgv(m, kgV(n, p))=kgV(kgV(m, n), p)
 $$ {#eq-kgv-assoz}
 :::
 
-Wir machen uns diesen Umstand zunütze und definieren eine neue Funktion in Python für die Berechnung des *kgV* für drei Zahlen:
+Wir machen uns diesen Umstand zunutze und definieren eine neue Funktion in Python für die Berechnung des *kgV* für drei Zahlen:
 
 ```{python}
 def kgv_3(m, n, p):                 # <1>
@@ -498,7 +524,7 @@ Ob diese Lösung dann leichter verständlich ist, kannst für dich selbst entsch
 
 Du bist jetzt bereit, deine ersten mathematischen Probleme mit Python zu lösen.
 
-Falls du Python und Jupyter noch nicht installiert hast, dann sieh in Lektion [Rechenregeln](1-rechenregeln.qmd#sec-ubung) nach und richte deine Arbeitsumgebung ein.
+Falls du Python und Jupyter noch nicht installiert hast, dann sieh in Lektion [Rechenregeln](rechenregeln.qmd#sec-ubung) nach und richte deine Arbeitsumgebung ein.
 
 Um mit den Jupyter-Notebooks dieses Tutorials arbeiten zu können, musst du sie dir zunächst herunterladen.
 Dafür brauchst du das Programm *Git*, dass du gemäß diesen [Installationsanleitungen](https://github.com/git-guides/install-git) installieren kannst.

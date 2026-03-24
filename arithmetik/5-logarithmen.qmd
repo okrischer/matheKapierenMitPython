@@ -1,4 +1,0 @@
----
-title: "Potenzen, Wurzeln, Logarithmen"
----
-
