@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Teiler und Vielfache – Mathe kapieren mit Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84365199647afda7ec578bfe13ef3742.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../arithmetik/rechenregeln.html">Arithmetik</a></li><li class="breadcrumb-item"><a href="../arithmetik/teiler_vielfache.html">Teiler und Vielfache</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Mathe kapieren mit Python</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Arithmetik</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../arithmetik/rechenregeln.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Grundlegende Rechenregeln</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../arithmetik/teiler_vielfache.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Teiler und Vielfache</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../arithmetik/bruchrechnung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bruchrechnung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../arithmetik/zahlen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Zahlenbereiche und Zahlensysteme</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../arithmetik/rekursion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rekursion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul>
+  <li><a href="#sec-primfaktor" id="toc-sec-primfaktor" class="nav-link active" data-scroll-target="#sec-primfaktor"><span class="header-section-number">1</span> Primfaktorzerlegung</a></li>
+  <li><a href="#sec-division" id="toc-sec-division" class="nav-link" data-scroll-target="#sec-division"><span class="header-section-number">2</span> Division mit Rest</a></li>
+  <li><a href="#sec-ggT" id="toc-sec-ggT" class="nav-link" data-scroll-target="#sec-ggT"><span class="header-section-number">3</span> Gößter gemeinsamer Teiler</a></li>
+  <li><a href="#kleinstes-gemeinsames-vielfaches" id="toc-kleinstes-gemeinsames-vielfaches" class="nav-link" data-scroll-target="#kleinstes-gemeinsames-vielfaches"><span class="header-section-number">4</span> Kleinstes gemeinsames Vielfaches</a>
+  <ul class="collapse">
+  <li><a href="#das-kgv-von-zwei-zahlen" id="toc-das-kgv-von-zwei-zahlen" class="nav-link" data-scroll-target="#das-kgv-von-zwei-zahlen"><span class="header-section-number">4.1</span> Das <em>kgV</em> von zwei Zahlen</a></li>
+  <li><a href="#das-kgv-von-mehreren-zahlen" id="toc-das-kgv-von-mehreren-zahlen" class="nav-link" data-scroll-target="#das-kgv-von-mehreren-zahlen"><span class="header-section-number">4.2</span> Das kgV von mehreren Zahlen</a></li>
+  </ul></li>
+  <li><a href="#übungen" id="toc-übungen" class="nav-link" data-scroll-target="#übungen"><span class="header-section-number">5</span> Übungen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../arithmetik/rechenregeln.html">Arithmetik</a></li><li class="breadcrumb-item"><a href="../arithmetik/teiler_vielfache.html">Teiler und Vielfache</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Teiler und Vielfache</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In diesem Kapitel machen wir einen kleinen Ausflug in die Welt der Zahlen und beschäftigen uns mit der Teilbarkeit natürlicher Zahlen. Außerdem wollen wir unsere ersten Funktionen in Python definieren und einen ersten Algorithmus implementieren.</p>
+<section id="sec-primfaktor" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sec-primfaktor"><span class="header-section-number">1</span> Primfaktorzerlegung</h2>
+<p>Primzahlen spielen in der Mathematik eine erstaunlich große Rolle, wir wollen sie hier aber nur im Rahmen der Teilbarkeit von natürlichen Zahlen betrachten.</p>
+<p>Eine Primzahl ist eine natürliche Zahl, die genau zwei Teiler hat (und somit größer als 1 ist). Diese zwei Teiler sind 1 und die Zahl selber. Eine Primzahl kann daher nicht als das <em>Produkt</em> zweier kleineren Zahlen geschrieben werden, also nicht in <em>Faktoren</em> zerlegt werden. Alle anderen natürlichen Zahlen können dagegen in <em>Primfaktoren</em> zerlegt werden, d.h. sie können als das Produkt von zwei oder mehr Primzahlen geschrieben werden.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wichtig</span>Fundamentalsatz der Arithmetik
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Jede natürliche Zahl <span class="math inline">\(n&gt;1\)</span> besitzt eine (bis auf die Reihenfolge) eindeutige <strong>Primfakorzerlegung</strong>, d.h. zwei unterschiedliche Zerlegungen unterscheiden sich nur in der Reihenfolge der Faktoren.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Beispiele für Primfaktorzerlegungen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(30=2\cdot 3 \cdot 5\)</span></li>
+<li><span class="math inline">\(37=37\)</span> (Primzahl)</li>
+<li><span class="math inline">\(1001=7\cdot 11 \cdot 13\)</span></li>
+<li><span class="math inline">\(1024=\underbrace{2\cdots 2}_\text{10 mal}=2^{10}\)</span> (Zweierpotenz)</li>
+<li><span class="math inline">\(6936=2\cdot 2\cdot 2\cdot 3\cdot 17\cdot 17=2^3\cdot 3\cdot 17^2\)</span></li>
+<li><span class="math inline">\(10000=2^4\cdot 5^4\)</span> (Zehnerpotenz)</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Vorsicht</span>Zwischenübung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Zerlege die Zahlen 12, 60, 128 und 1.000 in ihre Primfaktoren und stelle sie in Potenzen dieser Faktoren dar.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(12=2\cdot 2\cdot 3=2^2\cdot 3^1\)</span></li>
+<li><span class="math inline">\(60=2\cdot 2\cdot 3\cdot 5=2^2\cdot 3^1\cdot 5^1\)</span></li>
+<li><span class="math inline">\(128=\underbrace{2\cdots 2}_\text{7 mal}=2^7\)</span> (Zweierpotenz)</li>
+<li><span class="math inline">\(1.000=2^3\cdot 5^3=10\cdot 10\cdot 10=10^3\)</span> (Zehnerpotenz: die drei Nullen der Ausgangszahl führen zur dritten Potenz von 10)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-division" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-division"><span class="header-section-number">2</span> Division mit Rest</h2>
+<p>Wenn zwei natürliche Zahlen, der Dividend <span class="math inline">\(n\)</span>, und der Divisor <span class="math inline">\(m\)</span> (ungleich 0) mit Rest dividiert werden sollen, wenn also <span class="math inline">\(n\div m\)</span> berechnet werden soll, so wird gefragt, wie man die Zahl <span class="math inline">\(n\)</span> als Vielfaches von <span class="math inline">\(m\)</span> und einem Rest darstellen kann:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wichtig</span>Division mit Rest
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span id="eq-divmitrest"><span class="math display">\[
+n = m \cdot q + r, \quad 0 \leq r &lt; m.
+\tag{1}\]</span></span> Hier ist <span class="math inline">\(q\)</span> der sogenannte <em>Ganzzahlqotient</em> und <span class="math inline">\(r\)</span> der <em>Rest</em> der Division. Entscheidende Nebenbedingung ist, dass <span class="math inline">\(r\)</span> eine ganze Zahl größer oder gleich 0 und kleiner <span class="math inline">\(m\)</span> ist.</p>
+</div>
+</div>
+<p>Der Rest ist also die Differenz zwischen dem Dividenden <span class="math inline">\(n\)</span> und dem größten Vielfachen des Divisors <span class="math inline">\(m\)</span>: <span class="math inline">\(\ r=n-m\cdot q\)</span>.<br>
+Ein Rest ungleich 0 ergibt sich folglich genau dann, wenn der Dividend kein Vielfaches des Divisors ist. Man sagt auch: der Dividend ist nicht durch den Divisor teilbar, weshalb ein Rest übrigbleibt.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Beispiele für Division mit Rest
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(9 \div 4 = 2 \ \)</span> mit Rest <span class="math inline">\(1\)</span>, weil <span class="math inline">\(\ 9=4\cdot 2 + 1\)</span> (vier passt zweimal in neun und es bleibt eins übrig)</li>
+<li><span class="math inline">\(2 \div 4 = 0 \ \)</span> mit Rest <span class="math inline">\(2\)</span>, weil <span class="math inline">\(\ 2=4\cdot 0 + 2\)</span></li>
+<li><span class="math inline">\(4 \div 4 = 1 \ \)</span> mit Rest <span class="math inline">\(0\)</span>, weil <span class="math inline">\(\ 4=4\cdot 1 + 0\)</span></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Vorsicht</span>Zwischenübung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Stelle das Ergebnis der fogenden Divisionen als ganze Zahl mit Rest dar:</p>
+<ul>
+<li><span class="math inline">\(128\div 127\)</span></li>
+<li><span class="math inline">\(127\div 128\)</span></li>
+<li><span class="math inline">\(777\div 11\)</span></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(128\div 127=1\)</span>, Rest 1</li>
+<li><span class="math inline">\(127\div 128=0\)</span>, Rest 127</li>
+<li><span class="math inline">\(777\div 11=70\)</span>, Rest 7</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Man kann eine Funktion definieren, die jedem Zahlenpaar <span class="math inline">\((n, m)\)</span> einen eindeutigen Teilerrest <span class="math inline">\(r\)</span> zuordnet. Diese Funktion nennt man <em>Modulo</em> und kürzt sie meistens mit <em>mod</em> ab.</p>
+<p>Wir werden uns in späteren Kapiteln ausführlich mit Funktionen beschäftigen; ohne auf die Details einzugehen, wollen wir an dieser Stelle die Funktion Modulo in Python implementieren, um uns mit der Syntax einer Funktionsdefinition vertraut zu machen. Vergegenwärtigen wir uns hierzu nochmal die obige Definition des Restes einer ganzzahligen Division: <span class="math display">\[
+r=n-m\cdot q,
+\]</span> wobei <span class="math inline">\(q\)</span> der ganzzahlige Quotient von <span class="math inline">\(n \div m\)</span> ist.</p>
+<div id="5ceb39a6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod(n, m):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span> n <span class="op">//</span> m</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>  r <span class="op">=</span> n <span class="op">-</span> m <span class="op">*</span> q</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> r</span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mod(<span class="dv">9</span>,<span class="dv">4</span>) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mod(<span class="dv">2</span>,<span class="dv">4</span>) <span class="op">==</span> <span class="dv">2</span></span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mod(<span class="dv">4</span>,<span class="dv">4</span>) <span class="op">==</span> <span class="dv">0</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Eine Funtionsdefinition wird eingeleitet mit dem Schlüsselwort <code>def</code>, gefolgt von den Parametern der Funktion in Klammern und einem Doppelpunkt <code>:</code>, der den Beginn eines Code-Blocks signalisiert. Alle nachfolgenden Zeilen, die zu diesem Code-Block gehören sollen, werden um die selbe Anzahl von Stellen eingerückt.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="2">Zuweisung des Ergebnisses der ganzzahligen Division <span class="math inline">\(n \div m\)</span> an den Bezeichner <code>q</code>. Wir wählen hier die selben Bezeichner, die wir auch in der mathematischen Definition verwendet haben.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="3">Berechnung des Restes der Division gemäß der mathematischen Definition und Zuweisung an den Bezeichner <code>r</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="4">Die Funtion liefert den Rest der Division <code>r</code> als ihr Ergebnis zurück. Dies wird mit dem Schlüsselwort <code>return</code> angezeigt.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Unsere Funktion <code>mod</code> benutzt den Python Operator <code>//</code> für die ganzzahlige Division. Wir wissen aber nicht, wie dieser Operator in Python implementiert ist, d.h. wie hier das Ergebnis berechnet wird. Deshalb wollen wir eine eigene Funktion schreiben, die diese Berechnung im einfachsten Fall veranschaulicht: wir berechnen den Quotienten und den Rest einer ganzzahligen Division mittels wiederholter Subtraktion, und nennen die Funktion <code>quotrem</code>.</p>
+<div id="b0faa584" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quotrem(n, m):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span> <span class="dv">0</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> n <span class="op">&gt;=</span> m:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">-=</span> m</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>    q <span class="op">+=</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (q, n)</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> quotrem(<span class="dv">9</span>,<span class="dv">4</span>) <span class="op">==</span> (<span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> quotrem(<span class="dv">2</span>,<span class="dv">4</span>) <span class="op">==</span> (<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> quotrem(<span class="dv">4</span>,<span class="dv">4</span>) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Initialisiert den Quotienten <code>q</code> mit 0</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">Beginn einer Schleife, die solange ausgeführt wird, wie <code>n</code> größer oder gleich <code>m</code> ist</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="3">Ziehe <code>m</code> einmal von <code>n</code> ab</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="4">Erhöhe den Quotienten <code>q</code> um eins</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="5">Gib das Ergebis von Quotient und Rest der Divsison als Tupel zurück.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Die Funktion <code>quotrem</code> macht nichts anderes als zu abzuzählen, wie oft der Divisor <code>m</code> in den Dividend <code>n</code> passt. Sobald <code>n</code> kleiner als <code>m</code> ist, passt <code>m</code> kein weiteres mal in <code>n</code>, und <code>n</code> ist der Rest der Division. Die Funktion <code>quotrem</code> ist dabei nicht sonderlich effizient, da sie <span class="math inline">\(n \div m\)</span> Subtraktionen durchführen muss.</p>
+</section>
+<section id="sec-ggT" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sec-ggT"><span class="header-section-number">3</span> Gößter gemeinsamer Teiler</h2>
+<p>Der <strong>größte gemeinsame Teiler</strong> (<em>ggT</em>) ist die größte natürliche Zahl, durch die sich zwei ganze Zahlen jeweils ohne Rest teilen lassen. Der <em>ggT</em> zweier ganzer Zahlen <span class="math inline">\(a\)</span> und <span class="math inline">\(b\)</span> ist demnach eine ganze Zahl <span class="math inline">\(m\)</span> mit der Eigenschaft, dass sie Teiler sowohl von <span class="math inline">\(a\)</span> als auch von <span class="math inline">\(b\)</span> ist und dass jede ganze Zahl, die ebenfalls die Zahlen <span class="math inline">\(a\)</span> und <span class="math inline">\(b\)</span> teilt, auch Teiler von <span class="math inline">\(m\)</span> ist.</p>
+<p>Man kann den <em>ggT</em> über die <em>Primfaktorzerlegung</em> der beiden gegebenen Zahlen bestimmen. Wir wollen das einmal exemplarisch für die beiden Zahlen 3528 und 3780 durchführen:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Primfaktozerlegung für 3528 und 3780
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(3528=2^3\cdot 3^2\cdot 5^0\cdot 7^2\)</span></li>
+<li><span class="math inline">\(3780=2^2\cdot 3^3\cdot 5^1\cdot 7^1\)</span></li>
+</ul>
+</div>
+</div>
+<div id="7c712e8b" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">0</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">3528</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">1</span> <span class="op">==</span> <span class="dv">3780</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Primfaktoren, die in einer der beiden Zahlen nicht vorkommen, können wir dabei in der Form <span class="math inline">\(x^0\)</span> darstellen, um einen besseren Überblick über die Faktoren zu erhalten. <span class="math inline">\(x^0\)</span> ergibt immer 1, daher hat dieser zusätzliche Faktor keinen Einfluß auf das ensprechende Produkt.</p>
+<p>Für den <em>ggT</em> nimmt man die Primfaktoren, die in beiden Zerlegungen vorkommen, und als zugehörigen Exponenten den jeweils <em>kleineren</em> der Ausgangsexponenten:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Größter gemeinsamer Teiler für 3528 und 3780
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(ggT(3528, 3780)=2^2\cdot 3^2\cdot 5^0\cdot 7^1=252\)</span></p>
+</div>
+</div>
+<div id="410bd38d" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">0</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">1</span> <span class="op">==</span> <span class="dv">252</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Die Berechnung der Primfaktorzerlegung großer Zahlen und damit auch die Bestimmung des größten gemeinsamen Teilers über die Primfaktorzerlegungen ist sehr aufwändig. Mit dem <em>euklidischen Algorithmus</em> existiert jedoch auch ein effizientes Verfahren, um den größten gemeinsamen Teiler zweier Zahlen zu berechnen.</p>
+<p>Unter einem <em>Algorithmus</em> verstehen wir eine detaillierte, schrittweise Rechenvorschrift, in der sich möglichweise einige Schritte wiederholen, die am Ende das gewünschte Resultat ausgibt.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Klassischer euklidischer Algorithmus
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Der <em>klassische</em> euklidische Algorithmus berechnet den größten gemeinsamen Teiler, indem er nach einem gemeinsamen Maß für die Längen zweier Linien sucht:</p>
+<ol type="1">
+<li>Die kleinere zweier Längen wird von der größeren mehrfach abgezogen, bis ein Ergebnis übrig bleibt, das kleiner als die kleinere Länge ist.</li>
+<li>Bei einer Differenz von 0 ist man fertig und die kleinere Länge ist das Ergebnis.</li>
+<li>Andernfalls wiederholt man dieses Abziehen – jetzt aber mit der kleineren Länge anstelle der größeren, und der letzten Differenz anstelle der kleineren Länge.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Berechnung des <em>ggT</em> von 143 und 65
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(143-65=78\)</span></li>
+<li><span class="math inline">\(78-65=13, \quad (&lt;65)\)</span></li>
+<li><span class="math inline">\(65-13=52\)</span></li>
+<li><span class="math inline">\(52-13=39\)</span></li>
+<li><span class="math inline">\(39-13=26\)</span></li>
+<li><span class="math inline">\(26-13=13\)</span></li>
+<li><span class="math inline">\(13-13=0, \quad ggT = 13\)</span></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Vorsicht</span>Zwischenübung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Prüfe, ob du diese Rechenvorschrift verstanden hast, indem du sie mit den Werten 60 und 24 selbst durchführst.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(60-24=36\)</span></li>
+<li><span class="math inline">\(36-24=12, \quad (&lt;24)\)</span></li>
+<li><span class="math inline">\(24-12=12\)</span></li>
+<li><span class="math inline">\(12-12=0, \quad ggt = 12\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Mit diesem Wissen können wir jetzt den Algorithmus in Python implementieren:</p>
+<div id="6408ae07" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euklid_klassisch(a, b):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> b <span class="op">&gt;</span> a: a, b <span class="op">=</span> b, a</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>  zähler <span class="op">=</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>  d <span class="op">=</span> a <span class="op">-</span> b</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-5-5" class="code-annotation-target"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> d <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-5-6" class="code-annotation-target"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> d <span class="op">&lt;</span> b: a, b <span class="op">=</span> b, d</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-5-7" class="code-annotation-target"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: a <span class="op">=</span> d</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-5-8" class="code-annotation-target"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> a <span class="op">-</span> b</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-5-9" class="code-annotation-target"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>    zähler <span class="op">+=</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-5-10" class="code-annotation-target"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(zähler)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="11" onclick="event.preventDefault();">11</a><span id="annotated-cell-5-11" class="code-annotation-target"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> b</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="1" data-code-annotation="1">Definition der Funktion <code>euklid_klassisch</code>. Um genau zu sein, bezeichen wir diese Zeile als die <em>Signatur</em> der Funktion, die den Namen der Funktion und deren Parameter enthält. Der nachfolgende (eingerückte) Code-Block gehört ebenfalls zur Funktionsdefinition.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="2">Wir wollen immer die kleinere von der größeren Länge abziehen. Da wir aber nicht wissen, welche der gegebenen Funktionsparameter der größere ist, testen wir das mit <code>if b &gt; a</code>: wenn <code>b</code> größer ist als <code>a</code>, dann vertauschen wir die Parameter. Auf diese Weise stellen wir sicher, dass <code>a</code> immer die größere Länge bezeichnet.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="3">Diese Zeile ist für den Algorithmus eigentlich nicht notwendig. Wir wollen aber die Anzahl der durchgeführten Subtraktionen nachverfolgen, um eine Aussage über die Effizienz des Algorithmus machen zu können. Also legen wir einen Zähler an, den wir mit 1 initialisieren, da wir in der folgenden Zeile gleich die erste Subtraktion durchführen.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="4">Bestimmen der ersten Differenz zwischen <code>a</code> und <code>b</code>. Wir wissen aus (2), dass <code>a</code> immer die größere Länge ist.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="5" data-code-annotation="5">Der Algorithmus besagt in seinem 1. Schritt, das wir wiederholt die kleinere von der größeren Länge abziehen müssen. Daher starten wir eine Programm-Schleife mit dem Schlüsselwort <code>while</code> und geben als Schleifenbedingung <code>d &gt; 0</code> an. Damit werden die Anweisungen in der Schleife solange wiederholt bis die Differenz gleich 0 ist. Wir wissen aus Schritt 2 des Algorithmus, dass wir dann fertig sind.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="6" data-code-annotation="6">Innerhalb der Schleife prüfen wir zuerst, ob die letzte Differenz kleiner ist als die kleinere Länge (<code>b</code>). Falls ja, vertauschen wir <code>a</code> mit <code>b</code>, und <code>b</code> mit <code>d</code>, so wie in Schritt 3 des Algorithmus gefordert.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="7" data-code-annotation="7">Anderenfalls ersetzen wir <code>a</code> mit <code>d</code>, wie in Schritt 1 des Algorithmus gefordert.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="8" data-code-annotation="8">In beiden Fällen berechnen wir schließlich die Differenz der neuen großen und kleinen Länge.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="9" data-code-annotation="9">Als letzte Anweisung in der Schleife erhöhen wir den Zähler um 1.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="10" data-code-annotation="10">Nach der Schleife geben wir die Gesamtanzahl der durchgeführten Subtraktionen aus.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="11" data-code-annotation="11">Die letze Anweisung der Funktion gibt die aktuelle kleinere Länge als Funktionswert zurück. Gemäß Schritt 2 des Algorithmus ist das unser Ergebnis: der kleinste gemeinsame Teiler von <code>a</code> und <code>b</code>.</span>
+</dd>
+</dl>
+</div>
+</div>
+<div id="4cee25e4" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> euklid_klassisch(<span class="dv">143</span>, <span class="dv">65</span>) <span class="op">==</span> <span class="dv">13</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> euklid_klassisch(<span class="dv">3528</span>, <span class="dv">3780</span>) <span class="op">==</span> <span class="dv">252</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7
+15</code></pre>
+</div>
+</div>
+<p>Wir sehen, dass es keine Rolle spielt, in welcher Reihenfolge wir die Argumente der Funktion angeben, es wird immer das korrekte Ergebnis ausgegeben.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Parameter und Argumente
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Variablen, die wir in der Funktionsdefinition in Klammern angeben, heißen <strong>Parameter</strong> der Funktion. Wenn wir eine Funktion dann mit konkreten Werten aufrufen, nennen wir diese Werte <strong>Argumente</strong> der Funktion.</p>
+</div>
+</div>
+<p>Wir sehen aber auch, dass die Anzahl der notwendigen Operationen (in diesem Fall Subtraktionen) zunimmt, wenn die Argumente größer werden. Dies kann bei sehr großen Zahlen zu Effizienzproblemen führen, im schlimmsten Fall dazu, dass die Funktion kein Ergebnis mehr liefert. Wenn wir Algorithmen in einer Programmiersprache implementieren, wollen wir also auch immer darauf achten, eine möglichst effiziente Lösung zu finden, d.h. eine Lösung, die mit weniger Operationen auskommt.</p>
+<p>In unserem Beispiel <code>euklid_klassisch(143, 65)</code> sehen wir, dass die Funktion 7 Subtraktionen für die Berechnung des Ergebnisses benötigt; das stimmt mit unserer manuellen Berechnung überein, die nachfolgend noch einmal angegeben wird:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Berechnung des <em>ggT</em> von 143 und 65
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(143-65=78\)</span></li>
+<li><span class="math inline">\(78-65=13, \quad (&lt;65)\)</span></li>
+<li><span class="math inline">\(65-13=52\)</span></li>
+<li><span class="math inline">\(52-13=39\)</span></li>
+<li><span class="math inline">\(39-13=26\)</span></li>
+<li><span class="math inline">\(26-13=13\)</span></li>
+<li><span class="math inline">\(13-13=0, \quad ggT = 13\)</span></li>
+</ul>
+</div>
+</div>
+<p>Bei näherer Betrachtung erkennen wir, dass zunächst zweimal <code>65</code> von <code>143</code> abgezogen wird, und dann fünfmal <code>13</code> von <code>65</code> abgezogen wird. Das ist kein Zufall, denn <code>65</code> passt zweimal in <code>143</code> und <code>13</code> passt fünfmal in <code>143</code>, da <span class="math inline">\(2\cdot 65+rest=143\)</span> und <span class="math inline">\(5\cdot 13+rest=65\)</span>, wobei der Rest im ersten Fall 13 ist und im zweiten Fall 0, d.h. <code>13</code> passt <em>genau</em> fünfmal in <code>65</code>. Das erinnert doch sehr an die Division mit Rest aus <a href="#sec-division" class="quarto-xref">Kapitel&nbsp;2</a>.</p>
+<p>Anstatt also <span class="math inline">\(n\)</span>-mal <code>b</code> von <code>a</code> abzuziehen , können wir <code>a</code> durch <code>b</code> teilen, mit dem Ergebnis <span class="math inline">\(n\)</span> und Rest <span class="math inline">\(r\)</span>. Am ganzzahligen Quotienten <span class="math inline">\(n\)</span> sind wir gar nicht interessiert, sondern wir können gleich mit dem Rest <span class="math inline">\(r\)</span> weiterrechnen, so wie in den Zeilen 3 bis 7 der manuellen Berechnung (der Rest <span class="math inline">\(r\)</span> ist hier 13).</p>
+<p>Diese Überlegungen führen zum sogenannten <em>modernen euklidischen Algorithmus</em>:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Moderner euklidischer Algorithmus
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In den aufeinanderfolgenden Schritten wird jeweils eine Division mit Rest durchgeführt, wobei im nächsten Schritt der Divisor zum neuen Dividenden und der Rest zum neuen Divisor wird. Der Divisor, bei dem sich Rest 0 ergibt, ist der größte gemeinsame Teiler der Ausgangszahlen.</p>
+</div>
+</div>
+<p>Für unsere Beispielzahlen ergibt sich daraus folgende Berechnung:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Berechnung des <em>ggT</em> nach dem modernen euklidischen Algorithmus
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(143\div 65=2, \quad\mathrm{Rest} \ 13\)</span></li>
+<li><span class="math inline">\(65\div 13=5, \quad\mathrm{Rest } \ 0\)</span></li>
+<li><span class="math inline">\(ggT(143, 65)=13\)</span></li>
+</ul>
+</div>
+</div>
+<p>Wir brauchen also nur zwei Schritte zur Berechnung des <em>ggT</em> mit dem modernen Algorithmus, genauso wie für unser Beispiel aus der Primfaktorzerlegung:</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Vorsicht</span>Zwischenübung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Führe die Berechnung des <em>ggT</em> für die Werte 3780 und 3528 gemäß dem letzten Beispiel durch.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(3780\div 3528=1, \quad\mathrm{Rest} \ 252\)</span></li>
+<li><span class="math inline">\(3528\div 252=14, \quad\mathrm{Rest} \ 0\)</span></li>
+<li><span class="math inline">\(ggT(3780, 3528)=252\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Mit diesem Wissen können wir den modernen euklidischen Algorithmus in Python implementieren:</p>
+<div id="8cf646e8" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ggT(a, b):</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>  zähler <span class="op">=</span> <span class="dv">0</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> mod(a, b)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-5" class="code-annotation-target"><a href="#annotated-cell-7-5" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> b</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-7-6" class="code-annotation-target"><a href="#annotated-cell-7-6" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> r</span>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7" aria-hidden="true" tabindex="-1"></a>    zähler <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(zähler)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-7-9" class="code-annotation-target"><a href="#annotated-cell-7-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">Beginn der Programmschleife mit Schleifenbedingung <code>b != 0</code>; die Schleife wird also ausgeführt, solange <code>b</code> nicht 0 ist.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="2">Wir führen eine Division mit Rest aus und verwenden dafür unsere <code>mod()</code> Funktion aus <a href="#sec-division" class="quarto-xref">Kapitel&nbsp;2</a>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="5" data-code-annotation="3">Dann machen wir den Divisor zum neuen Dividenden…</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="6" data-code-annotation="4">und den Rest der Division <code>r</code> zum neuen Divisor.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="9" data-code-annotation="5">Eigentlich sollten wir den letzten Divisor <code>b</code> als Ergebnis ausgeben, wenn <code>mod(a, b)</code> gleich 0 ist. Da dieser Test aber erst vor dem nächsten Schleifendurchlauf durchgeführt wird (1), wird im letzten Durchlauf nochmal <code>a = b</code> (2) und <code>b = r</code> (3) gesetzt. Das führt dazu, dass nach Beendigung der Schleife <code>b</code> immer gleich 0 ist; wir müssen also <code>a</code> als letzten Divisor ausgeben.</span>
+</dd>
+</dl>
+</div>
+</div>
+<div id="2d29e22e" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ggT(<span class="dv">143</span>, <span class="dv">65</span>) <span class="op">==</span> <span class="dv">13</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ggT(<span class="dv">3780</span>, <span class="dv">3528</span>) <span class="op">==</span> <span class="dv">252</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2
+2</code></pre>
+</div>
+</div>
+<p>Aufgrund der Möglichkeit, in Python mehrere Zuweisungen gleichzeitig vorzunehmen, indem wir die Bezeichner und die zugewiesen Werte jeweils mit einem Komma trennen, hätten wir den kompletten Algorithmus der Zeilen (2) bis (4) auch in eine Zeile schreiben können:<br>
+<code>a, b = b, mod(a, b)</code>.</p>
+<p>Auch bei dieser Implementierung spielt die Reihenfolge der Argumente keine Rolle:</p>
+<div id="ae5752e7" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ggT(<span class="dv">143</span>, <span class="dv">65</span>) <span class="op">==</span> ggT(<span class="dv">65</span>, <span class="dv">143</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2
+3</code></pre>
+</div>
+</div>
+<p>Wir sehen aber, dass eine zusätzliche Operation notwendig wird, wenn das kleinere Argument zuerst kommt. Das liegt daran, dass <span class="math inline">\(65 \div 143\)</span> gleich 0, mit Rest 65 ist, d.h. beim nächsten Schleifendurchlauf wird <code>mod(143, 65)</code> aufgerufen, die Variante mit dem größeren Argument zuerst. Die zusätzliche Operation können wir aus Effizienzsicht gut verkraften, da wir uns ja den Test auf <code>b &gt; a</code> sparen.</p>
+</section>
+<section id="kleinstes-gemeinsames-vielfaches" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="kleinstes-gemeinsames-vielfaches"><span class="header-section-number">4</span> Kleinstes gemeinsames Vielfaches</h2>
+<section id="das-kgv-von-zwei-zahlen" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="das-kgv-von-zwei-zahlen"><span class="header-section-number">4.1</span> Das <em>kgV</em> von zwei Zahlen</h3>
+<p>Das <strong>kleinste gemeinsame Vielfache</strong> (<em>kgV</em>) zweier ganzer Zahlen <span class="math inline">\(m\)</span> und <span class="math inline">\(n\)</span> ist die kleinste positive natürliche Zahl, die sowohl Vielfaches von <span class="math inline">\(m\)</span> als auch Vielfaches von <span class="math inline">\(n\)</span> ist. Zusätzlich wird für den Fall <span class="math inline">\(m = 0\)</span> oder <span class="math inline">\(n = 0\)</span> das <em>kgV</em> definiert als: <span class="math inline">\(kgV ⁡(m, n) = 0\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Berechnung des <em>kgV</em> von 12 und 18 über die Vielfachen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Die Vielfachen von 12 sind: 12, 24, 36, 48, 60, 72, 84, 96, 108,…</li>
+<li>Die Vielfachen von 18 sind: 18, 36, 54, 72, 90, 108, …</li>
+<li>Die gemeinsamen Vielfachen von 12 und 18 sind also: 36, 72, 108, …</li>
+<li>und das kleinste von diesen ist 36: <span class="math inline">\(kgV(12, 18)=36\)</span>.</li>
+</ul>
+</div>
+</div>
+<p>Man kann das <em>kgV</em> über die Primfaktorzerlegung (siehe <a href="#sec-primfaktor" class="quarto-xref">Kapitel&nbsp;1</a>) der beiden gegebenen Zahlen bestimmen. Wir nehmen hierzu wieder das Beispiel aus <a href="#sec-division" class="quarto-xref">Kapitel&nbsp;2</a>:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Primfaktozerlegung für 3528 und 3780
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(3528=2^3\cdot 3^2\cdot 7^2\)</span></li>
+<li><span class="math inline">\(3780=2^2\cdot 3^3\cdot 5^1\cdot 7^1\)</span></li>
+</ul>
+</div>
+</div>
+<p>Für das <em>kgV</em> nimmt man die Primfaktoren, die in mindestens einer der beiden Zerlegungen vorkommen, und als zugehörigen Exponenten den jeweils <em>größeren</em> der Ausgangsexponenten:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Kleinstes gemeinsames Vielfaches für 3528 und 7380
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(kgV(3528, 3780)=2^3\cdot 3^3\cdot 5^1\cdot 7^2=52.920\)</span></p>
+</div>
+</div>
+<div id="a8b29625" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">52920</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Vorsicht</span>Zwischenübung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bestimme das <em>kgV</em> von 60 und 24 über die Primfaktorzerlegung.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(60=2^2\cdot 3^1\cdot 5^1\)</span></li>
+<li><span class="math inline">\(24=2^3\cdot 3^1\cdot 5^0\)</span></li>
+<li><span class="math inline">\(kgV(60, 24)=2^3\cdot 3^1\cdot 5^1=120\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Man kann das <em>kgV</em> aber auch mit Hilfe des <em>ggT</em> berechnen; es gilt der folgende Grundsatz:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wichtig</span>Produkt von <em>ggT</em> und <em>kgV</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Das Produkt des <em>ggT</em> und des <em>kgV</em> zweier natürlicher Zahlen ist gleich dem Produkt beider Zahlen: <span id="eq-produkt"><span class="math display">\[
+ggT(m, n) \cdot kgV(m, n) = m \cdot n
+\tag{2}\]</span></span></p>
+</div>
+</div>
+<p>Wenn der <em>ggT</em> zweier Zahlen bekannt ist, dann kann man das <em>kgV</em> also wie folgt berechnen:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wichtig</span>Berechnung des <em>kgV</em> aus dem <em>ggT</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span id="eq-kgV"><span class="math display">\[
+kgV(m, n)=(m\cdot n)\div ggT(m, n)
+\tag{3}\]</span></span></p>
+</div>
+</div>
+<p>Für die Zahlen 12 und 18 ergibt sich also folgende Berechnung:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Berechnung des <em>kgV</em> von 12 und 18 über den <em>ggT</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(ggT(12, 18)=6\)</span></li>
+<li><span class="math inline">\(kgV(12, 18)=(12\cdot 18)\div 6=12\cdot 3=36\)</span></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Vorsicht</span>Zwischenübung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bestimme das <em>kgV</em> von 60 und 24 über den <em>ggT</em>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(ggT(60, 24)=12\)</span></li>
+<li><span class="math inline">\(kgV(60, 24)=(60\cdot 24)\div 12=60\cdot 2=120\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Da wir aus <a href="#sec-ggT" class="quarto-xref">Kapitel&nbsp;3</a> bereits über eine Funktion zur Berechnung des <em>ggT</em> verfügen, ist die Implementierung des <em>kgV</em> in Python einfach:</p>
+<div id="bda6584b" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kgv_2(m, n): <span class="cf">return</span> m <span class="op">*</span> n <span class="op">//</span> ggT(m, n)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_2(<span class="dv">12</span>, <span class="dv">18</span>) <span class="op">==</span> <span class="dv">36</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_2(<span class="dv">60</span>, <span class="dv">24</span>) <span class="op">==</span> <span class="dv">120</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_2(<span class="dv">3528</span>, <span class="dv">3780</span>) <span class="op">==</span> <span class="dv">52920</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3
+2
+3</code></pre>
+</div>
+</div>
+</section>
+<section id="das-kgv-von-mehreren-zahlen" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="das-kgv-von-mehreren-zahlen"><span class="header-section-number">4.2</span> Das kgV von mehreren Zahlen</h3>
+<p>Man verwendet zur Berechnung des <em>kgV</em> mehrerer Zahlen alle Primfaktoren, die in mindestens einer der Zahlen vorkommen, mit der jeweils höchsten vorkommenden Potenz, zum Beispiel:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span><em>kgV</em> der Zahlen 144, 160 und 175
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(144=2^4\cdot 3^2\)</span></li>
+<li><span class="math inline">\(160=2^5\cdot 5^1\)</span></li>
+<li><span class="math inline">\(175=5^2\cdot 7^1\)</span></li>
+<li><span class="math inline">\(kgV(144, 160, 175)=2^5\cdot 3^2\cdot 5^2\cdot 7^1=50.400\)</span></li>
+</ul>
+</div>
+</div>
+<div id="7119156c" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">5</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">1</span> <span class="op">==</span> <span class="dv">50400</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Wir könnten auch zunächst <span class="math inline">\(kgV ⁡(144, 160)=1440\)</span> berechnen und danach <span class="math inline">\(kgV(1440, 175)= 50.400\)</span>, denn als eine zweistellige Verknüpfung auf den ganzen Zahlen ist das <em>kgV</em> assoziativ:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wichtig</span>Assoziativität des <em>kgV</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span id="eq-kgv-assoz"><span class="math display">\[
+kgv(m, kgV(n, p))=kgV(kgV(m, n), p)
+\tag{4}\]</span></span></p>
+</div>
+</div>
+<p>Wir machen uns diesen Umstand zunutze und definieren eine neue Funktion in Python für die Berechnung des <em>kgV</em> für drei Zahlen:</p>
+<div id="539a273f" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kgv_3(m, n, p):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>  kgv_mn <span class="op">=</span> kgv_2(m, n)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> kgv_2(kgv_mn, p)</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_3(<span class="dv">144</span>, <span class="dv">160</span>, <span class="dv">175</span>) <span class="op">==</span> <span class="dv">50400</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="1" data-code-annotation="1">Signatur für die Funktion <code>kgv_3</code> mit drei Parametern</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="2">Berechnung des <em>kgV</em> für die ersten beiden Parameter</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="3">Berechnung und Rückgabe des <em>kgV</em> mit dem dritten Parameter</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3
+5</code></pre>
+</div>
+</div>
+<p>Python unterstützt nicht das Überladen von Funktionen. Wenn wir zwei verschiedene Varianten einer Funktion definieren wollen (z.B. eine Variante, die zwei Argumente akzeptiert und eine Variante, die drei Argumente akzeptiert, wie in unserem Fall), dann müssen wir diesen Funktionen in Python verschiedene Namen geben. Das ist der Grund, weshalb ich die Variante für zwei Argumente <code>kgv_2</code> genannt habe, und die Variante für drei Argumente <code>kgv_3</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Überladen von Funktionen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Einige <em>statisch kompilierte</em> Programmiersprachen (z.B. Java und C++) bieten die Möglichkeit, denselben Funtionsnamen für verwandte Funtionen zu verwenden. Das nennt man dann <strong>Überladen</strong> der Funktion.</p>
+<p>Die Signaturen der Funktionen müssen sich dann aber unterscheiden lassen: entweder durch die Anzahl der zugelassenen Parameter, oder dadurch, dass den Parametern unterschiedliche <em>Datentypen</em> zugeordnet werden.</p>
+<p>Da Python aber eine <em>dynamische</em> Spache ist (d.h. eine Funktion wird erst dann kompiliert, wenn sie aufgerufen wird), und weil die Datentypen der Parameter zum Zeitpunkt der Kompilierung noch nicht bekannt sind, ist es in Python nicht möglich, Funktionen zu überladen.</p>
+</div>
+</div>
+<p>Wir können das Problem aber umgehen, indem wir einen zusätzlichen Standardparameter definieren und innerhalb der Funktion prüfen, ob dieser beim Aufruf der Funktion gesetzt wurde:</p>
+<div id="9fd5a120" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kgV(m, n, p<span class="op">=</span><span class="va">None</span>):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-14-2" class="code-annotation-target"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> p:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a>    kgv_mn <span class="op">=</span> kgV(m, n)</span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> kgV(kgv_mn, p)</span>
+<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-14-6" class="code-annotation-target"><a href="#annotated-cell-14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m <span class="op">*</span> n <span class="op">//</span> ggT(m, n)</span>
+<span id="annotated-cell-14-7"><a href="#annotated-cell-14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-14-8"><a href="#annotated-cell-14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgV(<span class="dv">144</span>, <span class="dv">160</span>, <span class="dv">175</span>) <span class="op">==</span> <span class="dv">50400</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">Signatur der Funktion <code>kgV</code> mit drei Parameterm. Der dritte Parameter <code>p</code> wird als Standardparameter definiert, indem wir ihm den Wert <code>None</code> zuweisen. Wenn wir später die Funktion mit nur zwei Argumenten aufrufen, dann ist <code>p</code> undefiniert. Wenn wir sie mit drei Argumenten aufrufen, dann ist <code>p</code> gleich dem dritten Argument.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="2" data-code-annotation="2">Test, ob <code>p</code> gesetzt ist, d.h. ob drei Argumente angegeben wurden.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="3,4" data-code-annotation="3">Falls ja, berechnen wir das Ergebnis so wie in <code>kgv_3</code>, nur dass wir eben wieder <em>kgV</em> mit zwei Argumenten aufrufen.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="6" data-code-annotation="4">Falls <code>p</code> nicht gesetzt ist, berechnen wir das <em>kgV</em> wie in <code>kgv_2</code>.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3
+5</code></pre>
+</div>
+</div>
+<p>Ob diese Lösung dann leichter verständlich ist, kannst für dich selbst entscheiden; grundsätzlich sind beide Varianten gleichwertig und führen zum selben Ergebnis.</p>
+</section>
+</section>
+<section id="übungen" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="übungen"><span class="header-section-number">5</span> Übungen</h2>
+<p>Du bist jetzt bereit, deine ersten mathematischen Probleme mit Python zu lösen.</p>
+<p>Falls du Python und Jupyter noch nicht installiert hast, dann sieh in Lektion <a href="../arithmetik/rechenregeln.html#sec-ubung">Rechenregeln</a> nach und richte deine Arbeitsumgebung ein.</p>
+<p>Um mit den Jupyter-Notebooks dieses Tutorials arbeiten zu können, musst du sie dir zunächst herunterladen. Besuche dazu die Seite <a href="https://github.com/okrischer/matheKapierenMitPython">matheKapierenMitPython</a> in deinem Bowser, klicke auf den grünen Button <code>&lt;Code&gt;</code> und wähle die unterste Option <code>&lt;Download ZIP&gt;</code>, um dir alle Inhalte dieses Verzeichnisses auf deinen Rechner zu laden. Entpacke das heruntergeladene Archiv <code>matheKapierenMitPython-main.zip</code>, indem du in deinem File-Explorer doppelt auf den Dateinammen klickst.</p>
+<p>Wechsle dann in deiner Eingabeaufforderung (Prompt) oder in deinem Terminalfenster in das Verzeichnis <code>matheKapierenMitPython-main</code> und aktiviere deine Arbeitsumgebung mit <code>conda activate matheKapieren</code>.</p>
+<p>Jetzt kannst du mit <code>jupyter lab</code> <em>Jupyter</em> starten, und es sollte sich ein neues Browser-Fenster öffnen. Öffne dort im <em>File Browser</em> (der Spalte ganz links im Browser-Fenster) das Verzeichnis <code>arithmetik</code>, indem du einen Doppelclick auf den Verzeichnisnamen ausführst, und öffne dann das Verzeichnis <code>_notebooks</code>.</p>
+<p>Hier findest du eine Reihe von Jupyter Notebooks; um die Inhalte dieser Lektion einzuüben, bearbeite die Notebooks <code>euler1.ipynb</code> und <code>exercism_raindrops_ipynb</code>, indem du wieder doppelt auf den jeweiligen Namen klickst. Folge dann den Anweisungen im jeweiligen Notebook.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/okrischer\.github\.io\/matheKapierenMitPython\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Quellcode</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Teiler und Vielfache"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">order:</span><span class="co"> 2</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>In diesem Kapitel machen wir einen kleinen Ausflug in die Welt der Zahlen und beschäftigen uns mit der Teilbarkeit natürlicher Zahlen.</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>Außerdem wollen wir unsere ersten Funktionen in Python definieren und einen ersten Algorithmus implementieren.</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Primfaktorzerlegung {#sec-primfaktor}</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>Primzahlen spielen in der Mathematik eine erstaunlich große Rolle, wir wollen sie hier aber nur im Rahmen der Teilbarkeit von natürlichen Zahlen betrachten.</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>Eine Primzahl ist eine natürliche Zahl, die genau zwei Teiler hat (und somit größer als 1 ist).</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>Diese zwei Teiler sind 1 und die Zahl selber.</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>Eine Primzahl kann daher nicht als das *Produkt* zweier kleineren Zahlen geschrieben werden, also nicht in *Faktoren* zerlegt werden.</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>Alle anderen natürlichen Zahlen können dagegen in *Primfaktoren* zerlegt werden, d.h. sie können als das Produkt von zwei oder mehr Primzahlen geschrieben werden.</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fundamentalsatz der Arithmetik</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>Jede natürliche Zahl $n&gt;1$ besitzt eine (bis auf die Reihenfolge) eindeutige **Primfakorzerlegung**, d.h. zwei unterschiedliche Zerlegungen unterscheiden sich nur in der Reihenfolge der Faktoren.</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele für Primfaktorzerlegungen</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$30=2\cdot 3 \cdot 5$</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$37=37$ (Primzahl)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$1001=7\cdot 11 \cdot 13$</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$1024=\underbrace{2\cdots 2}_\text{10 mal}=2^{10}$ (Zweierpotenz)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$6936=2\cdot 2\cdot 2\cdot 3\cdot 17\cdot 17=2^3\cdot 3\cdot 17^2$</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$10000=2^4\cdot 5^4$ (Zehnerpotenz)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zwischenübung</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>Zerlege die Zahlen 12, 60, 128 und 1.000 in ihre Primfaktoren und stelle sie in Potenzen dieser Faktoren dar.</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$12=2\cdot 2\cdot 3=2^2\cdot 3^1$</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$60=2\cdot 2\cdot 3\cdot 5=2^2\cdot 3^1\cdot 5^1$</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$128=\underbrace{2\cdots 2}_\text{7 mal}=2^7$ (Zweierpotenz)</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$1.000=2^3\cdot 5^3=10\cdot 10\cdot 10=10^3$ (Zehnerpotenz: die drei Nullen der Ausgangszahl führen zur dritten Potenz von 10)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Division mit Rest {#sec-division}</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>Wenn zwei natürliche Zahlen, der Dividend $n$, und der Divisor $m$ (ungleich 0) mit Rest dividiert werden sollen, wenn also $n\div m$ berechnet werden soll, so wird gefragt, wie man die Zahl $n$ als Vielfaches von $m$ und einem Rest darstellen kann:</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Division mit Rest</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>n = m \cdot q + r, \quad 0 \leq r &lt; m.</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>$$ {#eq-divmitrest}</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>Hier ist $q$ der sogenannte *Ganzzahlqotient* und $r$ der *Rest* der Division.</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>Entscheidende Nebenbedingung ist, dass $r$ eine ganze Zahl größer oder gleich 0 und kleiner $m$ ist.</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>Der Rest ist also die Differenz zwischen dem Dividenden $n$ und dem größten Vielfachen des Divisors $m$: $\ r=n-m\cdot q$.\</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>Ein Rest ungleich 0 ergibt sich folglich genau dann, wenn der Dividend kein Vielfaches des Divisors ist.</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>Man sagt auch: der Dividend ist nicht durch den Divisor teilbar, weshalb ein Rest übrigbleibt.</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beispiele für Division mit Rest</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$9 \div 4 = 2 \ $ mit Rest $1$, weil $\ 9=4\cdot 2 + 1$ (vier passt zweimal in neun und es bleibt eins übrig)</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$2 \div 4 = 0 \ $ mit Rest $2$, weil $\ 2=4\cdot 0 + 2$</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$4 \div 4 = 1 \ $ mit Rest $0$, weil $\ 4=4\cdot 1 + 0$</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zwischenübung</span></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>Stelle das Ergebnis der fogenden Divisionen als ganze Zahl mit Rest dar:</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$128\div 127$</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$127\div 128$</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$777\div 11$</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$128\div 127=1$, Rest 1</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$127\div 128=0$, Rest 127</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$777\div 11=70$, Rest 7</span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a>Man kann eine Funktion definieren, die jedem Zahlenpaar $(n, m)$ einen eindeutigen Teilerrest $r$ zuordnet. Diese Funktion nennt man *Modulo* und kürzt sie meistens mit *mod* ab.</span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a>Wir werden uns in späteren Kapiteln ausführlich mit Funktionen beschäftigen;</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a>ohne auf die Details einzugehen, wollen wir an dieser Stelle die Funktion Modulo in Python implementieren, um uns mit der Syntax einer Funktionsdefinition vertraut zu machen.</span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>Vergegenwärtigen wir uns hierzu nochmal die obige Definition des Restes einer ganzzahligen Division:</span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>r=n-m\cdot q,</span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>wobei $q$ der ganzzahlige Quotient von $n \div m$ ist.</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod(n, m):                  <span class="co"># &lt;1&gt;</span></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span> n <span class="op">//</span> m                    <span class="co"># &lt;2&gt;</span></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a>  r <span class="op">=</span> n <span class="op">-</span> m <span class="op">*</span> q                 <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> r                      <span class="co"># &lt;4&gt;</span></span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mod(<span class="dv">9</span>,<span class="dv">4</span>) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mod(<span class="dv">2</span>,<span class="dv">4</span>) <span class="op">==</span> <span class="dv">2</span></span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> mod(<span class="dv">4</span>,<span class="dv">4</span>) <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Eine Funtionsdefinition wird eingeleitet mit dem Schlüsselwort <span class="in">`def`</span>, gefolgt von den Parametern der Funktion in Klammern und einem Doppelpunkt <span class="in">`:`</span>, der den Beginn eines Code-Blocks signalisiert.</span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a>Alle nachfolgenden Zeilen, die zu diesem Code-Block gehören sollen, werden um die selbe Anzahl von Stellen eingerückt.</span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Zuweisung des Ergebnisses der ganzzahligen Division $n \div m$ an den Bezeichner <span class="in">`q`</span>. Wir wählen hier die selben Bezeichner, die wir auch in der mathematischen Definition verwendet haben.</span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Berechnung des Restes der Division gemäß der mathematischen Definition und Zuweisung an den Bezeichner <span class="in">`r`</span>.</span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Die Funtion liefert den Rest der Division <span class="in">`r`</span> als ihr Ergebnis zurück.</span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>Dies wird mit dem Schlüsselwort <span class="in">`return`</span> angezeigt.</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a>Unsere Funktion <span class="in">`mod`</span> benutzt den Python Operator <span class="in">`//`</span> für die ganzzahlige Division.</span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a>Wir wissen aber nicht, wie dieser Operator in Python implementiert ist, d.h. wie hier das Ergebnis berechnet wird.</span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a>Deshalb wollen wir eine eigene Funktion schreiben, die diese Berechnung im einfachsten Fall veranschaulicht:</span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a>wir berechnen den Quotienten und den Rest einer ganzzahligen Division mittels wiederholter Subtraktion, und nennen die Funktion <span class="in">`quotrem`</span>.</span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quotrem(n, m):</span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span> <span class="dv">0</span>                             <span class="co"># &lt;1&gt;</span></span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> n <span class="op">&gt;=</span> m:                     <span class="co"># &lt;2&gt;</span></span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>    n <span class="op">-=</span> m                          <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a>    q <span class="op">+=</span> <span class="dv">1</span>                          <span class="co"># &lt;4&gt;</span></span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (q, n)                     <span class="co"># &lt;5&gt;</span></span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> quotrem(<span class="dv">9</span>,<span class="dv">4</span>) <span class="op">==</span> (<span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> quotrem(<span class="dv">2</span>,<span class="dv">4</span>) <span class="op">==</span> (<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> quotrem(<span class="dv">4</span>,<span class="dv">4</span>) <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Initialisiert den Quotienten <span class="in">`q`</span> mit 0</span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Beginn einer Schleife, die solange ausgeführt wird, wie <span class="in">`n`</span> größer oder gleich <span class="in">`m`</span> ist</span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Ziehe <span class="in">`m`</span> einmal von <span class="in">`n`</span> ab</span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Erhöhe den Quotienten <span class="in">`q`</span> um eins</span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Gib das Ergebis von Quotient und Rest der Divsison als Tupel zurück.</span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a>Die Funktion <span class="in">`quotrem`</span> macht nichts anderes als zu abzuzählen, wie oft der Divisor <span class="in">`m`</span> in den Dividend <span class="in">`n`</span> passt.</span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a>Sobald <span class="in">`n`</span> kleiner als <span class="in">`m`</span> ist, passt <span class="in">`m`</span> kein weiteres mal in <span class="in">`n`</span>, und <span class="in">`n`</span> ist der Rest der Division.</span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a>Die Funktion <span class="in">`quotrem`</span> ist dabei nicht sonderlich effizient, da sie $n \div m$ Subtraktionen durchführen muss.</span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gößter gemeinsamer Teiler {#sec-ggT}</span></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>Der **größte gemeinsame Teiler** (*ggT*) ist die größte natürliche Zahl, durch die sich zwei ganze Zahlen jeweils ohne Rest teilen lassen.</span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>Der *ggT* zweier ganzer Zahlen $a$ und $b$ ist demnach eine ganze Zahl $m$ mit der Eigenschaft, dass sie Teiler sowohl von $a$ als auch von $b$ ist und dass jede ganze Zahl, die ebenfalls die Zahlen $a$ und $b$ teilt, auch Teiler von $m$ ist.</span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>Man kann den *ggT* über die *Primfaktorzerlegung* der beiden gegebenen Zahlen bestimmen.</span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a>Wir wollen das einmal exemplarisch für die beiden Zahlen 3528 und 3780 durchführen:</span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## Primfaktozerlegung für 3528 und 3780</span></span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$3528=2^3\cdot 3^2\cdot 5^0\cdot 7^2$</span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$3780=2^2\cdot 3^3\cdot 5^1\cdot 7^1$</span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">0</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">3528</span></span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">1</span> <span class="op">==</span> <span class="dv">3780</span></span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a>Primfaktoren, die in einer der beiden Zahlen nicht vorkommen, können wir dabei in der Form $x^0$ darstellen, um einen besseren Überblick über die Faktoren zu erhalten.</span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a>$x^0$ ergibt immer 1, daher hat dieser zusätzliche Faktor keinen Einfluß auf das ensprechende Produkt.</span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a>Für den *ggT* nimmt man die Primfaktoren, die in beiden Zerlegungen vorkommen, und als zugehörigen Exponenten den jeweils *kleineren* der Ausgangsexponenten:</span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## Größter gemeinsamer Teiler für 3528 und 3780</span></span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a>$ggT(3528, 3780)=2^2\cdot 3^2\cdot 5^0\cdot 7^1=252$</span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">0</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">1</span> <span class="op">==</span> <span class="dv">252</span></span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a>Die Berechnung der Primfaktorzerlegung großer Zahlen und damit auch die Bestimmung des größten gemeinsamen Teilers über die Primfaktorzerlegungen ist sehr aufwändig.</span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a>Mit dem *euklidischen Algorithmus* existiert jedoch auch ein effizientes Verfahren, um den größten gemeinsamen Teiler zweier Zahlen zu berechnen.</span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a>Unter einem *Algorithmus* verstehen wir eine detaillierte, schrittweise Rechenvorschrift, in der sich möglichweise einige Schritte wiederholen, die am Ende das gewünschte Resultat ausgibt.</span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Klassischer euklidischer Algorithmus</span></span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>Der *klassische* euklidische Algorithmus berechnet den größten gemeinsamen Teiler, indem er nach einem gemeinsamen Maß für die Längen zweier Linien sucht:</span>
+<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Die kleinere zweier Längen wird von der größeren mehrfach abgezogen, bis ein Ergebnis übrig bleibt, das kleiner als die kleinere Länge ist.</span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Bei einer Differenz von 0 ist man fertig und die kleinere Länge ist das Ergebnis.</span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Andernfalls wiederholt man dieses Abziehen – jetzt aber mit der kleineren Länge anstelle der größeren, und der letzten Differenz anstelle der kleineren Länge.</span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## Berechnung des *ggT* von 143 und 65</span></span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$143-65=78$</span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$78-65=13, \quad (&lt;65)$</span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$65-13=52$</span>
+<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$52-13=39$</span>
+<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$39-13=26$</span>
+<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$26-13=13$</span>
+<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$13-13=0, \quad ggT = 13$</span>
+<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zwischenübung</span></span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a>Prüfe, ob du diese Rechenvorschrift verstanden hast, indem du sie mit den Werten 60 und 24 selbst durchführst.</span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$60-24=36$</span>
+<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$36-24=12, \quad (&lt;24)$</span>
+<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$24-12=12$</span>
+<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$12-12=0, \quad ggt = 12$</span>
+<span id="cb15-218"><a href="#cb15-218" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-219"><a href="#cb15-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-220"><a href="#cb15-220" aria-hidden="true" tabindex="-1"></a>Mit diesem Wissen können wir jetzt den Algorithmus in Python implementieren:</span>
+<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euklid_klassisch(a, b):                 <span class="co"># &lt;1&gt;</span></span>
+<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> b <span class="op">&gt;</span> a: a, b <span class="op">=</span> b, a                     <span class="co"># &lt;2&gt;</span></span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a>  zähler <span class="op">=</span> <span class="dv">1</span>                               <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a>  d <span class="op">=</span> a <span class="op">-</span> b                                 <span class="co"># &lt;4&gt;</span></span>
+<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> d <span class="op">&gt;</span> <span class="dv">0</span>:                              <span class="co"># &lt;5&gt;</span></span>
+<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> d <span class="op">&lt;</span> b: a, b <span class="op">=</span> b, d                   <span class="co"># &lt;6&gt;</span></span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: a <span class="op">=</span> d                             <span class="co"># &lt;7&gt;</span></span>
+<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> a <span class="op">-</span> b                               <span class="co"># &lt;8&gt;</span></span>
+<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a>    zähler <span class="op">+=</span> <span class="dv">1</span>                            <span class="co"># &lt;9&gt;</span></span>
+<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(zähler)                            <span class="co"># &lt;10&gt;</span></span>
+<span id="cb15-235"><a href="#cb15-235" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> b                                  <span class="co"># &lt;11&gt;</span></span>
+<span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Definition der Funktion <span class="in">`euklid_klassisch`</span>.</span>
+<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a>Um genau zu sein, bezeichen wir diese Zeile als die *Signatur* der Funktion, die den Namen der Funktion und deren Parameter enthält. Der nachfolgende (eingerückte) Code-Block gehört ebenfalls zur Funktionsdefinition.</span>
+<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Wir wollen immer die kleinere von der größeren Länge abziehen.</span>
+<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a>Da wir aber nicht wissen, welche der gegebenen Funktionsparameter der größere ist, testen wir das mit <span class="in">`if b &gt; a`</span>: wenn <span class="in">`b`</span> größer ist als <span class="in">`a`</span>, dann vertauschen wir die Parameter.</span>
+<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a>Auf diese Weise stellen wir sicher, dass <span class="in">`a`</span> immer die größere Länge bezeichnet.</span>
+<span id="cb15-243"><a href="#cb15-243" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Diese Zeile ist für den Algorithmus eigentlich nicht notwendig.</span>
+<span id="cb15-244"><a href="#cb15-244" aria-hidden="true" tabindex="-1"></a>Wir wollen aber die Anzahl der durchgeführten Subtraktionen nachverfolgen, um eine Aussage über die Effizienz des Algorithmus machen zu können.</span>
+<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a>Also legen wir einen Zähler an, den wir mit 1 initialisieren, da wir in der folgenden Zeile gleich die erste Subtraktion durchführen.</span>
+<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Bestimmen der ersten Differenz zwischen <span class="in">`a`</span> und <span class="in">`b`</span>. Wir wissen aus (2), dass <span class="in">`a`</span> immer die größere Länge ist.</span>
+<span id="cb15-247"><a href="#cb15-247" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Der Algorithmus besagt in seinem 1. Schritt, das wir wiederholt die kleinere von der größeren Länge abziehen müssen.</span>
+<span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a>Daher starten wir eine Programm-Schleife mit dem Schlüsselwort <span class="in">`while`</span> und geben als Schleifenbedingung <span class="in">`d &gt; 0`</span> an.</span>
+<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a>Damit werden die Anweisungen in der Schleife solange wiederholt bis die Differenz gleich 0 ist.</span>
+<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a>Wir wissen aus Schritt 2 des Algorithmus, dass wir dann fertig sind.</span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Innerhalb der Schleife prüfen wir zuerst, ob die letzte Differenz kleiner ist als die kleinere Länge (<span class="in">`b`</span>). Falls ja, vertauschen wir <span class="in">`a`</span> mit <span class="in">`b`</span>, und <span class="in">`b`</span> mit <span class="in">`d`</span>, so wie in Schritt 3 des Algorithmus gefordert.</span>
+<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Anderenfalls ersetzen wir <span class="in">`a`</span> mit <span class="in">`d`</span>, wie in Schritt 1 des Algorithmus gefordert.</span>
+<span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>In beiden Fällen berechnen wir schließlich die Differenz der neuen großen und kleinen Länge.</span>
+<span id="cb15-254"><a href="#cb15-254" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>Als letzte Anweisung in der Schleife erhöhen wir den Zähler um 1.</span>
+<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Nach der Schleife geben wir die Gesamtanzahl der durchgeführten Subtraktionen aus.</span>
+<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>Die letze Anweisung der Funktion gibt die aktuelle kleinere Länge als Funktionswert zurück.</span>
+<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a>Gemäß Schritt 2 des Algorithmus ist das unser Ergebnis: der kleinste gemeinsame Teiler von <span class="in">`a`</span> und <span class="in">`b`</span>.</span>
+<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> euklid_klassisch(<span class="dv">143</span>, <span class="dv">65</span>) <span class="op">==</span> <span class="dv">13</span></span>
+<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> euklid_klassisch(<span class="dv">3528</span>, <span class="dv">3780</span>) <span class="op">==</span> <span class="dv">252</span></span>
+<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a>Wir sehen, dass es keine Rolle spielt, in welcher Reihenfolge wir die Argumente der Funktion angeben, es wird immer das korrekte Ergebnis ausgegeben.</span>
+<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb15-269"><a href="#cb15-269" aria-hidden="true" tabindex="-1"></a><span class="fu">## Parameter und Argumente</span></span>
+<span id="cb15-270"><a href="#cb15-270" aria-hidden="true" tabindex="-1"></a>Die Variablen, die wir in der Funktionsdefinition in Klammern angeben, heißen **Parameter** der Funktion. Wenn wir eine Funktion dann mit konkreten Werten aufrufen, nennen wir diese Werte **Argumente** der Funktion. </span>
+<span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a>Wir sehen aber auch, dass die Anzahl der notwendigen Operationen (in diesem Fall Subtraktionen) zunimmt, wenn die Argumente größer werden.</span>
+<span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a>Dies kann bei sehr großen Zahlen zu Effizienzproblemen führen, im schlimmsten Fall dazu, dass die Funktion kein Ergebnis mehr liefert.</span>
+<span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a>Wenn wir Algorithmen in einer Programmiersprache implementieren, wollen wir also auch immer darauf achten, eine möglichst effiziente Lösung zu finden, d.h. eine Lösung, die mit weniger Operationen auskommt.</span>
+<span id="cb15-276"><a href="#cb15-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-277"><a href="#cb15-277" aria-hidden="true" tabindex="-1"></a>In unserem Beispiel <span class="in">`euklid_klassisch(143, 65)`</span> sehen wir, dass die Funktion 7 Subtraktionen für die Berechnung des Ergebnisses benötigt; das stimmt mit unserer manuellen Berechnung überein, die nachfolgend noch einmal angegeben wird:</span>
+<span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a><span class="fu">## Berechnung des *ggT* von 143 und 65</span></span>
+<span id="cb15-281"><a href="#cb15-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$143-65=78$</span>
+<span id="cb15-282"><a href="#cb15-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$78-65=13, \quad (&lt;65)$</span>
+<span id="cb15-283"><a href="#cb15-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$65-13=52$</span>
+<span id="cb15-284"><a href="#cb15-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$52-13=39$</span>
+<span id="cb15-285"><a href="#cb15-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$39-13=26$</span>
+<span id="cb15-286"><a href="#cb15-286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$26-13=13$</span>
+<span id="cb15-287"><a href="#cb15-287" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$13-13=0, \quad ggT = 13$</span>
+<span id="cb15-288"><a href="#cb15-288" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-289"><a href="#cb15-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-290"><a href="#cb15-290" aria-hidden="true" tabindex="-1"></a>Bei näherer Betrachtung erkennen wir, dass zunächst zweimal <span class="in">`65`</span> von <span class="in">`143`</span> abgezogen wird, und dann fünfmal <span class="in">`13`</span> von <span class="in">`65`</span> abgezogen wird.</span>
+<span id="cb15-291"><a href="#cb15-291" aria-hidden="true" tabindex="-1"></a>Das ist kein Zufall, denn <span class="in">`65`</span> passt zweimal in <span class="in">`143`</span> und <span class="in">`13`</span> passt fünfmal in <span class="in">`143`</span>, da $2\cdot 65+rest=143$ und $5\cdot 13+rest=65$, wobei der Rest im ersten Fall 13 ist und im zweiten Fall 0, d.h. <span class="in">`13`</span> passt *genau* fünfmal in <span class="in">`65`</span>.</span>
+<span id="cb15-292"><a href="#cb15-292" aria-hidden="true" tabindex="-1"></a>Das erinnert doch sehr an die Division mit Rest aus @sec-division.</span>
+<span id="cb15-293"><a href="#cb15-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-294"><a href="#cb15-294" aria-hidden="true" tabindex="-1"></a>Anstatt also $n$-mal <span class="in">`b`</span> von <span class="in">`a`</span> abzuziehen , können wir <span class="in">`a`</span> durch <span class="in">`b`</span> teilen, mit dem Ergebnis $n$ und Rest $r$.</span>
+<span id="cb15-295"><a href="#cb15-295" aria-hidden="true" tabindex="-1"></a>Am ganzzahligen Quotienten $n$ sind wir gar nicht interessiert, sondern wir können gleich mit dem Rest $r$ weiterrechnen, so wie in den Zeilen 3 bis 7 der manuellen Berechnung (der Rest $r$ ist hier 13).</span>
+<span id="cb15-296"><a href="#cb15-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-297"><a href="#cb15-297" aria-hidden="true" tabindex="-1"></a>Diese Überlegungen führen zum sogenannten *modernen euklidischen Algorithmus*:</span>
+<span id="cb15-298"><a href="#cb15-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-299"><a href="#cb15-299" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb15-300"><a href="#cb15-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## Moderner euklidischer Algorithmus</span></span>
+<span id="cb15-301"><a href="#cb15-301" aria-hidden="true" tabindex="-1"></a>In den aufeinanderfolgenden Schritten wird jeweils eine Division mit Rest durchgeführt, wobei im nächsten Schritt der Divisor zum neuen Dividenden und der Rest zum neuen Divisor wird.</span>
+<span id="cb15-302"><a href="#cb15-302" aria-hidden="true" tabindex="-1"></a>Der Divisor, bei dem sich Rest 0 ergibt, ist der größte gemeinsame Teiler der Ausgangszahlen.</span>
+<span id="cb15-303"><a href="#cb15-303" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-304"><a href="#cb15-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-305"><a href="#cb15-305" aria-hidden="true" tabindex="-1"></a>Für unsere Beispielzahlen ergibt sich daraus folgende Berechnung:</span>
+<span id="cb15-306"><a href="#cb15-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-307"><a href="#cb15-307" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-308"><a href="#cb15-308" aria-hidden="true" tabindex="-1"></a><span class="fu">## Berechnung des *ggT* nach dem modernen euklidischen Algorithmus</span></span>
+<span id="cb15-309"><a href="#cb15-309" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$143\div 65=2, \quad\mathrm{Rest} \ 13$</span>
+<span id="cb15-310"><a href="#cb15-310" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$65\div 13=5, \quad\mathrm{Rest } \ 0$</span>
+<span id="cb15-311"><a href="#cb15-311" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$ggT(143, 65)=13$</span>
+<span id="cb15-312"><a href="#cb15-312" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-313"><a href="#cb15-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-314"><a href="#cb15-314" aria-hidden="true" tabindex="-1"></a>Wir brauchen also nur zwei Schritte zur Berechnung des *ggT* mit dem modernen Algorithmus, genauso wie für unser Beispiel aus der Primfaktorzerlegung:</span>
+<span id="cb15-315"><a href="#cb15-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-316"><a href="#cb15-316" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb15-317"><a href="#cb15-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zwischenübung</span></span>
+<span id="cb15-318"><a href="#cb15-318" aria-hidden="true" tabindex="-1"></a>Führe die Berechnung des *ggT* für die Werte 3780 und 3528 gemäß dem letzten Beispiel durch.</span>
+<span id="cb15-319"><a href="#cb15-319" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-320"><a href="#cb15-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-321"><a href="#cb15-321" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb15-322"><a href="#cb15-322" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb15-323"><a href="#cb15-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$3780\div 3528=1, \quad\mathrm{Rest} \ 252$</span>
+<span id="cb15-324"><a href="#cb15-324" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$3528\div 252=14, \quad\mathrm{Rest} \ 0$</span>
+<span id="cb15-325"><a href="#cb15-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$ggT(3780, 3528)=252$</span>
+<span id="cb15-326"><a href="#cb15-326" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-327"><a href="#cb15-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-328"><a href="#cb15-328" aria-hidden="true" tabindex="-1"></a>Mit diesem Wissen können wir den modernen euklidischen Algorithmus in Python implementieren:</span>
+<span id="cb15-329"><a href="#cb15-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-332"><a href="#cb15-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-333"><a href="#cb15-333" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ggT(a, b):</span>
+<span id="cb15-334"><a href="#cb15-334" aria-hidden="true" tabindex="-1"></a>  zähler <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-335"><a href="#cb15-335" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:           <span class="co"># &lt;1&gt;</span></span>
+<span id="cb15-336"><a href="#cb15-336" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> mod(a, b)         <span class="co"># &lt;2&gt;</span></span>
+<span id="cb15-337"><a href="#cb15-337" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> b                 <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-338"><a href="#cb15-338" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> r                 <span class="co"># &lt;4&gt;</span></span>
+<span id="cb15-339"><a href="#cb15-339" aria-hidden="true" tabindex="-1"></a>    zähler <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb15-340"><a href="#cb15-340" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(zähler)</span>
+<span id="cb15-341"><a href="#cb15-341" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a                <span class="co"># &lt;5&gt;</span></span>
+<span id="cb15-342"><a href="#cb15-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-343"><a href="#cb15-343" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Beginn der Programmschleife mit Schleifenbedingung <span class="in">`b != 0`</span>; die Schleife wird also ausgeführt, solange <span class="in">`b`</span> nicht 0 ist.</span>
+<span id="cb15-344"><a href="#cb15-344" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Wir führen eine Division mit Rest aus und verwenden dafür unsere <span class="in">`mod()`</span> Funktion aus @sec-division.</span>
+<span id="cb15-345"><a href="#cb15-345" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Dann machen wir den Divisor zum neuen Dividenden...</span>
+<span id="cb15-346"><a href="#cb15-346" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>und den Rest der Division <span class="in">`r`</span> zum neuen Divisor.</span>
+<span id="cb15-347"><a href="#cb15-347" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Eigentlich sollten wir den letzten Divisor <span class="in">`b`</span> als Ergebnis ausgeben, wenn <span class="in">`mod(a, b)`</span> gleich 0 ist.</span>
+<span id="cb15-348"><a href="#cb15-348" aria-hidden="true" tabindex="-1"></a>Da dieser Test aber erst vor dem nächsten Schleifendurchlauf durchgeführt wird (1), wird im letzten Durchlauf nochmal <span class="in">`a = b`</span> (2) und <span class="in">`b = r`</span> (3) gesetzt.</span>
+<span id="cb15-349"><a href="#cb15-349" aria-hidden="true" tabindex="-1"></a>Das führt dazu, dass nach Beendigung der Schleife <span class="in">`b`</span> immer gleich 0 ist; wir müssen also <span class="in">`a`</span> als letzten Divisor ausgeben.</span>
+<span id="cb15-350"><a href="#cb15-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-353"><a href="#cb15-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-354"><a href="#cb15-354" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ggT(<span class="dv">143</span>, <span class="dv">65</span>) <span class="op">==</span> <span class="dv">13</span></span>
+<span id="cb15-355"><a href="#cb15-355" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ggT(<span class="dv">3780</span>, <span class="dv">3528</span>) <span class="op">==</span> <span class="dv">252</span></span>
+<span id="cb15-356"><a href="#cb15-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-357"><a href="#cb15-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-358"><a href="#cb15-358" aria-hidden="true" tabindex="-1"></a>Aufgrund der Möglichkeit, in Python mehrere Zuweisungen gleichzeitig vorzunehmen, indem wir die Bezeichner und die zugewiesen Werte jeweils mit einem Komma trennen, hätten wir den kompletten Algorithmus der Zeilen (2) bis (4) auch in eine Zeile schreiben können:\</span>
+<span id="cb15-359"><a href="#cb15-359" aria-hidden="true" tabindex="-1"></a><span class="in">`a, b = b, mod(a, b)`</span>.</span>
+<span id="cb15-360"><a href="#cb15-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-361"><a href="#cb15-361" aria-hidden="true" tabindex="-1"></a>Auch bei dieser Implementierung spielt die Reihenfolge der Argumente keine Rolle:</span>
+<span id="cb15-362"><a href="#cb15-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-365"><a href="#cb15-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-366"><a href="#cb15-366" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ggT(<span class="dv">143</span>, <span class="dv">65</span>) <span class="op">==</span> ggT(<span class="dv">65</span>, <span class="dv">143</span>)</span>
+<span id="cb15-367"><a href="#cb15-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-368"><a href="#cb15-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-369"><a href="#cb15-369" aria-hidden="true" tabindex="-1"></a>Wir sehen aber, dass eine zusätzliche Operation notwendig wird, wenn das kleinere Argument zuerst kommt.</span>
+<span id="cb15-370"><a href="#cb15-370" aria-hidden="true" tabindex="-1"></a>Das liegt daran, dass $65 \div 143$ gleich 0, mit Rest 65 ist, d.h. beim nächsten Schleifendurchlauf wird <span class="in">`mod(143, 65)`</span> aufgerufen, die Variante mit dem größeren Argument zuerst.</span>
+<span id="cb15-371"><a href="#cb15-371" aria-hidden="true" tabindex="-1"></a>Die zusätzliche Operation können wir aus Effizienzsicht gut verkraften, da wir uns ja den Test auf <span class="in">`b &gt; a`</span> sparen.</span>
+<span id="cb15-372"><a href="#cb15-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-373"><a href="#cb15-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kleinstes gemeinsames Vielfaches</span></span>
+<span id="cb15-374"><a href="#cb15-374" aria-hidden="true" tabindex="-1"></a><span class="fu">### Das *kgV* von zwei Zahlen</span></span>
+<span id="cb15-375"><a href="#cb15-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-376"><a href="#cb15-376" aria-hidden="true" tabindex="-1"></a>Das **kleinste gemeinsame Vielfache** (*kgV*) zweier ganzer Zahlen $m$ und $n$ ist die kleinste positive natürliche Zahl, die sowohl Vielfaches von $m$ als auch Vielfaches von $n$ ist.</span>
+<span id="cb15-377"><a href="#cb15-377" aria-hidden="true" tabindex="-1"></a>Zusätzlich wird für den Fall $m = 0$ oder $n = 0$ das *kgV* definiert als: $kgV ⁡(m, n) = 0$.</span>
+<span id="cb15-378"><a href="#cb15-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-379"><a href="#cb15-379" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-380"><a href="#cb15-380" aria-hidden="true" tabindex="-1"></a><span class="fu">## Berechnung des *kgV* von 12 und 18 über die Vielfachen</span></span>
+<span id="cb15-381"><a href="#cb15-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Die Vielfachen von 12 sind: 12, 24, 36, 48, 60, 72, 84, 96, 108,... </span>
+<span id="cb15-382"><a href="#cb15-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Die Vielfachen von 18 sind: 18, 36, 54, 72, 90, 108, ...</span>
+<span id="cb15-383"><a href="#cb15-383" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Die gemeinsamen Vielfachen von 12 und 18 sind also: 36, 72, 108, ...</span>
+<span id="cb15-384"><a href="#cb15-384" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>und das kleinste von diesen ist 36: $kgV(12, 18)=36$.</span>
+<span id="cb15-385"><a href="#cb15-385" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-386"><a href="#cb15-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-387"><a href="#cb15-387" aria-hidden="true" tabindex="-1"></a>Man kann das *kgV* über die Primfaktorzerlegung (siehe @sec-primfaktor) der beiden gegebenen Zahlen bestimmen.</span>
+<span id="cb15-388"><a href="#cb15-388" aria-hidden="true" tabindex="-1"></a>Wir nehmen hierzu wieder das Beispiel aus @sec-division:</span>
+<span id="cb15-389"><a href="#cb15-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-390"><a href="#cb15-390" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-391"><a href="#cb15-391" aria-hidden="true" tabindex="-1"></a><span class="fu">## Primfaktozerlegung für 3528 und 3780</span></span>
+<span id="cb15-392"><a href="#cb15-392" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$3528=2^3\cdot 3^2\cdot 7^2$</span>
+<span id="cb15-393"><a href="#cb15-393" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$3780=2^2\cdot 3^3\cdot 5^1\cdot 7^1$</span>
+<span id="cb15-394"><a href="#cb15-394" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-395"><a href="#cb15-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-396"><a href="#cb15-396" aria-hidden="true" tabindex="-1"></a>Für das *kgV* nimmt man die Primfaktoren, die in mindestens einer der beiden Zerlegungen vorkommen, und als zugehörigen Exponenten den jeweils *größeren* der Ausgangsexponenten:</span>
+<span id="cb15-397"><a href="#cb15-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-398"><a href="#cb15-398" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-399"><a href="#cb15-399" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kleinstes gemeinsames Vielfaches für 3528 und 7380</span></span>
+<span id="cb15-400"><a href="#cb15-400" aria-hidden="true" tabindex="-1"></a>$kgV(3528, 3780)=2^3\cdot 3^3\cdot 5^1\cdot 7^2=52.920$</span>
+<span id="cb15-401"><a href="#cb15-401" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-402"><a href="#cb15-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-405"><a href="#cb15-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-406"><a href="#cb15-406" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">1</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">52920</span></span>
+<span id="cb15-407"><a href="#cb15-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-408"><a href="#cb15-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-409"><a href="#cb15-409" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb15-410"><a href="#cb15-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zwischenübung</span></span>
+<span id="cb15-411"><a href="#cb15-411" aria-hidden="true" tabindex="-1"></a>Bestimme das *kgV* von 60 und 24 über die Primfaktorzerlegung.</span>
+<span id="cb15-412"><a href="#cb15-412" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-413"><a href="#cb15-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-414"><a href="#cb15-414" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb15-415"><a href="#cb15-415" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb15-416"><a href="#cb15-416" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$60=2^2\cdot 3^1\cdot 5^1$</span>
+<span id="cb15-417"><a href="#cb15-417" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$24=2^3\cdot 3^1\cdot 5^0$</span>
+<span id="cb15-418"><a href="#cb15-418" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$kgV(60, 24)=2^3\cdot 3^1\cdot 5^1=120$</span>
+<span id="cb15-419"><a href="#cb15-419" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-420"><a href="#cb15-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-421"><a href="#cb15-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-422"><a href="#cb15-422" aria-hidden="true" tabindex="-1"></a>Man kann das *kgV* aber auch mit Hilfe des *ggT* berechnen; es gilt der folgende Grundsatz:</span>
+<span id="cb15-423"><a href="#cb15-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-424"><a href="#cb15-424" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb15-425"><a href="#cb15-425" aria-hidden="true" tabindex="-1"></a><span class="fu">## Produkt von *ggT* und *kgV*</span></span>
+<span id="cb15-426"><a href="#cb15-426" aria-hidden="true" tabindex="-1"></a>Das Produkt des *ggT* und des *kgV* zweier natürlicher Zahlen ist gleich dem Produkt beider Zahlen: </span>
+<span id="cb15-427"><a href="#cb15-427" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb15-428"><a href="#cb15-428" aria-hidden="true" tabindex="-1"></a>ggT(m, n) \cdot kgV(m, n) = m \cdot n</span>
+<span id="cb15-429"><a href="#cb15-429" aria-hidden="true" tabindex="-1"></a>$$ {#eq-produkt}</span>
+<span id="cb15-430"><a href="#cb15-430" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-431"><a href="#cb15-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-432"><a href="#cb15-432" aria-hidden="true" tabindex="-1"></a>Wenn der *ggT* zweier Zahlen bekannt ist, dann kann man das *kgV* also wie folgt berechnen:</span>
+<span id="cb15-433"><a href="#cb15-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-434"><a href="#cb15-434" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb15-435"><a href="#cb15-435" aria-hidden="true" tabindex="-1"></a><span class="fu">## Berechnung des *kgV* aus dem *ggT*</span></span>
+<span id="cb15-436"><a href="#cb15-436" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb15-437"><a href="#cb15-437" aria-hidden="true" tabindex="-1"></a>kgV(m, n)=(m\cdot n)\div ggT(m, n)</span>
+<span id="cb15-438"><a href="#cb15-438" aria-hidden="true" tabindex="-1"></a>$$ {#eq-kgV}</span>
+<span id="cb15-439"><a href="#cb15-439" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-440"><a href="#cb15-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-441"><a href="#cb15-441" aria-hidden="true" tabindex="-1"></a>Für die Zahlen 12 und 18 ergibt sich also folgende Berechnung:</span>
+<span id="cb15-442"><a href="#cb15-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-443"><a href="#cb15-443" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-444"><a href="#cb15-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## Berechnung des *kgV* von 12 und 18 über den *ggT*</span></span>
+<span id="cb15-445"><a href="#cb15-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$ggT(12, 18)=6$</span>
+<span id="cb15-446"><a href="#cb15-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$kgV(12, 18)=(12\cdot 18)\div 6=12\cdot 3=36$</span>
+<span id="cb15-447"><a href="#cb15-447" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-448"><a href="#cb15-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-449"><a href="#cb15-449" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb15-450"><a href="#cb15-450" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zwischenübung</span></span>
+<span id="cb15-451"><a href="#cb15-451" aria-hidden="true" tabindex="-1"></a>Bestimme das *kgV* von 60 und 24 über den *ggT*.</span>
+<span id="cb15-452"><a href="#cb15-452" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-453"><a href="#cb15-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-454"><a href="#cb15-454" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb15-455"><a href="#cb15-455" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lösung</span></span>
+<span id="cb15-456"><a href="#cb15-456" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$ggT(60, 24)=12$</span>
+<span id="cb15-457"><a href="#cb15-457" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$kgV(60, 24)=(60\cdot 24)\div 12=60\cdot 2=120$</span>
+<span id="cb15-458"><a href="#cb15-458" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-459"><a href="#cb15-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-460"><a href="#cb15-460" aria-hidden="true" tabindex="-1"></a>Da wir aus @sec-ggT bereits über eine Funktion zur Berechnung des *ggT* verfügen, ist die Implementierung des *kgV* in Python einfach:</span>
+<span id="cb15-461"><a href="#cb15-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-464"><a href="#cb15-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-465"><a href="#cb15-465" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kgv_2(m, n): <span class="cf">return</span> m <span class="op">*</span> n <span class="op">//</span> ggT(m, n)</span>
+<span id="cb15-466"><a href="#cb15-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-467"><a href="#cb15-467" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_2(<span class="dv">12</span>, <span class="dv">18</span>) <span class="op">==</span> <span class="dv">36</span></span>
+<span id="cb15-468"><a href="#cb15-468" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_2(<span class="dv">60</span>, <span class="dv">24</span>) <span class="op">==</span> <span class="dv">120</span></span>
+<span id="cb15-469"><a href="#cb15-469" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_2(<span class="dv">3528</span>, <span class="dv">3780</span>) <span class="op">==</span> <span class="dv">52920</span></span>
+<span id="cb15-470"><a href="#cb15-470" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-471"><a href="#cb15-471" aria-hidden="true" tabindex="-1"></a><span class="fu">### Das kgV von mehreren Zahlen</span></span>
+<span id="cb15-472"><a href="#cb15-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-473"><a href="#cb15-473" aria-hidden="true" tabindex="-1"></a>Man verwendet zur Berechnung des *kgV* mehrerer Zahlen alle Primfaktoren, die in mindestens einer der Zahlen vorkommen, mit der jeweils höchsten vorkommenden Potenz, zum Beispiel:</span>
+<span id="cb15-474"><a href="#cb15-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-475"><a href="#cb15-475" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb15-476"><a href="#cb15-476" aria-hidden="true" tabindex="-1"></a><span class="fu">## *kgV* der Zahlen 144, 160 und 175</span></span>
+<span id="cb15-477"><a href="#cb15-477" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$144=2^4\cdot 3^2$</span>
+<span id="cb15-478"><a href="#cb15-478" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$160=2^5\cdot 5^1$</span>
+<span id="cb15-479"><a href="#cb15-479" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$175=5^2\cdot 7^1$</span>
+<span id="cb15-480"><a href="#cb15-480" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$kgV(144, 160, 175)=2^5\cdot 3^2\cdot 5^2\cdot 7^1=50.400$</span>
+<span id="cb15-481"><a href="#cb15-481" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-482"><a href="#cb15-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-485"><a href="#cb15-485" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-486"><a href="#cb15-486" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">2</span><span class="op">**</span><span class="dv">5</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">5</span><span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">7</span><span class="op">**</span><span class="dv">1</span> <span class="op">==</span> <span class="dv">50400</span></span>
+<span id="cb15-487"><a href="#cb15-487" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-488"><a href="#cb15-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-489"><a href="#cb15-489" aria-hidden="true" tabindex="-1"></a>Wir könnten auch zunächst $kgV ⁡(144, 160)=1440$ berechnen und danach $kgV(1440, 175)= 50.400$, denn als eine zweistellige Verknüpfung auf den ganzen Zahlen ist das *kgV* assoziativ:</span>
+<span id="cb15-490"><a href="#cb15-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-491"><a href="#cb15-491" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb15-492"><a href="#cb15-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## Assoziativität des *kgV*</span></span>
+<span id="cb15-493"><a href="#cb15-493" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb15-494"><a href="#cb15-494" aria-hidden="true" tabindex="-1"></a>kgv(m, kgV(n, p))=kgV(kgV(m, n), p)</span>
+<span id="cb15-495"><a href="#cb15-495" aria-hidden="true" tabindex="-1"></a>$$ {#eq-kgv-assoz}</span>
+<span id="cb15-496"><a href="#cb15-496" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-497"><a href="#cb15-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-498"><a href="#cb15-498" aria-hidden="true" tabindex="-1"></a>Wir machen uns diesen Umstand zunutze und definieren eine neue Funktion in Python für die Berechnung des *kgV* für drei Zahlen:</span>
+<span id="cb15-499"><a href="#cb15-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-502"><a href="#cb15-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-503"><a href="#cb15-503" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kgv_3(m, n, p):                 <span class="co"># &lt;1&gt;</span></span>
+<span id="cb15-504"><a href="#cb15-504" aria-hidden="true" tabindex="-1"></a>  kgv_mn <span class="op">=</span> kgv_2(m, n)              <span class="co"># &lt;2&gt;</span></span>
+<span id="cb15-505"><a href="#cb15-505" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> kgv_2(kgv_mn, p)           <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-506"><a href="#cb15-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-507"><a href="#cb15-507" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgv_3(<span class="dv">144</span>, <span class="dv">160</span>, <span class="dv">175</span>) <span class="op">==</span> <span class="dv">50400</span></span>
+<span id="cb15-508"><a href="#cb15-508" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-509"><a href="#cb15-509" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Signatur für die Funktion <span class="in">`kgv_3`</span> mit drei Parametern</span>
+<span id="cb15-510"><a href="#cb15-510" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Berechnung des *kgV* für die ersten beiden Parameter</span>
+<span id="cb15-511"><a href="#cb15-511" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Berechnung und Rückgabe des *kgV* mit dem dritten Parameter</span>
+<span id="cb15-512"><a href="#cb15-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-513"><a href="#cb15-513" aria-hidden="true" tabindex="-1"></a>Python unterstützt nicht das Überladen von Funktionen.</span>
+<span id="cb15-514"><a href="#cb15-514" aria-hidden="true" tabindex="-1"></a>Wenn wir zwei verschiedene Varianten einer Funktion definieren wollen (z.B. eine Variante, die zwei Argumente akzeptiert und eine Variante, die drei Argumente akzeptiert, wie in unserem Fall), dann müssen wir diesen Funktionen in Python verschiedene Namen geben.</span>
+<span id="cb15-515"><a href="#cb15-515" aria-hidden="true" tabindex="-1"></a>Das ist der Grund, weshalb ich die Variante für zwei Argumente <span class="in">`kgv_2`</span> genannt habe, und die Variante für drei Argumente <span class="in">`kgv_3`</span>.</span>
+<span id="cb15-516"><a href="#cb15-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-517"><a href="#cb15-517" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb15-518"><a href="#cb15-518" aria-hidden="true" tabindex="-1"></a><span class="fu">## Überladen von Funktionen</span></span>
+<span id="cb15-519"><a href="#cb15-519" aria-hidden="true" tabindex="-1"></a>Einige *statisch kompilierte* Programmiersprachen (z.B. Java und C++) bieten die Möglichkeit, denselben Funtionsnamen für verwandte Funtionen zu verwenden.</span>
+<span id="cb15-520"><a href="#cb15-520" aria-hidden="true" tabindex="-1"></a>Das nennt man dann **Überladen** der Funktion.</span>
+<span id="cb15-521"><a href="#cb15-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-522"><a href="#cb15-522" aria-hidden="true" tabindex="-1"></a>Die Signaturen der Funktionen müssen sich dann aber unterscheiden lassen: entweder durch die Anzahl der zugelassenen Parameter, oder dadurch, dass den Parametern unterschiedliche *Datentypen* zugeordnet werden.</span>
+<span id="cb15-523"><a href="#cb15-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-524"><a href="#cb15-524" aria-hidden="true" tabindex="-1"></a>Da Python aber eine *dynamische* Spache ist (d.h. eine Funktion wird erst dann kompiliert, wenn sie aufgerufen wird), und weil die Datentypen der Parameter zum Zeitpunkt der Kompilierung noch nicht bekannt sind, ist es in Python nicht möglich, Funktionen zu überladen.</span>
+<span id="cb15-525"><a href="#cb15-525" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb15-526"><a href="#cb15-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-527"><a href="#cb15-527" aria-hidden="true" tabindex="-1"></a>Wir können das Problem aber umgehen, indem wir einen zusätzlichen Standardparameter definieren und innerhalb der Funktion prüfen, ob dieser beim Aufruf der Funktion gesetzt wurde:</span>
+<span id="cb15-528"><a href="#cb15-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-531"><a href="#cb15-531" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb15-532"><a href="#cb15-532" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kgV(m, n, p<span class="op">=</span><span class="va">None</span>):              <span class="co"># &lt;1&gt;</span></span>
+<span id="cb15-533"><a href="#cb15-533" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> p:                             <span class="co"># &lt;2&gt;</span></span>
+<span id="cb15-534"><a href="#cb15-534" aria-hidden="true" tabindex="-1"></a>    kgv_mn <span class="op">=</span> kgV(m, n)              <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-535"><a href="#cb15-535" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> kgV(kgv_mn, p)           <span class="co"># &lt;3&gt;</span></span>
+<span id="cb15-536"><a href="#cb15-536" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb15-537"><a href="#cb15-537" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m <span class="op">*</span> n <span class="op">//</span> ggT(m, n)       <span class="co"># &lt;4&gt;</span></span>
+<span id="cb15-538"><a href="#cb15-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-539"><a href="#cb15-539" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> kgV(<span class="dv">144</span>, <span class="dv">160</span>, <span class="dv">175</span>) <span class="op">==</span> <span class="dv">50400</span></span>
+<span id="cb15-540"><a href="#cb15-540" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-541"><a href="#cb15-541" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Signatur der Funktion <span class="in">`kgV`</span> mit drei Parameterm.</span>
+<span id="cb15-542"><a href="#cb15-542" aria-hidden="true" tabindex="-1"></a>Der dritte Parameter <span class="in">`p`</span> wird als Standardparameter definiert, indem wir ihm den Wert <span class="in">`None`</span> zuweisen.</span>
+<span id="cb15-543"><a href="#cb15-543" aria-hidden="true" tabindex="-1"></a>Wenn wir später die Funktion mit nur zwei Argumenten aufrufen, dann ist <span class="in">`p`</span> undefiniert.</span>
+<span id="cb15-544"><a href="#cb15-544" aria-hidden="true" tabindex="-1"></a>Wenn wir sie mit drei Argumenten aufrufen, dann ist <span class="in">`p`</span> gleich dem dritten Argument.</span>
+<span id="cb15-545"><a href="#cb15-545" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Test, ob <span class="in">`p`</span> gesetzt ist, d.h. ob drei Argumente angegeben wurden.</span>
+<span id="cb15-546"><a href="#cb15-546" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Falls ja, berechnen wir das Ergebnis so wie in <span class="in">`kgv_3`</span>, nur dass wir eben wieder *kgV* mit zwei Argumenten aufrufen.</span>
+<span id="cb15-547"><a href="#cb15-547" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Falls <span class="in">`p`</span> nicht gesetzt ist, berechnen wir das *kgV* wie in <span class="in">`kgv_2`</span>.</span>
+<span id="cb15-548"><a href="#cb15-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-549"><a href="#cb15-549" aria-hidden="true" tabindex="-1"></a>Ob diese Lösung dann leichter verständlich ist, kannst für dich selbst entscheiden; grundsätzlich sind beide Varianten gleichwertig und führen zum selben Ergebnis.</span>
+<span id="cb15-550"><a href="#cb15-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-551"><a href="#cb15-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## Übungen</span></span>
+<span id="cb15-552"><a href="#cb15-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-553"><a href="#cb15-553" aria-hidden="true" tabindex="-1"></a>Du bist jetzt bereit, deine ersten mathematischen Probleme mit Python zu lösen.</span>
+<span id="cb15-554"><a href="#cb15-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-555"><a href="#cb15-555" aria-hidden="true" tabindex="-1"></a>Falls du Python und Jupyter noch nicht installiert hast, dann sieh in Lektion <span class="co">[</span><span class="ot">Rechenregeln</span><span class="co">](rechenregeln.qmd#sec-ubung)</span> nach und richte deine Arbeitsumgebung ein.</span>
+<span id="cb15-556"><a href="#cb15-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-557"><a href="#cb15-557" aria-hidden="true" tabindex="-1"></a>Um mit den Jupyter-Notebooks dieses Tutorials arbeiten zu können, musst du sie dir zunächst herunterladen.</span>
+<span id="cb15-558"><a href="#cb15-558" aria-hidden="true" tabindex="-1"></a>Besuche dazu die Seite <span class="co">[</span><span class="ot">matheKapierenMitPython</span><span class="co">](https://github.com/okrischer/matheKapierenMitPython)</span> in deinem Bowser, klicke auf den grünen Button <span class="in">`&lt;Code&gt;`</span> und wähle die unterste Option <span class="in">`&lt;Download ZIP&gt;`</span>, um dir alle Inhalte dieses Verzeichnisses auf deinen Rechner zu laden.</span>
+<span id="cb15-559"><a href="#cb15-559" aria-hidden="true" tabindex="-1"></a>Entpacke das heruntergeladene Archiv <span class="in">`matheKapierenMitPython-main.zip`</span>, indem du in deinem File-Explorer doppelt auf den Dateinammen klickst.</span>
+<span id="cb15-560"><a href="#cb15-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-561"><a href="#cb15-561" aria-hidden="true" tabindex="-1"></a>Wechsle dann in deiner Eingabeaufforderung (Prompt) oder in deinem Terminalfenster in das Verzeichnis <span class="in">`matheKapierenMitPython-main`</span> und aktiviere deine Arbeitsumgebung mit <span class="in">`conda activate matheKapieren`</span>.</span>
+<span id="cb15-562"><a href="#cb15-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-563"><a href="#cb15-563" aria-hidden="true" tabindex="-1"></a>Jetzt kannst du mit <span class="in">`jupyter lab`</span> *Jupyter* starten, und es sollte sich ein neues Browser-Fenster öffnen.</span>
+<span id="cb15-564"><a href="#cb15-564" aria-hidden="true" tabindex="-1"></a>Öffne dort im *File Browser* (der Spalte ganz links im Browser-Fenster) das Verzeichnis <span class="in">`arithmetik`</span>, indem du einen Doppelclick auf den Verzeichnisnamen ausführst, und öffne dann das Verzeichnis <span class="in">`_notebooks`</span>.</span>
+<span id="cb15-565"><a href="#cb15-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-566"><a href="#cb15-566" aria-hidden="true" tabindex="-1"></a>Hier findest du eine Reihe von Jupyter Notebooks;</span>
+<span id="cb15-567"><a href="#cb15-567" aria-hidden="true" tabindex="-1"></a>um die Inhalte dieser Lektion einzuüben, bearbeite die Notebooks <span class="in">`euler1.ipynb`</span> und <span class="in">`exercism_raindrops_ipynb`</span>, indem du wieder doppelt auf den jeweiligen Namen klickst.</span>
+<span id="cb15-568"><a href="#cb15-568" aria-hidden="true" tabindex="-1"></a>Folge dann den Anweisungen im jeweiligen Notebook.</span>
+</code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
