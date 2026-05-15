@@ -399,4 +399,9 @@ print(a.div(b))
 
 ## Übungen
 
-Die Übungen zu dieser Lektion findest du im Notebook `artithmetik/_bruch.ipynb`.
+Für diese Lektion besteht deine Aufgabe darin, ein neues Jupyter Notebook `bruchrechnung.ipynb` anzulegen und darin die Klasse `Bruch` aus dieser Lektion vollständig zu implementieren.
+Du kannst im einfachsten Fall meine Funktionsdefinitionen übernehmen, oder jeweils deine eigene Implementierung finden.
+Wenn du meine Definitionen übernimmst, kopiere sie nicht einfach, sondern schreibe sie selbst (über deine Tastatur).
+Das Schreiben von Quelltext hilft dir, den Quelltext besser zu verstehen und trainiert deine "*Programmiermuskeln*''.
+
+Weitere Übungen zu Thema *Teiler und Vielfache* der letzten Lektion findest du in den Notebooks `euler3.ipynb` und `euler5.ipynb`.

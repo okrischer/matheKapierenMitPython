@@ -527,11 +527,14 @@ Du bist jetzt bereit, deine ersten mathematischen Probleme mit Python zu lösen.
 Falls du Python und Jupyter noch nicht installiert hast, dann sieh in Lektion [Rechenregeln](rechenregeln.qmd#sec-ubung) nach und richte deine Arbeitsumgebung ein.
 
 Um mit den Jupyter-Notebooks dieses Tutorials arbeiten zu können, musst du sie dir zunächst herunterladen.
-Dafür brauchst du das Programm *Git*, dass du gemäß diesen [Installationsanleitungen](https://github.com/git-guides/install-git) installieren kannst.
+Besuche dazu die Seite [matheKapierenMitPython](https://github.com/okrischer/matheKapierenMitPython) in deinem Bowser, klicke auf den grünen Button `<Code>` und wähle die unterste Option `<Download ZIP>`, um dir alle Inhalte dieses Verzeichnisses auf deinen Rechner zu laden.
+Entpacke das heruntergeladene Archiv `matheKapierenMitPython-main.zip`, indem du in deinem File-Explorer doppelt auf den Dateinammen klickst.
 
-Wenn *Git* installiert ist, setze in deiner Kommandozeile den Befehl `git clone https://github.com/okrischer/matheKapierenMitPython.git` ab.
-Wechsle dann in das Verzeichnis `matheKapierenMitPython` und aktiviere deine Arbeitsumgebung mit `conda activate matheKapieren`.
+Wechsle dann in deiner Eingabeaufforderung (Prompt) oder in deinem Terminalfenster in das Verzeichnis `matheKapierenMitPython-main` und aktiviere deine Arbeitsumgebung mit `conda activate matheKapieren`.
 
 Jetzt kannst du mit `jupyter lab` *Jupyter* starten, und es sollte sich ein neues Browser-Fenster öffnen.
-Öffne dort im *File Browser* (der Spalte ganz links im Browser-Fenster) das Verzeichnis `arithmetik` und dann mit einem Doppel-Klick das Notebook `_teiler.ipynb`.
-Folge dann den Anweisungen im Notebook.
+Öffne dort im *File Browser* (der Spalte ganz links im Browser-Fenster) das Verzeichnis `arithmetik`, indem du einen Doppelclick auf den Verzeichnisnamen ausführst, und öffne dann das Verzeichnis `_notebooks`.
+
+Hier findest du eine Reihe von Jupyter Notebooks;
+um die Inhalte dieser Lektion einzuüben, bearbeite die Notebooks `euler1.ipynb` und `exercism_raindrops_ipynb`, indem du wieder doppelt auf den jeweiligen Namen klickst.
+Folge dann den Anweisungen im jeweiligen Notebook.

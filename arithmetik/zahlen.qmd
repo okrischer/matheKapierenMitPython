@@ -372,33 +372,33 @@ Wir wollen aber nicht mit dem Abakus rechnen, sondern mit Python; dazu entwickel
 Als ersten Schritt definieren wir hierzu ein *dictionary*, ein Objekt mit dem Datentyp `dict`:
 
 ```{python}
-rom = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+rom2dec = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 ```
 
 Ein `dict` ist ein Objekt, dessen Elemente sogenannte *key-value pairs* sind, also Paare von Schlüsseln und zugehörigen Werten.
 Diese Paare werden in Mengenklammern geschrieben und mit einem Komma voneinander getrennt.
 Ein einzelnes Paar wird dabei in Form `k: v` geschrieben, also Schlüssel, gefolgt von Doppelpunkt, gefolgt von zugeordnetem Wert.
 Das Leerzeichen ist optional und kann weggelassen werden.
-Wir haben unser *dictionary* `rom` mit den Werten aus @tbl-ziffern initialisiert.
+Wir haben unser *dictionary* `rom2dec` mit den Werten aus @tbl-ziffern initialisiert.
 
 Die Elemente können dann in einer `for` Schleife durchlaufen und ausgegeben oder manipuliert werden:
 
 ```{python}
-for (k, v) in rom.items():
+for (k, v) in rom2dec.items():
   print("Schlüssel: ", k, ", ","Wert: ", v)
 ```
 
 Damit können wir dann die eigentliche Funktion definieren:
 
 ```{python}
-def roman_to_decimal(roman):                        # <1>
-  res = 0                                           # <2>
-  for i in range(len(roman)):                       # <3>
-    if i > 0 and rom[roman[i]] > rom[roman[i-1]]:   # <4>
-      res += rom[roman[i]] - 2 * rom[roman[i-1]]    # <5>
+def roman_to_decimal(roman):                                # <1>
+  res = 0                                                   # <2>
+  for i in range(len(roman)):                               # <3>
+    if i > 0 and rom2dec[roman[i]] > rom2dec[roman[i-1]]:   # <4>
+      res += rom2dec[roman[i]] - 2 * rom2dec[roman[i-1]]    # <5>
     else:
-      res += rom[roman[i]]                          # <6>
-  return res                                        # <7>
+      res += rom2dec[roman[i]]                              # <6>
+  return res                                                # <7>
 
 assert roman_to_decimal("MCMLXXXIV") == 1984
 ```
@@ -532,7 +532,7 @@ Mit diesen Regeln können wir jetzt eine Dualzahl mit Python in eine Dezimalzahl
 ```{python}
 def bin_to_dec(binary):
   assert type(binary) == str            # <1>
-  s = binary.split(',')                 # <2>
+  s = binary.split('.')                 # <2>
   n = len(s[0])                         # <3>
   m = 1
   decimal = 0
@@ -544,14 +544,14 @@ def bin_to_dec(binary):
     m += 1
   return decimal
 
-assert bin_to_dec("1011,01") == 11.25
+assert bin_to_dec("1011.01") == 11.25
 ```
 1. Wir erwarten, dass die Funktion mit einem Argument vom Typ `str` (also einer Zeichenkette) aufgerufen wird.
 Wenn nicht, dann ergeben die nachfolgenden Berechnungen keinen Sinn, und wir brechen das Programm ab.
-2. Teilen des Eingabestrings in zwei Hälften, den Teil vor dem Komma und den Teil nach dem Komma.
+2. Teilen des Eingabestrings in zwei Hälften, den Teil vor dem Dezimalpunkt und den Teil nach dem Punkt (Python verwendet zur Darstellung von Dezimalzahlen den im englischen Sprachraum üblichen Dezimalpunkt anstelle eines Kommas).
 Das Ergebnis ist eine Liste mit zwei Teilstrings.
 3. Belegen der Variablen `n` mit der Länge des ersten Teilstrings (zur Erinnerung: der Index in Python beginnt mit 0).
-4. Wir durchlaufen die Zeichen im ersten Teilstring (die Ziffern vor dem Komma) und berechnen den Wert der jeweiligen Ziffer nach der Formel von @eq-dualzahl.
+4. Wir durchlaufen die Zeichen im ersten Teilstring (die Ziffern vor dem Punkt) und berechnen den Wert der jeweiligen Ziffer nach der Formel von @eq-dualzahl.
 Die Schleifenvariable haben wir hier `bit` genannt.
 Nach jedem Durchlauf verringern wir den Wert von `n` um 1.
 5. Berechnung der Werte für die *bits* nach dem Komma.
@@ -620,5 +620,4 @@ assert c == a // 2
 
 ## Übungen
 
-Die Übungen dieser Lektion findest du im Notebook `arithmetik/_mengen.ipynb`.
-Öffne diese Datei in *Jupyter* und erforsche des Rechnen mit verschiedenen Zahlensystemen.
+Die Übungen dieser Lektion findest du in den Notebooks `exercism_grains.ipynb`, `exercism_secrethandshake.ipynb` und `exercism_romannumerals.ipynb`.

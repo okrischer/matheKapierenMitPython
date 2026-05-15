@@ -537,7 +537,7 @@ jedes Paar in runden Klammern repräsentiert einen Zug, wobei jeweils die oberst
 Du kannst das z.B. mit einem Stapel verschieden großer Münzen ausprobieren und wirst feststellen, dass das Spiel damit gelöst wird, und dass dabei nie eine größere auf einer kleineren Münze plaziert wird.
 
 Ich habe beide Ansätze kombiniert, um die nachfolgende Animation zu erstellen.
-Du kannst dir den Quellcode dafür unter `arithmetik/hanoi_solve.py` ansehen und dort auch die Anzahl der Scheiben ändern und dann mit `manim -ql hanoi_solve.py` die Animation neu erstellen.
+Du kannst dir den Quellcode dafür unter `arithmetik/_scripts/hanoi_solve.py` ansehen und dort auch die Anzahl der Scheiben ändern und dann mit `manim -ql hanoi_solve.py` die Animation neu erstellen.
 Dafür musst du aber das Python Programm `Manim` bei dir [installieren](https://docs.manim.community/en/stable/installation.html).
 
 ::: {#fig-hanoi-solve}

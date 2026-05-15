@@ -7,3 +7,5 @@ __pycache__/
 Tex/
 texts/
 partial_movie_files/
+
+**/*.quarto_ipynb
